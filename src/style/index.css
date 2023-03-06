@@ -1,8 +1,12 @@
 /* 
 * Github icon link
 */
-#github {
-  float: right;
+.clickableIcon {
+  scale: 0.4;
+  text-align: end;
+}
+.clickableIcon > ul > li {
+  list-style: none;
 }
 
 /* 
@@ -15,5 +19,5 @@
   width: fit-content;
   background-color: black;
   font-size: 5em;
-  color: green;
+  color: white;
 }

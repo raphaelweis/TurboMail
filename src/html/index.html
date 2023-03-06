@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TODO</title>
+    <title>TurboMail</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style/index.css" />
+    <link rel="stylesheet" href="../style/style.css" />
   </head>
 </html>
 
 <body>
   <header>
-    <div id="github">
-      <a href="https://github.com/raphaelweis/TurboMail" target="_blank">
-        <img src="./resources/images/github-mark.svg"
-      /></a>
-    </div>
-    <div id="title">
+    <section class="clickableIcon">
+      <ul>
+        <li>
+          <a href="https://github.com/raphaelweis/TurboMail" target="_blank">
+            <img src="../resources/svg/github-mark.svg"
+          /></a>
+        </li>
+      </ul>
+    </section>
+    <section id="title">
       <h1>TurboMail.</h1>
-    </div>
+    </section>
   </header>
   <main>
     <form>
       <h2>Login</h2>
-      <label for="email">Email Address :</label><br />
+      Email address :<br />
       <input
+        class="inputField"
         type="text"
-        id="email"
         name="email"
         placeholder="Enter your email"
       /><br />
-      <label for="password">Password :</label><br />
+      Password :<br />
       <input
-        type="text"
-        id="password"
+        class="inputField"
+        type="password"
         name="password"
         placeholder="Enter your password"
       /><br />

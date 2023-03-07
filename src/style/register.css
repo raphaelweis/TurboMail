@@ -1,1 +1,22 @@
+.form-register {
+  border: 1px grey solid;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2em;
+  border-radius: 1em;
+  max-width: max-content;
+}
 
+.form-register > label, input {
+  width: 25em;
+}
+
+.form-register > h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.form-register > input[type="submit"] {
+  width: auto;
+  float: right;
+}

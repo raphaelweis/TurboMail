@@ -21,3 +21,27 @@
 html {
   background-color: var(--backgroundColor);
 }
+
+header > #topBar {
+  text-align: right;
+}
+
+header > #topBar > a > img {
+  width: 2em;
+  height: 2em;
+}
+
+main > #title {
+  margin: 0 auto 0 auto;
+  background-color: black;
+  color: green;
+  width: fit-content;
+  font-size: 3.5em;
+}
+
+.form-register > input{
+  margin-bottom: 2em;
+  border: none;
+  border-bottom: 1px solid black;
+  height: 2em;
+}

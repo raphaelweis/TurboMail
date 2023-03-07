@@ -1,6 +1,11 @@
 /*
 * FONTS
 */
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+* {
+  font-family: Raleway;
+}
 
 /*
 * COLORS
@@ -12,6 +17,7 @@
   --color1: #99582a;
   --color2: #ffe6a7;
 }
+
 html {
   background-color: var(--backgroundColor);
 }

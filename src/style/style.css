@@ -1,0 +1,17 @@
+/*
+* FONTS
+*/
+
+/*
+* COLORS
+*/
+:root {
+  --accentColor: #6f1d1b;
+  --backgroundColor: #bb9457;
+  --fontColor: #432818;
+  --color1: #99582a;
+  --color2: #ffe6a7;
+}
+html {
+  background-color: var(--backgroundColor);
+}

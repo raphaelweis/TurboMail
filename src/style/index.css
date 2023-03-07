@@ -2,7 +2,8 @@
 * Github icon link
 */
 .clickableIcon {
-  scale: 0.4;
+  width: 10%;
+  height: 10%;
   text-align: end;
 }
 .clickableIcon > ul > li {

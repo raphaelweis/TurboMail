@@ -1,24 +1,27 @@
-/* 
-* Github icon link
+/*
+* Form and About div
 */
-.clickableIcon {
-  width: 10%;
-  height: 10%;
-  text-align: end;
-}
-.clickableIcon > ul > li {
-  list-style: none;
+
+main > div {
+  margin: 3em 10em 0 10em;
+  display: flex;
 }
 
-/* 
-* Main Title
-*/
-#title {
-  margin-left: auto;
-  margin-right: auto;
+main > div > #login {
+  width: 50%;
+}
+main > div > #login > form > h2 {
   text-align: center;
-  width: fit-content;
-  background-color: black;
-  font-size: 5em;
-  color: white;
+}
+main > div > #login > form > input {
+  text-align: center;
+}
+
+main > div > #about {
+  width: 50%;
+  text-align: justify;
+  padding: 0 5em 0 5em;
+}
+main > div > #about > h2 {
+  text-align: center;
 }

@@ -24,22 +24,26 @@ html {
 
 header > #topBar {
   text-align: right;
+  margin: 2em 2em 0 2em;
 }
 
-header > #topBar > a > img {
+header > #topBar > ul {
+  list-style: none;
+}
+
+header > #topBar > ul > li > a > img {
   width: 2em;
   height: 2em;
 }
 
-main > #title {
+header > #title {
   margin: 0 auto 0 auto;
-  background-color: black;
-  color: green;
+  color: black;
   width: fit-content;
-  font-size: 3.5em;
+  font-size: 5em;
 }
 
-.form-register > input{
+form > input {
   margin-bottom: 2em;
   border: none;
   border-bottom: 1px solid black;

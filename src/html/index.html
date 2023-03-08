@@ -11,7 +11,7 @@
 
 <body>
   <header>
-    <section class="clickableIcon">
+    <div id="topBar">
       <ul>
         <li>
           <a href="https://github.com/raphaelweis/TurboMail" target="_blank">
@@ -19,33 +19,35 @@
           /></a>
         </li>
       </ul>
-    </section>
-    <section id="title">
+    </div>
+    <div id="title">
       <h1>TurboMail.</h1>
-    </section>
+    </div>
   </header>
   <main>
-    <form>
-      <h2>Login</h2>
-      Email address :<br />
-      <input
-        class="inputField"
-        type="text"
-        name="email"
-        placeholder="Enter your email"
-      /><br />
-      Password :<br />
-      <input
-        class="inputField"
-        type="password"
-        name="password"
-        placeholder="Enter your password"
-      /><br />
-      <input type="submit" value="Log In" />
-    </form>
-    <a href="register.html">Sign up</a>
-    <section>
-      <div>
+    <div>
+      <div id="login">
+        <form>
+          <h2>Login</h2>
+          Email address :<br />
+          <input
+            class="inputField"
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+          /><br />
+          Password :<br />
+          <input
+            class="inputField"
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+          /><br />
+          <input type="submit" value="Log In" />
+          <a href="register.html">Sign up</a>
+        </form>
+      </div>
+      <div id="about">
         <h2>About</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -57,7 +59,6 @@
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </div>
-    </section>
+    </div>
   </main>
-  <footer></footer>
 </body>

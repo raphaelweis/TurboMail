@@ -43,7 +43,7 @@ header > #title {
   font-size: 5em;
 }
 
-form > input {
+form > input[class="inputField"] {
   margin-bottom: 2em;
   border: none;
   border-bottom: 1px solid black;

@@ -6,16 +6,11 @@
 * COLORS
 */
 :root {
-  --accentColor: #403234;
-  --backgroundColor: #79031D;
-  --fontColor: #F7F1F0;
-  --color1: #687477;
-  --color2: #A15C38;
-  /* --accentColor: #6f1d1b;
-  --backgroundColor: #bb9457;
-  --fontColor: #432818;
-  --color1: #99582a;
-  --color2: #ffe6a7; */
+  --accentColor: #3C6E71;
+  --backgroundColor: #284B63;
+  --fontColor: #D9D9D9;
+  --color1: #353535;
+  --color2: #FFFFFF;
 }
 
 /*
@@ -26,7 +21,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
-  background: linear-gradient(#000, #000) no-repeat center/2px 100%;
+  background: linear-gradient(var(--color2), var(--color2)) no-repeat center/2px 100%;
 }
 .mainContainer h2 {
   text-align: center;
@@ -47,12 +42,11 @@
   width: 100%;
   border-radius: .5em;
 }
-input[type="submit"] {
-  width: 5em;
-  text-align: center;
-  border-radius: .3em;
-}
+
 .login > a {
   float: right;
   color: var(--fontColor);
+}
+.login > a:hover { 
+  color: var(--color1);
 }

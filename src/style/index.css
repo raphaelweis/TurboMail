@@ -2,47 +2,57 @@
 * Form and About div
 */
 
-.split {
+/*
+* COLORS
+*/
+:root {
+  --accentColor: #403234;
+  --backgroundColor: #79031D;
+  --fontColor: #F7F1F0;
+  --color1: #687477;
+  --color2: #A15C38;
+  /* --accentColor: #6f1d1b;
+  --backgroundColor: #bb9457;
+  --fontColor: #432818;
+  --color1: #99582a;
+  --color2: #ffe6a7; */
+}
+
+/*
+* FLEXBOX
+*/
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
   background: linear-gradient(#000, #000) no-repeat center/2px 100%;
 }
-
-.login, .about{
-  width: 50%;
-  position: fixed;
-}
-.split h2 {
-  font-size: 2.5em;
-}
-
-.login {
-  left: 0;
-  max-width: 30%;
-  margin: 0 7em 0 13em;
-}
-.login > form > h2 {
+.mainContainer h2 {
   text-align: center;
+  font-size: 2.5em;
+  color: var(--fontColor);
 }
-.login > form > .inputField {
+.item {
+  flex-grow: 1;
+  flex-basis: 30%;
+  margin: 0 10em 0 10em;
+  text-align: justify;
+}
+
+/*
+* FORM FIELDS
+*/
+.inputField {
   width: 100%;
   border-radius: .5em;
 }
-.login > form > input[type="submit"] {
+input[type="submit"] {
   width: 5em;
   text-align: center;
   border-radius: .3em;
 }
-.login > form > a {
+.login > a {
   float: right;
-}
-
-.about {
-  right: 0;
-  max-width: 30%;
-  margin: 0 13em 0 7em;
-}
-.about > h2 {
-  text-align: center;
-}
-.about > p {
-  text-align: justify;
+  color: var(--fontColor);
 }

@@ -2,7 +2,6 @@
 * FONTS
 */
 @import url("https://fonts.googleapis.com/css?family=Raleway");
-
 * {
   font-family: Raleway;
 }
@@ -11,38 +10,64 @@
 * COLORS
 */
 :root {
-  --accentColor: #6f1d1b;
+  --accentColor: #C1DF1F;
+  --backgroundColor: #650D1B;
+  --fontColor: #F7F1F0;
+  --color1: #9B3D12;
+  --color2: #AE8E1C;
+  /* --accentColor: #403234;
+  --backgroundColor: #79031D;
+  --fontColor: #F7F1F0;
+  --color1: #687477;
+  --color2: #A15C38; */
+  /* --accentColor: #6f1d1b;
   --backgroundColor: #bb9457;
   --fontColor: #432818;
   --color1: #99582a;
-  --color2: #ffe6a7;
+  --color2: #ffe6a7; */
 }
 
 html {
   background-color: var(--backgroundColor);
 }
 
-header > #topBar {
-  text-align: right;
-  margin: 2em 2em 0 2em;
+/*
+* HEADER
+*/
+.topBarContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  background-color: var(--accentColor);
+  /* margin: 2em 2em 0 2em; */
+  /* border-radius: 1em; */
+  position: sticky;
+  height: 5em;
+  align-items: center;
+  padding: 0 1.5em 0 1.5em;
 }
-
-header > #topBar > ul {
-  list-style: none;
+header img {
+  width: 3em;
+  height: 3em;
 }
-
-header > #topBar > ul > li > a > img {
-  width: 2em;
-  height: 2em;
-}
-
-header > #title {
-  margin: 0 auto 0 auto;
-  color: black;
+header h1 {
+  text-align: center;
+  margin: 1em auto 0 auto;
+  color: var(--accentColor);
   width: fit-content;
-  font-size: 5em;
+  font-size: 7em;
+}
+header p {
+  text-align: center;
+  font-size: larger;
+  color: var(--accentColor);
+  margin-bottom: 3em;
 }
 
+/*
+* FORM
+*/
 form > input[class="inputField"] {
   margin-bottom: 2em;
   border: none;

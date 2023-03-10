@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <title>TurboMail</title>
+    <title>Turbomail</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/index.css" />
@@ -11,43 +11,40 @@
 
 <body>
   <header>
-    <div id="topBar">
-      <ul>
-        <li>
-          <a href="https://github.com/raphaelweis/TurboMail" target="_blank">
-            <img src="../resources/svg/github-mark.svg"
-          /></a>
-        </li>
-      </ul>
+    <div class="topBarContainer">
+      <div id="github">
+        <a href="https://github.com/raphaelweis/turbomail" target="_blank">
+          <img src="../resources/svg/github-mark.svg"
+        /></a>
+      </div>
     </div>
     <div id="title">
-      <h1>TurboMail.</h1>
+      <h1>Turbomail.</h1>
+      <p class="slogan">Just send, just receive, just opensource.</p>
     </div>
   </header>
   <main>
-    <div class="split">
-      <div class="login">
-        <form>
-          <h2>Login</h2>
-          Email address :<br />
-          <input
-            class="inputField"
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-          /><br />
-          Password :<br />
-          <input
-            class="inputField"
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-          /><br />
-          <input type="submit" value="Log In" />
-          <a href="register.html">Sign up</a>
-        </form>
-      </div>
-      <div class="about">
+    <div class="mainContainer">
+      <form class="item login">
+        <h2>Login</h2>
+        Email address :<br />
+        <input
+          class="inputField"
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+        /><br />
+        Password :<br />
+        <input
+          class="inputField"
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+        /><br />
+        <input type="submit" value="Log In" />
+        <a href="register.html">Sign up</a>
+      </form>
+      <div class="item about">
         <h2>About</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

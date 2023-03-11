@@ -5,6 +5,7 @@ form {
   padding: 2em;
   border-radius: 1em;
   max-width: max-content;
+  background-color: grey;
 }
 
 form > label,

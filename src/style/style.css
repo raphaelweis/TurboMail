@@ -23,6 +23,9 @@
 html {
   background-color: var(--backgroundColor);
 }
+body {
+  margin: 0;
+}
 
 /*
 * HEADER
@@ -45,7 +48,7 @@ header img {
 header h1 {
   text-align: center;
   margin: .5em auto 0 auto;
-  color: var(--accentColor);
+  color: var(--fontColor);
   width: fit-content;
   font-size: 7em;
 }
@@ -62,7 +65,8 @@ header p {
 form > input[class="inputField"] {
   margin-bottom: 2em;
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid white;
+  background: transparent;
   height: 2em;
 }
 form label {
@@ -70,9 +74,17 @@ form label {
 }
 
 input[type="submit"] {
-  background-color: var(--color1);
+  background: transparent;
   color: var(--fontColor);
+  border: 1px solid var(--fontColor);
   width: 5em;
   text-align: center;
   border-radius: .3em;
+  float: right;
+}
+
+footer {
+  height: 100px;
+  width: 100%;
+  background-color: var(--accentColor);
 }

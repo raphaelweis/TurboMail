@@ -4,10 +4,25 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway");
 * {
   font-family: Raleway;
+  color: var(--fontColor);
   margin: 0;
   padding: 0;
 }
 
+/*
+* COLORS
+*/
+:root {
+  --accentColor: #a27355;
+  --backgroundColor: #c9af77;
+  --fontColor: #3f3f3d;
+  --color1: #c39d69;
+  --color2: #bf976b;
+}
+
+html {
+  background-color: var(--backgroundColor);
+}
 /*
 * NAVBAR
 */
@@ -16,7 +31,7 @@ header nav {
   padding: 0 2% 0 2%;
   justify-content: space-between;
   align-items: center;
-  background-color: grey;
+  background-color: var(--accentColor);
 }
 nav img {
   width: 40px;
@@ -73,9 +88,13 @@ input {
 }
 .row input {
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--fontColor);
+  border-radius: 0.25em;
   width: 70%;
+  height: 1.75em;
   margin-bottom: 1.5em;
+  background-color: var(--color2);
+  opacity: 70%;
 }
 .row input[type="submit"] {
   border: none;
@@ -88,17 +107,17 @@ input {
   margin-bottom: 2em;
 }
 .sign-in {
-  border-right: 1px solid black;
+  border-right: 1px solid var(--fontColor);
 }
 .sign-up {
-  border-left: 1px solid black;
+  border-left: 1px solid var(--fontColor);
 }
 
 /*
 * FOOTER
 */
 footer {
-  background-color: grey;
+  background-color: var(--accentColor);
   padding: 2em;
   text-align: justify;
   font-size: 1em;

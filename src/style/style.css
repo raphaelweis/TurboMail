@@ -64,9 +64,10 @@ nav img {
   text-align: center;
   font-size: 2em;
   margin-top: 1em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
-.row label, input{
+.row label,
+input {
   margin-left: 15%;
   font-size: 1em;
 }
@@ -77,6 +78,8 @@ nav img {
   margin-bottom: 1.5em;
 }
 .row input[type="submit"] {
+  border: none;
+  border-radius: 3px;
   width: 10%;
   margin-left: 75%;
 }
@@ -85,11 +88,9 @@ nav img {
   margin-bottom: 2em;
 }
 .sign-in {
-  border: none;
   border-right: 1px solid black;
 }
 .sign-up {
-  border: none;
   border-left: 1px solid black;
 }
 
@@ -103,11 +104,10 @@ footer {
   font-size: 1em;
 }
 
-
 /*
 * RESPONSIVE
 */
-@media(max-width: 700px){
+@media (max-width: 700px) {
   nav img {
     width: 20px;
     height: 20px;
@@ -117,7 +117,7 @@ footer {
   }
   .title h1 {
     font-size: 3em;
-  } 
+  }
   .title p {
     font-size: 1em;
   }
@@ -136,6 +136,6 @@ footer {
   }
 
   footer {
-    font-size: .75em;
+    font-size: 0.75em;
   }
 }

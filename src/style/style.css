@@ -90,7 +90,6 @@ input {
 .row input {
   border: none;
   border-bottom: 1px solid var(--fontColor);
-  border-radius: 0.25em;
   width: 70%;
   height: 1.75em;
   margin-bottom: 1.5em;
@@ -118,6 +117,9 @@ input {
 * FOOTER
 */
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background-color: var(--accentColor);
   padding: 2em;
   text-align: justify;

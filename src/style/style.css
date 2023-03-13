@@ -98,7 +98,6 @@ input {
 }
 .row input[type="submit"] {
   border: none;
-  border-radius: 3px;
   width: 10%;
   margin-left: 75%;
 }

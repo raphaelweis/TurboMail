@@ -1,3 +1,10 @@
+<?php
+/**
+ * Variables
+ */
+include 'signup.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +40,7 @@
         <div class="row">
           <div class="item sign-in">
             <h2>Sign In</h2>
-            <form>
+            <form method="post" action="../php/signin.php">
               <label for="si-email">Email Address :</label><br />
               <input
                 id="si-email"
@@ -58,13 +65,14 @@
           </div>
           <div class="item sign-up">
             <h2>Sign Up</h2>
-            <form>
+            <form method="POST" action="../php/signup.php">
               <label for="su-firstname">First name :</label><br />
               <input
                 id="su-firstname"
                 type="text"
                 class="inputField"
                 name="firstname"
+                value="<?php echo $_POST['firstname'] ?>"
                 placeholder="Enter your first name"
               />
               <br />

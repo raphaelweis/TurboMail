@@ -116,9 +116,8 @@ input {
 * FOOTER
 */
 footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
-  width: 100%;
   background-color: var(--accentColor);
   padding: 2em;
   text-align: justify;

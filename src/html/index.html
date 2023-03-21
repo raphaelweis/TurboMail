@@ -7,6 +7,7 @@
     <title>TurboMail.</title>
   </head>
   <body>
+    <script src="../javascript/form.js"></script>
     <header>
       <nav>
         <div class="nav-links">
@@ -33,7 +34,7 @@
         <div class="row">
           <div class="item sign-in">
             <h2>Sign In</h2>
-            <form>
+            <form id="sign-in">
               <label for="si-email">Email Address :</label><br />
               <input
                 id="si-email"
@@ -53,7 +54,7 @@
               />
               <br />
 
-              <input type="submit" value="Sign In" />
+              <input type="submit" onclick="signIn()" value="Sign In" />
             </form>
           </div>
           <div class="item sign-up">

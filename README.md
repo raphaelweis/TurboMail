@@ -27,4 +27,4 @@ Note : We do not plan to use any kind of frameworks for this project
 
 We are trying to implement the MVC design pattern to better organize our code, here is
 a simple sketch to provide an overview of the tech stack :
-![image info](doc/resources/appsketch.pdf)
+![title](doc/resources/appsketch.pdf)

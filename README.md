@@ -5,6 +5,7 @@
 - [TurboMail](#turbomail)
   - [Vision](#vision)
   - [Technologies](#technologies)
+  - [Try TurboMail](#try-turbomail)
   <!--toc:end-->
 
 TurboMail is a school project conducted by Sam Barthazon and Raphaël Weis.
@@ -14,8 +15,9 @@ our first fully functionnal Web Application with this project.
 ## Vision
 
 Our goal is to make an application that allows it's users to send messages to each other,
-allowing them to choose wether or not the messages they send are public or not. If we find
-the time, we would also like to turn the application into a email client, allowing it's
+letting them choose to make the conversation public or private. Public messages can be browsed
+on the users wall, and can be replied to by anyone.
+If we find the time, we would also like to turn the application into a email client, allowing it's
 users to check and send emails from their existing email addresses, kind of like thunderbird.
 
 ## Technologies

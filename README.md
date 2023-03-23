@@ -23,8 +23,33 @@ users to check and send emails from their existing email addresses, kind of like
 We are currently using Apache Web Server for our server, along with MySQL for the database.
 We use PHP for our backend, and javascript, HTML and CSS for our frontend.
 
-Note : We do not plan to use any kind of frameworks for this project
+> Note : We do not plan to use any kind of frameworks for this project
 
 We are trying to implement the MVC design pattern to better organize our code, here is
 a simple sketch to provide an overview of the tech stack :
 ![alt text](doc/resources/appsketch.png)
+
+## Try TurboMail
+
+We currently do not plan to upload this project to the web, but you may
+try out the application by doing the following :
+
+1. Make sure you have XAMPP installed - available on Linux, Windows and MacOS
+2. clone this repository :
+
+```
+git clone https://raphaelweis/TurboMail
+```
+
+2. start xampp server, and ensure that you set it up to watch the cloned repository.
+   [more info here](https://wiki.archlinux.org/title/XAMPP)
+
+> Make sure to use the 'TurboMail' alias if you want to use the link below
+
+```
+xampp start
+```
+
+3. You can now go to [this link](http://localhost/TurboMail) and browse the application.
+
+You are free to reuse any part of this project, as stated in the LICENSE.

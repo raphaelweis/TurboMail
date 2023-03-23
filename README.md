@@ -40,7 +40,7 @@ try the application by doing the following :
 2. clone this repository :
 
 ```
-git clone https://raphaelweis/TurboMail
+git clone https://github.com/raphaelweis/TurboMail.git
 ```
 
 2. start xampp server, and ensure that you set it up to watch the cloned repository.

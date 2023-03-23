@@ -32,7 +32,7 @@ a simple sketch to provide an overview of the tech stack :
 ## Try TurboMail
 
 We currently do not plan to upload this project to the web, but you may
-try out the application by doing the following :
+try the application by doing the following :
 
 1. Make sure you have XAMPP installed - available on Linux, Windows and MacOS
 2. clone this repository :
@@ -50,6 +50,6 @@ git clone https://raphaelweis/TurboMail
 xampp start
 ```
 
-3. You can now go to [this link](http://localhost/TurboMail) and browse the application.
+3. You can now go to [this link](http://localhost/TurboMail/src/html) and browse the application.
 
-You are free to reuse any part of this project, as stated in the LICENSE.
+You are free to reuse any part of this project, as stated in the [LICENSE](LICENSE).

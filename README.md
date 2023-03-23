@@ -39,6 +39,8 @@ try the application by doing the following :
 1. Make sure you have XAMPP installed - available on Linux, Windows and MacOS
 2. clone this repository :
 
+> You can get the latest commits by switching to the dev branch
+
 ```
 git clone https://github.com/raphaelweis/TurboMail.git
 ```

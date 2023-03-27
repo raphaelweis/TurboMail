@@ -9,10 +9,10 @@ and documentation we came accross while building TurboMail.
 
 ## Websites
 
-[MDN](https://developer.mozilla.org/) : Lots of well written documentation on various web development topics and technologies
-[W3 Schools](https://www.w3schools.com/) : Useful website for various techonologies with examples and a live console.
-[GeekForGeeks](https://www.geeksforgeeks.org/) : Often times the quick answer to any given simple computer science question
+- [MDN](https://developer.mozilla.org/) : Lots of well written documentation on various web development topics and technologies
+- [W3 Schools](https://www.w3schools.com/) : Useful website for various techonologies with examples and a live console.
+- [GeekForGeeks](https://www.geeksforgeeks.org/) : Often times the quick answer to any given simple computer science question
 
 ## Pages
 
-[Ajax](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX) : Great documentation for the AJAX approach
+- [Ajax](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX) : Great documentation for the AJAX approach

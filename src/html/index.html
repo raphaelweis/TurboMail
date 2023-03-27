@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/style.css" />
+    <script src="../javascript/form.js"></script>
     <title>TurboMail.</title>
   </head>
   <body>
-    <script src="../javascript/form.js"></script>
     <header>
       <nav>
         <div class="nav-links">
@@ -54,12 +54,12 @@
               />
               <br />
 
-              <input type="submit" onclick="signIn()" value="Sign In" />
+              <input id="sign-in-submit" type="submit" value="Sign In" />
             </form>
           </div>
           <div class="item sign-up">
             <h2>Sign Up</h2>
-            <form>
+            <form id="sign-up">
               <label for="su-firstname">First name :</label><br />
               <input
                 id="su-firstname"
@@ -89,7 +89,7 @@
               <br />
               <label for="su-password">Password :</label><br />
               <input
-                id="su-password"
+                id="password1"
                 type="password"
                 class="inputField"
                 name="password"
@@ -98,7 +98,7 @@
               <br />
               <label for="su-checkpassword">Check Password :</label><br />
               <input
-                id="su-checkpassword"
+                id="password2"
                 type="password"
                 class="inputField"
                 name="password"
@@ -106,7 +106,7 @@
               />
               <br />
 
-              <input type="submit" value="Sign Up" />
+              <input id="sign-up-button" type="submit" value="Sign Up" />
             </form>
           </div>
         </div>

@@ -9,7 +9,7 @@
   <!--toc:end-->
 
 TurboMail is a school project conducted by Sam Barthazon and Raphaël Weis.
-We are taking our first course on web developpement, and are hoping to build
+We are taking our first course on web development, and are hoping to build
 our first fully functionnal Web Application with this project.
 
 ## Vision
@@ -17,7 +17,7 @@ our first fully functionnal Web Application with this project.
 Our goal is to make an application that allows it's users to send messages to each other,
 letting them choose to make the conversation public or private. Public messages can be browsed
 on the users wall, and can be replied to by anyone.
-If we find the time, we would also like to turn the application into a email client, allowing it's
+If we find the time, we would also like to turn the application into an email client, allowing it's
 users to check and send emails from their existing email addresses, kind of like thunderbird.
 
 ## Technologies
@@ -30,6 +30,10 @@ We use PHP for our backend, and javascript, HTML and CSS for our frontend.
 We are trying to implement the MVC design pattern to better organize our code, here is
 a simple sketch to provide an overview of the tech stack :
 ![alt text](doc/resources/appsketch.png)
+
+## Useful Web development related documentation
+
+see [useful-links](/doc/useful-links.md)
 
 ## Try TurboMail
 

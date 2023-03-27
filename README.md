@@ -17,7 +17,7 @@ our first fully functionnal Web Application with this project.
 
 Our goal is to make an application that allows it's users to send messages to each other,
 letting them choose to make the conversation public or private. Public messages can be browsed
-on the users wall, and can be replied to by anyone.
+on the user's wall (like an instagram feed for example), and can be replied to by anyone.
 If we find the time, we would also like to turn the application into an email client, allowing it's
 users to check and send emails from their existing email addresses, kind of like thunderbird.
 

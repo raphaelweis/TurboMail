@@ -18,3 +18,7 @@ and documentation we came accross while building TurboMail.
 - [Ajax](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX) : Great documentation for the AJAX approach
 - [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) : Guide for using the XMLHttpRequest JavaScript object
 - [Example website with xampp](https://code-boxx.com/use-html-css-javascript-php-mysql/) : Simple example which displays an approch similar to ours
+- [Xhr spec](https://xhr.spec.whatwg.org) : Full documentation for the XMLHttpRequest JavaScript Object
+- [setRequestHeader() method](https://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method) : Documentation for the setRequestHeader method
+- [Overview of MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) : Explaination of MIME types by mozilla
+- [MIME types](https://www.iana.org/assignments/media-types/media-types.xhtml) : Full up-to-date list of MIME types

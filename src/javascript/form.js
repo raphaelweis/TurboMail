@@ -1,16 +1,21 @@
 //handling of signIn form
 function signIn() {
-  let signInForm = document.getElementById("sign-in");
+  let httpRequest;
+  document.getElementById("sign-in").addEventListener("submit", makeRequest());
+  function makeRequest() {
+    httpRequest = new XMLHttpRequest();
 
-  signInForm.addEventListener("submit", function (event) {
-    event.preventDefault(); //prevent the html from auto submitting data
+    httpRequest.open(
+      "GET",
+      "http://localhost/TurboMail/src/html/dummy.html",
+      true
+    ); //TODO : verify true parameter
+    httpRequest.send();
 
-    let email = document.getElementById("si-email").value;
-    let password = document.getElementById("si-password").value;
+    //let signInData = new formData(document.getElementById("sign-in"));
 
-    console.log(email);
-    console.log(password);
-  });
+    //httpRequest.send(signInData);
+  }
 }
 
 //handling of signUp form

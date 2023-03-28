@@ -16,3 +16,4 @@ and documentation we came accross while building TurboMail.
 ## Pages
 
 - [Ajax](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX) : Great documentation for the AJAX approach
+- [Example website with xampp](https://code-boxx.com/use-html-css-javascript-php-mysql/) : Simple example which displays an approch similar to ours

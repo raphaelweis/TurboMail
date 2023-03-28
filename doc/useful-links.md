@@ -17,3 +17,4 @@ and documentation we came accross while building TurboMail.
 
 - [Ajax](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX) : Great documentation for the AJAX approach
 - [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) : Guide for using the XMLHttpRequest JavaScript object
+- [Example website with xampp](https://code-boxx.com/use-html-css-javascript-php-mysql/) : Simple example which displays an approch similar to ours

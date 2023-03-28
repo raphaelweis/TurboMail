@@ -2,11 +2,10 @@
 
 <!--toc:start-->
 
-- [TurboMail](#turbomail)
-  - [Vision](#vision)
-  - [Technologies](#technologies)
-  - [Useful Web development related documentation](#useful-web-development-related-documentation)
-  - [Try TurboMail](#try-turbomail)
+- [Vision](#vision)
+- [Technologies](#technologies)
+- [Useful Web development related documentation](#useful-web-development-related-documentation)
+- [Try TurboMail](#try-turbomail)
   <!--toc:end-->
 
 TurboMail is a school project conducted by Sam Barthazon and Raphaël Weis.

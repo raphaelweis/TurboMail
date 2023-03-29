@@ -24,3 +24,5 @@ and documentation we came accross while building TurboMail.
 - [MIME types](https://www.iana.org/assignments/media-types/media-types.xhtml) : Full up-to-date list of MIME types
 - [Connect to database](https://www.w3schools.com/php/php_mysql_connect.asp) : Code to connect to a local database
 - [Create a database](https://www.w3schools.com/php/php_mysql_create.asp) : Code to create a database using PHP instructions
+- [MIME types](https://www.iana.org/assignments/media-types/media-types.xhtml) : Full up-to-date list of MIME type
+- [Browser Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) : Browser local storage, can be used to pass in information between htmlPages

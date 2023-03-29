@@ -23,5 +23,4 @@ if($result) {
 
 header("Location: success.php");
 exit();
-
 ?>

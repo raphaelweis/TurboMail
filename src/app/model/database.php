@@ -23,6 +23,6 @@ if ($conn->multi_query($sql) === TRUE) {
     echo "Error creating database: " . $conn->error;
 }
 
-$conn->close();
+// Add redirection
 
 ?>

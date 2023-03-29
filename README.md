@@ -58,6 +58,6 @@ git clone https://github.com/raphaelweis/TurboMail.git
 xampp start
 ```
 
-3. You can now go to [this link](http://localhost/TurboMail/src/html) and browse the application.
+3. You can now go to [this link](http://localhost/TurboMail/src/app/view) and browse the application.
 
 You are free to reuse any part of this project, as stated in the [LICENSE](LICENSE).

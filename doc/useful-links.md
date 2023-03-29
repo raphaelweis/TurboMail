@@ -22,3 +22,5 @@ and documentation we came accross while building TurboMail.
 - [setRequestHeader() method](https://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method) : Documentation for the setRequestHeader method
 - [Overview of MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) : Explaination of MIME types by mozilla
 - [MIME types](https://www.iana.org/assignments/media-types/media-types.xhtml) : Full up-to-date list of MIME types
+- [Connect to database](https://www.w3schools.com/php/php_mysql_connect.asp) : Code to connect to a local database
+- [Create a database](https://www.w3schools.com/php/php_mysql_create.asp) : Code to create a database using PHP instructions

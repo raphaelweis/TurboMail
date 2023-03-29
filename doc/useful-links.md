@@ -21,4 +21,5 @@ and documentation we came accross while building TurboMail.
 - [Xhr spec](https://xhr.spec.whatwg.org) : Full documentation for the XMLHttpRequest JavaScript Object
 - [setRequestHeader() method](https://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method) : Documentation for the setRequestHeader method
 - [Overview of MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) : Explaination of MIME types by mozilla
-- [MIME types](https://www.iana.org/assignments/media-types/media-types.xhtml) : Full up-to-date list of MIME types
+- [MIME types](https://www.iana.org/assignments/media-types/media-types.xhtml) : Full up-to-date list of MIME type
+- [Browser Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) : Browser local storage, can be used to pass in information between htmlPages

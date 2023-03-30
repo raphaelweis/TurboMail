@@ -1,5 +1,22 @@
 <?php
 
+class User {
+  // Properties
+  private $email;
+  private $firstname;
+  private $lastname;
+  private $hashedPassword;
+
+  // Methods
+  function signIn() {
+
+  }
+
+  function signUp() {
+
+  }
+}
+
 include_once("database.php");
 
 $email = urldecode($_POST["email"]);
@@ -21,6 +38,4 @@ if($result) {
   echo "Login successful !";
 }
 
-header("Location: success.php");
-exit();
 ?>

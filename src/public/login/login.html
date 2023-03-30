@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="../controller/form.js"></script>
+    <script type="module" src="router.js"></script>
     <title>TurboMail.</title>
   </head>
   <body>
@@ -13,7 +13,7 @@
         <div class="nav-links">
           <ul>
             <li>
-              <a href="../model/database.php">Click Me</a>
+              <a href="../../app/model/database.php">Click Me</a>
             </li>
             <li>
               <a
@@ -28,7 +28,7 @@
       </nav>
       <div class="title">
         <h1>TurboMail.</h1>
-        <p>Simply Better.</p>
+        <p>Written with love.</p>
       </div>
     </header>
 
@@ -59,7 +59,12 @@
                 value="bang!bang!"
               />
               <br />
-              <input id="sign-in-submit" type="submit" value="Sign In" />
+              <input
+                type="submit"
+                name="submit"
+                value="Sign In"
+                onsubmit="event.preventDefault()"
+              />
             </form>
           </div>
           <div class="item sign-up">

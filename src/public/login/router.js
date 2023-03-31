@@ -22,15 +22,23 @@ window.onload = function () {
 // HTTP requests
 function signInRequest(signInForm) {
   let xhr = sendForm("POST", signInForm, USER_CONTROLLER_URL);
+  // const xhr = new XMLHttpRequest();
+  // xhr.open("POST", USER_CONTROLLER_URL);
+  // xhr.send(new FormData(signInForm));
   xhr.onreadystatechange = () => {
-    if (xhr.readyState !== 4 && xhr.status !== 200) {
-      alert("Oops, something went wrong with your request !");
-      return;
-    }
-    if (xhr.responseText === "success") {
-      window.location.href = "../home/home.html";
-    } else {
-      // alert("Wrong credentials !");
+    // if (xhr.readyState !== 4 && xhr.status !== 200) {
+    //   alert("Oops, something went wrong with your request !");
+    //   return;
+    // }
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        if (xhr.responseText === "success") {
+          window.location.href = "../home/home.html";
+        } else {
+          alert("Wrong credentials !");
+          // window.alert("Wrong credentials !");
+        }
+      }
     }
   };
 }

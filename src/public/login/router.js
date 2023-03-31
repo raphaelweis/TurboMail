@@ -11,7 +11,8 @@ window.onload = function () {
     event.preventDefault();
     signInRequest(signInForm);
   });
-  let signUpForm = document.getElementById("sign-up");
+
+  const signUpForm = document.getElementById("sign-up");
   signUpForm.addEventListener("submit", (event) => {
     event.preventDefault();
     signUpRequest(signInForm);
@@ -20,7 +21,18 @@ window.onload = function () {
 
 // HTTP requests
 function signInRequest(signInForm) {
-  sendForm("POST", signInForm, USER_CONTROLLER_URL);
+  let xhr = sendForm("POST", signInForm, USER_CONTROLLER_URL);
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState !== 4 && xhr.status !== 200) {
+      alert("Oops, something went wrong with your request !");
+      return;
+    }
+    if (xhr.responseText === "success") {
+      window.location.href = "../home/home.html";
+    } else {
+      // alert("Wrong credentials !");
+    }
+  };
 }
 
 function signUpRequest(signUpForm) {

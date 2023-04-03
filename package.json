@@ -1,0 +1,25 @@
+{
+  "name": "turbomail",
+  "version": "1.0.0",
+  "description": "<!--toc:start-->",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelweis/TurboMail.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raphaelweis/TurboMail/issues"
+  },
+  "homepage": "https://github.com/raphaelweis/TurboMail#readme",
+  "devDependencies": {
+    "eslint": "^8.37.0"
+  }
+}

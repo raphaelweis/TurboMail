@@ -1,41 +1,47 @@
 <?php
 
+const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
+ 
 class User {
   // Properties
-  private $email;
-  private $firstname;
-  private $lastname;
-  private $hashedPassword;
+  protected $email;
+  protected $password;
 
   // Methods
-  function signIn() {
-
+  public function __construct($email, $password) {
+    $this->email = $email;
+    $this->password = $password;
   }
 
-  function signUp() {
+  public function signIn(): int {
+    if(!preg_match(EMAIL_REGEX, $this->email)) {
+      return false;
+    }
+    if(empty($this->password)) {
+      return false;
+    }
 
+    if(!$this->checkEmail()) {
+      return false;
+    }
+    if(!$this->checkPassword()) {
+      return false;
+    }
+
+    return true;
   }
-}
 
-include_once("database.php");
-
-$email = urldecode($_POST["email"]);
-$password = urldecode($_POST["password"]);
-$emailRegEx = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
-
-if(!preg_match($emailRegEx, $email)) {
-  echo "Email don't match to email synthax";
-}
-if(empty($password)) {
-  echo "Password missing";
-}
-
-// Read from database
-$query = "SELECT * FROM users WHERE Email = '$email' AND Passwd = '$password'";
-$result = $conn->query($query);
-
-if($result) {
-  echo "Login successful !";
+  public function checkEmail(): bool{
+    // TODO
+    // Check if the email is in the User table of TurboMail's database
+    return true;
+  }
+  
+  public function checkPassword(): bool {
+    // TODO
+    // Check if for the checked email we have this password in the User table of TurboMail's database
+    return true;
+  }
 }
 
 ?>

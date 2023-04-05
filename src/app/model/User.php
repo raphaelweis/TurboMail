@@ -1,5 +1,7 @@
 <?php
 
+include_once("ErrorCodes.php");
+
 const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
  
 class User {
@@ -15,20 +17,20 @@ class User {
 
   public function signIn(): int {
     if(!preg_match(EMAIL_REGEX, $this->email)) {
-      return false;
+      return INVALID_EMAIL;
     }
     if(empty($this->password)) {
-      return false;
+      return INVALID_PASSWORD;
     }
 
     if(!$this->checkEmail()) {
-      return false;
+      return EMAIL_NOT_FOUND;
     }
     if(!$this->checkPassword()) {
-      return false;
+      return WRONG_PASSWORD;
     }
 
-    return true;
+    return SUCCESS;
   }
 
   public function checkEmail(): bool{

@@ -2,8 +2,7 @@
 
 include_once("ErrorCodes.php");
 
-//const NAMES_REGEX = "/^([ \u00c0-\u01ffa-zA-Z'\-])+$/";
-const NAMES_REGEX = "/^([a-z])/";
+const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 
 class NewUser extends User {
   private $firstName;
@@ -11,23 +10,28 @@ class NewUser extends User {
   private $checkPassword;
 
   public function __construct($email, $firstName, $lastName, $password, $checkPassword) {
-    $this->email = $email;
+    parent::__construct($email, $password);
     $this->firstName = $firstName;
     $this->lastName = $lastName;
-    $this->password = $password;
     $this->checkPassword = $checkPassword;
   }
 
   public function signUp(): int {
-    if(!preg_match(EMAIL_REGEX, $this->email)) {
+    if(!$this->checkValidEmail()) {
       return INVALID_EMAIL;
     }
-    if(!$this->checkFirstName()) {
+    if($this->checkExistingEmail()) {
+      return EMAIL_IN_USE;
+    }
 
+    if(!$this->checkFirstName()) {
+      return INVALID_FIRSTNAME;
     }
-    if(empty($this->password)) {
-      return INVALID_PASSWORD;
+
+    if(!$this->checkLastName()) {
+      return INVALID_LASTNAME;
     }
+
     if(!$this->checkPasswords()) {
       return PASSWORDS_DONT_MATCH;
     }
@@ -36,26 +40,33 @@ class NewUser extends User {
   }
 
   public function checkFirstName(): bool {
-    // Check if != 0
     if(empty($this->firstName)) {
       return false;
     }
 
-    // Check if <= 100
     if(strlen($this->firstName > 100)) {
       return false;
     }
 
-    // Check if preg_match
-    
+    if(!preg_match(NAMES_REGEX, $this->firstName)) {
+      return false;
+    }
 
     return true;
   }
 
   public function checkLastName(): bool {
-    // Check if != 0
-    // Check if <= 100
-    // Check if preg_match
+    if(empty($this->lastName)) {
+      return false;
+    }
+
+    if(strlen($this->lastName > 100)) {
+      return false;
+    }
+
+    if(!preg_match(NAMES_REGEX, $this->lastName)) {
+      return false;
+    }
     return true;
   }
 
@@ -63,7 +74,5 @@ class NewUser extends User {
     return $this->password == $this->checkPassword;
   }
 }
-
-echo "Résultat : " . preg_match(NAMES_REGEX, "Sam");
 
 ?>

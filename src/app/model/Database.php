@@ -1,6 +1,8 @@
 <?php
 class Database {
+  //
   // Properties
+  //
   private $serverName = "localhost";
   private $userName = "root";
   private $password = "";
@@ -8,12 +10,15 @@ class Database {
   private $connection;
 
 
+  //
   // Methods
+  //
 
-  /* Connect to PhpMyAdmin */
+  /**
+   * Function to connect to the server
+   */
   function connectToServer() {
     try {
-      // Create connection
       $this->connection = new PDO("mysql:host=$this->serverName", $this->userName, $this->password);
 
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -24,10 +29,11 @@ class Database {
     }
   }
 
-  /* Connect to TurboMail */
+  /**
+   * Function to connect to TurboMail's database
+   */
   public function connectToTMDB() {
     try {
-      // Create connection
       $this->connection = new PDO("mysql:host=$this->serverName; $this->dbName", $this->userName, $this->password);
 
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -38,10 +44,12 @@ class Database {
     }
   }
 
-  /* Create the TurboMail's database */
+  /**
+   * Function to create the database : TurboMailDB
+   * Execute a sql file
+   */
   public function createDatabase() {
     try {
-      // Connect to PhpMyAdmin
       $this->connectToServer();
 
       if($this->connection) {
@@ -55,12 +63,16 @@ class Database {
     $this->disconnectFromDB($this->connection);
   }
 
-  /* Disconnect from Database */
+  /**
+   * Function to disconnect from the database
+   */
   public function disconnectFromDB() {
     $this->connection = null;
   }
 
-  /* Execute one query */
+  /**
+   * Function to execute a query
+   */
   public function execQuery($query) {
     try {
       $this->connectToTMDB();

@@ -5,10 +5,23 @@ include_once("ErrorCodes.php");
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 
 class NewUser extends User {
+  //
+  // Properties
+  //
   private $firstName;
   private $lastName;
   private $checkPassword;
 
+
+  /**
+   * Constructor
+   * 
+   * @var mixed $email User's email
+   * @var mixed $firstName User's first name
+   * @var mixed $lastName User's last name
+   * @var mixed $password User's password
+   * @var mixed $checkPassword User's password
+   */
   public function __construct($email, $firstName, $lastName, $password, $checkPassword) {
     parent::__construct($email, $password);
     $this->firstName = $firstName;
@@ -16,6 +29,16 @@ class NewUser extends User {
     $this->checkPassword = $checkPassword;
   }
 
+
+  //
+  // Methods
+  //
+
+  /**
+   * Sign up fonction
+   * Check all inputs of the sign up form
+   * Return the appropriate error in case of problem
+   */
   public function signUp(): int {
     if(!$this->checkValidEmail()) {
       return INVALID_EMAIL;
@@ -36,9 +59,13 @@ class NewUser extends User {
       return PASSWORDS_DONT_MATCH;
     }
 
+    // TODO : add new user in DB in user table
     return SUCCESS;
   }
 
+  /**
+   * Function to check first name input
+   */
   public function checkFirstName(): bool {
     if(empty($this->firstName)) {
       return false;
@@ -55,6 +82,9 @@ class NewUser extends User {
     return true;
   }
 
+  /**
+   * Function to check last name input
+   */
   public function checkLastName(): bool {
     if(empty($this->lastName)) {
       return false;
@@ -70,6 +100,9 @@ class NewUser extends User {
     return true;
   }
 
+  /**
+   * Function to check if passwords are equal
+   */
   public function checkPasswords(): bool {
     return $this->password == $this->checkPassword;
   }

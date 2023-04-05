@@ -1,3 +1,25 @@
+<?php
+
+<<<<<<< HEAD
+class User {
+    protected $email;
+
+    protected $password;
+
+    /**
+     * @param  mixed  $email
+     * @param  mixed  $password
+     */
+    public function __construct($email, $password) {
+        $this->email = $email;
+        $this->password = $password;
+    }
+
+    public function authenticateUser(): bool {
+        return true;
+    }
+}
+=======
 const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
  
 class User {
@@ -43,3 +65,4 @@ class User {
 }
 
 ?>
+>>>>>>> origin/user

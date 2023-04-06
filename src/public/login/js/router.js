@@ -9,18 +9,19 @@ window.onload = function () {
   const signInForm = document.getElementById("sign-in");
   signInForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    formRequest(signInForm);
+    formRequest(signInForm, "login");
   });
   const signUpForm = document.getElementById("sign-up");
   signUpForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    formRequest(signUpForm);
+    formRequest(signUpForm, "register");
   });
 };
 
-function formRequest(form) {
+function formRequest(form, type) {
   const formCopy = form;
   const formData = new FormData(formCopy);
+  formData.append("type", type);
 
   // remove previous error divs
   const validationErrorsDivs = document.querySelectorAll(".validation-error");

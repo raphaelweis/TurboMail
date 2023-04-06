@@ -18,10 +18,27 @@
   --fontColor: #3f3f3d;
   --color1: #c39d69;
   --color2: #bf976b;
+  --errorMessage: #af0202;
 }
 
 html {
   background-color: var(--backgroundColor);
+}
+
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+footer {
+  background-color: var(--accentColor);
+  padding: 2em;
+  text-align: justify;
+  font-size: 1em;
+  margin-top: auto;
 }
 
 /*
@@ -29,7 +46,7 @@ html {
 */
 header nav {
   display: flex;
-  padding: 0 2% 0 2%;
+  padding: 0 1% 0 1%;
   justify-content: space-between;
   align-items: center;
   background-color: var(--accentColor);
@@ -54,7 +71,7 @@ nav img {
 */
 .title {
   text-align: center;
-  margin-top: 2em;
+  margin-top: 0.5em;
 }
 .title h1 {
   font-size: 7.5em;
@@ -69,10 +86,10 @@ nav img {
 */
 .signinup {
   text-align: center;
-  padding-top: 100px;
+  padding-top: 0;
 }
 .row {
-  margin-top: 5%;
+  margin-top: 1%;
   display: flex;
   justify-content: space-around;
 }
@@ -80,6 +97,9 @@ nav img {
   text-align: center;
   font-size: 2em;
   margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+.row .input-div {
   margin-bottom: 0.5em;
 }
 .row label,
@@ -92,14 +112,14 @@ input {
   border-bottom: 1px solid var(--fontColor);
   width: 70%;
   height: 1.75em;
-  margin-bottom: 1.5em;
   background-color: var(--color2);
   opacity: 70%;
 }
 .row input[type="submit"] {
-  border: none;
-  width: 10%;
-  margin-left: 75%;
+  border: solid 1px black;
+  width: 5em;
+  float: right;
+  margin-right: 15%;
 }
 .item {
   width: 50%;
@@ -113,34 +133,31 @@ input {
 }
 
 /*
-* FOOTER
+* Errors
 */
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: var(--accentColor);
-  padding: 2em;
-  text-align: justify;
-  font-size: 1em;
+.validation-error {
+  color: var(--errorMessage);
+  width: 70%;
+  margin-left: 15%;
+  font-size: 0.75em;
 }
 
 /*
 * RESPONSIVE
 */
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   nav img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
   .title {
     margin-top: 1.5em;
   }
   .title h1 {
-    font-size: 3em;
+    font-size: 6em;
   }
   .title p {
-    font-size: 1em;
+    font-size: 1.25em;
   }
 
   .row {

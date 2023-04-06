@@ -34,10 +34,14 @@ function formRequest(form, type) {
   })
     .then((response) => response.text())
     .then((responseText) => {
+      if (responseText === "success") {
+        window.location.href = "../home/home.html";
+      }
       let errorCode = parseInt(responseText);
       checkErrorCodes(errorCode, formCopy);
     })
     .catch((error) => {
+      console.log(error);
       if (error instanceof ValidationErrors.ValidationError) {
         error.appendError();
       } else {

@@ -1,10 +1,10 @@
 <?php
 
-include_once("ErrorCodes.php");
+require_once "ErrorCodes.php";
 
 const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\-\/\*\&\%\$\#\@\!\?]+$/";
- 
+
 class User {
   /*
   * Properties

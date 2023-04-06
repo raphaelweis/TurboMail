@@ -18,6 +18,7 @@
   --fontColor: #3f3f3d;
   --color1: #c39d69;
   --color2: #bf976b;
+  --errorMessage: #af0202;
 }
 
 html {
@@ -135,7 +136,7 @@ input {
 * Errors
 */
 .validation-error {
-  color: #af0202;
+  color: var(--errorMessage);
   width: 70%;
   margin-left: 15%;
   font-size: 0.75em;

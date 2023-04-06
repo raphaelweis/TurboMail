@@ -1,6 +1,7 @@
 // parent class for form Validation Errors
 export class ValidationError extends Error {
   constructor(formInput) {
+    if (formInput === undefined) throw new InvalidTypeError();
     super();
     this.formInput = formInput;
   }

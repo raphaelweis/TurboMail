@@ -9,13 +9,22 @@ window.onload = function () {
   const signInForm = document.getElementById("sign-in");
   signInForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    signInRequest();
+    formRequest(signInForm);
+  });
+  const signUpForm = document.getElementById("sign-up");
+  signUpForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    formRequest(signUpForm);
   });
 };
 
-function signInRequest() {
-  const signInForm = document.getElementById("sign-in");
-  const formData = new FormData(signInForm);
+function formRequest(form) {
+  const formCopy = form;
+  const formData = new FormData(formCopy);
+
+  // remove previous error divs
+  const validationErrorsDivs = document.querySelectorAll(".validation-error");
+  validationErrorsDivs.forEach((div) => div.remove());
 
   //use of the fetch API to send a POST request
   fetch(LOGIN_URL, {
@@ -25,7 +34,7 @@ function signInRequest() {
     .then((response) => response.text())
     .then((responseText) => {
       let errorCode = parseInt(responseText);
-      checkErrorCodes(errorCode, signInForm);
+      checkErrorCodes(errorCode, formCopy);
     })
     .catch((error) => {
       if (error instanceof ValidationErrors.ValidationError) {

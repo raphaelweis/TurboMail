@@ -1,8 +1,8 @@
 <?php
 class Database {
-  //
-  // Properties
-  //
+  /* 
+  /* Properties
+  */
   private $serverName = "localhost";
   private $userName = "root";
   private $password = "";
@@ -10,14 +10,15 @@ class Database {
   private $connection;
 
 
-  //
-  // Methods
-  //
+  /*
+  /* Methods
+  /*
 
   /**
    * Function to connect to the server
+   * @return void
    */
-  function connectToServer() {
+  function connectToServer(): void {
     try {
       $this->connection = new PDO("mysql:host=$this->serverName", $this->userName, $this->password);
 
@@ -31,8 +32,9 @@ class Database {
 
   /**
    * Function to connect to TurboMail's database
+   * @return void
    */
-  public function connectToTMDB() {
+  public function connectToTMDB(): void {
     try {
       $this->connection = new PDO("mysql:host=$this->serverName; $this->dbName", $this->userName, $this->password);
 
@@ -47,8 +49,9 @@ class Database {
   /**
    * Function to create the database : TurboMailDB
    * Execute a sql file
+   * @return void
    */
-  public function createDatabase() {
+  public function createDatabase(): void {
     try {
       $this->connectToServer();
 
@@ -65,15 +68,18 @@ class Database {
 
   /**
    * Function to disconnect from the database
+   * @return void
    */
-  public function disconnectFromDB() {
+  public function disconnectFromDB(): void {
     $this->connection = null;
   }
 
   /**
    * Function to execute a query
+   * @return void
+   * @param mixed $query
    */
-  public function execQuery($query) {
+  public function execQuery($query): void {
     try {
       $this->connectToTMDB();
 

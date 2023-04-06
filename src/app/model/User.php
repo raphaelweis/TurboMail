@@ -6,17 +6,17 @@ const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\-\/\*\&\%\$\#\@\!\?]+$/";
  
 class User {
-  //
-  // Properties
-  //
+  /*
+  * Properties
+  */
   protected $email;
   protected $password;
 
   /**
    * Constructor
    * 
-   * @var mixed $email User's email
-   * @var mixed $password User's password
+   * @param mixed $email User's email
+   * @param mixed $password User's password
    */
   public function __construct($email, $password) {
     $this->email = $email;
@@ -24,9 +24,9 @@ class User {
   }
 
 
-  //
-  // Methods
-  //
+  /*
+  * Methods
+  */
 
   /**
    * Sign in function
@@ -101,5 +101,3 @@ class User {
     return true;
   }
 }
-
-?>

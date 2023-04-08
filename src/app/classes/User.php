@@ -3,7 +3,7 @@
 require_once "ErrorCodes.php";
 
 const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
-const PASSWORD_REGEX = "/^[a-zA-Z0-9\-\/\*\&\%\$\#\@\!\?]+$/";
+const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/"; // To change to don't accept ' " and spaces
 
 class User {
   /*
@@ -78,7 +78,7 @@ class User {
    * Function to check the user's password syntax
    */
   public function checkValidPassword(): bool {
-    if(empty($this->password)) {
+    if(strlen($this->password) < 8) {
       return false;
     }
     

@@ -1,6 +1,8 @@
 <?php
 
-include_once("ErrorCodes.php");
+require_once("Database.php");
+require_once("User.php");
+require_once("ErrorCodes.php");
 
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 
@@ -40,26 +42,35 @@ class NewUser extends User {
    * Return the appropriate error in case of problem
    */
   public function signUp(): int {
+
+    echo "Sign Up Function"; 
     if(!$this->checkValidEmail()) {
+      echo "Invalid email";
       return INVALID_EMAIL;
     }
-    if($this->checkExistingEmail()) {
+    if(!$this->checkExistingEmail()) {
+      echo "Existing email";
       return EMAIL_IN_USE;
     }
 
     if(!$this->checkFirstName()) {
+      echo "Invalid first name";
       return INVALID_FIRSTNAME;
     }
 
     if(!$this->checkLastName()) {
+      echo "Invalid last name";
       return INVALID_LASTNAME;
     }
 
     if(!$this->checkPasswords()) {
+      echo "Passwords don't match";
       return PASSWORDS_DONT_MATCH;
     }
 
-    // TODO : add new user in DB in user table
+    $database = new Database();
+    $database->execQuery("INSERT INTO users(Email, FirstName, LastName, Passwd) VALUES ('$this->email', '$this->firstName', '$this->lastName', '$this->password');");
+
     return SUCCESS;
   }
 
@@ -71,7 +82,7 @@ class NewUser extends User {
       return false;
     }
 
-    if(strlen($this->firstName > 100)) {
+    if(strlen($this->firstName) > 100) {
       return false;
     }
 
@@ -90,7 +101,7 @@ class NewUser extends User {
       return false;
     }
 
-    if(strlen($this->lastName > 100)) {
+    if(strlen($this->lastName) > 100) {
       return false;
     }
 
@@ -108,4 +119,9 @@ class NewUser extends User {
   }
 }
 
+echo "Print";
+$newUser = new NewUser('sam.barthazon@gmail.com', 'Sam', 'BARTHAZON', 'ItsA"Password', 'ItsA"Password');
+$newUser->signUp();
+
+echo "Print";
 ?>

@@ -10,6 +10,12 @@ class Database {
   private $dbName = "TurboMailDB";
   private $connection;
 
+  //
+  // Constructor
+  //
+  public function __construct() {
+    $this->createDatabase();
+  }
 
   /*
   /* Methods
@@ -19,12 +25,12 @@ class Database {
    * Function to connect to the server
    * @return void
    */
-  function connectToServer(): void {
+  public function connectToServer(): void {
     try {
       $this->connection = new PDO("mysql:host=$this->serverName", $this->userName, $this->password);
 
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully";
+      echo "Connected to Server";
 
     } catch(PDOException $e) {
       echo "Connection failed : " . $e->getMessage();
@@ -38,9 +44,9 @@ class Database {
   public function connectToTMDB(): void {
     try {
       $this->connection = new PDO("mysql:host=$this->serverName; $this->dbName", $this->userName, $this->password);
+      echo "Connected to TMDB";
 
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully";
 
     } catch(PDOException $e) {
       echo "Connection failed : " . $e->getMessage();
@@ -53,6 +59,7 @@ class Database {
    * @return void
    */
   public function createDatabase(): void {
+    echo "Creation";
     try {
       $this->connectToServer();
 
@@ -60,6 +67,8 @@ class Database {
         $query = file_get_contents("createDatabase.sql");
         $this->connection->exec($query);
       }
+
+      echo "Created successfully";
     } catch(PDOException $e) {
       echo "Creation failed" . $e->getMessage();
     }
@@ -77,15 +86,17 @@ class Database {
 
   /**
    * Function to execute a query
-   * @return void
    * @param mixed $query
+   * @return void
    */
   public function execQuery($query): void {
+    $use = "USE ".$this->dbName.";";
+
     try {
       $this->connectToTMDB();
 
       if($this->connection) {
-        $this->connection->exec($query);
+        $this->connection->exec($use.$query);
       }
     } catch(PDOException $e) {
       echo $query . "<br>" . $e->getMessage();
@@ -94,4 +105,7 @@ class Database {
     $this->disconnectFromDB();
   }
 }
+
+echo "Print";
+
 ?>

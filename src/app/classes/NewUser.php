@@ -45,31 +45,27 @@ class NewUser extends User {
 
     echo "Sign Up Function"; 
     if(!$this->checkValidEmail()) {
-      echo "Invalid email";
       return INVALID_EMAIL;
     }
     if(!$this->checkExistingEmail()) {
-      echo "Existing email";
       return EMAIL_IN_USE;
     }
 
     if(!$this->checkFirstName()) {
-      echo "Invalid first name";
       return INVALID_FIRSTNAME;
     }
 
     if(!$this->checkLastName()) {
-      echo "Invalid last name";
       return INVALID_LASTNAME;
     }
 
     if(!$this->checkPasswords()) {
-      echo "Passwords don't match";
       return PASSWORDS_DONT_MATCH;
     }
 
     $database = new Database();
     $database->execQuery("INSERT INTO users(Email, FirstName, LastName, Passwd) VALUES ('$this->email', '$this->firstName', '$this->lastName', '$this->password');");
+    $database->disconnectFromDB();
 
     return SUCCESS;
   }
@@ -119,9 +115,4 @@ class NewUser extends User {
   }
 }
 
-echo "Print";
-$newUser = new NewUser('sam.barthazon@gmail.com', 'Sam', 'BARTHAZON', 'ItsA"Password', 'ItsA"Password');
-$newUser->signUp();
-
-echo "Print";
 ?>

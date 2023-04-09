@@ -44,7 +44,6 @@ class Database {
   public function connectToTMDB(): void {
     try {
       $this->connection = new PDO("mysql:host=$this->serverName; $this->dbName", $this->userName, $this->password);
-      echo "Connected to TMDB";
 
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -59,7 +58,6 @@ class Database {
    * @return void
    */
   public function createDatabase(): void {
-    echo "Creation";
     try {
       $this->connectToServer();
 
@@ -68,12 +66,11 @@ class Database {
         $this->connection->exec($query);
       }
 
-      echo "Created successfully";
     } catch(PDOException $e) {
       echo "Creation failed" . $e->getMessage();
     }
     
-    $this->disconnectFromDB($this->connection);
+    $this->disconnectFromDB();
   }
 
   /**
@@ -105,7 +102,5 @@ class Database {
     $this->disconnectFromDB();
   }
 }
-
-echo "Print";
 
 ?>

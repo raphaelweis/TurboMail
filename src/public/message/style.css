@@ -20,7 +20,7 @@ main {
   height: 94vh;
 }
 
-.contacts {
+#contacts {
   overflow: scroll;
   width: 15%;
   border-right: 1px solid black;
@@ -32,30 +32,40 @@ main {
   background-color: brown;
 }
 
-.messages {
+#messages {
   height: 100%;
   width: 85%;
   flex-grow: 8;
 }
-.chat {
+#chat {
   overflow: scroll;
   height: 90vh;
 }
-.received {
+#received {
   float: left;
 }
-.sended {
+#sended {
   float: right;
 }
 .msg-box {
   width: 50%;
   margin: 10px;
+  padding: 5px;
   border: 1px solid black;
   border-radius: 5px;
+  font-size: medium;
 }
 
-.write {
+#message {
+  display: flex;
+  width: 100%;
+}
+#write {
+  width: 100%;
+  flex-grow: 1;
 }
 textarea {
-  width: 100%;
+  width: 95%;
+  margin: 0 1% 0 1%;
+  font-size: medium;
 }

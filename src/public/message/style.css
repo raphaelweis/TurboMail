@@ -62,6 +62,7 @@ main {
   width: 99%;
   margin: auto;
   border: 1px solid black;
+  border-radius: 4px;
 }
 #write {
   width: 100%;
@@ -72,9 +73,10 @@ textarea {
   height: 20px;
   font-size: medium;
   float: right;
-  margin: 0 10px 0 0;
   padding: 2px;
   border: none;
 }
-#button {
+button {
+  height: 100%;
+  width: 40px;
 }

@@ -43,22 +43,25 @@ main {
 }
 #received {
   float: left;
+  border-radius: 10px 10px 10px 2px;
 }
 #sended {
   float: right;
+  border-radius: 10px 10px 2px 10px;
 }
 .msg-box {
   width: 50%;
   margin: 10px;
   padding: 5px;
   border: 1px solid black;
-  border-radius: 5px;
   font-size: medium;
 }
 
 #message {
   display: flex;
-  width: 100%;
+  width: 99%;
+  margin: auto;
+  border: 1px solid black;
 }
 #write {
   width: 100%;
@@ -66,6 +69,12 @@ main {
 }
 textarea {
   width: 95%;
-  margin: 0 1% 0 1%;
+  height: 20px;
   font-size: medium;
+  float: right;
+  margin: 0 10px 0 0;
+  padding: 2px;
+  border: none;
+}
+#button {
 }

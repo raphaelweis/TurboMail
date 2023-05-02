@@ -22,11 +22,12 @@ header {
   text-align: center;
   background-color: var(--accentColor);
   font-size: larger;
-  height: 6vh;
-  border-bottom: 1px solid black;
+  min-height: 6vh;
+  outline: 1px solid black;
 }
 body {
   background-color: var(--backgroundColor);
+  overflow: hidden;
 }
 
 main {
@@ -34,7 +35,6 @@ main {
 }
 .item {
   height: 94vh;
-  /* height: calc(94vh-1px); */
 }
 
 #contacts {
@@ -42,9 +42,11 @@ main {
   width: 15%;
   border-right: 1px solid black;
   flex-grow: 1;
+  min-width: 250px;
 }
 .contact {
   height: 10vh;
+  min-height: 80px;
   border-bottom: 1px solid black;
   background-color: var(--accentColor);
 }
@@ -77,13 +79,14 @@ main {
 }
 
 #send-box {
+  position: sticky;
+  bottom: 5px;
   display: flex;
-  width: 99%;
+  width: auto;
   height: auto;
-  margin: auto;
-  margin-top: 5px;
+  margin: 5px 10px 0 10px;
   border: 1px solid black;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 #write {
   width: 100%;
@@ -91,15 +94,35 @@ main {
 }
 textarea {
   width: 100%;
-  height: 20px;
+  height: 50px;
   font-size: medium;
-  float: right;
+  float: left;
   padding: 2px;
   border: none;
   resize: none;
+  border-radius: 5px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+textarea:focus {
+  outline: none;
 }
 button {
   height: 100%;
-  margin-right: 5px;
   width: 40px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
+  border-left: 1px solid black;
+  background-color: var(--color1);
+}
+
+@media (max-width: 450px) {
+  #messages {
+    display: none;
+    visibility: hidden;
+  }
+  .contact {
+    background-color: var(--backgroundColor);
+  }
 }

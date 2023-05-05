@@ -3,6 +3,11 @@
 // require_once __DIR__ . "/classes/User.php";
 // require_once "/home/raphaelw/Projects/TurboMail/src/app/classes/User.php";
 require_once __DIR__ . '/classes/User.php';
+//bonjour
+//bonjour
+//bonjour
+
+//bonjour
 
 new User("bonjour", "password");
 

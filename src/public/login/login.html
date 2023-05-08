@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="style.css"/>
     <script defer type="module" src="js/router.js"></script>
-    <script defer type="module" src="../../lib/js/validationErrors.js"></script>
     <script defer type="module" src="../../../node_modules/jquery/dist/jquery.js"></script>
     <title>TurboMail.</title>
 </head>
@@ -38,6 +37,7 @@
                 <h2>Sign In</h2>
 
                 <form id="sign-in">
+                    <div class="validation-error" id="sign-in-error">Error, the login credentials you provided are incorrect</div>
                     <div class="input-div">
                         <label for="si-email">Email Address :</label><br/>
                         <input

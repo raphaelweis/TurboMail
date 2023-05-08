@@ -1,7 +1,5 @@
-// classes imports
-
 // defining path constants
-const LOGIN_URL = "../../app/login.php";
+const LOGIN_URL = '../../app/login.php';
 
 // add event Listeners on page load - prevent default submit
 window.onload = function () {
@@ -19,18 +17,18 @@ window.onload = function () {
 
 function signInRequest() {
     // remove previous error divs
-    const validationErrorsDivs = $("validation-errors")
-    validationErrorsDivs.forEach((div) => div.remove());
 
-    $.post(LOGIN_URL, $("#sign-in").serialize(), function (response) {
+    // send POST request
+    $.post(LOGIN_URL, $('#sign-in').serialize(), function (response) {
+        response = parseInt(response);
         if (response === 0) {
-            window.location.href = "../../home/home.html";
+            window.location.href = '../../home/home.html';
         } else if (response === 1) {
-            alert("Login failed !");
+            $('#sign-in-error').css('visibility', 'visible');
         } else {
-            alert("Oops, something unexpected happened...");
+            alert('Oops, something unexpected happened...');
         }
-    }, "text");
+    }, 'text');
 }
 
 function signUpRequest(form) {

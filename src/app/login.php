@@ -1,5 +1,8 @@
 <?php
 
 if (empty($_POST)) {
-    exit(1);
+    echo 1;
+    exit();
 }
+
+echo 1;

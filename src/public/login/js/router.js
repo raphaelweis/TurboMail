@@ -1,5 +1,5 @@
 // classes imports
-import * as ValidationErrors from "./validationErrors.js";
+import * as ValidationErrors from "../../../lib/js/validationErrors.js";
 
 // defining path constants
 const LOGIN_URL = "../../app/login.php";

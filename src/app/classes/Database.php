@@ -1,8 +1,5 @@
 <?php
 
-$db = new Database();
-$db->execQuery("INSERT INTO users(Email, Firstname, Lastname, Passwd) VALUES ('sam.barthazon@gmail.com', 'Sam', 'BARTHAZON', 'password');");
-
 class Database {
   
   /**************/

@@ -1,13 +1,10 @@
 /*
 * FONTS
 */
-@font-face {
-    font-family: Raleway, serif;
-    src: url('../../resources/fonts/Raleway-VariableFont_wght.ttf')
-}
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 * {
-    font-family: Raleway, serif;
+    font-family: 'Raleway', sans-serif;
     color: var(--fontColor);
     margin: 0;
     padding: 0;
@@ -84,7 +81,6 @@ nav img {
 
 .title h1 {
     font-size: 7.5em;
-    font-weight: inherit;
 }
 
 .title p {

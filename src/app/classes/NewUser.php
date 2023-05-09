@@ -64,7 +64,7 @@ class NewUser extends User {
 
     $database = new Database();
     $database->execQuery("INSERT INTO users(Email, FirstName, LastName, Passwd) VALUES ('$this->email', '$this->firstName', '$this->lastName', '$this->password');");
-    $database->disconnectFromDB();
+    $database->disconnect();
 
     return SUCCESS;
   }

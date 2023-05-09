@@ -1,10 +1,8 @@
 <?php
 
-require_once("Database.php");
-require_once("User.php");
-require_once("ErrorCodes.php");
-
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
+
+$nu = new NewUser('sam.barthazon@gmail.com', 'Sam', 'BARTHAZON', 'Passwordddd', 'Passwordddd');
 
 class NewUser extends User {
   //
@@ -29,6 +27,8 @@ class NewUser extends User {
     $this->firstName = $firstName;
     $this->lastName = $lastName;
     $this->checkPassword = $checkPassword;
+
+    $this->signUp();
   }
 
 
@@ -44,27 +44,32 @@ class NewUser extends User {
   public function signUp(): int {
 
     if(!$this->checkValidEmail()) {
+      echo "Email error";
       return INVALID_EMAIL;
     }
     if(!$this->checkExistingEmail()) {
+      echo "Existing email";
       return EMAIL_IN_USE;
     }
 
     if(!$this->checkFirstName()) {
+      echo "First name error";
       return INVALID_FIRSTNAME;
     }
 
     if(!$this->checkLastName()) {
+      echo "Last name error";
       return INVALID_LASTNAME;
     }
 
     if(!$this->checkPasswords()) {
+      echo "Passwords don't match"; 
       return PASSWORDS_DONT_MATCH;
     }
 
-    $database = new Database();
-    $database->execQuery("INSERT INTO users(Email, FirstName, LastName, Passwd) VALUES ('$this->email', '$this->firstName', '$this->lastName', '$this->password');");
-    $database->disconnect();
+    $db = new Database();
+    $hased = password_hash($this->password, PASSWORD_DEFAULT);
+    $db->execQuery("INSERT INTO users(Email, Firstname, Lastname, Password) VALUES ('$this->email', '$this->firstName', '$this->lastName', '$hased');");
 
     return SUCCESS;
   }

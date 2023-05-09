@@ -15,7 +15,9 @@ class Database {
   /*   Methods   */
   /***************/
   public function __construct() {
+    echo "success";
     $this->createDatabase();
+    echo "success";
   }
 
   /**

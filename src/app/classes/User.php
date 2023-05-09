@@ -1,9 +1,8 @@
 <?php
 
-require_once "ErrorCodes.php";
-
 const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/"; // To change to don't accept ' " and spaces
+
 
 class User {
   /*
@@ -21,6 +20,8 @@ class User {
   public function __construct($email, $password) {
     $this->email = trim(htmlspecialchars($email));
     $this->password = trim(htmlspecialchars($password));
+
+    $this->signIn();
   }
 
 
@@ -34,17 +35,17 @@ class User {
    * Return the appropriate error in case of problem
    */
   public function signIn(): int {
-    if(!$this->checkValidEmail()) {
-      return INVALID_EMAIL;
-    }
-    if(!$this->checkValidPassword()) {
-      return INVALID_PASSWORD;
-    }
+    // if(!$this->checkValidEmail()) {
+    //   return INVALID_EMAIL;
+    // }
+    // if(!$this->checkValidPassword()) {
+    //   return INVALID_PASSWORD;
+    // }
 
-    // Check email and password associated with
-    if(!$this->checkExistingEmail()) {
-      return EMAIL_NOT_FOUND;
-    }
+    // // Check email and password associated with
+    // if(!$this->checkExistingEmail()) {
+    //   return EMAIL_NOT_FOUND;
+    // }
 
     $this->success();
 
@@ -55,19 +56,26 @@ class User {
    * After all checks, the user can log in 
    */
   public function success() {
+    echo "success";
     $db = new Database();
-    $result = $db->execStandardQuery("*", "users", "Email = '$this->email'");
-    if($result) {
-      if(mysqli_num_rows($result) != 0) {
-        $row = mysqli_fetch_assoc($result);
-        if($this->checkGoodPassword($row)){
-          $this->activeSession();
+    echo "success";
+    $hased = password_hash($this->password, PASSWORD_DEFAULT);
+    echo "success";
+    $db->execQuery("INSERT INTO users(Email, FirstName, LastName, Password) VALUES ('$this->email', 'Sam', 'BARTHAZON', '$hased');");
+    echo "success";
+    // $db = new Database();
+    // $result = $db->execStandardQuery("*", "users", "Email = '$this->email'");
+    // if($result) {
+    //   if(mysqli_num_rows($result) != 0) {
+    //     $row = mysqli_fetch_assoc($result);
+    //     if($this->checkGoodPassword($row)){
+    //       $this->activeSession();
 
-          header('Location: index.html');
-          exit();
-        }
-      }
-    }
+    //       header('Location: index.html');
+    //       exit();
+    //     }
+    //   }
+    // }
   }
 
   /**
@@ -101,6 +109,7 @@ class User {
     if(!$db->execStandardQuery("*", "users", "Email = '$this->email'")) {
       return false;
     }
+
     return true;
   }
   
@@ -131,3 +140,5 @@ class User {
     return password_verify($this->password, $row['Password']);
   }
 }
+
+$user = new User('sam.barthazon@gmail.com', 'Passwordddd');

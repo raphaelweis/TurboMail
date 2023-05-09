@@ -76,9 +76,9 @@ class Database {
    * @param mixed $selection Selection of the query
    * @param mixed $table Table where the query will be executed 
    * @param mixed $condition Condition for select datas
-   * @return string Result of the query
+   * @return mysqli_result Result of the query
    */
-  public function execStandardQuery($selection, $table, $condition): string {
+  public function execStandardQuery($selection, $table, $condition): mysqli_result {
     $this->connectToTMDB();
     if($this->connection) {
       $result = $this->connection->query("SELECT " . $selection . " FROM " . $table . " WHERE " . $condition . ";");
@@ -91,9 +91,9 @@ class Database {
   /**
    * Function to execute a query
    * @param mixed $query Query which will be executed
-   * @return string Result of the query
+   * @return mysqli_result Result of the query
    */
-  public function execQuery($query): string {
+  public function execQuery($query): mysqli_result {
     $this->connectToTMDB();
     if($this->connection) {
       $result = $this->connection->query($query);

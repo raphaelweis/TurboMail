@@ -43,7 +43,6 @@ class NewUser extends User {
    */
   public function signUp(): int {
 
-    echo "Sign Up Function"; 
     if(!$this->checkValidEmail()) {
       return INVALID_EMAIL;
     }

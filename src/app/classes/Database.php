@@ -86,20 +86,22 @@ class Database {
    * @param mixed $query
    * @return void
    */
-  public function execQuery($query): void {
+  public function execQuery($query): string {
     $use = "USE ".$this->dbName.";";
 
     try {
       $this->connectToTMDB();
 
       if($this->connection) {
-        $this->connection->exec($use.$query);
+        $result = $this->connection->exec($use.$query);
       }
     } catch(PDOException $e) {
       echo $query . "<br>" . $e->getMessage();
     }
 
     $this->disconnectFromDB();
+    
+    return $result;
   }
 }
 

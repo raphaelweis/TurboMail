@@ -19,8 +19,8 @@ class User {
    * @param mixed $password User's password
    */
   public function __construct($email, $password) {
-    $this->email = $email;
-    $this->password = $password;
+    $this->email = trim(htmlspecialchars($email));
+    $this->password = trim(htmlspecialchars($password));
   }
 
 
@@ -70,7 +70,14 @@ class User {
    * Function to search the user's email in the database
    */
   public function checkExistingEmail(): bool {
-    // Check if the email is in the User table of TurboMail's database
+    $db = new Database();
+    $query = "SELECT * FROM Users WHERE Email = '$this->email'";
+    $result = $db->execQuery($query);
+
+    if(!$result) {
+      return false;
+    }
+
     return true;
   }
   

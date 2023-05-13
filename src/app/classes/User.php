@@ -57,7 +57,7 @@ class User
    */
   public function success() {
     $db = new Database();
-    $result = $db->execStandardQuery("*", "users", "Email = '$this->email'");
+    $result = $db->execSelectQuery("*", "users", "Email = '$this->email'");
     if($result) {
       if(mysqli_num_rows($result) != 0) {
         $row = mysqli_fetch_assoc($result);
@@ -101,7 +101,7 @@ class User
    */
   public function checkExistingEmail(): bool {
     $db = new Database();
-    if(!$db->execStandardQuery("*", "users", "Email = '$this->email'")) {
+    if(!$db->execSelectQuery("*", "users", "Email = '$this->email'")) {
       return false;
     }
     return true;

@@ -1,33 +1,34 @@
 <?php
 
 class Database {
-  /* 
-  /* Properties
-  */
+  
+  /**************/
+  /* Properties */
+  /**************/
   private $serverName = "localhost";
   private $userName = "root";
   private $password = "";
   private $dbName = "TurboMailDB";
   private $connection;
 
-
-  /*
-  /* Methods
-  /*
+  /***************/
+  /*   Methods   */
+  /***************/
+  public function __construct() {
+    $this->createDatabase();
+  }
 
   /**
    * Function to connect to the server
    * @return void
    */
-  function connectToServer(): void {
-    try {
-      $this->connection = new PDO("mysql:host=$this->serverName", $this->userName, $this->password);
+  public function connectToServer(): void {
+    // Create connection
+    $this->connection = new mysqli($this->serverName, $this->userName, $this->password);
 
-      $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully";
-
-    } catch(PDOException $e) {
-      echo "Connection failed : " . $e->getMessage();
+    // Check connection
+    if($this->connection->connect_error) {
+      die("Connection failed: " . $this->connection->connect_error);
     }
   }
 
@@ -36,15 +37,21 @@ class Database {
    * @return void
    */
   public function connectToTMDB(): void {
-    try {
-      $this->connection = new PDO("mysql:host=$this->serverName; $this->dbName", $this->userName, $this->password);
+    // Create connection
+    $this->connection = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
 
-      $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully";
-
-    } catch(PDOException $e) {
-      echo "Connection failed : " . $e->getMessage();
+    // Check connection
+    if($this->connection->connect_error) {
+      die("Connection failed: " . $this->connection->connect_error);
     }
+  }
+
+  /**
+   * Function to disconnect from the database
+   * @return void
+   */
+  public function disconnect(): void {
+    $this->connection->close();
   }
 
   /**
@@ -53,45 +60,48 @@ class Database {
    * @return void
    */
   public function createDatabase(): void {
-    try {
-      $this->connectToServer();
+    // Connect to the server
+    $this->connectToServer();
 
-      if($this->connection) {
-        $query = file_get_contents("createDatabase.sql");
-        $this->connection->exec($query);
-      }
-    } catch(PDOException $e) {
-      echo "Creation failed" . $e->getMessage();
-    }
-    
-    $this->disconnectFromDB($this->connection);
+    // Execute SQL file to create the database
+    $queries = file_get_contents("createDatabase.sql");
+    mysqli_multi_query($this->connection, $queries);
+
+    // Disconnect from DB
+    $this->disconnect();
   }
 
   /**
-   * Function to disconnect from the database
-   * @return void
+   * Function to execute a query based on : SELECT selection FROM table WHERE condition
+   * @param mixed $selection Selection of the query
+   * @param mixed $table Table where the query will be executed 
+   * @param mixed $condition Condition for select datas
+   * @return mysqli_result Result of the query
    */
-  public function disconnectFromDB(): void {
-    $this->connection = null;
+  public function execStandardQuery($selection, $table, $condition): mysqli_result {
+    $this->connectToTMDB();
+    if($this->connection) {
+      $result = $this->connection->query("SELECT " . $selection . " FROM " . $table . " WHERE " . $condition . ";");
+    }
+    $this->disconnect();
+
+    return $result;
   }
 
   /**
    * Function to execute a query
-   * @return void
-   * @param mixed $query
+   * @param mixed $query Query which will be executed
+   * @return mysqli_result Result of the query
    */
-  public function execQuery($query): void {
-    try {
-      $this->connectToTMDB();
-
-      if($this->connection) {
-        $this->connection->exec($query);
-      }
-    } catch(PDOException $e) {
-      echo $query . "<br>" . $e->getMessage();
+  public function execQuery($query): mysqli_result {
+    $this->connectToTMDB();
+    if($this->connection) {
+      $result = $this->connection->query($query);
     }
+    $this->disconnect();
 
-    $this->disconnectFromDB();
+    return $result;
   }
 }
+
 ?>

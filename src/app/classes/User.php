@@ -3,7 +3,7 @@
 require_once "ErrorCodes.php";
 
 const EMAIL_REGEX = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
-const PASSWORD_REGEX = "/^[a-zA-Z0-9\-\/\*\&\%\$\#\@\!\?]+$/";
+const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/"; // To change to don't accept ' " and spaces
 
 class User {
   /*
@@ -19,8 +19,8 @@ class User {
    * @param mixed $password User's password
    */
   public function __construct($email, $password) {
-    $this->email = $email;
-    $this->password = $password;
+    $this->email = trim(htmlspecialchars($email));
+    $this->password = trim(htmlspecialchars($password));
   }
 
 
@@ -37,22 +37,49 @@ class User {
     if(!$this->checkValidEmail()) {
       return INVALID_EMAIL;
     }
+    if(!$this->checkValidPassword()) {
+      return INVALID_PASSWORD;
+    }
+
+    // Check email and password associated with
     if(!$this->checkExistingEmail()) {
       return EMAIL_NOT_FOUND;
     }
 
-    if(!$this->checkValidPassword()) {
-      return INVALID_PASSWORD;
-    }
-    if(!$this->checkGoodPassword()) {
-      return WRONG_PASSWORD;
-    }
+    $this->success();
 
     return SUCCESS;
   }
 
   /**
+   * After all checks, the user can log in 
+   */
+  public function success() {
+    $db = new Database();
+    $result = $db->execStandardQuery("*", "users", "Email = '$this->email'");
+    if($result) {
+      if(mysqli_num_rows($result) != 0) {
+        $row = mysqli_fetch_assoc($result);
+        if($this->checkGoodPassword($row)){
+          $this->activeSession();
+
+          header('Location: index.html');
+          exit();
+        }
+      }
+    }
+  }
+
+  /**
+   * Active session while logged in
+   */
+  public function activeSession() {
+
+  }
+
+  /**
    * Function to check the user's email syntax
+   * @return bool
    */
   public function checkValidEmail(): bool{
     if(empty($this->email)) {
@@ -70,7 +97,10 @@ class User {
    * Function to search the user's email in the database
    */
   public function checkExistingEmail(): bool {
-    // Check if the email is in the User table of TurboMail's database
+    $db = new Database();
+    if(!$db->execStandardQuery("*", "users", "Email = '$this->email'")) {
+      return false;
+    }
     return true;
   }
   
@@ -78,7 +108,7 @@ class User {
    * Function to check the user's password syntax
    */
   public function checkValidPassword(): bool {
-    if(empty($this->password)) {
+    if(strlen($this->password) < 8) {
       return false;
     }
     
@@ -95,9 +125,9 @@ class User {
 
   /**
    * Function to check if the user's password is in the database
+   * @param mixed $row Rows of the result of the query
    */
-  public function checkGoodPassword(): bool {
-    // Check if for the checked email we have this password in the User table of TurboMail's database
-    return true;
+  public function checkGoodPassword($row): bool {
+    return password_verify($this->password, $row['Password']);
   }
 }

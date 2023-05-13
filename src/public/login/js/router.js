@@ -1,5 +1,5 @@
 // classes imports
-import * as ValidationErrors from "./validationErrors.js";
+import * as ValidationErrors from "../../../lib/js/validationErrors.js";
 
 // defining path constants
 const LOGIN_URL = "../../app/login.php";
@@ -73,7 +73,7 @@ function checkErrorCodes(errorCode, form) {
       throw new ValidationErrors.EmailTaken(form.elements["email"]);
     case NON_MATCHING_PASSWORDS:
       throw new ValidationErrors.NonMatchingPasswords(
-        form.elements["passwordcheck"]
+        form.elements["password-check"]
       );
     case EMAIL_NOT_FOUND:
       throw new ValidationErrors.EmailNotFound(form.elements["email"]);

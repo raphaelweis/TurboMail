@@ -1,5 +1,5 @@
 // imports
-import { InvalidEmail } from "./validationErrors";
+import { InvalidEmail } from "../../lib/js/validationErrors";
 
 // defining path constants
 const LOGIN_URL = "../../../app/login.php";
@@ -25,7 +25,7 @@ function signInRequest() {
   })
     .then((response) => {
       let errorCode = Number(response.text());
-      if (errorCode == 910) {
+      if (errorCode === 910) {
         throw new InvalidEmail(document.getElementById("si-email"));
       }
     })

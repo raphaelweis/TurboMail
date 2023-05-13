@@ -1,7 +1,7 @@
 // parent class for form Validation Errors
 export class ValidationError extends Error {
   constructor(formInput) {
-    if (formInput === undefined) throw new InvalidTypeError();
+    if (formInput === undefined) throw new TypeError();
     super();
     this.formInput = formInput;
   }
@@ -61,7 +61,7 @@ export class EmailNotFound extends ValidationError {
   constructor(emailInput) {
     super(emailInput);
     this.message =
-      "Error, there is no account associated with this email adress";
+      "Error, there is no account associated with this email address";
   }
 }
 

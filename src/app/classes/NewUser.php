@@ -1,6 +1,8 @@
 <?php
 
-include_once("ErrorCodes.php");
+require_once("Database.php");
+require_once("User.php");
+require_once("ErrorCodes.php");
 
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 
@@ -40,10 +42,11 @@ class NewUser extends User {
    * Return the appropriate error in case of problem
    */
   public function signUp(): int {
+
     if(!$this->checkValidEmail()) {
       return INVALID_EMAIL;
     }
-    if($this->checkExistingEmail()) {
+    if(!$this->checkExistingEmail()) {
       return EMAIL_IN_USE;
     }
 
@@ -59,7 +62,10 @@ class NewUser extends User {
       return PASSWORDS_DONT_MATCH;
     }
 
-    // TODO : add new user in DB in user table
+    $database = new Database();
+    $database->execQuery("INSERT INTO users(Email, FirstName, LastName, Passwd) VALUES ('$this->email', '$this->firstName', '$this->lastName', '$this->password');");
+    $database->disconnect();
+
     return SUCCESS;
   }
 
@@ -71,7 +77,7 @@ class NewUser extends User {
       return false;
     }
 
-    if(strlen($this->firstName > 100)) {
+    if(strlen($this->firstName) > 100) {
       return false;
     }
 
@@ -90,7 +96,7 @@ class NewUser extends User {
       return false;
     }
 
-    if(strlen($this->lastName > 100)) {
+    if(strlen($this->lastName) > 100) {
       return false;
     }
 

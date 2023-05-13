@@ -5,19 +5,17 @@ class Database {
   /**************/
   /* Properties */
   /**************/
-  private $serverName = "localhost";
-  private $userName = "root";
-  private $password = "";
-  private $dbName = "TurboMailDB";
-  private $connection;
+  private string $serverName = "localhost";
+  private string $userName = "root";
+  private string $password = "";
+  private string $dbName = "TurboMailDB";
+  private mysqli $connection;
 
   /***************/
   /*   Methods   */
   /***************/
   public function __construct() {
-    echo "success";
     $this->createDatabase();
-    echo "success";
   }
 
   /**
@@ -80,10 +78,10 @@ class Database {
    * @param mixed $condition Condition for select datas
    * @return mysqli_result Result of the query
    */
-  public function execStandardQuery($selection, $table, $condition): mysqli_result {
+  public function execSelectQuery($selection, $table, $condition): mysqli_result {
     $this->connectToTMDB();
     if($this->connection) {
-      $result = $this->connection->query("SELECT " . $selection . " FROM " . $table . " WHERE " . $condition . ";");
+      $result = mysqli_query($this->connection, "SELECT " . $selection . " FROM " . $table . " WHERE " . $condition . ";");
     }
     $this->disconnect();
 
@@ -93,17 +91,21 @@ class Database {
   /**
    * Function to execute a query
    * @param mixed $query Query which will be executed
-   * @return mysqli_result Result of the query
    */
-  public function execQuery($query): mysqli_result {
+  public function execQuery($query): void {
     $this->connectToTMDB();
-    if($this->connection) {
-      $result = $this->connection->query($query);
+    if(!$this->connection->connect_error) {
+      mysqli_query($this->connection, $query);
     }
     $this->disconnect();
-
-    return $result;
   }
 }
+
+$db = new Database();
+$db->execQuery("INSERT INTO users(Email, Firstname, Lastname, Password) VALUES ('sam.barthazon@gmail.com', 'Sam', 'BARTHAZON', 'Passworddd');");
+// $result = $db->execSelectQuery("*", "users", "Email = sam.barthazon@gmail.com");
+// if($result) {
+//   echo "Success";
+// }
 
 ?>

@@ -35,17 +35,17 @@ class User {
    * Return the appropriate error in case of problem
    */
   public function signIn(): int {
-    // if(!$this->checkValidEmail()) {
-    //   return INVALID_EMAIL;
-    // }
-    // if(!$this->checkValidPassword()) {
-    //   return INVALID_PASSWORD;
-    // }
+    if(!$this->checkValidEmail()) {
+      return INVALID_EMAIL;
+    }
+    if(!$this->checkValidPassword()) {
+      return INVALID_PASSWORD;
+    }
 
-    // // Check email and password associated with
-    // if(!$this->checkExistingEmail()) {
-    //   return EMAIL_NOT_FOUND;
-    // }
+    // Check email and password associated with
+    if(!$this->checkExistingEmail()) {
+      return EMAIL_NOT_FOUND;
+    }
 
     $this->success();
 
@@ -106,7 +106,7 @@ class User {
    */
   public function checkExistingEmail(): bool {
     $db = new Database();
-    if(!$db->execStandardQuery("*", "users", "Email = '$this->email'")) {
+    if(!$db->execSelectQuery("*", "users", "Email = '$this->email'")) {
       return false;
     }
 

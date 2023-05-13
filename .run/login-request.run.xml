@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="login-request" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" server_name="Xampp - Windows" url="/TurboMail/src/public/login/login.html">
+    <HttpRequestSettings request_body="email=stephencurry.fromwaydowntown@nba.com&amp;password=bang!bang!" request_method="POST" />
+    <method v="2" />
+  </configuration>
+</component>

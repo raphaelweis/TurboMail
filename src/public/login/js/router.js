@@ -1,83 +1,92 @@
-// classes imports
-import * as ValidationErrors from "../../../lib/js/validationErrors.js";
-
 // defining path constants
-const LOGIN_URL = "../../app/login.php";
+const LOGIN_URL = '../../app/login.php';
+const REGISTER_URL = '../../app/register.php';
 
 // add event Listeners on page load - prevent default submit
 window.onload = function () {
-  const signInForm = document.getElementById("sign-in");
-  signInForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    formRequest(signInForm, "login");
-  });
-  const signUpForm = document.getElementById("sign-up");
-  signUpForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    formRequest(signUpForm, "register");
-  });
+    const signInForm = $("#sign-in");
+    signInForm.submit(function (event) {
+        event.preventDefault();
+        signInRequest();
+    });
+    const signUpForm = $("#sign-up");
+    signUpForm.submit(function (event) {
+        event.preventDefault();
+        signUpRequest();
+    });
 };
 
-function formRequest(form, type) {
-  const formCopy = form;
-  const formData = new FormData(formCopy);
-  formData.append("type", type);
+function signInRequest() {
+    // select error div
+    let signInErrorDiv = $('#sign-in-error');
 
-  // remove previous error divs
-  const validationErrorsDivs = document.querySelectorAll(".validation-error");
-  validationErrorsDivs.forEach((div) => div.remove());
+    // defining error codes
+    const SUCCESS = 0;
+    const INVALID_LOGIN = 1;
 
-  //use of the fetch API to send a POST request
-  fetch(LOGIN_URL, {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.text())
-    .then((responseText) => {
-      if (responseText === "success") {
-        window.location.href = "../home/home.html";
-      }
-      let errorCode = parseInt(responseText);
-      checkErrorCodes(errorCode, formCopy);
-    })
-    .catch((error) => {
-      console.log(error);
-      if (error instanceof ValidationErrors.ValidationError) {
-        error.appendError();
-      } else {
-        alert("Oops, an unexpected server error happened !");
-      }
-    });
+    // send POST request
+    $.post(LOGIN_URL, $('#sign-in').serialize(), function (response) {
+        response = parseInt(response);
+        if (response === SUCCESS) {
+            window.location.href = '../../home/home.html';
+        } else if (response === INVALID_LOGIN) {
+            signInErrorDiv.css('visibility', 'visible');
+        } else {
+            alert('Oops, something unexpected happened...');
+        }
+    }, 'text');
 }
 
-function checkErrorCodes(errorCode, form) {
-  const INVALID_EMAIL = 910;
-  const INVALID_PASSWORD = 911;
-  const INVALID_FIRST_NAME = 912;
-  const INVALID_LAST_NAME = 913;
-  const EMAIL_TAKEN = 914;
-  const NON_MATCHING_PASSWORDS = 915;
-  const EMAIL_NOT_FOUND = 916;
-  const WRONG_PASSWORD = 917;
+function signUpRequest() {
+    // select error div
+    let signUpErrorDiv = $('#sign-up-error');
+    signUpErrorDiv.text("Error: ");
 
-  switch (errorCode) {
-    case INVALID_EMAIL:
-      throw new ValidationErrors.InvalidEmail(form.elements["email"]);
-    case INVALID_PASSWORD:
-      throw new ValidationErrors.InvalidPassword(form.elements["password"]);
-    case INVALID_FIRST_NAME:
-      throw new ValidationErrors.InvalidFirstName(form.elements["firstname"]);
-    case INVALID_LAST_NAME:
-      throw new ValidationErrors.InvalidLastName(form.elements["lastname"]);
-    case EMAIL_TAKEN:
-      throw new ValidationErrors.EmailTaken(form.elements["email"]);
-    case NON_MATCHING_PASSWORDS:
-      throw new ValidationErrors.NonMatchingPasswords(
-        form.elements["password-check"]
-      );
-    case EMAIL_NOT_FOUND:
-      throw new ValidationErrors.EmailNotFound(form.elements["email"]);
-    case WRONG_PASSWORD:
-      throw new ValidationErrors.WrongPassword(form.elements["password"]);
-  }
+    // defining error codes
+    const SUCCESS = 0;
+    const INVALID_EMAIL = 1;
+    const INVALID_PASSWORD = 2;
+    const INVALID_FIRSTNAME = 3;
+    const INVALID_LASTNAME = 4;
+    const EMAIL_TAKEN = 5;
+    const DIFFERENT_PASSWORDS = 6;
+
+    // send POST request
+    $.post(REGISTER_URL, $('#sign-up').serialize(), function (response) {
+        response = JSON.parse(response);
+        console.log(response);
+
+        let responseInt;
+        for (let i = 0; i < response.length; i++) {
+            responseInt = parseInt(response[i])
+            switch (responseInt) {
+                case SUCCESS:
+                    window.location.href = '../../home/home.html';
+                    return;
+                case INVALID_EMAIL:
+                    signUpErrorDiv.append('incorrect email format, ');
+                    break;
+                case INVALID_PASSWORD:
+                    signUpErrorDiv.append('incorrect password format, ');
+                    break;
+                case INVALID_FIRSTNAME:
+                    signUpErrorDiv.append('incorrect firstname format, ');
+                    break;
+                case INVALID_LASTNAME:
+                    signUpErrorDiv.append('incorrect lastname format, ');
+                    break;
+                case EMAIL_TAKEN:
+                    signUpErrorDiv.append('email already exists, ');
+                    break;
+                case DIFFERENT_PASSWORDS:
+                    signUpErrorDiv.append('the passwords don\'t match, ');
+                    break;
+                default:
+                    alert('Oops, something unexpected happened...');
+                    break;
+            }
+        }
+        signUpErrorDiv.text(signUpErrorDiv.text().slice(0, -2));
+        signUpErrorDiv.css('visibility', 'visible');
+    }, 'text');
 }

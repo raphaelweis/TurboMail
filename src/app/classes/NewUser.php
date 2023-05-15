@@ -76,8 +76,8 @@ class NewUser extends User {
             return PASSWORDS_DONT_MATCH;
         }
 
-    return SUCCESS;
-  }
+        return SUCCESS;
+    }
 
     /**
      * Function to check first name input.

@@ -51,25 +51,23 @@ class User {
     }
 
   /**
-   * After all checks, the user can log in 
+   * After all checks, the user can log in.
    */
   public function success() {
   }
 
   /**
-   * Active session while logged in
+   * Active session while logged in.
    */
-  public function activeSession()
-  {
+  public function activeSession() {
 
   }
 
   /**
-   * Function to check the user's email syntax
+   * Function to check the user's email syntax.
    * @return bool
    */
-  public function checkValidEmail(): bool
-  {
+  public function checkValidEmail(): bool {
       if (empty($this->email)) {
           return false;
       }
@@ -82,41 +80,41 @@ class User {
   }
 
 /**
- * Function to search the user's email in the database
+ * Function to search the user's email in the database.
  */
 public function checkExistingEmail(): bool {
-  $db = new Database();
-  if(!$db->execSelectQuery("*", "users", 1, "Email = '$this->email'")) {
-    return false;
-  }
-  return true;
+    $db = new Database();
+    if (!$db->execSelectQuery('*', 'users', 1, "Email = '$this->email'")) {
+        return false;
+    }
+
+    return true;
 }
 
 /**
- * Function to check the user's password syntax
+ * Function to check the user's password syntax.
  */
 public function checkValidPassword(): bool {
-  if(strlen($this->password) < 8) {
-    return false;
-  }
-  
-  if(strlen($this->password) > 256) {
-    return false;
-  }
+    if (strlen($this->password) < 8) {
+        return false;
+    }
 
-      if (!preg_match(PASSWORD_REGEX, $this->password)) {
-          return false;
-      }
+    if (strlen($this->password) > 256) {
+        return false;
+    }
 
-      return true;
-  }
+    if (!preg_match(PASSWORD_REGEX, $this->password)) {
+        return false;
+    }
+
+    return true;
+}
 
   /**
-   * Function to check if the user's password is in the database
+   * Function to check if the user's password is in the database.
    * @param mixed $row Rows of the result of the query
    */
-  public function checkGoodPassword($row): bool
-  {
+  public function checkGoodPassword($row): bool {
       return password_verify($this->password, $row['Password']);
   }
 }

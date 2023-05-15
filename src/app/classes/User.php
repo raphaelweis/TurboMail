@@ -86,7 +86,7 @@ class User {
  */
 public function checkExistingEmail(): bool {
   $db = new Database();
-  if(!$db->execSelectQuery("*", "users", "Email = '$this->email'")) {
+  if(!$db->execSelectQuery("*", "users", 1, "Email = '$this->email'")) {
     return false;
   }
   return true;

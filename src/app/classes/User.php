@@ -50,86 +50,73 @@ class User {
         return SUCCESS;
     }
 
-    /**
-     * After all checks, the user can log in.
-     */
-    public function success() {
-        $db = new Database();
-        $result = $db->execSelectQuery('*', 'users', "Email = '$this->email'");
-        if ($result) {
-            if (mysqli_num_rows($result) != 0) {
-                $row = mysqli_fetch_assoc($result);
-                if ($this->checkGoodPassword($row)) {
-                    $this->activeSession();
+  /**
+   * After all checks, the user can log in 
+   */
+  public function success() {
+  }
 
-                    header('Location: index.html');
-                    exit();
-                }
-            }
-        }
-    }
+  /**
+   * Active session while logged in
+   */
+  public function activeSession()
+  {
 
-    /**
-     * Active session while logged in.
-     */
-    public function activeSession() {
+  }
 
-    }
+  /**
+   * Function to check the user's email syntax
+   * @return bool
+   */
+  public function checkValidEmail(): bool
+  {
+      if (empty($this->email)) {
+          return false;
+      }
 
-    /**
-     * Function to check the user's email syntax.
-     *
-     * @return bool
-     */
-    public function checkValidEmail(): bool {
-        if (empty($this->email)) {
-            return false;
-        }
+      if (!preg_match(EMAIL_REGEX, $this->email)) {
+          return false;
+      }
 
-        if (!preg_match(EMAIL_REGEX, $this->email)) {
-            return false;
-        }
+      return true;
+  }
 
-        return true;
-    }
+/**
+ * Function to search the user's email in the database
+ */
+public function checkExistingEmail(): bool {
+  $db = new Database();
+  if(!$db->execSelectQuery("*", "users", "Email = '$this->email'")) {
+    return false;
+  }
+  return true;
+}
 
-    /**
-     * Function to search the user's email in the database.
-     */
-    public function checkExistingEmail(): bool {
-        $db = new Database();
-        if (!$db->execSelectQuery('*', 'users', "Email = '$this->email'")) {
-            return false;
-        }
+/**
+ * Function to check the user's password syntax
+ */
+public function checkValidPassword(): bool {
+  if(strlen($this->password) < 8) {
+    return false;
+  }
+  
+  if(strlen($this->password) > 256) {
+    return false;
+  }
 
-        return true;
-    }
+      if (!preg_match(PASSWORD_REGEX, $this->password)) {
+          return false;
+      }
 
-    /**
-     * Function to check the user's password syntax.
-     */
-    public function checkValidPassword(): bool {
-        if (strlen($this->password) < 8) {
-            return false;
-        }
+      return true;
+  }
 
-        if (strlen($this->password) > 256) {
-            return false;
-        }
-
-        if (!preg_match(PASSWORD_REGEX, $this->password)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Function to check if the user's password is in the database.
-     *
-     * @param  mixed  $row  Rows of the result of the query
-     */
-    public function checkGoodPassword($row): bool {
-        return password_verify($this->password, $row['Password']);
-    }
+  /**
+   * Function to check if the user's password is in the database
+   * @param mixed $row Rows of the result of the query
+   */
+  public function checkGoodPassword($row): bool
+  {
+      return password_verify($this->password, $row['Password']);
+  }
 }

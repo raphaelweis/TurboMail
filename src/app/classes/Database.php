@@ -16,12 +16,13 @@ class Database {
   private $dbName = "TurboMailDB";
   private $connection;
 
-    /***************/
-    /*   Methods   */
-    /***************/
-    public function __construct() {
-        $this->createDatabase();
-    }
+  /***************/
+  /*   Methods   */
+  /***************/
+  public function __construct() {
+    $this->createDatabase();
+    $this->connectToTMDB();
+  }
 
     /**
      * Function to connect to the server.
@@ -95,13 +96,11 @@ class Database {
    * @param mixed $condition Condition for select datas
    * @return mysqli_result Result of the query
    */
-  public function execSelectQuery($selection, $table, $condition): mysqli_result|bool {
-    $this->connectToTMDB();
-    if($this->connection->connect_error) {
-      $result = mysqli_query($this->connection, "SELECT " . $selection . " FROM " . $table . " WHERE " . $condition . ";");
+  public function execSelectQuery($selection, $table, $idUser, $email): mysqli_result|bool {
+    if(!$this->connection->connect_error) {
+      $result = mysqli_query($this->connection, "SELECT '$selection' FROM '$table' WHERE Email='$email';");
       return $result;
     }
-    $this->disconnect();
 
     return false;
   }
@@ -111,20 +110,19 @@ class Database {
    * @param mixed $query Query which will be executed
    */
   public function execQuery($query): mysqli_result|bool {
-    $this->connectToTMDB();
     if(!$this->connection->connect_error) {
       $result = mysqli_query($this->connection, $query);
       return $result;
     }
-    $this->disconnect();
 
     return false;
   }
 }
 
 $db = new Database();
-$db->execQuery("INSERT INTO users(Email, Firstname, Lastname, Password) VALUES ('sam.barthazon@gmail.com', 'Sam', 'BARTHAZON', 'password');");
-// $result = $db->execSelectQuery("*", "users", "Email = sam.barthazon@gmail.com");
-// if($result) {
-//   echo "Success";
-// }
+$db->execQuery("INSERT INTO users(Email, Firstname, Lastname, Password) VALUES ('sam.barthazon@gmail.com', 'Sam', 'BARTHAZON', 'Passworddd');");
+$result = $db->execSelectQuery("*", "users", 1, "sam.barthazon@gmail.com");
+if($result) {
+  echo "Success";
+}
+$db->disconnect();

@@ -4,14 +4,6 @@ namespace app\classes;
 
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 
-$nu = new NewUser(
-    'sam.barthazon@gmail.com',
-    'Sam',
-    'BARTHAZON',
-    'password',
-    'password'
-);
-
 class NewUser extends User {
     //
     // Properties
@@ -84,13 +76,8 @@ class NewUser extends User {
             return PASSWORDS_DONT_MATCH;
         }
 
-        $db = new Database();
-        $hashed = password_hash($this->password, PASSWORD_DEFAULT);
-
-        //    $db->execQuery("INSERT INTO users(Email, Firstname, Lastname, Password) VALUES ('$this->email', '$this->firstName', '$this->lastName', '$hashed');");
-
-        return SUCCESS;
-    }
+    return SUCCESS;
+  }
 
     /**
      * Function to check first name input.

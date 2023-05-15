@@ -5,11 +5,11 @@ class Database {
   /**************/
   /* Properties */
   /**************/
-  private string $serverName = "localhost";
-  private string $userName = "root";
-  private string $password = "";
-  private string $dbName = "TurboMailDB";
-  private mysqli $connection;
+  private $serverName = "localhost";
+  private $userName = "root";
+  private $password = "";
+  private $dbName = "TurboMailDB";
+  private $connection;
 
   /***************/
   /*   Methods   */
@@ -51,7 +51,7 @@ class Database {
    * @return void
    */
   public function disconnect(): void {
-    $this->connection->close();
+    mysqli_close($this->connection);
   }
 
   /**
@@ -78,26 +78,30 @@ class Database {
    * @param mixed $condition Condition for select datas
    * @return mysqli_result Result of the query
    */
-  public function execSelectQuery($selection, $table, $condition): mysqli_result {
+  public function execSelectQuery($selection, $table, $condition): mysqli_result|bool {
     $this->connectToTMDB();
-    if($this->connection) {
+    if($this->connection->connect_error) {
       $result = mysqli_query($this->connection, "SELECT " . $selection . " FROM " . $table . " WHERE " . $condition . ";");
+      return $result;
     }
     $this->disconnect();
 
-    return $result;
+    return false;
   }
 
   /**
    * Function to execute a query
    * @param mixed $query Query which will be executed
    */
-  public function execQuery($query): void {
+  public function execQuery($query): mysqli_result|bool {
     $this->connectToTMDB();
     if(!$this->connection->connect_error) {
-      mysqli_query($this->connection, $query);
+      $result = mysqli_query($this->connection, $query);
+      return $result;
     }
     $this->disconnect();
+
+    return false;
   }
 }
 

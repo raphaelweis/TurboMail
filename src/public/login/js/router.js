@@ -4,6 +4,7 @@ const REGISTER_URL = "../../app/register.php";
 
 // add event Listeners on page load - prevent default submit
 window.onload = function () {
+	console.log("hello");
 	const signInForm = $("#sign-in");
 	signInForm.submit(function (event) {
 		event.preventDefault();
@@ -31,7 +32,7 @@ function signInRequest() {
 		function (response) {
 			response = parseInt(response);
 			if (response === SUCCESS) {
-				window.location.href = "../../home/home.html";
+				window.location.href = "../home/home.html";
 			} else if (response === INVALID_LOGIN) {
 				signInErrorDiv.css("visibility", "visible");
 			} else {
@@ -69,7 +70,7 @@ function signUpRequest() {
 				responseInt = parseInt(response[i]);
 				switch (responseInt) {
 					case SUCCESS:
-						window.location.href = "../../home/home.html";
+						window.location.href = "../home/home.html";
 						return;
 					case INVALID_EMAIL:
 						signUpErrorDiv.append("incorrect email format, ");

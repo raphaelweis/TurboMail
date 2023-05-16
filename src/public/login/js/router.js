@@ -97,6 +97,6 @@ function signUpRequest() {
 			signUpErrorDiv.text(signUpErrorDiv.text().slice(0, -2));
 			signUpErrorDiv.css("visibility", "visible");
 		},
-		"text"
+		"json"
 	);
 }

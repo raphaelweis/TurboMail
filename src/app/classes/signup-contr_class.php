@@ -13,11 +13,11 @@ class SignupContr extends Signup {
 
     // Constructor
     public function __construct($firstName, $lastName, $email, $password, $passwordCheck) {
-        $this->$firstName = $firstName;
-        $this->$lastName = $lastName;
-        $this->$email = $email;
-        $this->$password = $password;
-        $this->$passwordCheck = $passwordCheck;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->password = $password;
+        $this->passwordCheck = $passwordCheck;
     }
 
     // Methods

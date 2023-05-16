@@ -11,10 +11,9 @@ if (isset($_POST['submit'])) {
     include '../classes/login-contr.classes.php';
     $login = new LoginContr($email, $password);
 
-    // Running error handlers and user signup
+    // Running error handlers and user login
     $login->loginUser();
 
     // Going to back to front page
-    header('Location: ../../public/login/login.html');
-
+    header('Location: ../../public/message/message.html');
 }

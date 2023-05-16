@@ -9,14 +9,14 @@ if (isset($_POST['submit'])) {
     $passwordCheck = trim(htmlspecialchars($_POST['password-check']));
 
     // Instantiate SignupContr class
-    include '../classes/dbh.classes.php';
-    include '../classes/signup_classes.php';
-    include '../classes/signup-contr_classes.php';
-    $signup = new SignupContr($firstName, $lastName, $email, $password, $passwordCheck);
+    include '../database/dbh_class.php';
+    include 'signup_class.php';
+    include 'signup-contr_class.php';
+    $signup = new NewUserController($firstName, $lastName, $email, $password, $passwordCheck);
 
     // Running error handlers and user signup
     $signup->signupUser();
 
     // Going to back to front page
-    header('Location: ../../public/message/message.html');
+    header('Location: ../public/message/message.html');
 }

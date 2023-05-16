@@ -1,18 +1,18 @@
 <?php
 
-class Login extends DBH {
+class User extends DataBaseHandler {
     protected function getUser($email, $password) {
         $stmt = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
 
         if (!$stmt->execute([$email])) {
             $stmt = null;
-            header('Location: ../../public/login/login.html?error=stmtfailed');
+            header('Location: ../public/login/login.html?error=stmtfailed');
             exit();
         }
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            header('Location: ../../public/login/login.html?error=usernotfound');
+            header('Location: ../public/login/login.html?error=usernotfound');
             exit();
         }
 
@@ -21,7 +21,7 @@ class Login extends DBH {
 
         if (!$checkPassword) {
             $stmt = null;
-            header('Location: ../../public/login/login.html?error=wrongpassword');
+            header('Location: ../public/login/login.html?error=wrongpassword');
             exit();
         }
 

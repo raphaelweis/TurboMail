@@ -2,7 +2,7 @@
 
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
 
-class LoginContr extends Login {
+class UserController extends User {
     private $email;
     private $password;
 
@@ -13,15 +13,15 @@ class LoginContr extends Login {
 
     public function loginUser() {
         if ($this->emptyInput()) {
-            header('Location: ../../public/login/login.html?error=input');
+            header('Location: ../public/login/login.html?error=input');
             exit();
         }
         if ($this->invalidEmail()) {
-            header('Location: ../../public/login/login.html?error=email');
+            header('Location: ../public/login/login.html?error=email');
             exit();
         }
         if ($this->invalidPassword()) {
-            header('Location: ../../public/login/login.html?error=password');
+            header('Location: ../public/login/login.html?error=password');
             exit();
         }
 

@@ -3,7 +3,7 @@
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
 
-class SignupContr extends Signup {
+class NewUserController extends NewUser {
     // Properties
     private $firstName;
     private $lastName;
@@ -24,31 +24,31 @@ class SignupContr extends Signup {
 
     public function signupUser(): void {
         if ($this->emptyInput()) {
-            header('Location: ../../public/login/login.html?error=input');
+            header('Location: ../public/login/login.html?error=input');
             exit();
         }
         if ($this->invalidFirstName()) {
-            header('Location: ../../public/login/login.html?error=firstname');
+            header('Location: ../public/login/login.html?error=firstname');
             exit();
         }
         if ($this->invalidLastName()) {
-            header('Location: ../../public/login/login.html?error=lastname');
+            header('Location: ../public/login/login.html?error=lastname');
             exit();
         }
         if ($this->invalidEmail()) {
-            header('Location: ../../public/login/login.html?error=email');
+            header('Location: ../public/login/login.html?error=email');
             exit();
         }
         if ($this->invalidPassword()) {
-            header('Location: ../../public/login/login.html?error=password');
+            header('Location: ../public/login/login.html?error=password');
             exit();
         }
         if (!$this->passwordMatch()) {
-            header('Location: ../../public/login/login.html?error=passwordmatch');
+            header('Location: ../public/login/login.html?error=passwordmatch');
             exit();
         }
         if ($this->emailTakenCheck()) {
-            header('Location: ../../public/login/login.html?error=emailtaken');
+            header('Location: ../public/login/login.html?error=emailtaken');
             exit();
         }
 

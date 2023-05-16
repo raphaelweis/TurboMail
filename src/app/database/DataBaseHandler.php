@@ -1,6 +1,6 @@
 <?php
 
-class DBH {
+class DataBaseHandler {
     protected function connect() {
         try {
             $username = 'root';

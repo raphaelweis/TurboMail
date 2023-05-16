@@ -1,6 +1,6 @@
 <?php
 
-class Signup extends DBH {
+class NewUser extends DataBaseHandler {
     protected function setUser($firstName, $lastName, $email, $password) {
         $stmt = $this->connect()->prepare('INSERT INTO users(FirstName, LastName, Email, Password) VALUES (?, ?, ?, ?);');
 
@@ -8,7 +8,7 @@ class Signup extends DBH {
 
         if (!$stmt->execute([$firstName, $lastName, $email, $hashedPassword])) {
             $stmt = null;
-            header('Location: ../../public/login/login.html?error=fail');
+            header('Location: ../public/login/login.html?error=fail');
             exit();
         }
 
@@ -21,7 +21,7 @@ class Signup extends DBH {
 
         if (!$stmt->execute([$email])) {
             $stmt = null;
-            header('Location: ../../public/login/login.html?error=fail');
+            header('Location: ../public/login/login.html?error=fail');
             exit();
         }
 

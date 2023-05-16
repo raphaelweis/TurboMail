@@ -1,6 +1,4 @@
 <?php
 
-$errors = array();
-array_push($errors, '1', '2', '3', '4', '5', '6');
-
+$errors[] = 0;
 echo json_encode($errors);

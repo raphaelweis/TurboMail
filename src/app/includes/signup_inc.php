@@ -10,8 +10,8 @@ if (isset($_POST['submit'])) {
 
     // Instantiate SignupContr class
     include '../classes/dbh.classes.php';
-    include '../classes/signup.classes.php';
-    include '../classes/signup-contr.classes.php';
+    include '../classes/signup_classes.php';
+    include '../classes/signup-contr_classes.php';
     $signup = new SignupContr($firstName, $lastName, $email, $password, $passwordCheck);
 
     // Running error handlers and user signup

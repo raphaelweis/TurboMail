@@ -7,8 +7,8 @@ if (isset($_POST['submit'])) {
 
     // Instantiate SignupContr class
     include '../classes/dbh.classes.php';
-    include '../classes/login.classes.php';
-    include '../classes/login-contr.classes.php';
+    include '../classes/login_classes.php';
+    include '../classes/login-contr_classes.php';
     $login = new LoginContr($email, $password);
 
     // Running error handlers and user login

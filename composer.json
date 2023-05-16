@@ -20,6 +20,7 @@
 		"php-cs-fixer": "php-cs-fixer --config=./.php-cs-fixer.dist.php"
 	},
 	"require": {
-		"ext-mysqli": "*"
+		"ext-mysqli": "*",
+		"ext-json": "*"
 	}
 }

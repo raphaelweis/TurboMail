@@ -1,6 +1,6 @@
 // defining path constants
 const LOGIN_URL = "../../app/login/login.php";
-const REGISTER_URL = "../../app/signup/register.php";
+const REGISTER_URL = "../../app/signup/signup.php";
 
 // add event Listeners on page load - prevent default submit
 window.onload = function () {
@@ -31,7 +31,7 @@ function signInRequest() {
 		function (response) {
 			response = parseInt(response);
 			if (response === SUCCESS) {
-				window.location.href = "../../home/home.html";
+				window.location.href = "../home/home.html";
 			} else if (response === INVALID_LOGIN) {
 				signInErrorDiv.css("visibility", "visible");
 			} else {
@@ -61,15 +61,15 @@ function signUpRequest() {
 		REGISTER_URL,
 		$("#sign-up").serialize(),
 		function (response) {
-			response = JSON.parse(response);
 			console.log(response);
-
+			// let responseArray = Object.values(response);
 			let responseInt;
+			console.log(response.length);
 			for (let i = 0; i < response.length; i++) {
 				responseInt = parseInt(response[i]);
 				switch (responseInt) {
 					case SUCCESS:
-						window.location.href = "../../home/home.html";
+						window.location.href = "../home/home.html";
 						return;
 					case INVALID_EMAIL:
 						signUpErrorDiv.append("incorrect email format, ");

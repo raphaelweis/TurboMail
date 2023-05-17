@@ -19,3 +19,6 @@ if (isset($_POST['submit'])) {
 
     echo json_encode([0]);
 }
+
+$errors[] = 0;
+echo json_encode($errors);

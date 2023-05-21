@@ -15,5 +15,5 @@ if (isset($_POST['submit'])) {
     $signup = new NewUserController($firstName, $lastName, $email, $password, $passwordCheck);
 
     // Running error handlers and user signup
-    $signup->signupUser();
+    $errors = $signup->signupUser();
 }

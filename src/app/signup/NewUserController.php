@@ -22,38 +22,36 @@ class NewUserController extends NewUser {
 
     // Methods
 
-    public function signupUser(): void {
+    public function signupUser(): array {
+        $errors = [];
+
         if ($this->emptyInput()) {
-            header('Location: ../public/login/login.html?error=input');
-            exit();
+            array_push($errors, 1);
         }
         if ($this->invalidFirstName()) {
-            header('Location: ../public/login/login.html?error=firstname');
-            exit();
+            array_push($errors, 2);
         }
         if ($this->invalidLastName()) {
-            header('Location: ../public/login/login.html?error=lastname');
-            exit();
+            array_push($errors, 3);
         }
         if ($this->invalidEmail()) {
-            header('Location: ../public/login/login.html?error=email');
-            exit();
+            array_push($errors, 4);
         }
         if ($this->invalidPassword()) {
-            header('Location: ../public/login/login.html?error=password');
-            exit();
+            array_push($errors, 5);
         }
         if (!$this->passwordMatch()) {
-            header('Location: ../public/login/login.html?error=passwordmatch');
-            exit();
+            array_push($errors, 6);
         }
         if ($this->emailTakenCheck()) {
-            header('Location: ../public/login/login.html?error=emailtaken');
-            exit();
+            array_push($errors, 7);
         }
 
-        $this->setUser($this->firstName, $this->lastName, $this->email, $this->password);
+        if (count($errors) == 0) {
+            $this->setUser($this->firstName, $this->lastName, $this->email, $this->password);
+        }
 
+        return $errors;
     }
 
     private function emptyInput(): bool {

@@ -1,6 +1,6 @@
 // defining path constants
 const LOGIN_URL = "../../app/login/login.php";
-const REGISTER_URL = "../../app/signup/signup.php";
+const REGISTER_URL = "../../app/signup/register.php";
 
 // add event Listeners on page load - prevent default submit
 window.onload = function () {
@@ -49,12 +49,13 @@ function signUpRequest() {
 
 	// defining error codes
 	const SUCCESS = 0;
-	const INVALID_EMAIL = 1;
-	const INVALID_PASSWORD = 2;
-	const INVALID_FIRSTNAME = 3;
-	const INVALID_LASTNAME = 4;
-	const EMAIL_TAKEN = 5;
+	const EMPTY_INPUTS = 1;
+	const INVALID_FIRSTNAME = 2;
+	const INVALID_LASTNAME = 3;
+	const INVALID_EMAIL = 4;
+	const INVALID_PASSWORD = 5;
 	const DIFFERENT_PASSWORDS = 6;
+	const EMAIL_TAKEN = 7;
 
 	// send POST request
 	$.post(
@@ -71,11 +72,8 @@ function signUpRequest() {
 					case SUCCESS:
 						window.location.href = "../home/home.html";
 						return;
-					case INVALID_EMAIL:
-						signUpErrorDiv.append("incorrect email format, ");
-						break;
-					case INVALID_PASSWORD:
-						signUpErrorDiv.append("incorrect password format, ");
+					case EMPTY_INPUTS:
+						signUpErrorDiv.append("empty inputs, ");
 						break;
 					case INVALID_FIRSTNAME:
 						signUpErrorDiv.append("incorrect firstname format, ");
@@ -83,11 +81,17 @@ function signUpRequest() {
 					case INVALID_LASTNAME:
 						signUpErrorDiv.append("incorrect lastname format, ");
 						break;
-					case EMAIL_TAKEN:
-						signUpErrorDiv.append("email already exists, ");
+					case INVALID_EMAIL:
+						signUpErrorDiv.append("incorrect email format, ");
+						break;
+					case INVALID_PASSWORD:
+						signUpErrorDiv.append("incorrect password format, ");
 						break;
 					case DIFFERENT_PASSWORDS:
 						signUpErrorDiv.append("the passwords don't match, ");
+						break;
+					case EMAIL_TAKEN:
+						signUpErrorDiv.append("email already exists, ");
 						break;
 					default:
 						alert("Oops, something unexpected happened...");

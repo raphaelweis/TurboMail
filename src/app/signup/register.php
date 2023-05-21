@@ -16,9 +16,4 @@ if (isset($_POST['submit'])) {
 
     // Running error handlers and user signup
     $signup->signupUser();
-
-    echo json_encode([0]);
 }
-
-$errors[] = 0;
-echo json_encode($errors);

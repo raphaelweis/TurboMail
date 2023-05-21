@@ -43,6 +43,17 @@ function signInRequest() {
 }
 
 function signUpRequest() {
+	// $.ajax({
+	// 	url: REGISTER_URL,
+	// 	type: "POST",
+	// 	success: function (responseData) {
+	// 		console.log(responseData);
+	// 	},
+	// 	error: function (xhr, status, error) {
+	// 		console.error("Request failed. Status code: " + xhr.status);
+	// 	},
+	// });
+
 	// select error div
 	let signUpErrorDiv = $("#sign-up-error");
 	signUpErrorDiv.text("Error: ");

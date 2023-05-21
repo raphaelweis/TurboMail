@@ -22,7 +22,7 @@ class NewUserController extends NewUser {
 
     // Methods
 
-    public function signupUser(): array {
+    public function signupUser(): string {
         $errors = [];
 
         if ($this->emptyInput()) {
@@ -51,7 +51,7 @@ class NewUserController extends NewUser {
             $this->setUser($this->firstName, $this->lastName, $this->email, $this->password);
         }
 
-        return $errors;
+        return json_encode($errors);
     }
 
     private function emptyInput(): bool {

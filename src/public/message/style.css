@@ -1,128 +1,158 @@
 /*
+* FONTS
+*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+* {
+    font-family: 'Raleway', sans-serif;
+    color: var(--fontColor);
+    margin: 0;
+    padding: 0;
+}
+
+/*
 * COLORS
 */
 :root {
-  --accentColor: #a27355;
-  --backgroundColor: #c9af77;
-  --fontColor: #3f3f3d;
-  --color1: #c39d69;
-  --color2: #bf976b;
-  --errorMessage: #af0202;
-}
-
-@import url("https://fonts.googleapis.com/css?family=Raleway");
-* {
-  font-family: Raleway;
-  color: var(--fontColor);
-  margin: 0;
-  padding: 0;
+    --accentColor: #a27355;
+    --backgroundColor: #c9af77;
+    --fontColor: #3f3f3d;
+    --color1: #c39d69;
+    --color2: #bf976b;
+    --errorMessage: #af0202;
 }
 
 header {
-  text-align: center;
-  background-color: var(--accentColor);
-  font-size: larger;
-  min-height: 6vh;
-  outline: 1px solid black;
+    text-align: center;
+    background-color: var(--accentColor);
+    font-size: larger;
+    outline: 1px solid black;
+    padding: 1em 0 1em 0;
 }
+
 body {
-  background-color: var(--backgroundColor);
-  overflow: hidden;
+    background-color: var(--backgroundColor);
+    overflow: hidden;
 }
 
 main {
-  display: flex;
+    display: flex;
 }
+
 .item {
-  height: 94vh;
+    height: 94vh;
 }
 
 #contacts {
-  overflow: scroll;
-  width: 15%;
-  border-right: 1px solid black;
-  flex-grow: 1;
-  min-width: 250px;
+    overflow: scroll;
+    width: 15%;
+    border-right: 1px solid black;
+    flex-grow: 1;
+    min-width: 250px;
 }
+
 .contact {
-  height: 10vh;
-  min-height: 80px;
-  border-bottom: 1px solid black;
-  background-color: var(--accentColor);
+    height: 10vh;
+    border-bottom: 1px solid black;
+    background-color: var(--accentColor);
+    transition: background-color 0.3s ease;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact:hover {
+    background-color: hsl(20, 60%, 80%);
+}
+.contact:active {
+    background-color: var(--fontColor);
+}
+
+.profile {
+    text-align: center;
 }
 
 #messages {
-  height: 100%;
-  width: 85%;
-  flex-grow: 8;
+    height: 100%;
+    width: 85%;
+    flex-grow: 8;
 }
+
 #chat {
-  overflow: scroll;
-  height: 90vh;
+    overflow: scroll;
+    height: 90vh;
 }
+
 .received {
-  float: left;
-  border-radius: 10px 10px 10px 2px;
-  background-color: var(--color2);
+    float: left;
+    border-radius: 10px 10px 10px 2px;
+    background-color: var(--color2);
 }
-.sended {
-  float: right;
-  border-radius: 10px 10px 2px 10px;
-  background-color: var(--color1);
+
+.sent {
+    float: right;
+    border-radius: 10px 10px 2px 10px;
+    background-color: var(--color1);
 }
+
 .msg-box {
-  width: 50%;
-  margin: 10px;
-  padding: 5px;
-  border: 1px solid black;
-  font-size: medium;
+    width: 50%;
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    font-size: medium;
 }
 
 #send-box {
-  position: sticky;
-  bottom: 5px;
-  display: flex;
-  width: auto;
-  height: auto;
-  margin: 5px 10px 0 10px;
-  border: 1px solid black;
-  border-radius: 5px;
+    position: sticky;
+    bottom: 5px;
+    display: flex;
+    width: auto;
+    height: auto;
+    margin: 5px 10px 0 10px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
+
 #write {
-  width: 100%;
-  flex-grow: 1;
+    flex-grow: 1;
 }
+
 textarea {
-  width: 100%;
-  height: 50px;
-  font-size: medium;
-  float: left;
-  padding: 2px;
-  border: none;
-  resize: none;
-  border-radius: 5px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+    width: 100%;
+    height: 2em;
+    font-size: medium;
+    float: left;
+    padding: 2px;
+    border: none;
+    resize: none;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
+
 textarea:focus {
-  outline: none;
+    outline: none;
 }
+
 button {
-  height: 100%;
-  width: 40px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border: none;
-  border-left: 1px solid black;
-  background-color: var(--color1);
+    height: 100%;
+    width: 40px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    border-left: 1px solid black;
+    background-color: var(--color1);
 }
 
 @media (max-width: 450px) {
-  #messages {
-    display: none;
-    visibility: hidden;
-  }
-  .contact {
-    background-color: var(--backgroundColor);
-  }
+    #messages {
+        display: none;
+        visibility: hidden;
+    }
+
+    .contact {
+        background-color: var(--backgroundColor);
+    }
 }

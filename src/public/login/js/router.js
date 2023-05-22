@@ -1,6 +1,7 @@
 // defining path constants
 const LOGIN_URL = "../../app/login/login.php";
-const REGISTER_URL = "../../app/signup/register.php";
+const REGISTER_URL = "../../app/register/register.php";
+const MESSAGES_URL = "../message/message.html"
 
 // add event Listeners on page load - prevent default submit
 window.onload = function () {
@@ -26,9 +27,10 @@ function signInRequest() {
 
 	// sending POST request
 	$.post(LOGIN_URL, $("#sign-in").serialize(), function (response) {
+        console.log(response);
 		response = parseInt(response);
 		if (response === SUCCESS) {
-			window.location.href = "../home/home.html";
+			window.location.href = MESSAGES_URL;
 		} else if (response === INVALID_LOGIN) {
 			signInErrorDiv.css("visibility", "visible");
 		} else {
@@ -54,15 +56,13 @@ function signUpRequest() {
 
 	// sending POST request
 	$.post(REGISTER_URL, $("#sign-up").serialize(), function (response) {
-		console.log(response);
 		// let responseArray = Object.values(response);
 		let responseInt;
-		console.log(response.length);
 		for (let i = 0; i < response.length; i++) {
 			responseInt = parseInt(response[i]);
 			switch (responseInt) {
 				case SUCCESS:
-					window.location.href = "../home/home.html";
+					window.location.href = MESSAGES_URL;
 					return;
 				case EMPTY_INPUTS:
 					signUpErrorDiv.append("empty inputs, ");

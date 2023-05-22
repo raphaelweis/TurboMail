@@ -1,6 +1,13 @@
 <?php
 
-if (isset($_POST['submit'])) {
+echo 'Bonjour';
+
+use TurboMail\NewUserController as NewUserController;
+
+include_once 'NewUserController.php';
+
+//if (isset($_POST['submit'])) {
+if (1) {
     // Grabbing the data
     $firstName = trim(htmlspecialchars($_POST['firstname']));
     $lastName = trim(htmlspecialchars($_POST['lastname']));
@@ -9,11 +16,14 @@ if (isset($_POST['submit'])) {
     $passwordCheck = trim(htmlspecialchars($_POST['password-check']));
 
     // Instantiate SignupContr class
-    include '../database/DataBaseHandler.php';
-    include 'NewUser.php';
-    include 'NewUserController.php';
-    $signup = new NewUserController($firstName, $lastName, $email, $password, $passwordCheck);
+    $signup = new NewUserController(
+        $firstName,
+        $lastName,
+        $email,
+        $password,
+        $passwordCheck
+    );
 
     // Running error handlers and user signup
-    $errors = $signup->signupUser();
+    echo $signup->signupUser();
 }

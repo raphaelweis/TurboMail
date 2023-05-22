@@ -17,7 +17,7 @@ $rules = [
     'single_space_around_construct'               => true,
     'control_structure_braces'                    => true,
     'curly_braces_position'                       => [
-        'classes_opening_brace' => 'same_line',
+        'classes_opening_brace'   => 'same_line',
         'functions_opening_brace' => 'same_line',
     ],
     'control_structure_continuation_position'     => true,
@@ -138,7 +138,7 @@ $rules = [
 ];
 
 $finder = Finder::create()
-	->in(__DIR__);
+    ->in(__DIR__);
 
 $config = new Config();
 

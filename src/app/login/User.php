@@ -1,5 +1,9 @@
 <?php
 
+namespace TurboMail;
+
+include_once '../database/DataBaseHandler.php';
+
 class User extends DataBaseHandler {
     protected function getUser($email, $password) {
         $stmt = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
@@ -17,7 +21,10 @@ class User extends DataBaseHandler {
         }
 
         $passwordHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $checkPassword = password_verify($password, $passwordHashed[0]['Password']);
+        $checkPassword = password_verify(
+            $password,
+            $passwordHashed[0]['Password']
+        );
 
         if (!$checkPassword) {
             $stmt = null;

@@ -1,5 +1,9 @@
 <?php
 
+namespace TurboMail;
+
+include_once 'User.php';
+
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
 
 class UserController extends User {

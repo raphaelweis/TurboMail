@@ -1,8 +1,13 @@
 <?php
 
+namespace TurboMail;
+
+include_once '../database/DataBaseHandler.php';
+
 class NewUser extends DataBaseHandler {
     protected function setUser($firstName, $lastName, $email, $password) {
-        $stmt = $this->connect()->prepare('INSERT INTO users(FirstName, LastName, Email, Password) VALUES (?, ?, ?, ?);');
+        $stmt = $this->connect()
+            ->prepare('INSERT INTO users(FirstName, LastName, Email, Password) VALUES (?, ?, ?, ?);');
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -17,7 +22,8 @@ class NewUser extends DataBaseHandler {
     }
 
     protected function checkUser($email) {
-        $stmt = $this->connect()->prepare('SELECT ID FROM users WHERE Email=?;');
+        $stmt = $this->connect()
+            ->prepare('SELECT ID FROM users WHERE Email=?;');
 
         if (!$stmt->execute([$email])) {
             $stmt = null;

@@ -17,14 +17,14 @@ window.onload = function () {
 };
 
 function signInRequest() {
-	// select error div
+	// selecting the error div
 	let signInErrorDiv = $("#sign-in-error");
 
 	// defining error codes
 	const SUCCESS = 0;
 	const INVALID_LOGIN = 1;
 
-	// send POST request
+	// sending POST request
 	$.post(
 		LOGIN_URL,
 		$("#sign-in").serialize(),
@@ -54,7 +54,7 @@ function signUpRequest() {
 	// 	},
 	// });
 
-	// select error div
+	// selecting the error div
 	let signUpErrorDiv = $("#sign-up-error");
 	signUpErrorDiv.text("Error: ");
 
@@ -68,7 +68,7 @@ function signUpRequest() {
 	const DIFFERENT_PASSWORDS = 6;
 	const EMAIL_TAKEN = 7;
 
-	// send POST request
+	// sending POST request
 	$.post(
 		REGISTER_URL,
 		$("#sign-up").serialize(),

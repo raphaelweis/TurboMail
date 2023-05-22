@@ -1,5 +1,9 @@
 <?php
 
+namespace TurboMail;
+
+include_once 'NewUser.php';
+
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
 
@@ -12,7 +16,13 @@ class NewUserController extends NewUser {
     private $passwordCheck;
 
     // Constructor
-    public function __construct($firstName, $lastName, $email, $password, $passwordCheck) {
+    public function __construct(
+        $firstName,
+        $lastName,
+        $email,
+        $password,
+        $passwordCheck
+    ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
@@ -26,36 +36,45 @@ class NewUserController extends NewUser {
         $errors = [];
 
         if ($this->emptyInput()) {
-            array_push($errors, 1);
+            $errors[] = 1;
         }
         if ($this->invalidFirstName()) {
-            array_push($errors, 2);
+            $errors[] = 2;
         }
         if ($this->invalidLastName()) {
-            array_push($errors, 3);
+            $errors[] = 3;
         }
         if ($this->invalidEmail()) {
-            array_push($errors, 4);
+            $errors[] = 4;
         }
         if ($this->invalidPassword()) {
-            array_push($errors, 5);
+            $errors[] = 5;
         }
         if (!$this->passwordMatch()) {
-            array_push($errors, 6);
+            $errors[] = 6;
         }
         if ($this->emailTakenCheck()) {
-            array_push($errors, 7);
+            $errors[] = 7;
         }
 
         if (count($errors) == 0) {
-            $this->setUser($this->firstName, $this->lastName, $this->email, $this->password);
+            $this->setUser(
+                $this->firstName,
+                $this->lastName,
+                $this->email,
+                $this->password
+            );
         }
 
         return json_encode($errors);
     }
 
     private function emptyInput(): bool {
-        if (empty($this->firstName) || empty($this->lastName) || empty($this->email) || empty($this->password) || empty($this->passwordCheck)) {
+        if (empty($this->firstName) || empty($this->lastName)
+            || empty($this->email)
+            || empty($this->password)
+            || empty($this->passwordCheck)
+        ) {
             return true;
         }
 

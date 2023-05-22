@@ -1,13 +1,12 @@
 <?php
 
-echo 'Bonjour';
+echo 'bonjour';
 
 use TurboMail\NewUserController as NewUserController;
 
 include_once 'NewUserController.php';
 
-//if (isset($_POST['submit'])) {
-if (1) {
+if (!empty($_POST)) {
     // Grabbing the data
     $firstName = trim(htmlspecialchars($_POST['firstname']));
     $lastName = trim(htmlspecialchars($_POST['lastname']));

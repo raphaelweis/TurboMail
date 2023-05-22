@@ -25,35 +25,19 @@ function signInRequest() {
 	const INVALID_LOGIN = 1;
 
 	// sending POST request
-	$.post(
-		LOGIN_URL,
-		$("#sign-in").serialize(),
-		function (response) {
-			response = parseInt(response);
-			if (response === SUCCESS) {
-				window.location.href = "../home/home.html";
-			} else if (response === INVALID_LOGIN) {
-				signInErrorDiv.css("visibility", "visible");
-			} else {
-				alert("Oops, something unexpected happened...");
-			}
-		},
-		"text"
-	);
+	$.post(LOGIN_URL, $("#sign-in").serialize(), function (response) {
+		response = parseInt(response);
+		if (response === SUCCESS) {
+			window.location.href = "../home/home.html";
+		} else if (response === INVALID_LOGIN) {
+			signInErrorDiv.css("visibility", "visible");
+		} else {
+			alert("Oops, something unexpected happened...");
+		}
+	}, "text");
 }
 
 function signUpRequest() {
-	// $.ajax({
-	// 	url: REGISTER_URL,
-	// 	type: "POST",
-	// 	success: function (responseData) {
-	// 		console.log(responseData);
-	// 	},
-	// 	error: function (xhr, status, error) {
-	// 		console.error("Request failed. Status code: " + xhr.status);
-	// 	},
-	// });
-
 	// selecting the error div
 	let signUpErrorDiv = $("#sign-up-error");
 	signUpErrorDiv.text("Error: ");
@@ -69,49 +53,44 @@ function signUpRequest() {
 	const EMAIL_TAKEN = 7;
 
 	// sending POST request
-	$.post(
-		REGISTER_URL,
-		$("#sign-up").serialize(),
-		function (response) {
-			console.log(response);
-			// let responseArray = Object.values(response);
-			let responseInt;
-			console.log(response.length);
-			for (let i = 0; i < response.length; i++) {
-				responseInt = parseInt(response[i]);
-				switch (responseInt) {
-					case SUCCESS:
-						window.location.href = "../home/home.html";
-						return;
-					case EMPTY_INPUTS:
-						signUpErrorDiv.append("empty inputs, ");
-						break;
-					case INVALID_FIRSTNAME:
-						signUpErrorDiv.append("incorrect firstname format, ");
-						break;
-					case INVALID_LASTNAME:
-						signUpErrorDiv.append("incorrect lastname format, ");
-						break;
-					case INVALID_EMAIL:
-						signUpErrorDiv.append("incorrect email format, ");
-						break;
-					case INVALID_PASSWORD:
-						signUpErrorDiv.append("incorrect password format, ");
-						break;
-					case DIFFERENT_PASSWORDS:
-						signUpErrorDiv.append("the passwords don't match, ");
-						break;
-					case EMAIL_TAKEN:
-						signUpErrorDiv.append("email already exists, ");
-						break;
-					default:
-						alert("Oops, something unexpected happened...");
-						break;
-				}
+	$.post(REGISTER_URL, $("#sign-up").serialize(), function (response) {
+		console.log(response);
+		// let responseArray = Object.values(response);
+		let responseInt;
+		console.log(response.length);
+		for (let i = 0; i < response.length; i++) {
+			responseInt = parseInt(response[i]);
+			switch (responseInt) {
+				case SUCCESS:
+					window.location.href = "../home/home.html";
+					return;
+				case EMPTY_INPUTS:
+					signUpErrorDiv.append("empty inputs, ");
+					break;
+				case INVALID_FIRSTNAME:
+					signUpErrorDiv.append("incorrect firstname format, ");
+					break;
+				case INVALID_LASTNAME:
+					signUpErrorDiv.append("incorrect lastname format, ");
+					break;
+				case INVALID_EMAIL:
+					signUpErrorDiv.append("incorrect email format, ");
+					break;
+				case INVALID_PASSWORD:
+					signUpErrorDiv.append("incorrect password format, ");
+					break;
+				case DIFFERENT_PASSWORDS:
+					signUpErrorDiv.append("the passwords don't match, ");
+					break;
+				case EMAIL_TAKEN:
+					signUpErrorDiv.append("email already exists, ");
+					break;
+				default:
+					alert("Oops, something unexpected happened...");
+					break;
 			}
-			signUpErrorDiv.text(signUpErrorDiv.text().slice(0, -2));
-			signUpErrorDiv.css("visibility", "visible");
-		},
-		"json"
-	);
+		}
+		signUpErrorDiv.text(signUpErrorDiv.text().slice(0, -2));
+		signUpErrorDiv.css("visibility", "visible");
+	}, "json");
 }

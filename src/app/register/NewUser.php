@@ -5,7 +5,7 @@ namespace TurboMail;
 include_once '../database/DataBaseHandler.php';
 
 class NewUser extends DataBaseHandler {
-    protected function setUser($firstName, $lastName, $email, $password) {
+    protected function setUser($firstName, $lastName, $email, $password): void {
         $stmt = $this->connect()
             ->prepare('INSERT INTO users(FirstName, LastName, Email, Password) VALUES (?, ?, ?, ?);');
 

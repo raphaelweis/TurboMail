@@ -15,11 +15,13 @@
 * COLORS
 */
 :root {
-    --accentColor: #a27355;
-    --backgroundColor: #c9af77;
-    --fontColor: #3f3f3d;
-    --color1: #c39d69;
-    --color2: #bf976b;
+    --accentColor: #ffffff;
+    --backgroundColor: rgba(2, 2, 2, 0.9);
+    --fontColor: white;
+    --color1: #25aae2;
+    /* --color1: rgba(37, 170, 226, 0.5); */
+    --color2: #2e3192;
+    /* --color2: rgba(46, 49, 146, 0.8); */
     --errorMessage: #af0202;
 }
 
@@ -28,7 +30,43 @@ header {
     background-color: var(--accentColor);
     font-size: larger;
     outline: 1px solid black;
-    padding: 1em 0 1em 0;
+}
+
+.navbar {
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar img {
+    vertical-align: middle;
+    width: 100px;
+    height: 50px;
+    margin: 0 20px 0 20px;
+}
+
+.navbar-title {
+    color: var(--color1);
+    flex-grow: 1;
+    text-align: left;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.navbar-user {
+    font-size: 16px;
+    color: black;
+}
+
+.navbar-logout {
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 0 0 20px;
+    font-size: 14px;
 }
 
 body {
@@ -38,29 +76,6 @@ body {
 
 main {
     display: flex;
-}
-
-/*
-* NAVBAR
-*/
-header nav {
-    display: flex;
-    padding: 0 1% 0 1%;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--accentColor);
-}
-
-.nav-links {
-    flex: 1;
-    text-align: right;
-}
-
-.nav-links ul li {
-    list-style: none;
-    display: inline-block;
-    padding: 8px 12px;
-    position: relative;
 }
 
 .item {
@@ -77,8 +92,8 @@ header nav {
 
 .contact {
     height: 10vh;
-    border-bottom: 1px solid black;
-    background-color: var(--accentColor);
+    border-bottom: 1px solid var(--color2);
+    background-color: var(--color1);
     transition: background-color 0.3s ease;
     text-align: center;
 
@@ -87,18 +102,21 @@ header nav {
     align-items: center;
 }
 .contact:hover {
-    background-color: hsl(20, 60%, 80%);
+    background-color: var(--color2);
+    color: white;
 }
 .contact:active {
     background-color: var(--fontColor);
 }
-
-.profile {
-    text-align: center;
+/* .contact:nth-child(odd) {
+    background-color: var(--color2);
 }
+.contact:nth-child(even) {
+    background-color: white;
+} */
 
 #messages {
-    height: 100%;
+    height: 80vh;
     width: 85%;
     flex-grow: 8;
 }

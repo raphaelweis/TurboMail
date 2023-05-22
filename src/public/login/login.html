@@ -1,166 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="style.css"/>
-  <script defer type="module" src="js/router.js"></script>
-  <script
-    defer
-    type="module"
-    src="../../../node_modules/jquery/dist/jquery.js"
-  ></script>
-  <title>TurboMail.</title>
-</head>
-<body>
-<header>
-  <nav>
-    <div class="nav-links">
-      <ul>
-        <li>
-          <a
-            href="https://github.com/raphaelweis/turbomail"
-            target="_blank"
-          >
-            <img src="../../resources/svg/github-mark.svg" alt=""/>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div class="title">
-    <h1>TurboMail.</h1>
-    <p>Written with love.</p>
-  </div>
-</header>
-
-<main>
-  <section class="sign-up-in">
-    <div class="row">
-      <div class="item sign-in">
-        <h2>Sign In</h2>
-
-        <form id="sign-in">
-          <div class="validation-error" id="sign-in-error">
-            Error, the login credentials you provided are incorrect
-          </div>
-          <div class="input-div">
-            <label for="si-email">Email Address :</label><br/>
-            <input
-              value="stephen.curry@nba.com"
-              id="si-email"
-              type="email"
-              class="inputField"
-              name="email"
-              placeholder="Enter your email"
-            />
-          </div>
-          <br/>
-          <div class="input-div">
-            <label for="si-password">Password :</label><br/>
-            <input
-              value="bang!bang!"
-              id="si-password"
-              type="password"
-              class="inputField"
-              name="password"
-              placeholder="Enter your password"
-            />
-          </div>
-
-          <br/>
-          <input type="submit" name="submit" value="Sign In"/>
-        </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer type="module" src="js/router.js"></script>
+    <script
+      defer
+      type="module"
+      src="../../../node_modules/jquery/dist/jquery.js"
+    ></script>
+    <title>TurboMail.</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-links">
+          <ul>
+            <li>
+              <a
+                href="https://github.com/raphaelweis/turbomail"
+                target="_blank"
+              >
+                <img src="../../resources/svg/github-mark.svg" alt="" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="title">
+        <h1>TurboMail.</h1>
+        <p>Written with love.</p>
       </div>
-      <div class="item sign-up">
-        <h2>Sign Up</h2>
+    </header>
 
-        <form id="sign-up">
-          <div class="validation-error" id="sign-up-error">Error:</div>
-          <div class="input-div">
-            <label for="su-firstname">First name :</label><br/>
-            <input
-              value="Stephen"
-              id="su-firstname"
-              type="text"
-              class="inputField"
-              name="firstname"
-              placeholder="Enter your first name"
-            />
-          </div>
-          <br/>
-          <div class="input-div">
-            <label for="su-lastname">Last name :</label><br/>
-            <input
-              value="Curry"
-              id="su-lastname"
-              type="text"
-              class="inputField"
-              name="lastname"
-              placeholder="Enter your last name"
-            />
-          </div>
-          <br/>
-          <div class="input-div">
-            <label for="su-email">Email Address :</label><br/>
-            <input
-              value="stephen.curry@nba.com"
-              id="su-email"
-              type="email"
-              class="inputField"
-              name="email"
-              placeholder="Enter your email"
-            />
-          </div>
-          <br/>
-          <div class="input-div">
-            <label for="su-password">Password :</label><br/>
-            <input
-              value="bang!bang!"
-              id="su-password"
-              type="password"
-              class="inputField"
-              name="password"
-              placeholder="Enter your password"
-            />
-          </div>
-          <br/>
-          <div class="input-div">
-            <label for="su-password-check">Check Password :</label><br/>
-            <input
-              value="bang!bang!"
-              id="su-password-check"
-              type="password"
-              class="inputField"
-              name="password-check"
-              placeholder="Enter your password"
-            />
-          </div>
-          <br/>
+    <main>
+      <section class="sign-up-in">
+        <div class="row">
+          <div class="item sign-in">
+            <h2>Sign In</h2>
 
-          <input
-            id="sign-up-button"
-            type="submit"
-            name="submit"
-            value="Sign Up"
-          />
-        </form>
-      </div>
-    </div>
-  </section>
-</main>
+            <form id="sign-in">
+              <div class="validation-error" id="sign-in-error">
+                Error, the login credentials you provided are incorrect
+              </div>
+              <div class="input-div">
+                <label for="si-email">Email Address :</label><br />
+                <input
+                  value="stephen.curry@nba.com"
+                  id="si-email"
+                  type="email"
+                  class="inputField"
+                  name="email"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <br />
+              <div class="input-div">
+                <label for="si-password">Password :</label><br />
+                <input
+                  value="bang!bang!"
+                  id="si-password"
+                  type="password"
+                  class="inputField"
+                  name="password"
+                  placeholder="Enter your password"
+                />
+              </div>
 
-<footer>
-  <h2>About</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-    occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-    mollit anim id est laborum.
-  </p>
-</footer>
-</body>
+              <br />
+              <input type="submit" name="submit" value="Sign In" />
+            </form>
+          </div>
+          <div class="item sign-up">
+            <h2>Sign Up</h2>
+
+            <form id="sign-up">
+              <div class="validation-error" id="sign-up-error">Error:</div>
+              <div class="input-div">
+                <label for="su-firstname">First name :</label><br />
+                <input
+                  value="Stephen"
+                  id="su-firstname"
+                  type="text"
+                  class="inputField"
+                  name="firstname"
+                  placeholder="Enter your first name"
+                />
+              </div>
+              <br />
+              <div class="input-div">
+                <label for="su-lastname">Last name :</label><br />
+                <input
+                  value="Curry"
+                  id="su-lastname"
+                  type="text"
+                  class="inputField"
+                  name="lastname"
+                  placeholder="Enter your last name"
+                />
+              </div>
+              <br />
+              <div class="input-div">
+                <label for="su-email">Email Address :</label><br />
+                <input
+                  value="stephen.curry@nba.com"
+                  id="su-email"
+                  type="email"
+                  class="inputField"
+                  name="email"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <br />
+              <div class="input-div">
+                <label for="su-password">Password :</label><br />
+                <input
+                  value="bang!bang!"
+                  id="su-password"
+                  type="password"
+                  class="inputField"
+                  name="password"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <br />
+              <div class="input-div">
+                <label for="su-password-check">Check Password :</label><br />
+                <input
+                  value="bang!bang!"
+                  id="su-password-check"
+                  type="password"
+                  class="inputField"
+                  name="password-check"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <br />
+
+              <input
+                id="sign-up-button"
+                type="submit"
+                name="submit"
+                value="Sign Up"
+              />
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <h2>About</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </footer>
+  </body>
 </html>

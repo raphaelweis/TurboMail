@@ -2,10 +2,10 @@
 * FONTS
 */
 /*noinspection CssUnknownTarget*/
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
 * {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     color: var(--fontColor);
     margin: 0;
     padding: 0;
@@ -38,6 +38,29 @@ body {
 
 main {
     display: flex;
+}
+
+/*
+* NAVBAR
+*/
+header nav {
+    display: flex;
+    padding: 0 1% 0 1%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--accentColor);
+}
+
+.nav-links {
+    flex: 1;
+    text-align: right;
+}
+
+.nav-links ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
 }
 
 .item {
@@ -135,7 +158,7 @@ textarea:focus {
     outline: none;
 }
 
-button {
+#send-button {
     height: 100%;
     width: 40px;
     border-top-right-radius: 5px;

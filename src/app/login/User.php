@@ -2,37 +2,31 @@
 
 namespace TurboMail;
 
+use PDO;
+
 include_once '../database/DataBaseHandler.php';
 
 class User extends DataBaseHandler {
-    protected function getUser($email, $password) {
-        $stmt = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
+    protected function getUser($email, $password): int {
 
+        $stmt = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
         if (!$stmt->execute([$email])) {
             $stmt = null;
-            header('Location: ../public/login/login.html?error=stmtfailed');
-            exit();
-        }
 
+            return 1;
+        }
         if ($stmt->rowCount() == 0) {
             $stmt = null;
-            header('Location: ../public/login/login.html?error=usernotfound');
-            exit();
-        }
 
-        $passwordHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $checkPassword = password_verify(
-            $password,
-            $passwordHashed[0]['Password']
-        );
-
-        if (!$checkPassword) {
-            $stmt = null;
-            header('Location: ../public/login/login.html?error=wrongpassword');
-            exit();
+            return 1;
         }
 
         $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (!password_verify($password, $user[0]['Password'])) {
+            $stmt = null;
+
+            return 1;
+        }
 
         session_start();
         $_SESSION['s_ID'] = $user[0]['ID'];
@@ -42,5 +36,6 @@ class User extends DataBaseHandler {
 
         $stmt = null;
 
+        return 0;
     }
 }

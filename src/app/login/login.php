@@ -1,18 +1,24 @@
 <?php
 
-if (isset($_POST['submit'])) {
-	// Grabbing the data
-	$email = trim(htmlspecialchars($_POST['email']));
-	$password = trim(htmlspecialchars($_POST['password']));
+use TurboMail\UserController as UserController;
 
-	// Instantiate SignupContr class
-	include '../database/DataBaseHandler.php';
-	include 'User.php';
-	include 'UserController.php';
-	$login = new UserController($email, $password);
+include_once 'UserController.php';
 
-	// Running error handlers and user login
-	$login->loginUser();
+$debug = 1;
+
+/* @noinspection PhpConditionAlreadyCheckedInspection */
+if ($debug) {
+    $email = 'stephen.curry@nba.com';
+    $password = 'bang!bang!';
+
+    $login = new UserController($email, $password);
+    echo $login->loginUser();
 }
 
-echo 0;
+if (isset($_POST['email'], $_POST['password'])) {
+    $email = trim(htmlspecialchars($_POST['email']));
+    $password = trim(htmlspecialchars($_POST['password']));
+
+    $login = new UserController($email, $password);
+    echo $login->loginUser();
+}

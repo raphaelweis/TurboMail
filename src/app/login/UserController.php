@@ -1,32 +1,31 @@
 <?php
 
+namespace TurboMail;
+
+include_once 'User.php';
+
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
 
 class UserController extends User {
-    private $email;
-    private $password;
+    private string $email;
+    private string $password;
 
     public function __construct($email, $password) {
         $this->email = trim(htmlspecialchars($email));
         $this->password = trim(htmlspecialchars($password));
     }
 
-    public function loginUser() {
+    public function loginUser(): int {
         if ($this->emptyInput()) {
-            header('Location: ../public/login/login.html?error=input');
-            exit();
+            return 1;
         }
         if ($this->invalidEmail()) {
-            header('Location: ../public/login/login.html?error=email');
-            exit();
+            return 1;
         }
         if ($this->invalidPassword()) {
-            header('Location: ../public/login/login.html?error=password');
-            exit();
+            return 1;
         }
-
-        $this->getUser($this->email, $this->password);
-
+        return $this->getUser($this->email, $this->password);
     }
 
     private function emptyInput(): bool {

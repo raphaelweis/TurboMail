@@ -1,4 +1,6 @@
 vendor
 node_modules
 .idea
+.vscode
 .php-cs-fixer.cache
+.DS_Store

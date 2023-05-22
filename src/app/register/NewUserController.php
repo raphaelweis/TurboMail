@@ -1,5 +1,9 @@
 <?php
 
+namespace TurboMail;
+
+include_once 'NewUser.php';
+
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
 
@@ -12,7 +16,13 @@ class NewUserController extends NewUser {
     private $passwordCheck;
 
     // Constructor
-    public function __construct($firstName, $lastName, $email, $password, $passwordCheck) {
+    public function __construct(
+        $firstName,
+        $lastName,
+        $email,
+        $password,
+        $passwordCheck
+    ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
@@ -22,42 +32,50 @@ class NewUserController extends NewUser {
 
     // Methods
 
-    public function signupUser(): void {
+    public function signupUser(): string {
+        $errors = [];
+
         if ($this->emptyInput()) {
-            header('Location: ../public/login/login.html?error=input');
-            exit();
+            $errors[] = 1;
         }
         if ($this->invalidFirstName()) {
-            header('Location: ../public/login/login.html?error=firstname');
-            exit();
+            $errors[] = 2;
         }
         if ($this->invalidLastName()) {
-            header('Location: ../public/login/login.html?error=lastname');
-            exit();
+            $errors[] = 3;
         }
         if ($this->invalidEmail()) {
-            header('Location: ../public/login/login.html?error=email');
-            exit();
+            $errors[] = 4;
         }
         if ($this->invalidPassword()) {
-            header('Location: ../public/login/login.html?error=password');
-            exit();
+            $errors[] = 5;
         }
         if (!$this->passwordMatch()) {
-            header('Location: ../public/login/login.html?error=passwordmatch');
-            exit();
+            $errors[] = 6;
         }
         if ($this->emailTakenCheck()) {
-            header('Location: ../public/login/login.html?error=emailtaken');
-            exit();
+            $errors[] = 7;
         }
 
-        $this->setUser($this->firstName, $this->lastName, $this->email, $this->password);
+        if (count($errors) == 0) {
+            $errors[] = 0;
+            $this->setUser(
+                $this->firstName,
+                $this->lastName,
+                $this->email,
+                $this->password
+            );
+        }
 
+        return json_encode($errors);
     }
 
     private function emptyInput(): bool {
-        if (empty($this->firstName) || empty($this->lastName) || empty($this->email) || empty($this->password) || empty($this->passwordCheck)) {
+        if (empty($this->firstName) || empty($this->lastName)
+            || empty($this->email)
+            || empty($this->password)
+            || empty($this->passwordCheck)
+        ) {
             return true;
         }
 

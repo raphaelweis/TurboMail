@@ -1,11 +1,19 @@
 <?php
 
+namespace TurboMail;
+
+use PDO;
+
 class DataBaseHandler {
     protected function connect() {
         try {
             $username = 'root';
             $password = '';
-            $dbh = new PDO('mysql:host=localhost;dbname=TurboMailDB', $username, $password);
+            $dbh = new PDO(
+                'mysql:host=localhost;dbname=TurboMailDB',
+                $username,
+                $password
+            );
 
             return $dbh;
         } catch (PDOException $e) {

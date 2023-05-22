@@ -1,6 +1,7 @@
 /*
 * FONTS
 */
+/*noinspection CssUnknownTarget*/
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 * {
@@ -127,9 +128,7 @@ textarea {
     padding: 2px;
     border: none;
     resize: none;
-    border-radius: 5px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-radius: 5px 0 0 5px;
 }
 
 textarea:focus {

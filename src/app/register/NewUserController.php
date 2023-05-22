@@ -58,6 +58,7 @@ class NewUserController extends NewUser {
         }
 
         if (count($errors) == 0) {
+            $errors[] = 0;
             $this->setUser(
                 $this->firstName,
                 $this->lastName,

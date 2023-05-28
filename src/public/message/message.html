@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="../style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+      defer
+      type="module"
+      src="../../../node_modules/jquery/dist/jquery.js"
+    ></script>
     <script defer type="module" src="js/router.js"></script>
     <title>Messages</title>
   </head>
@@ -19,7 +23,7 @@
           />
         </div>
         <div class="navbar-title">TurboMail.</div>
-        <div class="navbar-user">Stephen CURRY</div>
+        <div id="user-info" class="navbar-user"></div>
         <button class="navbar-button common-button">Add Friend</button>
         <button id="logout-button" class="navbar-button common-button">
           Logout

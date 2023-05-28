@@ -13,8 +13,6 @@ class NewUser extends DataBaseHandler {
 
         if (!$statement->execute([$firstName, $lastName, $email, $hashedPassword])) {
             $statement = null;
-            header('Location: ../public/login/login.html?error=fail');
-            exit();
         }
 
         $statement = null;
@@ -27,8 +25,6 @@ class NewUser extends DataBaseHandler {
 
         if (!$statement->execute([$email])) {
             $statement = null;
-            header('Location: ../public/login/login.html?error=fail');
-            exit();
         }
 
         if ($statement->rowCount() > 0) {

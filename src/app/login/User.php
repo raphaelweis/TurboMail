@@ -11,7 +11,7 @@ class User extends DataBaseHandler {
 
         $statement = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
         if (!$statement->execute([$email])) {
-            $stmt = null;
+            $statement = null;
 
             return 1;
         }

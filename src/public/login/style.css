@@ -131,14 +131,6 @@ input {
     height: 25px;
     margin-right: 15%;
     float: right;
-    border: none;
-    border-radius: 5px;
-    color: var(--lightFontColor);
-    background-color: var(--buttonColor);
-    transition: background-color 0.3s ease;
-}
-.row input[type="submit"]:hover {
-    background-color: var(--lightBlue);
 }
 .item {
     width: 50%;

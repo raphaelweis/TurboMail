@@ -1,0 +1,13 @@
+input[class*="common-button"],
+button[class*="common-button"] {
+    border: none;
+    border-radius: 5px;
+    color: var(--lightFontColor);
+    background-color: var(--buttonColor);
+    transition: background-color 0.3s ease;
+}
+
+input[class*="common-button"]:hover,
+button[class*="common-button"]:hover {
+    background-color: var(--lightBlue);
+}

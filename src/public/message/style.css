@@ -53,9 +53,6 @@ header {
     color: black;
 }
 .navbar-button {
-    background-color: var(--buttonColor);
-    color: var(--lightFontColor);
-    border: none;
     padding: 8px 16px;
     margin: 0 0 0 20px;
     font-size: 14px;

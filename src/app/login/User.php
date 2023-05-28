@@ -9,21 +9,21 @@ include_once '../database/DataBaseHandler.php';
 class User extends DataBaseHandler {
     protected function getUser($email, $password): int {
 
-        $stmt = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
-        if (!$stmt->execute([$email])) {
+        $statement = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
+        if (!$statement->execute([$email])) {
             $stmt = null;
 
             return 1;
         }
-        if ($stmt->rowCount() == 0) {
-            $stmt = null;
+        if ($statement->rowCount() == 0) {
+            $statement = null;
 
             return 1;
         }
 
-        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $user = $statement->fetchAll(PDO::FETCH_ASSOC);
         if (!password_verify($password, $user[0]['Password'])) {
-            $stmt = null;
+            $statement = null;
 
             return 1;
         }
@@ -34,7 +34,7 @@ class User extends DataBaseHandler {
         $_SESSION['s_LastName'] = $user[0]['LastName'];
         $_SESSION['s_Email'] = $user[0]['Email'];
 
-        $stmt = null;
+        $statement = null;
 
         return 0;
     }

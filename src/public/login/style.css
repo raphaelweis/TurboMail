@@ -1,25 +1,3 @@
-/* FONTS */
-@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
-
-/* ALL */
-* {
-    font-family: "Raleway", sans-serif;
-    color: var(--darkFontColor);
-    margin: 0;
-    padding: 0;
-}
-
-/* COLORS */
-:root {
-    --darkBlue: #2e3192;
-    --lightBlue: #25aae2;
-    --backgroundColor: #ffffff;
-    --buttonColor: #000000;
-    --lightFontColor: #ffffff;
-    --darkFontColor: #000000;
-    --errorMessage: #af0202;
-}
-
 /* HTML */
 html {
     background-color: var(--backgroundColor);

@@ -1,3 +1,26 @@
+/* FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+/* ALL */
+* {
+    font-family: "Raleway", sans-serif;
+    color: var(--darkFontColor);
+    margin: 0;
+    padding: 0;
+}
+
+/* COLORS */
+:root {
+    --darkBlue: #2e3192;
+    --lightBlue: #25aae2;
+    --backgroundColor: #ffffff;
+    --buttonColor: #000000;
+    --lightFontColor: #ffffff;
+    --darkFontColor: #000000;
+    --errorMessage: #af0202;
+}
+
+/* BUTTONS */
 input[class*="common-button"],
 button[class*="common-button"] {
     border: none;
@@ -6,7 +29,6 @@ button[class*="common-button"] {
     background-color: var(--buttonColor);
     transition: background-color 0.3s ease;
 }
-
 input[class*="common-button"]:hover,
 button[class*="common-button"]:hover {
     background-color: var(--lightBlue);

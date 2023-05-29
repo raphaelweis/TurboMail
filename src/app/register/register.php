@@ -25,6 +25,7 @@ if ($debug) {
 
     // Running error handlers and user register operation
     echo $signup->signupUser();
+    exit();
 }
 
 // Grabbing the data

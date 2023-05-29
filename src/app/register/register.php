@@ -4,30 +4,6 @@ use TurboMail\NewUserController as NewUserController;
 
 include_once 'NewUserController.php';
 
-$debug = 0;
-
-/* @noinspection PhpConditionAlreadyCheckedInspection */
-if ($debug) {
-    $firstName = 'Stephen';
-    $lastName = 'Curry';
-    $email = 'stephen.curry@nba.com';
-    $password = 'bang!bang!';
-    $passwordCheck = 'bang!bang!';
-
-    // Instantiate SignupContr class
-    $signup = new NewUserController(
-        $firstName,
-        $lastName,
-        $email,
-        $password,
-        $passwordCheck
-    );
-
-    // Running error handlers and user register operation
-    echo $signup->signupUser();
-    exit();
-}
-
 // Grabbing the data
 if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'], $_POST['password-check'])) {
     $firstName = trim(htmlspecialchars($_POST['firstname']));

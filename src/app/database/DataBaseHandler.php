@@ -5,15 +5,15 @@ namespace TurboMail;
 use PDO;
 use PDOException;
 
+require_once '../../lib/php/global.php';
+
 class DataBaseHandler {
     protected function connect() {
         try {
-            $username = 'root';
-            $password = '';
             $dbh = new PDO(
-                'mysql:host=localhost;dbname=TurboMailDB',
-                $username,
-                $password
+                DATA_SOURCE_NAME,
+                USER_NAME,
+                HOST_PASSWORD
             );
 
             return $dbh;

@@ -12,7 +12,7 @@ class DataBaseHandler {
         try {
             $dbh = new PDO(
                 DATA_SOURCE_NAME,
-                USER_NAME,
+                DATABASE_USER_NAME,
                 HOST_PASSWORD
             );
 

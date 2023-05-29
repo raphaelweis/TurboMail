@@ -13,7 +13,7 @@ const HOST_PASSWORD = '';
 const DATABASE_NAME = 'TurboMailDB';
 
 // User name
-const USER_NAME = 'root';
+const DATABASE_USER_NAME = 'root';
 
 // Data Source Name (DSN) for PDO constructor
 const DATA_SOURCE_NAME = 'mysql:host=' . HOST_NAME . ';dbname=' . DATABASE_NAME . '';

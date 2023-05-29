@@ -3,6 +3,7 @@
 namespace TurboMail;
 
 use PDO;
+use PDOException;
 
 class DataBaseHandler {
     protected function connect() {

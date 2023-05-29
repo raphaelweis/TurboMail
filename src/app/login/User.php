@@ -9,7 +9,7 @@ include_once '../database/DataBaseHandler.php';
 class User extends DataBaseHandler {
     protected function getUser($email, $password): int {
 
-        $statement = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
+        $statement = $this->connect()->prepare('SELECT * FROM User WHERE email=?;');
         if (!$statement->execute([$email])) {
             $statement = null;
 

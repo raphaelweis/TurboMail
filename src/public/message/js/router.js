@@ -19,8 +19,7 @@ window.onload = function () {
 
 // Insert in "user-info" div the first name and the last name of the user
 function insertUserInfo(user) {
-    document.getElementById("user-info").innerHTML =
-        user["s_FirstName"] + " " + user["s_LastName"];
+    $("#user-info").html(user["s_FirstName"] + " " + user["s_LastName"]);
 }
 
 // Proceed with logout procedure when the logout button is clicked
@@ -31,9 +30,16 @@ $("#logout-button").on("click", function () {
 });
 
 $("#add-friend-button").on("click", function () {
-    document.getElementById("add-friend").style.display = "block";
+    $("#add-friend").css("display", "block");
 });
 
 $("#close-button").on("click", function () {
-    document.getElementById("add-friend").style.display = "none";
+    $("#add-friend").css("display", "none");
 });
+
+// Not sure to implement
+// window.onclick = function (event) {
+//     if (event.target == document.getElementById("add-friend")) {
+//         document.getElementById("add-friend").style.display = "none";
+//     }
+// };

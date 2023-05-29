@@ -100,7 +100,7 @@ main {
     background-color: var(--lightBlue);
 }
 
-/* MESSAGE BOX */
+/* SEND BOX */
 #send-box {
     position: sticky;
     bottom: 5px;

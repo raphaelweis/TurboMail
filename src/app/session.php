@@ -4,8 +4,13 @@
 session_start();
 
 // Get the session's variable to save it
-foreach ($_SESSION as $key => $value) {
-    $array[$key] = $value;
+if (!empty($_SESSION)) {
+    $array = [];
+    foreach ($_SESSION as $key => $value) {
+        $array[$key] = $value;
+    }
+} else {
+    $array = null;
 }
 
 echo json_encode($array);

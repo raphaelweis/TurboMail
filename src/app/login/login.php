@@ -4,7 +4,7 @@ use TurboMail\UserController as UserController;
 
 include_once 'UserController.php';
 
-$debug = 1;
+$debug = 0;
 
 /* @noinspection PhpConditionAlreadyCheckedInspection */
 if ($debug) {
@@ -13,6 +13,7 @@ if ($debug) {
 
     $login = new UserController($email, $password);
     echo $login->loginUser();
+    exit();
 }
 
 if (isset($_POST['email'], $_POST['password'])) {

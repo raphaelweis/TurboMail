@@ -30,4 +30,10 @@ $("#logout-button").on("click", function () {
     });
 });
 
-$("#add-friend-button").on("click", function () {});
+$("#add-friend-button").on("click", function () {
+    document.getElementById("add-friend").style.display = "block";
+});
+
+$("#close-button").on("click", function () {
+    document.getElementById("add-friend").style.display = "none";
+});

@@ -4,14 +4,15 @@ const LOGOUT_URL = "../../app/logout/logout.php";
 const LOGIN_URL = "../login/login.html";
 
 window.onload = function () {
-    let user;
+    let userData;
     // Check if the user's session is started
     $.post(SESSION_URL, function (response) {
-        user = JSON.parse(response);
-        if (user == null) {
+        userData = JSON.parse(response);
+        console.log(userData);
+        if (userData === null) {
             window.location.href = LOGIN_URL;
         } else {
-            insertUserInfo(user);
+            insertUserInfo(userData);
         }
     });
 };
@@ -23,8 +24,10 @@ function insertUserInfo(user) {
 }
 
 // Proceed with logout procedure when the logout button is clicked
-$("#logout-button").click(function () {
+$("#logout-button").on("click", function () {
     $.post(LOGOUT_URL, function () {
         window.location.href = LOGIN_URL;
     });
 });
+
+$("#add-friend-button").on("click", function () {});

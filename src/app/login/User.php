@@ -5,11 +5,13 @@ namespace TurboMail;
 use PDO;
 
 include_once '../database/DataBaseHandler.php';
+include_once '../../lib/php/global.php';
 
 class User extends DataBaseHandler {
     protected function getUser($email, $password): int {
 
-        $statement = $this->connect()->prepare('SELECT * FROM users WHERE Email=?;');
+        $statement = $this->connect()->prepare(LOGIN_QUERY);
+        // $statement = $this->connect()->prepare(LOGIN_QUERY);
         if (!$statement->execute([$email])) {
             $statement = null;
 
@@ -22,17 +24,17 @@ class User extends DataBaseHandler {
         }
 
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
-        if (!password_verify($password, $user[0]['Password'])) {
+        if (!password_verify($password, $user[0][PASSWORD_USER_TABLE])) {
             $statement = null;
 
             return 1;
         }
 
         session_start();
-        $_SESSION['s_ID'] = $user[0]['ID'];
-        $_SESSION['s_FirstName'] = $user[0]['FirstName'];
-        $_SESSION['s_LastName'] = $user[0]['LastName'];
-        $_SESSION['s_Email'] = $user[0]['Email'];
+        $_SESSION['s_ID'] = $user[0][ID_USER_TABLE];
+        $_SESSION['s_FirstName'] = $user[0][FIRST_NAME_USER_TABLE];
+        $_SESSION['s_LastName'] = $user[0][LAST_NAME_USER_TABLE];
+        $_SESSION['s_Email'] = $user[0][EMAIL_USER_TABLE];
 
         $statement = null;
 

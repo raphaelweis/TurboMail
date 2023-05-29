@@ -65,6 +65,7 @@ function signUpRequest() {
         $("#sign-up").serialize(),
         function (response) {
             // let responseArray = Object.values(response);
+            console.log(response);
             let responseInt;
             for (let i = 0; i < response.length; i++) {
                 responseInt = parseInt(response[i]);

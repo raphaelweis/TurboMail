@@ -5,7 +5,6 @@ namespace TurboMail;
 include_once 'NewUser.php';
 
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
-const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
 
 class NewUserController extends NewUser {
     // Properties
@@ -58,13 +57,17 @@ class NewUserController extends NewUser {
         }
 
         if (count($errors) == 0) {
-            $errors[] = 0;
-            $this->setUser(
+            $status = $this->setUser(
                 $this->firstName,
                 $this->lastName,
                 $this->email,
                 $this->password
             );
+            if ($status) {
+                $errors[] = 500;
+            } else {
+                $errors[] = 0;
+            }
         }
 
         return json_encode($errors);

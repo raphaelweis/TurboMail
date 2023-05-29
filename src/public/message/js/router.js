@@ -24,8 +24,10 @@ function insertUserInfo(user) {
 }
 
 // Proceed with logout procedure when the logout button is clicked
-$("#logout-button").click(function () {
+$("#logout-button").on("click", function () {
     $.post(LOGOUT_URL, function () {
         window.location.href = LOGIN_URL;
     });
 });
+
+$("#add-friend-button").on("click", function () {});

@@ -23,3 +23,11 @@ export function relationRequest() {
         console.log(response);
     })
 }
+
+// Not sure to implement
+// Feature : close popup when we click outside
+// window.onclick = function (event) {
+//     if (event.target == document.getElementById("add-friend")) {
+//         document.getElementById("add-friend").style.display = "none";
+//     }
+// };

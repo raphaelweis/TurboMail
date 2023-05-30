@@ -2,7 +2,7 @@
 
 use TurboMail\UserController as UserController;
 
-include_once '../lib/php/UserController.php';
+require_once '../lib/php/UserController.php';
 
 if (isset($_POST['email'], $_POST['password'])) {
     $email = trim(htmlspecialchars($_POST['email']));

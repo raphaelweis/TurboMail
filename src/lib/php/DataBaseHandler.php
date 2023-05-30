@@ -5,7 +5,7 @@ namespace TurboMail;
 use PDO;
 use PDOException;
 
-include_once './const/global.php';
+include_once 'const/global.php';
 
 class DataBaseHandler {
     protected function connect() {

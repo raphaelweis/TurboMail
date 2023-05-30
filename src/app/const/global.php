@@ -22,7 +22,7 @@ const DATA_SOURCE_NAME = 'mysql:host=' . HOST_NAME . ';dbname=' . DATABASE_NAME 
 /* Model\User Table */
 /**************/
 // Model\User table's name
-const USER_TABLE_NAME = 'Model\User';
+const USER_TABLE_NAME = 'User';
 
 // Model\User table's attributes
 const ID_USER_TABLE = 'id';

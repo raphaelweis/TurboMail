@@ -1,4 +1,5 @@
 import {insertUserInfo} from "./message.js";
+import {resizeTextArea} from "./relation.js";
 
 const SESSION_URL = "../../app/session.php";
 const LOGOUT_URL = "../../app/logout/logout.php";
@@ -9,7 +10,12 @@ window.onload = () => {
     $('#logout-button').on('click', () => {
         logoutRequest();
     });
-    $("#add-friend-button").on("click", () => {
+    $("#add-friend-button").on('click', () => {
+        $("#add-friend").css("display", "block");
+        $("#close-button").on('click', () => {
+            $("#add-friend").css("display", "none");
+        });
+        resizeTextArea();
     });
 };
 

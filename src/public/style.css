@@ -23,11 +23,17 @@
 /* BUTTONS */
 input[class*="common-button"],
 button[class*="common-button"] {
+    font-size: 0.8em;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.2em;
     color: var(--lightFontColor);
     background-color: var(--buttonColor);
     transition: background-color 0.3s ease;
+}
+input[type="submit"] {
+    font-size: 1.2em;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+    float: right;
 }
 input[class*="common-button"]:hover,
 button[class*="common-button"]:hover {

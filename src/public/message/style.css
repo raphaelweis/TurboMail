@@ -46,7 +46,7 @@ header {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 10em; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -58,27 +58,40 @@ header {
     text-align: center;
     margin-bottom: 50px;
     font-size: 3em;
+    color: var(--darkBlue);
 }
 #popup-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    border-radius: 10px;
+    border-radius: 0.75em;
     width: 80%;
 }
-#friend-research-box {
-    display: flex;
+#popup-content input:not([type="submit"]) {
 }
 #popup-content input[type="email"] {
     font-size: 1.5em;
-    width: 100%;
-    padding-left: 10px;
+    width: calc(100% - 0.4em);
+    border: none;
     outline: none;
-    flex-grow: 1;
+    border-bottom: 1px solid var(--lightBlue);
+    margin-bottom: 2em;
+    padding: 0.2em;
 }
-#popup-content button {
-    float: left;
+#popup-content #asking-message {
+    font-size: 1.2em;
+    width: calc(100% - 2px - 0.4em);
+    height: 1.2em;
+    border: none;
+    border-left: 1px solid var(--lightBlue);
+    outline: none;
+    margin-bottom: 1em;
+    padding: 0 0.2em 0 0.2em;
+    resize: none;
+}
+#popup-content input[type="submit"] {
+    margin-right: 2%;
 }
 #close-button {
     color: #aaaaaa;
@@ -188,7 +201,7 @@ main {
     flex-grow: 1;
 }
 
-textarea {
+#to-send {
     width: 100%;
     height: 1em;
     min-height: 20px;

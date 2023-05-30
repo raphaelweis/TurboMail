@@ -38,6 +38,7 @@
       <div id="close-button">&times;</div>
       <h2>Add friend</h2>
       <form id="relation-form">
+        <div id="relation-error"></div>
         <label>
           <input
             type="email"
@@ -54,7 +55,8 @@
         </label>
         <input
           type="submit"
-          name="send-request"
+          name="send-relation"
+          id="send-relation"
           class="common-button"
           value="Send"
         />

@@ -1,9 +1,9 @@
-import {insertUserInfo} from "./message.js";
+import {insertUserInfo, sendMessage} from "./message.js";
 import {resizeTextArea} from "./relation.js";
 
 const SESSION_URL = "../../app/session.php";
-const LOGOUT_URL = "../../app/logout/logout.php";
-const LOGIN_URL = "../login/login.html";
+const LOGOUT_URL = "../../app/logout.php";
+const LOGIN_PAGE = "../login/login.html";
 
 window.onload = () => {
     fetchUserData();
@@ -17,6 +17,15 @@ window.onload = () => {
         });
         resizeTextArea();
     });
+    $("#to-send").on('keydown', (event) => {
+        if (event.keyCode === 13) { // enter key
+            event.preventDefault();
+            sendMessage();
+        }
+    }).focus();
+    $("#send-button").on('click', () => {
+        sendMessage();
+    })
 };
 
 function fetchUserData() {
@@ -26,7 +35,7 @@ function fetchUserData() {
         userData = JSON.parse(response);
         console.log(userData);
         if (userData === null) {
-            window.location.href = LOGIN_URL;
+            window.location.href = LOGIN_PAGE;
         } else {
             insertUserInfo(userData);
         }
@@ -35,7 +44,6 @@ function fetchUserData() {
 
 function logoutRequest() {
     $.post(LOGOUT_URL, () => {
-        window.location.href = LOGIN_URL;
+        window.location.href = LOGIN_PAGE;
     }, 'text');
 }
-

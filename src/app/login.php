@@ -1,8 +1,8 @@
 <?php
 
-use TurboMail\UserController as UserController;
+use TurboMail\Model\UserController;
 
-include_once 'UserController.php';
+require_once 'Model/UserController.php';
 
 if (isset($_POST['email'], $_POST['password'])) {
     $email = trim(htmlspecialchars($_POST['email']));

@@ -1,10 +1,10 @@
 <?php
 
-namespace TurboMail;
+namespace TurboMail\Model;
 
-include_once '../database/DataBaseHandler.php';
-include_once '../login/UserController.php';
-include_once '../../lib/php/global.php';
+include_once 'DataBaseHandler.php';
+include_once 'UserController.php';
+include_once __DIR__ . '/../const/global.php';
 
 class NewUser extends DataBaseHandler {
     protected function setUser($firstName, $lastName, $email, $password): int {

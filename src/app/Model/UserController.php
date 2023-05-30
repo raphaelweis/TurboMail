@@ -1,10 +1,9 @@
 <?php
 
-namespace TurboMail;
+namespace TurboMail\Model;
 
 include_once 'User.php';
-
-const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
+include_once __DIR__ . '/../const/global.php';
 
 class UserController extends User {
     private string $email;
@@ -25,6 +24,7 @@ class UserController extends User {
         if ($this->invalidPassword()) {
             return 1;
         }
+
         return $this->getUser($this->email, $this->password);
     }
 

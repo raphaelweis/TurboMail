@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Message`
+-- Table structure for table `Model\Message`
 --
 
 CREATE TABLE `Message` (
@@ -51,7 +51,7 @@ CREATE TABLE `Relation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User`
+-- Table structure for table `Model\User`
 --
 
 CREATE TABLE `User` (
@@ -67,7 +67,7 @@ CREATE TABLE `User` (
 --
 
 --
--- Indexes for table `Message`
+-- Indexes for table `Model\Message`
 --
 ALTER TABLE `Message`
   ADD PRIMARY KEY (`id`),
@@ -83,7 +83,7 @@ ALTER TABLE `Relation`
   ADD KEY `id_receiver` (`id_receiver`);
 
 --
--- Indexes for table `User`
+-- Indexes for table `Model\User`
 --
 ALTER TABLE `User`
   ADD PRIMARY KEY (`id`),
@@ -94,7 +94,7 @@ ALTER TABLE `User`
 --
 
 --
--- AUTO_INCREMENT for table `Message`
+-- AUTO_INCREMENT for table `Model\Message`
 --
 ALTER TABLE `Message`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
@@ -106,7 +106,7 @@ ALTER TABLE `Relation`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `User`
+-- AUTO_INCREMENT for table `Model\User`
 --
 ALTER TABLE `User`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
@@ -116,7 +116,7 @@ ALTER TABLE `User`
 --
 
 --
--- Constraints for table `Message`
+-- Constraints for table `Model\Message`
 --
 ALTER TABLE `Message`
   ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`id_sender`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

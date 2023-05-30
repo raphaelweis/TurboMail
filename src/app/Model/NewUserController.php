@@ -1,18 +1,17 @@
 <?php
 
-namespace TurboMail;
+namespace TurboMail\Model;
 
 include_once 'NewUser.php';
-
-const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
+include_once __DIR__ . '/../const/global.php';
 
 class NewUserController extends NewUser {
     // Properties
-    private $firstName;
-    private $lastName;
-    private $email;
-    private $password;
-    private $passwordCheck;
+    private string $firstName;
+    private string $lastName;
+    private string $email;
+    private string $password;
+    private string $passwordCheck;
 
     // Constructor
     public function __construct(

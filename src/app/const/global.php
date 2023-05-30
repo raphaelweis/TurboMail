@@ -12,19 +12,19 @@ const HOST_PASSWORD = '';
 // Database's name
 const DATABASE_NAME = 'TurboMailDB';
 
-// User name
+// Model\Username
 const DATABASE_USER_NAME = 'root';
 
 // Data Source Name (DSN) for PDO constructor
 const DATA_SOURCE_NAME = 'mysql:host=' . HOST_NAME . ';dbname=' . DATABASE_NAME . '';
 
 /**************/
-/* User Table */
+/* Model\User Table */
 /**************/
-// User table's name
+// Model\User table's name
 const USER_TABLE_NAME = 'User';
 
-// User table's attributes
+// Model\User table's attributes
 const ID_USER_TABLE = 'id';
 const FIRST_NAME_USER_TABLE = 'first_name';
 const LAST_NAME_USER_TABLE = 'last_name';
@@ -32,12 +32,12 @@ const EMAIL_USER_TABLE = 'email';
 const PASSWORD_USER_TABLE = 'password';
 
 /*****************/
-/* Message Table */
+/* Model\Message Table */
 /*****************/
-// Message table's name
-const MESSAGE_TABLE_NAME = 'Message';
+// Model\Message table's name
+const MESSAGE_TABLE_NAME = 'Model\Message';
 
-// Message table's attributes
+// Model\Message table's attributes
 const ID_MESSAGE_TABLE = 'id';
 const ID_SENDER_MESSAGE_TABLE = 'id_sender';
 const ID_RECEIVER_MESSAGE_TABLE = 'id_receiver';
@@ -67,3 +67,10 @@ const REGISTER_QUERY = 'INSERT INTO ' . USER_TABLE_NAME . '(' . FIRST_NAME_USER_
 
 // Select queries
 const SELECT_USER_BY_MAIL_QUERY = 'SELECT * FROM ' . USER_TABLE_NAME . ' WHERE ' . EMAIL_USER_TABLE . '=?;';
+
+/***********************/
+/* Regular Expressions */
+/***********************/
+
+const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
+const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";

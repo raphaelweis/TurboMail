@@ -1,7 +1,7 @@
 // defining path constants
-const LOGIN_URL = "../../app/login/login.php";
-const REGISTER_URL = "../../app/register/register.php";
-const MESSAGES_URL = "../message/message.html";
+const LOGIN_URL = "../../app/login.php";
+const REGISTER_URL = "../../app/register.php";
+const HOME_PAGE = "../message/message.html";
 
 // add event Listeners on page load - prevent default submit
 window.onload = () => {
@@ -33,7 +33,7 @@ function signInRequest() {
             console.log(response);
             response = parseInt(response);
             if (response === SUCCESS) {
-                window.location.href = MESSAGES_URL;
+                window.location.href = HOME_PAGE;
             } else if (response === INVALID_LOGIN) {
                 signInErrorDiv.css("visibility", "visible");
             } else {
@@ -71,7 +71,7 @@ function signUpRequest() {
                 responseInt = parseInt(response[i]);
                 switch (responseInt) {
                     case SUCCESS:
-                        window.location.href = MESSAGES_URL;
+                        window.location.href = HOME_PAGE;
                         return;
                     case EMPTY_INPUTS:
                         signUpErrorDiv.append("empty inputs, ");

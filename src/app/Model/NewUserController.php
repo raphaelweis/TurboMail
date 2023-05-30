@@ -113,7 +113,9 @@ class NewUserController extends NewUser {
             return true;
         }
 
-        if(strlen($this->email) > MAX_EMAIL_LENGTH)
+        if(strlen($this->email) > MAX_EMAIL_LENGTH) {
+            return true;
+        }
 
         return false;
     }

@@ -37,26 +37,28 @@
     <div id="popup-content">
       <div id="close-button">&times;</div>
       <h2>Add friend</h2>
-      <label>
-        <input
-          type="email"
-          name="email-searched"
-          placeholder="Enter the researched email"
-        />
-      </label>
-      <label>
+      <form id="relation-form">
+        <label>
+          <input
+            type="email"
+            name="email-searched"
+            placeholder="Enter the researched email"
+          />
+        </label>
+        <label>
         <textarea
           id="asking-message"
           name="asking-message"
           placeholder="Write a message to send to the relation's receiver"
         ></textarea>
-      </label>
-      <input
-        type="submit"
-        name="send-request"
-        class="common-button"
-        value="Send"
-      />
+        </label>
+        <input
+          type="submit"
+          name="send-request"
+          class="common-button"
+          value="Send"
+        />
+      </form>
     </div>
   </section>
   <section id="contacts" class="item"></section>

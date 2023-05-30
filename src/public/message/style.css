@@ -46,7 +46,7 @@ header {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 10em; /* Location of the box */
+    padding-top: 6em; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -67,8 +67,7 @@ header {
     border: 1px solid #888;
     border-radius: 0.75em;
     width: 80%;
-}
-#popup-content input:not([type="submit"]) {
+    min-height: 16em;
 }
 #popup-content input[type="email"] {
     font-size: 1.5em;
@@ -89,6 +88,7 @@ header {
     margin-bottom: 1em;
     padding: 0 0.2em 0 0.2em;
     resize: none;
+    overflow: scroll;
 }
 #popup-content input[type="submit"] {
     margin-right: 2%;
@@ -96,7 +96,7 @@ header {
 #close-button {
     color: #aaaaaa;
     float: right;
-    font-size: 40px;
+    font-size: 3em;
     font-weight: bold;
 }
 #close-button:hover,

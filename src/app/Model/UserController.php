@@ -41,7 +41,7 @@ class UserController extends User {
             return true;
         }
 
-        if(strlen($this->email) > 256) {
+        if(strlen($this->email) > MAX_EMAIL_LENGTH) {
             return true;
         }
 
@@ -53,7 +53,7 @@ class UserController extends User {
             return true;
         }
 
-        if (strlen($this->password) < 8 || strlen($this->password) > 256) {
+        if (strlen($this->password) < MIN_PASSWORD_LENGTH || strlen($this->password) > MAX_PASSWORD_LENGTH) {
             return true;
         }
 

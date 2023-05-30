@@ -27,9 +27,14 @@ const USER_TABLE_NAME = 'User';
 // User table's attributes
 const ID_USER_TABLE = 'id';
 const FIRST_NAME_USER_TABLE = 'first_name';
+const MAX_FIRST_NAME_LENGTH = 128;
 const LAST_NAME_USER_TABLE = 'last_name';
+const MAX_LAST_NAME_LENGTH = 128;
 const EMAIL_USER_TABLE = 'email';
+const MAX_EMAIL_LENGTH = 256;
 const PASSWORD_USER_TABLE = 'password';
+const MAX_PASSWORD_LENGTH = 256;
+const MIN_PASSWORD_LENGTH = 8;
 
 /*****************/
 /* Message Table */

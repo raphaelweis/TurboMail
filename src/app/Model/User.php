@@ -5,6 +5,8 @@ namespace TurboMail\Model;
 include_once 'DataBaseHandler.php';
 include_once __DIR__ . '/../const/global.php';
 
+use PDO;
+
 class User extends DataBaseHandler {
     protected function getUser($email, $password): int {
 

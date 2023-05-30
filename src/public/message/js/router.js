@@ -1,4 +1,4 @@
-import {insertUserInfo} from "./message.js";
+import {insertUserInfo, sendMessage} from "./message.js";
 
 const SESSION_URL = "../../app/session.php";
 const LOGOUT_URL = "../../app/logout/logout.php";
@@ -9,8 +9,17 @@ window.onload = () => {
     $('#logout-button').on('click', () => {
         logoutRequest();
     });
-    $("#add-friend-button").on("click", () => {
+    $("#add-friend-button").on('click', () => {
     });
+    $("#to-send").on('keydown', (event) => {
+        if (event.keyCode === 13) { // enter key
+            event.preventDefault();
+            sendMessage();
+        }
+    }).focus();
+    $("#send-button").on('click', () => {
+        sendMessage();
+    })
 };
 
 function fetchUserData() {
@@ -32,4 +41,3 @@ function logoutRequest() {
         window.location.href = LOGIN_URL;
     }, 'text');
 }
-

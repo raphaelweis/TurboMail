@@ -41,15 +41,19 @@ class UserController extends User {
             return true;
         }
 
+        if(strlen($this->email) > 256) {
+            return true;
+        }
+
         return false;
     }
 
     private function invalidPassword(): bool {
-        if (strlen($this->password) < 8 || strlen($this->password) > 128) {
+        if (!preg_match(PASSWORD_REGEX, $this->password)) {
             return true;
         }
 
-        if (!preg_match(PASSWORD_REGEX, $this->password)) {
+        if (strlen($this->password) < 8 || strlen($this->password) > 256) {
             return true;
         }
 

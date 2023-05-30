@@ -16,5 +16,5 @@ export function sendMessage() {
 
     $('#chat').append(messageDiv);
     textAreaDiv.val("");
-    textAreaDiv.focus();
+    textAreaDiv.focus()
 }

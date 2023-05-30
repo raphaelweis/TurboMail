@@ -4,14 +4,14 @@ const REGISTER_URL = "../../app/register/register.php";
 const MESSAGES_URL = "../message/message.html";
 
 // add event Listeners on page load - prevent default submit
-window.onload = function () {
+window.onload = () => {
     const signInForm = $("#sign-in");
-    signInForm.submit(function (event) {
+    signInForm.submit((event) => {
         event.preventDefault();
         signInRequest();
     });
     const signUpForm = $("#sign-up");
-    signUpForm.submit(function (event) {
+    signUpForm.submit((event) => {
         event.preventDefault();
         signUpRequest();
     });

@@ -1,9 +1,9 @@
 <?php
 
-namespace TurboMail\php\php\php;
+namespace TurboMail\Model;
 
 include_once 'User.php';
-include_once 'const/global.php';
+include_once __DIR__ . '/../const/global.php';
 
 class UserController extends User {
     private string $email;

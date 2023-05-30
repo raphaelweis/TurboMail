@@ -1,11 +1,11 @@
 <?php
 
-namespace TurboMail\php;
+namespace TurboMail\Model;
+
+include_once __DIR__ . '/../const/global.php';
 
 use PDO;
 use PDOException;
-
-include_once 'const/global.php';
 
 class DataBaseHandler {
     protected function connect() {
@@ -16,7 +16,7 @@ class DataBaseHandler {
                 HOST_PASSWORD
             );
         } catch (PDOException $e) {
-            echo 'Error!: ' . $e->getMessage() . '<br/>';
+            echo 'Error!: '.$e->getMessage().'<br/>';
             die();
         }
     }

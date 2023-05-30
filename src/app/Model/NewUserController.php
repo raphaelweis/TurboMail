@@ -1,9 +1,9 @@
 <?php
 
-namespace TurboMail\php;
+namespace TurboMail\Model;
 
 include_once 'NewUser.php';
-include_once 'const/global.php';
+include_once __DIR__ . '/../const/global.php';
 
 class NewUserController extends NewUser {
     // Properties

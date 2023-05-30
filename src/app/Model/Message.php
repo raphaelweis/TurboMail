@@ -1,6 +1,6 @@
 <?php
 
-namespace TurboMail\php;
+namespace TurboMail\Model;
 
 include_once 'User.php';
 

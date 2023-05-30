@@ -21,11 +21,11 @@ class NewUserController extends NewUser {
         $password,
         $passwordCheck
     ) {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
-        $this->password = $password;
-        $this->passwordCheck = $passwordCheck;
+        $this->firstName = trim(htmlspecialchars($firstName));
+        $this->lastName = trim(htmlspecialchars($lastName));
+        $this->email = trim(htmlspecialchars($email));
+        $this->password = trim(htmlspecialchars($password));
+        $this->passwordCheck = trim(htmlspecialchars($passwordCheck));
     }
 
     // Methods
@@ -89,19 +89,11 @@ class NewUserController extends NewUser {
             return true;
         }
 
-        if(strlen($this->firstName) > MAX_FIRST_NAME_LENGTH) {
-            return true;
-        }
-
         return false;
     }
 
     private function invalidLastName(): bool {
-        if (!preg_match(NAMES_REGEX, $this->lastName)) {
-            return true;
-        }
-
-        if(strlen($this->lastName) > MAX_LAST_NAME_LENGTH) {
+        if (!preg_match(NAMES_REGEX, $this->firstName)) {
             return true;
         }
 
@@ -113,19 +105,15 @@ class NewUserController extends NewUser {
             return true;
         }
 
-        if(strlen($this->email) > MAX_EMAIL_LENGTH) {
-            return true;
-        }
-
         return false;
     }
 
     private function invalidPassword(): bool {
-        if (!preg_match(PASSWORD_REGEX, $this->password)) {
+        if (strlen($this->password) < 8 || strlen($this->password) > 128) {
             return true;
         }
 
-        if (strlen($this->password) < MIN_PASSWORD_LENGTH || strlen($this->password) > MAX_PASSWORD_LENGTH) {
+        if (!preg_match(PASSWORD_REGEX, $this->password)) {
             return true;
         }
 

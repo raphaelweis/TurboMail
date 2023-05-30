@@ -2,7 +2,7 @@
 
 use TurboMail\NewUserController as NewUserController;
 
-include_once 'NewUserController.php';
+include_once '../lib/php/NewUserController.php';
 
 // Grabbing the data
 if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'], $_POST['password-check'])) {

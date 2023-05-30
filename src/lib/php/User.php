@@ -4,14 +4,13 @@ namespace TurboMail;
 
 use PDO;
 
-include_once '../database/DataBaseHandler.php';
-include_once '../../lib/php/global.php';
+include_once './DataBaseHandler.php';
+include_once './const/global.php';
 
 class User extends DataBaseHandler {
     protected function getUser($email, $password): int {
 
         $statement = $this->connect()->prepare(LOGIN_QUERY);
-        // $statement = $this->connect()->prepare(LOGIN_QUERY);
         if (!$statement->execute([$email])) {
             $statement = null;
 

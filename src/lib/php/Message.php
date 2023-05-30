@@ -2,7 +2,7 @@
 
 namespace TurboMail;
 
-include_once '../login/User.php';
+include_once './User.php';
 
 class Message {
     private User $sender;

@@ -67,3 +67,10 @@ const REGISTER_QUERY = 'INSERT INTO ' . USER_TABLE_NAME . '(' . FIRST_NAME_USER_
 
 // Select queries
 const SELECT_USER_BY_MAIL_QUERY = 'SELECT * FROM ' . USER_TABLE_NAME . ' WHERE ' . EMAIL_USER_TABLE . '=?;';
+
+/***********************/
+/* Regular Expressions */
+/***********************/
+
+const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
+const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";

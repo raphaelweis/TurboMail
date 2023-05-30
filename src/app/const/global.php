@@ -12,19 +12,19 @@ const HOST_PASSWORD = '';
 // Database's name
 const DATABASE_NAME = 'TurboMailDB';
 
-// Model\Username
+// Username
 const DATABASE_USER_NAME = 'root';
 
 // Data Source Name (DSN) for PDO constructor
 const DATA_SOURCE_NAME = 'mysql:host=' . HOST_NAME . ';dbname=' . DATABASE_NAME . '';
 
 /**************/
-/* Model\User Table */
+/* User Table */
 /**************/
-// Model\User table's name
+// User table's name
 const USER_TABLE_NAME = 'User';
 
-// Model\User table's attributes
+// User table's attributes
 const ID_USER_TABLE = 'id';
 const FIRST_NAME_USER_TABLE = 'first_name';
 const LAST_NAME_USER_TABLE = 'last_name';
@@ -32,12 +32,12 @@ const EMAIL_USER_TABLE = 'email';
 const PASSWORD_USER_TABLE = 'password';
 
 /*****************/
-/* Model\Message Table */
+/* Message Table */
 /*****************/
-// Model\Message table's name
-const MESSAGE_TABLE_NAME = 'Model\Message';
+// Message table's name
+const MESSAGE_TABLE_NAME = 'Message';
 
-// Model\Message table's attributes
+// Message table's attributes
 const ID_MESSAGE_TABLE = 'id';
 const ID_SENDER_MESSAGE_TABLE = 'id_sender';
 const ID_RECEIVER_MESSAGE_TABLE = 'id_receiver';

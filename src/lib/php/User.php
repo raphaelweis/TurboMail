@@ -1,6 +1,6 @@
 <?php
 
-namespace TurboMail;
+namespace TurboMail\php\php;
 
 use PDO;
 

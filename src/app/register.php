@@ -1,6 +1,6 @@
 <?php
 
-use TurboMail\NewUserController as NewUserController;
+use TurboMail\php\NewUserController as NewUserController;
 
 include_once '../lib/php/NewUserController.php';
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace TurboMail;
+namespace TurboMail\php\php\php;
 
 include_once 'User.php';
 include_once 'const/global.php';

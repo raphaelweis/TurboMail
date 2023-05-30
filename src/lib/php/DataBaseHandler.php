@@ -1,6 +1,6 @@
 <?php
 
-namespace TurboMail;
+namespace TurboMail\php;
 
 use PDO;
 use PDOException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace TurboMail;
+namespace TurboMail\php;
 
 include_once 'DataBaseHandler.php';
 include_once 'UserController.php';

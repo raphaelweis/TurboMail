@@ -1,6 +1,6 @@
 <?php
 
-use TurboMail\UserController as UserController;
+use TurboMail\php\UserController as UserController;
 
 require_once '../lib/php/UserController.php';
 

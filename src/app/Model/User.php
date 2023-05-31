@@ -8,7 +8,7 @@ include_once __DIR__ . '/../const/global.php';
 use PDO;
 
 class User extends DataBaseHandler {
-    protected function getUser($email, $password): int {
+    protected function GetUser(string $email, string $password): int {
 
         $statement = $this->connect()->prepare(LOGIN_QUERY);
         if (!$statement->execute([$email])) {
@@ -38,5 +38,27 @@ class User extends DataBaseHandler {
         $statement = null;
 
         return 0;
+    }
+
+    protected function GetUserIdByEmail($email): int {
+
+        $statement = $this->connect()->prepare(SELECT_USER_ID_BY_MAIL_QUERY);
+        if (!$statement->execute([$email])) {
+            $statement = null;
+
+            return -1;
+        }
+        if ($statement->rowCount() == 0) {
+            $statement = null;
+
+            return -1;
+        }
+
+        $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $userId = $user[0][ID_USER_TABLE];
+
+        $statement = null;
+
+        return $userId;
     }
 }

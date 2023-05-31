@@ -6,29 +6,43 @@ include_once 'User.php';
 include_once __DIR__ . '/../const/global.php';
 
 class UserController extends User {
+    /**
+     * @var string
+     */
     private string $email;
+    /**
+     * @var string
+     */
     private string $password;
 
-    public function __construct($email, $password) {
-        $this->email = trim(htmlspecialchars($email));
-        $this->password = trim(htmlspecialchars($password));
+    /**
+     * @param string $email
+     */
+    public function __construct(string $email) {
+        $this->email = $email;
     }
 
-    public function loginUser(): int {
-        if ($this->emptyInput()) {
+    /**
+     * @return int
+     */
+    public function LoginUser(): int {
+        if ($this->EmptyInput()) {
             return 1;
         }
-        if ($this->invalidEmail()) {
+        if ($this->InvalidEmail()) {
             return 1;
         }
-        if ($this->invalidPassword()) {
+        if ($this->InvalidPassword()) {
             return 1;
         }
 
-        return $this->getUser($this->email, $this->password);
+        return $this->GetUser($this->email, $this->password);
     }
 
-    private function emptyInput(): bool {
+    /**
+     * @return bool
+     */
+    private function EmptyInput(): bool {
         if (empty($this->email) || empty($this->password)) {
             return true;
         }
@@ -36,19 +50,31 @@ class UserController extends User {
         return false;
     }
 
-    private function invalidEmail(): bool {
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+    /**
+     * @return bool
+     */
+    private function InvalidEmail(): bool {
+
+        $email = match (func_num_args()) {
+            1 => func_get_arg(0),
+            default => $this->email,
+        };
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
         }
 
-        if(strlen($this->email) > MAX_EMAIL_LENGTH) {
+        if(strlen($email) > MAX_EMAIL_LENGTH) {
             return true;
         }
 
         return false;
     }
 
-    private function invalidPassword(): bool {
+    /**
+     * @return bool
+     */
+    private function InvalidPassword(): bool {
         if (!preg_match(PASSWORD_REGEX, $this->password)) {
             return true;
         }
@@ -58,5 +84,36 @@ class UserController extends User {
         }
 
         return false;
+    }
+
+    /**
+     * @param int $idSender
+     * @param string $emailReceiver
+     * @param string $message
+     * @return bool
+     */
+    public function SendRelation(int $idSender, string $emailReceiver, string $message): bool {
+        if($this->InvalidEmail($emailReceiver)) {
+            return false;
+        }
+
+        $idReceiver = $this->GetUserIdByEmail($emailReceiver);
+        if($idReceiver == -1) {
+            return false;
+        }
+
+        // Check if the relation exist
+        // Maybe just have a Relation Class with set method and get method
+        // $relation = new RelationController($idSender, $idReceiver, $message);
+
+        return true;
+    }
+
+    /**
+     * @param string $password
+     * @return void
+     */
+    public function SetPassword(string $password): void {
+        $this->password = $password;
     }
 }

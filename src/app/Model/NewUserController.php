@@ -15,48 +15,48 @@ class NewUserController extends NewUser {
 
     // Constructor
     public function __construct(
-        $firstName,
-        $lastName,
-        $email,
-        $password,
-        $passwordCheck
+        string $firstName,
+        string $lastName,
+        string $email,
+        string $password,
+        string $passwordCheck
     ) {
-        $this->firstName = trim(htmlspecialchars($firstName));
-        $this->lastName = trim(htmlspecialchars($lastName));
-        $this->email = trim(htmlspecialchars($email));
-        $this->password = trim(htmlspecialchars($password));
-        $this->passwordCheck = trim(htmlspecialchars($passwordCheck));
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->password = $password;
+        $this->passwordCheck = $passwordCheck;
     }
 
     // Methods
 
-    public function signupUser(): string {
+    public function SignupUser(): string {
         $errors = [];
 
-        if ($this->emptyInput()) {
+        if ($this->EmptyInput()) {
             $errors[] = 1;
         }
-        if ($this->invalidFirstName()) {
+        if ($this->InvalidFirstName()) {
             $errors[] = 2;
         }
-        if ($this->invalidLastName()) {
+        if ($this->InvalidLastName()) {
             $errors[] = 3;
         }
-        if ($this->invalidEmail()) {
+        if ($this->InvalidEmail()) {
             $errors[] = 4;
         }
-        if ($this->invalidPassword()) {
+        if ($this->InvalidPassword()) {
             $errors[] = 5;
         }
-        if (!$this->passwordMatch()) {
+        if (!$this->PasswordMatch()) {
             $errors[] = 6;
         }
-        if ($this->emailTakenCheck()) {
+        if ($this->EmailTakenCheck()) {
             $errors[] = 7;
         }
 
         if (count($errors) == 0) {
-            $status = $this->setUser(
+            $status = $this->SetUser(
                 $this->firstName,
                 $this->lastName,
                 $this->email,
@@ -72,7 +72,7 @@ class NewUserController extends NewUser {
         return json_encode($errors);
     }
 
-    private function emptyInput(): bool {
+    private function EmptyInput(): bool {
         if (empty($this->firstName) || empty($this->lastName)
             || empty($this->email)
             || empty($this->password)
@@ -84,7 +84,7 @@ class NewUserController extends NewUser {
         return false;
     }
 
-    private function invalidFirstName(): bool {
+    private function InvalidFirstName(): bool {
         if (!preg_match(NAMES_REGEX, $this->firstName)) {
             return true;
         }
@@ -92,7 +92,7 @@ class NewUserController extends NewUser {
         return false;
     }
 
-    private function invalidLastName(): bool {
+    private function InvalidLastName(): bool {
         if (!preg_match(NAMES_REGEX, $this->firstName)) {
             return true;
         }
@@ -100,7 +100,7 @@ class NewUserController extends NewUser {
         return false;
     }
 
-    private function invalidEmail(): bool {
+    private function InvalidEmail(): bool {
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return true;
         }
@@ -108,7 +108,7 @@ class NewUserController extends NewUser {
         return false;
     }
 
-    private function invalidPassword(): bool {
+    private function InvalidPassword(): bool {
         if (strlen($this->password) < 8 || strlen($this->password) > 128) {
             return true;
         }
@@ -120,7 +120,7 @@ class NewUserController extends NewUser {
         return false;
     }
 
-    private function passwordMatch(): bool {
+    private function PasswordMatch(): bool {
         if ($this->password == $this->passwordCheck) {
             return true;
         }
@@ -128,8 +128,8 @@ class NewUserController extends NewUser {
         return false;
     }
 
-    private function emailTakenCheck(): bool {
-        if ($this->checkUser($this->email)) {
+    private function EmailTakenCheck(): bool {
+        if ($this->CheckUser($this->email)) {
             return true;
         }
 

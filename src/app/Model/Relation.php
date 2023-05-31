@@ -3,11 +3,13 @@
 namespace TurboMail\Model;
 
 class Relation {
-    protected function getRelation() {
+    private bool $status;
+
+    protected function GetRelation() {
 
     }
 
-    protected function setRelation() {
-
+    protected function SetRelation($idSender, $idReceiver, $message): bool {
+        return true;
     }
 }

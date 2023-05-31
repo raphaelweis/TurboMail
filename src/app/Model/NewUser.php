@@ -7,7 +7,7 @@ include_once 'UserController.php';
 include_once __DIR__ . '/../const/global.php';
 
 class NewUser extends DataBaseHandler {
-    protected function setUser($firstName, $lastName, $email, $password): int {
+    protected function SetUser(string $firstName, string $lastName, string $email, string $password): int {
         $statement = $this->connect()
             ->prepare(REGISTER_QUERY);
 
@@ -21,12 +21,13 @@ class NewUser extends DataBaseHandler {
         }
         $statement = null;
 
-        $login = new UserController($email, $password);
+        $login = new UserController($email);
+        $login->SetPassword($password);
 
-        return $login->loginUser();
+        return $login->LoginUser();
     }
 
-    protected function checkUser($email): bool {
+    protected function CheckUser(string $email): bool {
         $statement = $this->connect()
             ->prepare(SELECT_USER_BY_MAIL_QUERY);
 

@@ -16,13 +16,13 @@ const DATABASE_NAME = 'TurboMailDB';
 const DATABASE_USER_NAME = 'root';
 
 // Data Source Name (DSN) for PDO constructor
-const DATA_SOURCE_NAME = 'mysql:host=' . HOST_NAME . ';dbname=' . DATABASE_NAME . '';
+const DATA_SOURCE_NAME = 'mysql:host=' . HOST_NAME . ';dbname=' . DATABASE_NAME;
 
 /**************/
 /* User Table */
 /**************/
 // User table's name
-const USER_TABLE_NAME = 'User';
+const USER_TABLE = 'User';
 
 // User table's attributes
 const ID_USER_TABLE = 'id';
@@ -40,7 +40,7 @@ const MIN_PASSWORD_LENGTH = 8;
 /* Message Table */
 /*****************/
 // Message table's name
-const MESSAGE_TABLE_NAME = 'Message';
+const MESSAGE_TABLE= 'Message';
 
 // Message table's attributes
 const ID_MESSAGE_TABLE = 'id';
@@ -53,7 +53,7 @@ const DATE_MESSAGE_TABLE = 'date';
 /* Relation Table */
 /******************/
 // Relation table's name
-const RELATION_TABLE_NAME = 'Relation';
+const RELATION_TABLE= 'Relation';
 
 // Relation table's attributes
 const ID_RELATION_TABLE = 'id';
@@ -65,13 +65,14 @@ const STATUS_RELATION_TABLE = 'status';
 /* Queries */
 /***********/
 // Login query
-const LOGIN_QUERY = 'SELECT * FROM ' . USER_TABLE_NAME . ' WHERE ' . EMAIL_USER_TABLE . '=?;';
+const LOGIN_QUERY = 'SELECT * FROM ' . USER_TABLE. ' WHERE ' . EMAIL_USER_TABLE . '=?;';
 
 // Register query
-const REGISTER_QUERY = 'INSERT INTO ' . USER_TABLE_NAME . '(' . FIRST_NAME_USER_TABLE . ',' . LAST_NAME_USER_TABLE . ',' . EMAIL_USER_TABLE . ',' . PASSWORD_USER_TABLE . ') VALUES (?, ?, ?, ?);';
+const REGISTER_QUERY = 'INSERT INTO ' . USER_TABLE. '(' . FIRST_NAME_USER_TABLE . ',' . LAST_NAME_USER_TABLE . ',' . EMAIL_USER_TABLE . ',' . PASSWORD_USER_TABLE . ') VALUES (?, ?, ?, ?);';
 
 // Select queries
-const SELECT_USER_BY_MAIL_QUERY = 'SELECT * FROM ' . USER_TABLE_NAME . ' WHERE ' . EMAIL_USER_TABLE . '=?;';
+const SELECT_USER_BY_MAIL_QUERY = 'SELECT * FROM ' . USER_TABLE. ' WHERE ' . EMAIL_USER_TABLE . '=?;';
+const SELECT_USER_ID_BY_MAIL_QUERY = 'SELECT '. ID_USER_TABLE . ' FROM ' . USER_TABLE . ' WHERE ' . EMAIL_USER_TABLE . '=?;';
 
 /***********************/
 /* Regular Expressions */

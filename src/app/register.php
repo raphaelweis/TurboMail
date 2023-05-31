@@ -19,6 +19,7 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass
         $password,
         $passwordCheck
     );
+
     // Running error handlers and user register operation
-    echo $signup->signupUser();
+    echo $signup->SignupUser();
 }

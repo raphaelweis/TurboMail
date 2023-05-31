@@ -10,7 +10,7 @@ class RelationController extends Relation {
     private bool $status;
 
     // Constructor
-    public function __construct($idSender, $idReceiver, $message) {
+    public function __construct($idSender, $emailReceiver, $message) {
 
     }
 

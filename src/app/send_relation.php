@@ -1,5 +1,7 @@
 <?php
 
+use TurboMail\Model\RelationController;
+
 session_start();
 
 if(isset($_POST['email-searched'], $_POST['asking-message'])) {
@@ -7,9 +9,9 @@ if(isset($_POST['email-searched'], $_POST['asking-message'])) {
     $emailReceiver = trim(htmlspecialchars($_POST['email-searched']));
     $message = trim(htmlspecialchars($_POST['asking-message']));
 
-    $relation = new RelationController();
+    $relation = new RelationController($idSender, $emailReceiver, $message);
 
-    $relation->sendRelation();
+    echo $relation->sendRelation();
 }
 
 echo "Success";

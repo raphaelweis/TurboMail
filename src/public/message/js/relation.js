@@ -16,9 +16,10 @@ export function showAddFriendDialog() {
 }
 
 function resizeDialog(dialog) {
-        dialog.setAttribute("style", "height:" + (dialog.scrollHeight) + "px;overflow-y:scroll;");
-        dialog.style.height = '0';
-        dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
+    dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
+    dialog.setAttribute("style", "height:" + (dialog.scrollHeight) + "px;overflow-y:scroll;");
+    dialog.style.height = '0';
+    dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
 }
 
 export function relationRequest() {

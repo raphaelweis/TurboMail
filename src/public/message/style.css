@@ -42,68 +42,8 @@ header {
 }
 
 /* ADD FRIEND POPUP */
-#add-friend {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 6em; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+#add-friend::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
-}
-#popup-content h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    font-size: 3em;
-    color: var(--darkBlue);
-}
-#popup-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 0.75em;
-    width: 80%;
-    min-height: 16em;
-}
-#popup-content input[type="email"] {
-    font-size: 1.5em;
-    width: calc(100% - 0.4em);
-    border: none;
-    outline: none;
-    border-bottom: 1px solid var(--lightBlue);
-    margin-bottom: 2em;
-    padding: 0.2em;
-}
-#popup-content #asking-message {
-    font-size: 1.2em;
-    width: calc(100% - 2px - 0.4em);
-    height: 1.2em;
-    border: none;
-    border-left: 1px solid var(--lightBlue);
-    outline: none;
-    margin-bottom: 1em;
-    padding: 0 0.2em 0 0.2em;
-    resize: none;
-    overflow: scroll;
-}
-#popup-content input[type="submit"] {
-    margin-right: 2%;
-}
-#close-button {
-    color: #aaaaaa;
-    float: right;
-    font-size: 3em;
-    font-weight: bold;
-}
-#close-button:hover,
-#close-button:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 /* BODY */

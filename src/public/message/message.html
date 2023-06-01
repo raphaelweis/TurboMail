@@ -33,36 +33,34 @@
   </div>
 </header>
 <main>
-  <section id="add-friend">
-    <div id="popup-content">
-      <div id="close-button">&times;</div>
-      <h2>Add friend</h2>
-      <form id="relation-form">
-        <div id="relation-error"></div>
-        <label>
-          <input
-            type="email"
-            name="email-searched"
-            placeholder="Enter the researched email"
-          />
-        </label>
-        <label>
+  <dialog id="add-friend">
+    <div id="close-button">X</div>
+    <h2>Add friend</h2>
+    <form id="relation-form" method="dialog">
+      <div id="relation-error"></div>
+      <label>
+        <input
+          type="email"
+          name="email-searched"
+          placeholder="Enter your new relation's email"
+        />
+      </label>
+      <label>
         <textarea
           id="asking-message"
           name="asking-message"
-          placeholder="Write a message to send to the relation's receiver"
+          placeholder="Write an impactful message to go along with your request"
         ></textarea>
-        </label>
-        <input
-          type="submit"
-          name="send-relation"
-          id="send-relation"
-          class="common-button"
-          value="Send"
-        />
-      </form>
-    </div>
-  </section>
+      </label>
+      <input
+        type="submit"
+        name="send-relation"
+        id="send-relation"
+        class="common-button"
+        value="Send"
+      />
+    </form>
+  </dialog>
   <section id="contacts" class="item"></section>
   <section id="messages" class="item">
     <div id="chat"></div>

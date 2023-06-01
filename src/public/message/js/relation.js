@@ -10,9 +10,16 @@ export function resizeTextArea() {
     });
 }
 
+export function showAddFriendDialog() {
+    // we need the get(0) method to access the actual html element, the 0 is to reference the 0 position in the array returned by jquery
+    // we have to put the 0 even though there is only one element being returned, otherwise we are accessing the array object.
+    $('#add-friend').get(0).showModal();
+    // Note: $('add-friend')[0].showModal(); is equivalent
+}
+
 export function relationRequest() {
     // Selecting error div
-    let relationErrorDiv = $("#relation-error");
+    let relationErrorDiv = $('#relation-error');
 
     // Defining error codes
     const SUCCESS = 0;

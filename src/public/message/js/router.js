@@ -1,5 +1,5 @@
 import {insertUserInfo, sendMessage} from "./message.js";
-import {resizeTextArea, relationRequest} from "./relation.js";
+import {showAddFriendDialog} from "./relation.js";
 
 const SESSION_URL = "../../app/session.php";
 const LOGOUT_URL = "../../app/logout.php";
@@ -11,16 +11,7 @@ window.onload = () => {
         logoutRequest();
     });
     $("#add-friend-button").on('click', () => {
-        $("#add-friend").css("display", "block");
-        $("#close-button").on('click', () => {
-            $("#add-friend").css("display", "none");
-        });
-        resizeTextArea();
-        const relationForm = $("#relation-form");
-        relationForm.submit((event) => {
-            event.preventDefault();
-            relationRequest();
-        })
+        showAddFriendDialog();
     });
     $("#to-send").on('keydown', (event) => {
         if (event.keyCode === 13) { // enter key

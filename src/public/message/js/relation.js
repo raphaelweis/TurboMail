@@ -4,24 +4,22 @@ export function showAddFriendDialog() {
     let addFriendDialog = $('#add-friend');
     addFriendDialog.get(0).showModal();
     let requestMessage = $('#request-message');
-    requestMessage.each(function () {
-        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:scroll;");
-    }).on("input", function () {
-        this.style.height = 0;
-        this.style.height = this.scrollHeight + "px";
-        this.style.maxHeight = 25 + "em";
+    requestMessage.on("input", () => {
+        resizeDialog(requestMessage.get(0));
     });
     window.addEventListener("resize", () => {
-        requestMessage.each(function () {
-            this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:scroll;");
-            this.style.height = 0;
-            this.style.height = this.scrollHeight + "px";
-            this.style.maxHeight = 25 + "em";
-        });
-    })
+        resizeDialog(requestMessage.get(0));
+    });
     $('#close-button').on('click', () => {
         addFriendDialog.get(0).close();
     })
+}
+
+function resizeDialog(dialog) {
+    dialog.setAttribute("style", "height:" + (dialog.scrollHeight) + "px;overflow-y:scroll;");
+    dialog.style.height = 0;
+    dialog.style.height = dialog.scrollHeight + "px";
+    dialog.style.maxHeight = 25 + "em";
 }
 
 export function relationRequest() {

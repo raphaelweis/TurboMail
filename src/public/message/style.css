@@ -58,7 +58,7 @@ header {
 
 #add-friend h2 {
     text-align: center;
-    margin: 1em 0 1em 0;
+    margin: 1em 0em 1em 0em;
     font-size: 3em;
     color: var(--darkBlue);
 }
@@ -67,7 +67,7 @@ header {
     float: right;
     margin: 0.5rem 1rem 0 0;
     font-size: 2rem;
-    font-family: Arial, serif;
+    font-family: Arial;
     color: #aaaaaa;
 }
 

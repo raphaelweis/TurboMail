@@ -8,7 +8,8 @@ export function showAddFriendDialog() {
 
     let messageArea = $('#asking-message');
     messageArea.on('input', () => {
-        messageArea[0].rows = messageArea[0].value.split('\n').length;
+        const rows = messageArea[0].value.split('\n').length;
+        messageArea[0].rows = rows;
     });
 }
 

@@ -48,8 +48,6 @@ header {
     transform: translateX(-50%) translateY(-50%);
     width: 80%;
     max-width: 1000px;
-    height: auto;
-    max-height: 80vh;
     border: none;
     border-radius: 0.5em;
 }
@@ -60,9 +58,22 @@ header {
 
 #add-friend h2 {
     text-align: center;
-    margin-bottom: 1em;
+    margin: 1em 0em 1em 0em;
     font-size: 3em;
     color: var(--darkBlue);
+}
+
+#close-button {
+    float: right;
+    margin: 0.5rem 1rem 0 0;
+    font-size: 2rem;
+    font-family: Arial;
+    color: #aaaaaa;
+}
+
+#close-button:hover {
+    color: #000000;
+    cursor: pointer;
 }
 
 #relation-form {
@@ -71,25 +82,18 @@ header {
     align-items: center;
 }
 
-#relation-form label {
-    display: flex;
-    flex-grow: 1;
-    width: 100%;
-}
-
 #relation-form input[type='email'] {
-    flex-grow: 1;
     font-size: 1.5em;
     border: none;
     outline: none;
     border-bottom: 1px solid var(--lightBlue);
-    margin: 0 2em 2em 2em;
+    margin-bottom: 2em;
     padding: 0.2em;
+    width: 90%;
     resize: none;
 }
 
 #relation-form textarea {
-    flex-grow: 1;
     font-size: 1.5em;
     border: none;
     outline: none;
@@ -97,17 +101,15 @@ header {
     border-left: 1px solid var(--lightBlue);
     margin: 0 2em 2em 2em;
     padding: 0.2em;
+    width: 90%;
+    max-height: 50vh;
     resize: none;
 }
 
 #relation-form input[type='submit'] {
-    float: right;
-    width: 20%;
-}
-
-#close-button {
-    float: right;
-    margin: 1em 1em 0 0;
+    align-self: end;
+    margin: 0 5% 1em 0;
+    padding: 0.5em 1em 0.5em 1em;
 }
 
 /* BODY */

@@ -34,25 +34,22 @@
 </header>
 <main>
   <dialog id="add-friend">
-    <div id="close-button">X</div>
+    <div id="close-button">&times;</div>
     <h2>Add friend</h2>
     <form id="relation-form" method="dialog">
       <div id="relation-error"></div>
-      <label>
-        <input
-          type="email"
-          name="email-searched"
-          placeholder="Enter your new relation's email"
-        />
-      </label>
-      <label>
-        <textarea
-          id="asking-message"
-          name="asking-message"
-          placeholder="Write an impactful message to go along with your request"
-          rows="1"
-        ></textarea>
-      </label>
+      <input
+        id="add-friend-email"
+        type="email"
+        name="email-searched"
+        placeholder="Enter your new relation's email"
+      />
+      <textarea
+        id="request-message"
+        name="request-message"
+        placeholder="Write an impactful message to go along with your request"
+        rows="1"
+      ></textarea>
       <input
         type="submit"
         name="send-relation"

@@ -1,15 +1,27 @@
 const RELATION_URL = "../../app/send_relation.php"
 
 export function showAddFriendDialog() {
-    // we need the get(0) method to access the actual html element, the 0 is to reference the 0 position in the array returned by jquery
-    // we have to put the 0 even though there is only one element being returned, otherwise we are accessing the array object.
-    $('#add-friend').get(0).showModal();
-    // Note: $('add-friend')[0].showModal(); is equivalent
-
-    let messageArea = $('#asking-message');
-    messageArea.on('input', () => {
-        messageArea[0].rows = messageArea[0].value.split('\n').length;
+    let addFriendDialog = $('#add-friend');
+    addFriendDialog.get(0).showModal();
+    let requestMessage = $('#request-message');
+    requestMessage.each(function () {
+        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:scroll;");
+    }).on("input", function () {
+        this.style.height = 0;
+        this.style.height = this.scrollHeight + "px";
+        this.style.maxHeight = 25 + "em";
     });
+    window.addEventListener("resize", () => {
+        requestMessage.each(function () {
+            this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:scroll;");
+            this.style.height = 0;
+            this.style.height = this.scrollHeight + "px";
+            this.style.maxHeight = 25 + "em";
+        });
+    })
+    $('#close-button').on('click', () => {
+        addFriendDialog.get(0).close();
+    })
 }
 
 export function relationRequest() {

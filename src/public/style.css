@@ -21,9 +21,17 @@
 }
 
 /* BUTTONS */
-input[class*="common-button"],
+input[class*="common-button"] {
+    border: none;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    color: var(--lightFontColor);
+    background-color: var(--buttonColor);
+    transition: background-color 0.3s ease;
+}
+
 button[class*="common-button"] {
-    font-size: 0.8rem;
     border: none;
     border-radius: 0.2rem;
     color: var(--lightFontColor);
@@ -31,8 +39,6 @@ button[class*="common-button"] {
     transition: background-color 0.3s ease;
 }
 input[type="submit"] {
-    font-size: 1.2rem;
-    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
     float: right;
 }
 input[class*="common-button"]:hover,

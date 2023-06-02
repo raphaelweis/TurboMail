@@ -202,7 +202,6 @@ main {
     left: 1rem;
     right: 1rem;
     flex-direction: row;
-    /*width: calc(98% - 250px);*/
     height: 4rem;
     border: 0.1rem solid black;
     border-radius: 0.2rem;

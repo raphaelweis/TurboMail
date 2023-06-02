@@ -19,13 +19,7 @@ export function sendMessage() {
     textAreaDiv.focus()
 }
 
-// export function autoGrowTextArea(textArea) {
-//     if (textArea.clientHeight < textArea.scrollHeight) {
-//         textArea.style.height = textArea.scrollHeight + 'px';
-//
-//         // if (textArea.clientHeight < textArea.scrollHeight) {
-//         //     textArea.style.height =
-//         //         (textArea.scrollHeight * 2 - textArea.clientHeight) + "px";
-//         // }
-//     }
-// }
+export function resizeTextArea(textarea) {
+    textarea.style.height = 0;
+    textarea.style.height = textarea.scrollHeight + 'px';
+}

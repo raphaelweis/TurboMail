@@ -15,7 +15,7 @@ export function showAddFriendDialog() {
     })
 }
 
-function resizeDialog(dialog) {
+export function resizeDialog(dialog) {
     dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
     dialog.setAttribute("style", "height:" + (dialog.scrollHeight) + "px;overflow-y:scroll;");
     dialog.style.height = '0';

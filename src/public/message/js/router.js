@@ -1,6 +1,5 @@
-import {insertUserInfo, sendMessage} from "./message.js";
-import {showAddFriendDialog} from "./relation.js";
-
+import {resizeTextArea, insertUserInfo, sendMessage} from "./message.js";
+import {resizeDialog, showAddFriendDialog} from "./relation.js";
 const SESSION_URL = "../../app/session.php";
 const LOGOUT_URL = "../../app/logout.php";
 const LOGIN_PAGE = "../login/login.html";

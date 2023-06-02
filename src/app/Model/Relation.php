@@ -5,8 +5,24 @@ namespace TurboMail\Model;
 class Relation {
     private bool $status;
 
-    protected function GetRelation() {
+    protected function CheckRelation(int $idSender, int $idReceiver): bool {
+        $dataBaseHandler = new DataBaseHandler();
 
+        $statement = $dataBaseHandler->connect()->prepare(SELECT_RELATION_QUERY);
+        if (!$statement->execute([$idSender, $idReceiver])) {
+            $statement = null;
+
+            return true;
+        }
+        if ($statement->rowCount() > 0) {
+            $statement = null;
+
+            return true;
+        }
+
+        $statement = null;
+
+        return false;
     }
 
     protected function SendRelation($idSender, $idReceiver, $message): bool {

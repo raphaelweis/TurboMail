@@ -8,8 +8,7 @@ include_once __DIR__ . '/../const/global.php';
 
 class NewUser extends DataBaseHandler {
     protected function SetUser(string $firstName, string $lastName, string $email, string $password): int {
-        $statement = $this->connect()
-            ->prepare(REGISTER_QUERY);
+        $statement = $this->connect()->prepare(REGISTER_QUERY);
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -28,8 +27,7 @@ class NewUser extends DataBaseHandler {
     }
 
     protected function CheckUser(string $email): bool {
-        $statement = $this->connect()
-            ->prepare(SELECT_USER_BY_MAIL_QUERY);
+        $statement = $this->connect()->prepare(SELECT_USER_BY_MAIL_QUERY);
 
         if (!$statement->execute([$email])) {
             $statement = null;
@@ -40,6 +38,5 @@ class NewUser extends DataBaseHandler {
         }
 
         return false;
-
     }
 }

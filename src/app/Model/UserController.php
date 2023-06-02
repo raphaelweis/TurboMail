@@ -92,7 +92,7 @@ class UserController extends User {
      * @param string $message
      * @return bool
      */
-    public function SendRelation(int $idSender, string $emailReceiver, string $message): bool {
+    public function AddFriend(int $idSender, string $emailReceiver, string $message): bool {
         if($this->InvalidEmail($emailReceiver)) {
             return false;
         }
@@ -102,11 +102,22 @@ class UserController extends User {
             return false;
         }
 
-        // Check if the relation exist
-        // Maybe just have a Relation Class with set method and get method
-        // $relation = new RelationController($idSender, $idReceiver, $message);
+        $relation = new RelationController($idSender, $idReceiver, $message);
+
+        if($relation->RelationExist()) {
+            return false;
+        }
 
         return true;
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function GetRelation(int $id): array {
+
+        return [];
     }
 
     /**

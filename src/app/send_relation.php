@@ -14,5 +14,5 @@ if(isset($_POST['email-searched'], $_POST['asking-message'])) {
 
     $user = new UserController($_SESSION['s_Email']);
 
-    $user->SendRelation($idSender, $emailReceiver, $message);
+    $user->AddFriend($idSender, $emailReceiver, $message);
 }

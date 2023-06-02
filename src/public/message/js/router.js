@@ -1,4 +1,4 @@
-import {autoGrowTextArea, insertUserInfo, sendMessage} from "./message.js";
+import {insertUserInfo, sendMessage} from "./message.js";
 import {showAddFriendDialog} from "./relation.js";
 
 const SESSION_URL = "../../app/session.php";

@@ -1,4 +1,4 @@
-import {insertUserInfo, sendMessage} from "./message.js";
+import {autoGrowTextArea, insertUserInfo, sendMessage} from "./message.js";
 import {showAddFriendDialog} from "./relation.js";
 
 const SESSION_URL = "../../app/session.php";
@@ -13,7 +13,9 @@ window.onload = () => {
     $("#add-friend-button").on('click', () => {
         showAddFriendDialog();
     });
-    $("#to-send").on('keydown', (event) => {
+
+    let messageTextArea = $('#message-textarea');
+    messageTextArea.on('keydown', (event) => {
         if (event.keyCode === 13) { // enter key
             event.preventDefault();
             sendMessage();

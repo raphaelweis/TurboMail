@@ -3,7 +3,7 @@ export function insertUserInfo(user) {
 }
 
 export function sendMessage() {
-    let textAreaDiv = $('#to-send');
+    let textAreaDiv = $('#message-textarea');
     let messageText = textAreaDiv.val();
     let messageDiv = $('<div></div>');
 
@@ -18,3 +18,14 @@ export function sendMessage() {
     textAreaDiv.val("");
     textAreaDiv.focus()
 }
+
+// export function autoGrowTextArea(textArea) {
+//     if (textArea.clientHeight < textArea.scrollHeight) {
+//         textArea.style.height = textArea.scrollHeight + 'px';
+//
+//         // if (textArea.clientHeight < textArea.scrollHeight) {
+//         //     textArea.style.height =
+//         //         (textArea.scrollHeight * 2 - textArea.clientHeight) + "px";
+//         // }
+//     }
+// }

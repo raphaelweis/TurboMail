@@ -16,7 +16,6 @@ footer {
     background-color: var(--lightBlue);
     padding: 2em;
     text-align: justify;
-    font-size: 1em;
 }
 footer * {
     color: var(--lightFontColor);

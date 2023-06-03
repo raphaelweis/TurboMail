@@ -6,11 +6,11 @@ const HOME_PAGE = "../message/message.html";
 // add event Listeners on page load - prevent default submit
 window.onload = () => {
     const signInForm = $("#sign-in");
+    const signUpForm = $("#sign-up");
     signInForm.submit((event) => {
         event.preventDefault();
         signInRequest();
     });
-    const signUpForm = $("#sign-up");
     signUpForm.submit((event) => {
         event.preventDefault();
         signUpRequest();

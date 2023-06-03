@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <link rel="stylesheet" href="./style.css"/>
   <link rel="stylesheet" href="../style.css"/>
+
   <script
     type="module"
     src="../../../node_modules/jquery/dist/jquery.js"
   ></script>
   <script type="module" src="./js/router.js"></script>
   <script type="module" src="./js/message.js"></script>
+  <script type="module" src="./js/relation.js"></script>
+
   <title>Messages</title>
 </head>
 <body>
@@ -18,7 +22,7 @@
   <div class="navbar">
     <div class="navbar-logo">
       <img
-        src="../../lib/assets/png/turbomail-logo.png"
+        src="../../../assets/png/turbomail-logo.png"
         alt="TurboMail's logo"
       />
     </div>
@@ -33,63 +37,45 @@
   </div>
 </header>
 <main>
-  <section id="add-friend">
-    <div id="popup-content">
-      <div id="close-button">&times;</div>
-      <h2>Add friend</h2>
-      <form id="relation-form">
-        <div id="relation-error"></div>
-        <label>
-          <input
-            type="email"
-            name="email-searched"
-            placeholder="Enter the researched email"
-          />
-        </label>
-        <label>
-        <textarea
-          id="asking-message"
-          name="asking-message"
-          placeholder="Write a message to send to the relation's receiver"
-        ></textarea>
-        </label>
-        <input
-          type="submit"
-          name="send-relation"
-          id="send-relation"
-          class="common-button"
-          value="Send"
-        />
-      </form>
-    </div>
-  </section>
+  <dialog id="add-friend">
+    <div id="close-button">&times;</div>
+    <h2>Add friend</h2>
+    <form id="relation-form" method="dialog">
+      <div id="relation-error"></div>
+      <input
+        id="add-friend-email"
+        type="email"
+        name="email-searched"
+        placeholder="Enter your new relation's email"
+      />
+      <textarea
+        id="request-message"
+        name="request-message"
+        placeholder="Write an impactful message to go along with your request"
+        rows="1"
+      ></textarea>
+      <input
+        type="submit"
+        name="send-relation"
+        id="send-relation"
+        class="common-button"
+        value="Send"
+      />
+    </form>
+  </dialog>
   <section id="contacts" class="item"></section>
   <section id="messages" class="item">
     <div id="chat"></div>
     <div id="send-box">
-      <div id="write">
-        <label for="to-send"></label>
         <textarea
-          id="to-send"
-          name="to-send"
+          id="message-textarea"
+          name="message-textarea"
           placeholder="Write a chat"
+          rows="1"
         ></textarea>
-      </div>
-      <div id="button">
-        <button id="send-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            class="bi bi-send"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
-            />
-          </svg>
-        </button>
-      </div>
+      <button id="send-button">
+        <img src="../../../assets/png/send-message.png"/>
+      </button>
     </div>
   </section>
 </main>

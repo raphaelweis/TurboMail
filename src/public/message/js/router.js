@@ -1,35 +1,22 @@
-import {insertUserInfo, sendMessage} from "./message.js";
-import {resizeTextArea, relationRequest} from "./relation.js";
+import {setupMessages} from "./message.js";
+import {setupRelations} from "./relation.js";
 
 const SESSION_URL = "../../app/session.php";
 const LOGOUT_URL = "../../app/logout.php";
 const LOGIN_PAGE = "../login/login.html";
+const SEND_RELATION_URL = "../../app/send_relation.php"
 
 window.onload = () => {
     fetchUserData();
+
+    setupRelations();
+
     $('#logout-button').on('click', () => {
         logoutRequest();
     });
-    $("#add-friend-button").on('click', () => {
-        $("#add-friend").css("display", "block");
-        $("#close-button").on('click', () => {
-            $("#add-friend").css("display", "none");
-        });
-        resizeTextArea();
-        const relationForm = $("#relation-form");
-        relationForm.submit((event) => {
-            event.preventDefault();
-            relationRequest();
-        })
-    });
-    $("#to-send").on('keydown', (event) => {
-        if (event.keyCode === 13) { // enter key
-            event.preventDefault();
-            sendMessage();
-        }
-    }).focus();
-    $("#send-button").on('click', () => {
-        sendMessage();
+
+    $.post(SEND_RELATION_URL, $("#relation-form").serialize(), (response) => {
+        console.log(response);
     })
 };
 
@@ -42,7 +29,7 @@ function fetchUserData() {
         if (userData === null) {
             window.location.href = LOGIN_PAGE;
         } else {
-            insertUserInfo(userData);
+            setupMessages(userData);
         }
     });
 }

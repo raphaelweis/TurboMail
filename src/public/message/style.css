@@ -170,7 +170,7 @@ main {
 
 #chat {
     overflow: scroll;
-    height: calc(100vh - 85px - 7rem); /* to check on other screens */
+    height: calc(100vh - 85px - 6rem); /* to check on other screens */
 }
 
 .msg-box {

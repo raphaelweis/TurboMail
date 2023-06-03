@@ -180,6 +180,8 @@ main {
     border: 1px solid black;
     font-size: medium;
     color: var(--lightFontColor);
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .received {
@@ -214,12 +216,13 @@ main {
     border-radius: 0.2rem;
     padding: 1.5rem 4.5rem 1.5rem 1rem;
     line-height: 1rem;
+    overflow: hidden;
     resize: none;
 }
 
 #send-button {
     position: absolute;
-    top: 0.5rem;
+    bottom: 0.5rem;
     right: 0.5rem;
     border: none;
     border-radius: 0.2rem;

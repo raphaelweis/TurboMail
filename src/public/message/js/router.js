@@ -1,5 +1,6 @@
-import {resizeTextArea, insertUserInfo, sendMessage} from "./message.js";
-import {resizeDialog, showAddFriendDialog} from "./relation.js";
+import {insertUserInfo, sendMessage} from "./message.js";
+import {showAddFriendDialog} from "./relation.js";
+
 const SESSION_URL = "../../app/session.php";
 const LOGOUT_URL = "../../app/logout.php";
 const LOGIN_PAGE = "../login/login.html";
@@ -23,6 +24,19 @@ window.onload = () => {
     $("#send-button").on('click', () => {
         sendMessage();
     })
+    document.getElementById('send-box').addEventListener('keyup', function () {
+        let textarea = document.getElementById('message-textarea');
+
+        if (textarea.scrollHeight > textarea.clientHeight) {
+            let element = this;
+            let computedStyle = window.getComputedStyle(element);
+            let currentHeightInPixels = parseFloat(computedStyle.height);
+            let fontSizeInPixels = parseFloat(computedStyle.fontSize);
+            let currentHeightInRems = currentHeightInPixels / fontSizeInPixels;
+            let newHeightInRems = currentHeightInRems + 1;
+            element.style.height = newHeightInRems + 'rem';
+        }
+    });
 };
 
 function fetchUserData() {

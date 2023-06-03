@@ -19,7 +19,6 @@ export function sendMessage() {
     textAreaDiv.focus()
 }
 
-export function resizeTextArea(textarea) {
-    textarea.style.height = 0;
-    textarea.style.height = textarea.scrollHeight + 'px';
+export function testTextArea(textarea) {
+    console.log(textarea.rows);
 }

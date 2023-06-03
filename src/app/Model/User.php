@@ -14,7 +14,7 @@ class User extends DataBaseHandler {
         if (!$statement->execute([$email])) {
             $statement = null;
 
-            return 1;
+            return -1;
         }
         if ($statement->rowCount() == 0) {
             $statement = null;

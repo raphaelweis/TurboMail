@@ -40,21 +40,15 @@ class UserController extends User {
         return $this->GetUser($this->email, $this->password);
     }
 
-    /**
-     * @return bool
-     */
-    private function EmptyInput(): bool {
+    private function EmptyInput(): int {
         if (empty($this->email) || empty($this->password)) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    /**
-     * @return bool
-     */
-    private function InvalidEmail(): bool {
+    private function InvalidEmail(): int {
 
         $email = match (func_num_args()) {
             1 => func_get_arg(0),
@@ -62,65 +56,62 @@ class UserController extends User {
         };
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return true;
+            return 1;
         }
 
         if(strlen($email) > MAX_EMAIL_LENGTH) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    /**
-     * @return bool
-     */
-    private function InvalidPassword(): bool {
+    private function InvalidPassword(): int {
         if (!preg_match(PASSWORD_REGEX, $this->password)) {
-            return true;
+            return 1;
         }
 
         if (strlen($this->password) < MIN_PASSWORD_LENGTH || strlen($this->password) > MAX_PASSWORD_LENGTH) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
     /**
      * @param int $idSender
      * @param string $emailReceiver
      * @param string $message
-     * @return bool
+     * @return int
      */
-    public function AddFriend(int $idSender, string $emailReceiver, string $message): bool {
+    public function AddFriend(int $idSender, string $emailReceiver, string $message): int {
         if($this->InvalidEmail($emailReceiver)) {
-            return false;
+            return 0;
         }
 
         $idReceiver = $this->GetUserIdByEmail($emailReceiver);
         if($idReceiver == -1) {
-            return false;
+            return 0;
         }
 
         if($idSender == $idReceiver) {
-            return false;
+            return 0;
         }
 
         $newRelation = new RelationController($idSender, $idReceiver);
 
         if($newRelation->RelationExist()) {
-            return false;
+            return 0;
         }
 
         $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
         if($idRelation == -1) {
-            return false;
+            return 0;
         }
 
         //$newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
 
-        return true;
+        return 1;
     }
 
     /**

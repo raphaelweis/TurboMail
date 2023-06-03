@@ -14,6 +14,8 @@ class NewUser extends DataBaseHandler {
 
         if (!$statement->execute([$firstName, $lastName, $email, $hashedPassword])) {
             $statement = null;
+
+            return -1;
         }
         $statement = null;
 
@@ -23,17 +25,19 @@ class NewUser extends DataBaseHandler {
         return $login->LoginUser();
     }
 
-    protected function UserAlreadyExist(string $email): bool {
+    protected function UserAlreadyExist(string $email): int {
         $statement = $this->connect()->prepare(SELECT_USER_BY_MAIL_QUERY);
 
         if (!$statement->execute([$email])) {
             $statement = null;
+
+            return -1;
         }
 
         if ($statement->rowCount() > 0) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 }

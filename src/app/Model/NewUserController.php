@@ -72,75 +72,75 @@ class NewUserController extends NewUser {
         return json_encode($errors);
     }
 
-    private function EmptyInput(): bool {
+    private function EmptyInput(): int {
         if (empty($this->firstName) || empty($this->lastName)
             || empty($this->email)
             || empty($this->password)
             || empty($this->passwordCheck)
         ) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    private function InvalidFirstName(): bool {
+    private function InvalidFirstName(): int {
         if(strlen($this->firstName) > MAX_FIRST_NAME_LENGTH) {
-            return true;
+            return 1;
         }
 
         if (!preg_match(NAMES_REGEX, $this->firstName)) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    private function InvalidLastName(): bool {
+    private function InvalidLastName(): int {
         if(strlen($this->lastName) > MAX_LAST_NAME_LENGTH) {
-            return true;
+            return 1;
         }
 
         if (!preg_match(NAMES_REGEX, $this->firstName)) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    private function InvalidEmail(): bool {
+    private function InvalidEmail(): int {
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    private function InvalidPassword(): bool {
+    private function InvalidPassword(): int {
         if (strlen($this->password) < 8 || strlen($this->password) > 128) {
-            return true;
+            return 1;
         }
 
         if (!preg_match(PASSWORD_REGEX, $this->password)) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    private function PasswordMatch(): bool {
+    private function PasswordMatch(): int {
         if ($this->password == $this->passwordCheck) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    private function EmailTakenCheck(): bool {
+    private function EmailTakenCheck(): int {
         if ($this->UserAlreadyExist($this->email)) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 }

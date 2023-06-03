@@ -6,39 +6,39 @@ use PDO;
 
 class Relation {
 
-    protected function RelationAlreadyExist(int $idSender, int $idReceiver): bool {
+    protected function RelationAlreadyExist(int $idSender, int $idReceiver): int {
         $dataBaseHandler = new DataBaseHandler();
 
         $statement = $dataBaseHandler->connect()->prepare(SELECT_RELATION_QUERY);
         if (!$statement->execute([$idSender, $idReceiver, $idReceiver, $idSender])) {
             $statement = null;
 
-            return true;
+            return -1;
         }
         if ($statement->rowCount() > 0) {
             $statement = null;
 
-            return true;
+            return 1;
         }
 
         $statement = null;
 
-        return false;
+        return 0;
     }
 
-    protected function SendRelation(int $idSender, int $idReceiver, int $status): bool {
+    protected function SendRelation(int $idSender, int $idReceiver, int $status): int {
         $dataBaseHandler = new DataBaseHandler();
 
         $statement = $dataBaseHandler->connect()->prepare(SEND_RELATION_QUERY);
         if(!$statement->execute([$idSender, $idReceiver, $status])) {
             $statement = null;
 
-            return false;
+            return 0;
         }
 
         $statement = null;
 
-        return true;
+        return 1;
     }
 
     public function GetRelationId(int $idSender, int $idReceiver): int {

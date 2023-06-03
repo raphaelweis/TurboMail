@@ -16,16 +16,16 @@ class RelationController extends Relation {
         $this->status = 0;
     }
 
-    public function RelationExist(): bool {
+    public function RelationExist(): int {
         if($this->RelationAlreadyExist($this->idSender, $this->idReceiver)) {
-            return true;
+            return 1;
         }
 
         if(!$this->SendRelation($this->idSender, $this->idReceiver, $this->status)) {
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
 }

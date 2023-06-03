@@ -205,6 +205,7 @@ main {
     right: 1rem;
     flex-direction: row;
     height: 4rem;
+    max-height: 20rem;
     border: 0.1rem solid black;
     border-radius: 0.2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -216,7 +217,7 @@ main {
     border-radius: 0.2rem;
     padding: 1.5rem 4.5rem 1.5rem 1rem;
     line-height: 1rem;
-    overflow: hidden;
+    overflow: scroll;
     resize: none;
 }
 

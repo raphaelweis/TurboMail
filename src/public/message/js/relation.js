@@ -1,6 +1,10 @@
-const RELATION_URL = "../../app/send_relation.php"
+export function setupRelations() {
+    $("#add-friend-button").on('click', () => {
+        showAddFriendDialog();
+    });
+};
 
-export function showAddFriendDialog() {
+function showAddFriendDialog() {
     let addFriendDialog = $('#add-friend');
     addFriendDialog.get(0).showModal();
     let requestMessage = $('#request-message');
@@ -15,23 +19,9 @@ export function showAddFriendDialog() {
     })
 }
 
-export function resizeDialog(dialog) {
+function resizeDialog(dialog) {
     dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
     dialog.setAttribute("style", "height:" + (dialog.scrollHeight) + "px;overflow-y:scroll;");
-    dialog.style.height = '0';
+    dialog.style.height = 'auto';
     dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
-}
-
-export function relationRequest() {
-    // Selecting error div
-    let relationErrorDiv = $('#relation-error');
-
-    // Defining error codes
-    const SUCCESS = 0;
-    const INVALID_EMAIL = 1;
-
-    // Sending post request
-    $.post(RELATION_URL, $("#relation-form").serialize(), (response) => {
-        console.log(response);
-    })
 }

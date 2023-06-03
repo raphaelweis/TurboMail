@@ -53,7 +53,7 @@ const DATE_MESSAGE_TABLE = 'date';
 /* Relation Table */
 /******************/
 // Relation table's name
-const RELATION_TABLE= 'Relation';
+const RELATION_TABLE = 'Relation';
 
 // Relation table's attributes
 const ID_RELATION_TABLE = 'id';
@@ -68,15 +68,18 @@ const STATUS_RELATION_TABLE = 'status';
 const LOGIN_QUERY = 'SELECT * FROM ' . USER_TABLE. ' WHERE ' . EMAIL_USER_TABLE . '=?;';
 
 // Register query
-const REGISTER_QUERY = 'INSERT INTO ' . USER_TABLE. '(' . FIRST_NAME_USER_TABLE . ',' . LAST_NAME_USER_TABLE . ',' . EMAIL_USER_TABLE . ',' . PASSWORD_USER_TABLE . ') VALUES (?, ?, ?, ?);';
+const REGISTER_QUERY = 'INSERT INTO ' . USER_TABLE. '(' . FIRST_NAME_USER_TABLE . ', ' . LAST_NAME_USER_TABLE . ', ' . EMAIL_USER_TABLE . ', ' . PASSWORD_USER_TABLE . ') VALUES (?, ?, ?, ?);';
+
+// Send relation query
+const SEND_RELATION_QUERY = 'INSERT INTO ' . RELATION_TABLE . '(' . ID_SENDER_RELATION_TABLE . ', ' . ID_RECEIVER_RELATION_TABLE . ', ' . STATUS_RELATION_TABLE . ') VALUES (?, ?, ?);';
 
 // Select queries
 const SELECT_USER_BY_MAIL_QUERY = 'SELECT * FROM ' . USER_TABLE. ' WHERE ' . EMAIL_USER_TABLE . '=?;';
 const SELECT_USER_ID_BY_MAIL_QUERY = 'SELECT '. ID_USER_TABLE . ' FROM ' . USER_TABLE . ' WHERE ' . EMAIL_USER_TABLE . '=?;';
+const SELECT_RELATION_QUERY = 'SELECT * FROM ' . RELATION_TABLE . ' WHERE (' . ID_SENDER_RELATION_TABLE . '=? AND ' . ID_RECEIVER_RELATION_TABLE . '=?) OR (' . ID_SENDER_RELATION_TABLE . '=? AND ' . ID_RECEIVER_RELATION_TABLE . '=?);';
 
 /***********************/
 /* Regular Expressions */
 /***********************/
-
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";

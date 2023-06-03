@@ -2,11 +2,11 @@
 
 use TurboMail\Model\UserController;
 
-include_once './Model/UserController.php';
+include_once __DIR__ . '/Model/UserController.php';
 
 session_start();
 
-if(isset($_POST['email-searched'], $_POST['asking-message'])) {
+if(isset($_POST['email-searched'], $_POST['request-message'])) {
     $idSender = $_SESSION['s_ID'];
 
     $emailReceiver = trim(htmlspecialchars($_POST['email-searched']));
@@ -14,5 +14,5 @@ if(isset($_POST['email-searched'], $_POST['asking-message'])) {
 
     $user = new UserController($_SESSION['s_Email']);
 
-    $user->SendRelation($idSender, $emailReceiver, $message);
+    echo $user->AddFriend($idSender, $emailReceiver, $message);
 }

@@ -4,6 +4,7 @@ import {setupRelations} from "./relation.js";
 const SESSION_URL = "../../app/session.php";
 const LOGOUT_URL = "../../app/logout.php";
 const LOGIN_PAGE = "../login/login.html";
+const SEND_RELATION_URL = "../../app/send_relation.php"
 
 export let user = undefined;
 
@@ -14,6 +15,14 @@ window.onload = () => {
 
     $('#logout-button').on('click', () => {
         logoutRequest();
+    });
+
+    // $('#send-relation').submit((event) => {
+    //     event.preventDefault();
+    //     addFriend();
+    // })
+    $('#send-relation').on('click', () => {
+        addFriend();
     });
 };
 
@@ -36,6 +45,8 @@ function logoutRequest() {
     }, 'text');
 }
 
-export function sendMessageRequest() {
-
+function addFriend() {
+    $.post(SEND_RELATION_URL, $('#relation-form').serialize(), (response) => {
+        console.log(response);
+    })
 }

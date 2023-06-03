@@ -85,6 +85,10 @@ class NewUserController extends NewUser {
     }
 
     private function InvalidFirstName(): bool {
+        if(strlen($this->firstName) > MAX_FIRST_NAME_LENGTH) {
+            return true;
+        }
+
         if (!preg_match(NAMES_REGEX, $this->firstName)) {
             return true;
         }
@@ -93,6 +97,10 @@ class NewUserController extends NewUser {
     }
 
     private function InvalidLastName(): bool {
+        if(strlen($this->lastName) > MAX_LAST_NAME_LENGTH) {
+            return true;
+        }
+
         if (!preg_match(NAMES_REGEX, $this->firstName)) {
             return true;
         }
@@ -129,7 +137,7 @@ class NewUserController extends NewUser {
     }
 
     private function EmailTakenCheck(): bool {
-        if ($this->CheckUser($this->email)) {
+        if ($this->UserAlreadyExist($this->email)) {
             return true;
         }
 

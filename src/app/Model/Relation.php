@@ -30,7 +30,7 @@ class Relation {
         $dataBaseHandler = new DataBaseHandler();
 
         $statement = $dataBaseHandler->connect()->prepare(SEND_RELATION_QUERY);
-        if (!$statement->execute([$idSender, $idReceiver, $status])) {
+        if(!$statement->execute([$idSender, $idReceiver, $status])) {
             $statement = null;
 
             return false;

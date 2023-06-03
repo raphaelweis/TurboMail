@@ -10,7 +10,7 @@ if(isset($_POST['email-searched'], $_POST['request-message'])) {
     $idSender = $_SESSION['s_ID'];
 
     $emailReceiver = trim(htmlspecialchars($_POST['email-searched']));
-    $message = trim(htmlspecialchars($_POST['asking-message']));
+    $message = trim(htmlspecialchars($_POST['request-message']));
 
     $user = new UserController($_SESSION['s_Email']);
 

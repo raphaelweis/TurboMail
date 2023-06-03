@@ -1,5 +1,3 @@
-import {sendMessageRequest} from "./router.js";
-
 export function setupMessages(user) {
     const messageTextArea = $('#message-textarea');
     const sendBox = $('#send-box');

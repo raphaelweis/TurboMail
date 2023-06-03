@@ -112,13 +112,13 @@ class UserController extends User {
         if($newRelation->RelationExist()) {
             return false;
         }
-//
-//        $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
-//        if($idRelation == -1) {
-//            return false;
-//        }
-//
-//        $newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
+
+        $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
+        if($idRelation == -1) {
+            return false;
+        }
+
+        //$newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
 
         return true;
     }

@@ -6,17 +6,24 @@ export function setupMessages(user) {
     insertUserInfo(user);
 
     messageTextArea.on('keydown', (event) => {
-        if (event.keyCode === 13) { // enter key
+        if (!event.shiftKey && event.keyCode === 13) { // enter key
             event.preventDefault();
             sendMessage();
         }
+        if (event.shiftKey && event.keyCode === 13) {
+            insertNewLine();
+        }
     }).focus();
+    messageTextArea.on('focus', () => {
+        resizeTextArea();
+    });
     sendButton.on('click', () => {
         sendMessage();
     })
     sendBox.on('input', () => {
         resizeTextArea();
     });
+    resizeTextArea();
 }
 
 function insertUserInfo(user) {
@@ -31,6 +38,7 @@ function resizeTextArea() {
     container.style.height = 'auto';
     container.style.overflow = 'hidden';
     container.style.height = textarea.scrollHeight + 'px';
+    scrollElementToBottom(textarea);
 }
 
 function resetTextArea() {
@@ -39,9 +47,13 @@ function resetTextArea() {
     container.style.height = 4 + 'rem';
 }
 
-function scrollChatToBottom() {
-    const chat = $('#chat')[0];
-    chat.scrollTop = chat.scrollHeight;
+function insertNewLine() {
+    const textarea = $('#message-textarea');
+    textarea.val(textarea.val() + '\n');
+}
+
+function scrollElementToBottom(element) {
+    element.scrollTop = element.scrollHeight;
 }
 
 function sendMessage() {
@@ -61,6 +73,6 @@ function sendMessage() {
     textarea.val("");
     textarea.focus()
 
-    scrollChatToBottom();
+    scrollElementToBottom(chat[0]);
     resetTextArea();
 }

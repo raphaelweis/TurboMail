@@ -5,23 +5,33 @@ export function setupRelations() {
 };
 
 function showAddFriendDialog() {
-    let addFriendDialog = $('#add-friend');
-    addFriendDialog.get(0).showModal();
-    let requestMessage = $('#request-message');
+    const addFriendDialog = $('#add-friend');
+    const requestMessage = $('#request-message');
+    const closeButton = $('#close-button');
+
+    addFriendDialog[0].showModal();
+
     requestMessage.on("input", () => {
-        resizeDialog(requestMessage.get(0));
+        resizeDialog();
     });
-    window.addEventListener("resize", () => {
-        resizeDialog(requestMessage.get(0));
-    });
-    $('#close-button').on('click', () => {
-        addFriendDialog.get(0).close();
+    closeButton.on('click', () => {
+        addFriendDialog[0].close();
     })
+    window.addEventListener("resize", () => {
+        resizeDialog(requestMessage[0]);
+    });
 }
 
-function resizeDialog(dialog) {
-    dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
-    dialog.setAttribute("style", "height:" + (dialog.scrollHeight) + "px;overflow-y:scroll;");
-    dialog.style.height = 'auto';
-    dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
+function resizeDialog() {
+    const textarea = $('#request-message')[0];
+    textarea.style.height = 'auto';
+
+    const currentScrollHeight = textarea.scrollHeight;
+    const topPadding = parseInt(window.getComputedStyle(textarea).paddingTop);
+    const bottomPadding = parseInt(window.getComputedStyle(textarea).paddingBottom);
+    const verticalPadding = topPadding + bottomPadding;
+    const finalHeight = currentScrollHeight - verticalPadding;
+
+    textarea.style.height = finalHeight + 'px';
 }
+

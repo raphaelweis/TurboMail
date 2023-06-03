@@ -1,3 +1,5 @@
+import {sendMessageRequest} from "./router.js";
+
 export function setupMessages(user) {
     const messageTextArea = $('#message-textarea');
     const sendBox = $('#send-box');
@@ -56,7 +58,10 @@ function scrollElementToBottom(element) {
     element.scrollTop = element.scrollHeight;
 }
 
-function sendMessage() {
+export function sendMessage() {
+    const SUCCESS = 0;
+    const COULD_NOT_SEND_MESSAGE = 1;
+
     const textarea = $('#message-textarea');
     const chat = $('#chat');
 
@@ -66,6 +71,15 @@ function sendMessage() {
     if (messageText === "") {
         return;
     }
+
+    // const serverResponse = sendMessageRequest(messageText, currentContact);
+    // if (serverResponse !== SUCCESS) {
+    //     if (serverResponse === COULD_NOT_SEND_MESSAGE) {
+    //         alert('Sorry... We were not able to send your message! Is your internet down?')
+    //     } else {
+    //         alert('Oops... An unexpected server error happened! Sit back and relax while we try to fix the problem.')
+    //     }
+    // }
 
     messageDiv.addClass('msg-box sent');
     messageDiv.html(messageText);

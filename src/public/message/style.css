@@ -83,26 +83,27 @@ header {
 }
 
 #relation-form input[type='email'] {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     border: none;
     outline: none;
     border-bottom: 1px solid var(--lightBlue);
-    margin-bottom: 2em;
-    padding: 0.2em;
+    margin-bottom: 2rem;
+    padding: 0.2rem;
     width: 90%;
     resize: none;
 }
 
 #relation-form textarea {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     border: none;
     outline: none;
     background-color: #eeeeee;
     border-left: 1px solid var(--lightBlue);
-    margin: 0 2em 2em 2em;
-    padding: 0.2em;
+    margin: 0 2rem 2rem 2rem;
+    padding: 0.5rem 0.2rem 0.5rem 0.2rem;
     width: 90%;
     max-height: 50vh;
+    overflow: scroll;
     resize: none;
 }
 
@@ -175,11 +176,12 @@ main {
 
 .msg-box {
     width: 50%;
-    margin: 10px;
-    padding: 5px;
-    border: 1px solid black;
+    margin: 0.5rem 1rem 0.5rem 1rem;
+    padding: 1rem;
+    border: none;
     font-size: medium;
     color: var(--lightFontColor);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
     word-wrap: break-word;
     word-break: break-all;
 }
@@ -206,7 +208,7 @@ main {
     flex-direction: row;
     height: 4rem;
     max-height: 20rem;
-    border: 0.1rem solid black;
+    border: none;
     border-radius: 0.2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -214,7 +216,6 @@ main {
 #send-box textarea {
     flex-grow: 1;
     border: none;
-    border-radius: 0.2rem;
     padding: 1.5rem 4.5rem 1.5rem 1rem;
     line-height: 1rem;
     overflow: scroll;
@@ -227,7 +228,7 @@ main {
     right: 0.5rem;
     border: none;
     border-radius: 0.2rem;
-    padding: 0.5rem 0.4rem 0.3rem 0.4rem;
+    padding: 0.5rem 0.5rem 0.3rem 0.3rem;
     transition: background-color 0.3s ease;
     background-color: black;
     fill: white;

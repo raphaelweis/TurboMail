@@ -15,9 +15,13 @@ window.onload = () => {
         logoutRequest();
     });
 
-    $.post(SEND_RELATION_URL, $("#relation-form").serialize(), (response) => {
-        console.log(response);
-    })
+    // $('#send-relation').submit((event) => {
+    //     event.preventDefault();
+    //     addFriend();
+    // })
+    $('#send-relation').on('click', () => {
+        addFriend();
+    });
 };
 
 function fetchUserData() {
@@ -38,4 +42,10 @@ function logoutRequest() {
     $.post(LOGOUT_URL, () => {
         window.location.href = LOGIN_PAGE;
     }, 'text');
+}
+
+function addFriend() {
+    $.post(SEND_RELATION_URL, $('#relation-form').serialize(), (response) => {
+        console.log(response);
+    })
 }

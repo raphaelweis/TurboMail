@@ -6,7 +6,7 @@ include_once __DIR__ . '/Model/UserController.php';
 
 session_start();
 
-if(isset($_POST['email-searched'], $_POST['asking-message'])) {
+if(isset($_POST['email-searched'], $_POST['request-message'])) {
     $idSender = $_SESSION['s_ID'];
 
     $emailReceiver = trim(htmlspecialchars($_POST['email-searched']));

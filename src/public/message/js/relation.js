@@ -25,7 +25,3 @@ function resizeDialog(dialog) {
     dialog.style.height = 'auto';
     dialog.style.height = (dialog.scrollHeight - 10) + "px"; // 10 offset to compensate for a weird height bug
 }
-
-export function relationRequest() {
-    // Sending post request
-}

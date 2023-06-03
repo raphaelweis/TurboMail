@@ -108,7 +108,7 @@ class UserController extends User {
         if($newRelation->RelationExist()) {
             return false;
         }
-
+//
 //        $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
 //        if($idRelation == -1) {
 //            return false;

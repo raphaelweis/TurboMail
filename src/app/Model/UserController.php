@@ -102,20 +102,27 @@ class UserController extends User {
             return false;
         }
 
-        $relation = new RelationController($idSender, $idReceiver, $message);
+        $newRelation = new RelationController($idSender, $idReceiver);
 
-        if($relation->RelationExist()) {
+        if($newRelation->RelationExist()) {
             return false;
         }
+
+        $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
+        if($idRelation == -1) {
+            return false;
+        }
+
+        $newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
 
         return true;
     }
 
     /**
-     * @param int $id
+     * @param int $idUser
      * @return array
      */
-    public function GetRelation(int $id): array {
+    public function GetRelation(int $idUser): array {
 
         return [];
     }

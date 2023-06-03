@@ -2,14 +2,15 @@
 
 namespace TurboMail\Model;
 
-class Relation {
-    private bool $status;
+use PDO;
 
-    protected function CheckRelation(int $idSender, int $idReceiver): bool {
+class Relation {
+
+    protected function RelationAlreadyExist(int $idSender, int $idReceiver): bool {
         $dataBaseHandler = new DataBaseHandler();
 
         $statement = $dataBaseHandler->connect()->prepare(SELECT_RELATION_QUERY);
-        if (!$statement->execute([$idSender, $idReceiver])) {
+        if (!$statement->execute([$idSender, $idReceiver, $idReceiver, $idSender])) {
             $statement = null;
 
             return true;
@@ -25,12 +26,12 @@ class Relation {
         return false;
     }
 
-    protected function SendRelation($idSender, $idReceiver, $message): bool {
+    protected function SendRelation($idSender, $idReceiver): bool {
         $dataBaseHandler = new DataBaseHandler();
 
         $statement = $dataBaseHandler->connect()->prepare(SEND_RELATION_QUERY);
 
-        if (!$statement->execute([$idSender, $idReceiver, $message])) {
+        if (!$statement->execute([$idSender, $idReceiver])) {
             $statement = null;
 
             return false;
@@ -39,5 +40,24 @@ class Relation {
         $statement = null;
 
         return true;
+    }
+
+    public function GetRelationId(int $idSender, int $idReceiver): int {
+        $dataBaseHandler = new DataBaseHandler();
+
+        $statement = $dataBaseHandler->connect()->prepare(SELECT_RELATION_QUERY);
+        if (!$statement->execute([$idSender, $idReceiver, $idReceiver, $idSender])) {
+            $statement = null;
+
+            return -1;
+        }
+        if ($statement->rowCount() == 0) {
+            $statement = null;
+
+            return -1;
+        }
+
+        $relation = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $relation[0][ID_RELATION_TABLE];
     }
 }

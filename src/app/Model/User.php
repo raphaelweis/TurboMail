@@ -55,10 +55,9 @@ class User extends DataBaseHandler {
         }
 
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $userId = $user[0][ID_USER_TABLE];
 
         $statement = null;
 
-        return $userId;
+        return $user[0][ID_USER_TABLE];
     }
 }

@@ -8,7 +8,7 @@ use PDO;
 use PDOException;
 
 class DataBaseHandler {
-    protected function connect() {
+    public function connect() {
         try {
             return new PDO(
                 DATA_SOURCE_NAME,

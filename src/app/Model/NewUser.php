@@ -26,7 +26,7 @@ class NewUser extends DataBaseHandler {
         return $login->LoginUser();
     }
 
-    protected function CheckUser(string $email): bool {
+    protected function UserAlreadyExist(string $email): bool {
         $statement = $this->connect()->prepare(SELECT_USER_BY_MAIL_QUERY);
 
         if (!$statement->execute([$email])) {

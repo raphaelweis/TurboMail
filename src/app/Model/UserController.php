@@ -86,7 +86,6 @@ class UserController extends User {
         return false;
     }
 
-    // Maybe move this function to User class
     /**
      * @param int $idSender
      * @param string $emailReceiver

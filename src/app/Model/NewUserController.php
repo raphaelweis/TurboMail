@@ -129,7 +129,7 @@ class NewUserController extends NewUser {
     }
 
     private function EmailTakenCheck(): bool {
-        if ($this->CheckUser($this->email)) {
+        if ($this->UserAlreadyExist($this->email)) {
             return true;
         }
 

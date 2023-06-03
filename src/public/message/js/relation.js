@@ -2,7 +2,7 @@ export function setupRelations() {
     $("#add-friend-button").on('click', () => {
         showAddFriendDialog();
     });
-};
+}
 
 function showAddFriendDialog() {
     let addFriendDialog = $('#add-friend');

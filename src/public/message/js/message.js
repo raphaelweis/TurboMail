@@ -20,7 +20,8 @@ export function setupMessages(user) {
 }
 
 function insertUserInfo(user) {
-    $("#user-info").text(user["s_FirstName"] + " " + user["s_LastName"]);
+    const userInfo = $('#user-info');
+    userInfo.text(user["s_FirstName"] + " " + user["s_LastName"]);
 }
 
 function resizeTextArea() {
@@ -34,12 +35,11 @@ function resizeTextArea() {
 
 function resetTextArea() {
     const container = $('#send-box')[0];
-    const textarea = $('#message-textarea')[0];
 
     container.style.height = 4 + 'rem';
 }
 
-function scrollChatToBottom(message) {
+function scrollChatToBottom() {
     const chat = $('#chat')[0];
     chat.scrollTop = chat.scrollHeight;
 }
@@ -48,7 +48,7 @@ function sendMessage() {
     const textarea = $('#message-textarea');
     const chat = $('#chat');
 
-    let messageText = textarea.val();
+    let messageText = textarea.val().replace(/\n/g, '<br/>'); // replace the '\n' characters with '<br>' so that we can preserve line breaks
     let messageDiv = $('<div></div>');
 
     if (messageText === "") {
@@ -56,11 +56,11 @@ function sendMessage() {
     }
 
     messageDiv.addClass('msg-box sent');
-    messageDiv.text(messageText);
+    messageDiv.html(messageText);
     chat.append(messageDiv);
     textarea.val("");
     textarea.focus()
 
-    scrollChatToBottom(messageDiv[0]);
+    scrollChatToBottom();
     resetTextArea();
 }

@@ -12,10 +12,7 @@ class NewUser extends DataBaseHandler {
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        if (!$statement->execute([
-            $firstName, $lastName, $email, $hashedPassword,
-        ])
-        ) {
+        if (!$statement->execute([$firstName, $lastName, $email, $hashedPassword])) {
             $statement = null;
         }
         $statement = null;

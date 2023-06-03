@@ -7,13 +7,13 @@ include_once 'Relation.php';
 class RelationController extends Relation {
     private int $idSender;
     private int $idReceiver;
-    private bool $status;
+    private int $status;
 
     // Constructor
     public function __construct(int $idSender, int $idReceiver) {
         $this->idSender = $idSender;
         $this->idReceiver = $idReceiver;
-        $this->status = false;
+        $this->status = 0;
     }
 
     public function RelationExist(): bool {

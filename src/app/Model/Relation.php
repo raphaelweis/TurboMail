@@ -26,12 +26,12 @@ class Relation {
         return false;
     }
 
-    protected function SendRelation($idSender, $idReceiver): bool {
+    protected function SendRelation(int $idSender, int $idReceiver, bool $status): bool {
         $dataBaseHandler = new DataBaseHandler();
 
         $statement = $dataBaseHandler->connect()->prepare(SEND_RELATION_QUERY);
 
-        if (!$statement->execute([$idSender, $idReceiver])) {
+        if (!$statement->execute([$idSender, $idReceiver, $status])) {
             $statement = null;
 
             return false;

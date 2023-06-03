@@ -3,6 +3,7 @@
 namespace TurboMail\Model;
 
 include_once 'User.php';
+include_once 'RelationController.php';
 include_once __DIR__ . '/../const/global.php';
 
 class UserController extends User {
@@ -108,12 +109,12 @@ class UserController extends User {
             return false;
         }
 
-        $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
-        if($idRelation == -1) {
-            return false;
-        }
-
-        $newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
+//        $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
+//        if($idRelation == -1) {
+//            return false;
+//        }
+//
+//        $newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
 
         return true;
     }

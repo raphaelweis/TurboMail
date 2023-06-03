@@ -1,4 +1,4 @@
-const RELATION_URL = "../../app/send_relation.php"
+const SEND_RELATION_URL = "../../app/send_relation.php"
 
 export function resizeTextArea() {
     $("#asking-message").each(function () {
@@ -19,15 +19,7 @@ export function relationRequest() {
     const INVALID_EMAIL = 1;
 
     // Sending post request
-    $.post(RELATION_URL, $("#relation-form").serialize(), (response) => {
+    $.post(SEND_RELATION_URL, $("#relation-form").serialize(), (response) => {
         console.log(response);
     })
 }
-
-// Not sure to implement
-// Feature : close popup when we click outside
-// window.onclick = function (event) {
-//     if (event.target == document.getElementById("add-friend")) {
-//         document.getElementById("add-friend").style.display = "none";
-//     }
-// };

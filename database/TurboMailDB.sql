@@ -5,8 +5,8 @@ USE TurboMailDB;
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 29, 2023 at 03:15 PM
+-- Host: 127.0.0.1
+-- Generation Time: Jun 04, 2023 at 02:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -21,17 +21,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `TurboMailDB`
+-- Database: `turbomaildb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Model\Message`
+-- Table structure for table `message`
 --
 
-CREATE TABLE `Message` (
+CREATE TABLE `message` (
   `id` bigint(20) NOT NULL,
+  `id_relation` bigint(20) NOT NULL,
   `id_sender` bigint(20) NOT NULL,
   `id_receiver` bigint(20) NOT NULL,
   `message` text NOT NULL,
@@ -41,23 +42,31 @@ CREATE TABLE `Message` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Relation`
+-- Table structure for table `relation`
 --
 
-CREATE TABLE `Relation` (
+CREATE TABLE `relation` (
   `id` bigint(20) NOT NULL,
   `id_sender` bigint(20) NOT NULL,
   `id_receiver` bigint(20) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `relation`
+--
+
+INSERT INTO `relation` (`id`, `id_sender`, `id_receiver`, `status`) VALUES
+(1, 1, 2, 0),
+(2, 1, 3, 0);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Model\User`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `id` bigint(20) NOT NULL,
   `first_name` varchar(128) NOT NULL,
   `last_name` varchar(128) NOT NULL,
@@ -66,29 +75,39 @@ CREATE TABLE `User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`) VALUES
+(1, 'Stephen', 'Curry', 'stephen.curry@nba.com', '$2y$10$vDtA4/0VJJ68fFYScVTDvOqGFYYHuIV/mg2cfwFlMbT/2o53Xe.Ii'),
+(2, 'LeBron', 'James', 'lebron.james@nba.com', '$2y$10$41HIxEeTtsHFbEJlGdESCejk.uU9jQEl0anca.9ZPdWiRFLpI5Y9e'),
+(3, 'Nikola', 'Jokic', 'nikola.jokic@nba.com', '$2y$10$d02xQf7IAviwX/jnziQWVelO4lt3kD2n40b6IvMZhwAcIz5jnXZ7O');
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `Model\Message`
+-- Indexes for table `message`
 --
-ALTER TABLE `Message`
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_relation` (`id_relation`),
+  ADD KEY `id_sender` (`id_sender`),
+  ADD KEY `id_receiver` (`id_receiver`);
+
+--
+-- Indexes for table `relation`
+--
+ALTER TABLE `relation`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_sender` (`id_sender`),
   ADD KEY `id_receiver` (`id_receiver`);
 
 --
--- Indexes for table `Relation`
+-- Indexes for table `user`
 --
-ALTER TABLE `Relation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_sender` (`id_sender`),
-  ADD KEY `id_receiver` (`id_receiver`);
-
---
--- Indexes for table `Model\User`
---
-ALTER TABLE `User`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQUE` (`email`);
 
@@ -97,40 +116,39 @@ ALTER TABLE `User`
 --
 
 --
--- AUTO_INCREMENT for table `Model\Message`
+-- AUTO_INCREMENT for table `message`
 --
-ALTER TABLE `Message`
+ALTER TABLE `message`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Relation`
+-- AUTO_INCREMENT for table `relation`
 --
-ALTER TABLE `Relation`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `relation`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `Model\User`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `User`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Model\Message`
+-- Constraints for table `message`
 --
-ALTER TABLE `Message`
-  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`id_sender`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`id_receiver`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id_relation`) REFERENCES `relation` (`id`);
 
 --
--- Constraints for table `Relation`
+-- Constraints for table `relation`
 --
-ALTER TABLE `Relation`
-  ADD CONSTRAINT `Relation_ibfk_1` FOREIGN KEY (`id_sender`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Relation_ibfk_2` FOREIGN KEY (`id_receiver`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `relation`
+  ADD CONSTRAINT `Relation_ibfk_1` FOREIGN KEY (`id_sender`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Relation_ibfk_2` FOREIGN KEY (`id_receiver`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

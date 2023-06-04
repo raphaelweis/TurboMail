@@ -1,9 +1,13 @@
+import {loggedInUser} from "./router.js";
+
 //-------------------------//
 // Public Functions        //
 //-------------------------//
 
 export function setupRelations() {
     const addFriendButton = $('#add-friend-button');
+
+    displayContacts(loggedInUser.relations);
 
     addFriendButton.on('click', () => {
         showAddFriendDialog();
@@ -13,6 +17,12 @@ export function setupRelations() {
 //-------------------------//
 // Private Functions       //
 //-------------------------//
+
+function displayContacts(relations) {
+    relations.forEach((relation)=> {
+        console.log(relation);
+    })
+}
 
 function selectContact() {
     //TODO

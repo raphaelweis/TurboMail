@@ -56,7 +56,6 @@ function fetchUserData() {
     return new Promise((resolve, reject) => {
         $.post(SESSION_URL, (response) => {
             const userData = JSON.parse(response);
-            console.log(userData);
 
             if (userData != null) {
                 resolve(userData);

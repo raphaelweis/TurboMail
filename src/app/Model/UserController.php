@@ -2,6 +2,8 @@
 
 namespace TurboMail\Model;
 
+use PDO;
+
 include_once 'User.php';
 include_once 'RelationController.php';
 include_once __DIR__ . '/../const/global.php';
@@ -132,9 +134,18 @@ class UserController extends User {
      * @param int $idUser
      * @return array
      */
-    public function GetRelation(int $idUser): array {
+    public function FetchRelations(int $idUser): array {
+        $statement = $this->connect()->prepare(SELECT_USER_RELATIONS_QUERY);
 
-        return [];
+        if (!$statement->execute([$idUser, $idUser])) {
+            $statement = null;
+            return -1;
+        }
+
+        $relation = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $statement = null;
+        return $relation;
     }
 
     /**

@@ -1,5 +1,3 @@
-import {loggedInUser} from "./router.js";
-
 //-------------------------//
 // Public Functions        //
 //-------------------------//

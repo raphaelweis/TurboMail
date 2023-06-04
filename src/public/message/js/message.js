@@ -71,7 +71,6 @@ function scrollElementToBottom(element) {
 }
 
 function sendMessage() {
-    const SUCCESS = 0;
     const COULD_NOT_SEND_MESSAGE = 1;
 
     const textarea = $('#message-textarea');

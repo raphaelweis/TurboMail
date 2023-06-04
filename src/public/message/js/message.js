@@ -1,9 +1,15 @@
-export function setupMessages(user) {
+import {sendMessageRequest, loggedInUser} from "./router.js";
+
+//-------------------------//
+// Public Functions        //
+//-------------------------//
+
+export function setupMessages() {
     const messageTextArea = $('#message-textarea');
     const sendBox = $('#send-box');
     const sendButton = $('#send-button');
 
-    insertUserInfo(user);
+    insertUserInfo();
 
     messageTextArea.on('keydown', (event) => {
         if (!event.shiftKey && event.key === 'Enter') {
@@ -28,10 +34,14 @@ export function setupMessages(user) {
     messageTextArea.focus();
 }
 
-function insertUserInfo(user) {
+//-------------------------//
+// Private Functions       //
+//-------------------------//
+
+function insertUserInfo() {
     const userInfo = $('#user-info');
 
-    userInfo.text(user["s_FirstName"] + " " + user["s_LastName"]);
+    userInfo.text(loggedInUser.firstName + " " + loggedInUser.lastName);
 }
 
 function resizeTextArea() {
@@ -60,7 +70,7 @@ function scrollElementToBottom(element) {
     element.scrollTop = element.scrollHeight;
 }
 
-export function sendMessage() {
+function sendMessage() {
     const SUCCESS = 0;
     const COULD_NOT_SEND_MESSAGE = 1;
 
@@ -74,14 +84,18 @@ export function sendMessage() {
         return;
     }
 
-    // const serverResponse = sendMessageRequest(messageText, currentContact);
-    // if (serverResponse !== SUCCESS) {
-    //     if (serverResponse === COULD_NOT_SEND_MESSAGE) {
-    //         alert('Sorry... We were not able to send your message! Is your internet down?')
-    //     } else {
-    //         alert('Oops... An unexpected server error happened! Sit back and relax while we try to fix the problem.')
-    //     }
-    // }
+    sendMessageRequest(loggedInUser.selectedContact, messageText)
+        .catch((error) => {
+            if (error === COULD_NOT_SEND_MESSAGE) {
+                alert('Sorry... We were not able to send your message! Is your internet down?')
+                textarea.val("");
+                removeMessageFromChat(messageDiv);
+            } else {
+                alert('Oops... An unexpected server error happened! Sit back and relax while we try to fix the problem.')
+                textarea.val("");
+                removeMessageFromChat(messageDiv);
+            }
+        })
 
     messageDiv.addClass('msg-box sent');
     messageDiv.html(messageText);
@@ -91,4 +105,8 @@ export function sendMessage() {
 
     scrollElementToBottom(chat[0]);
     resetTextArea();
+}
+
+function removeMessageFromChat(message) {
+    message.remove();
 }

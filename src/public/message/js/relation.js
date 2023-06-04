@@ -1,9 +1,24 @@
+import {loggedInUser} from "./router.js";
+
+//-------------------------//
+// Public Functions        //
+//-------------------------//
+
 export function setupRelations() {
     const addFriendButton = $('#add-friend-button');
 
     addFriendButton.on('click', () => {
         showAddFriendDialog();
     });
+}
+
+//-------------------------//
+// Private Functions       //
+//-------------------------//
+
+function selectContact() {
+    //TODO
+    user.selectedContact = null;
 }
 
 function showAddFriendDialog() {
@@ -37,4 +52,3 @@ function resizeDialog() {
 
     textarea.style.height = finalHeight + 'px';
 }
-

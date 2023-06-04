@@ -81,6 +81,10 @@ header {
     flex-direction: column;
     align-items: center;
 }
+.validation-error {
+    visibility: hidden;
+    color: var(--errorMessage);
+}
 
 #relation-form input[type='email'] {
     font-size: 1.5rem;

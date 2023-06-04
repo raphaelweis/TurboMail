@@ -137,9 +137,8 @@ class UserController extends User {
     public function FetchRelations(int $idUser): array {
         $statement = $this->connect()->prepare(SELECT_USER_RELATIONS_QUERY);
 
-        if (!$statement->execute([$idUser, $idUser])) {
+        if (!$statement->execute([$idUser, $idUser, $idUser])) {
             $statement = null;
-            return -1;
         }
 
         $relation = $statement->fetchAll(PDO::FETCH_ASSOC);

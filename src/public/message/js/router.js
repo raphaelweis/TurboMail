@@ -30,13 +30,11 @@ window.onload = () => {
 //-------------------------//
 
 export function sendMessageRequest(contactID, messageText) {
-    const messageObject = {
+    const messageData = {
         idSender: loggedInUser.id,
-        idReceiver: contactID,
+        idReceiver: loggedInUser.selectedContact,
         messageContent: messageText,
     }
-    const messageData = JSON.stringify(messageObject);
-
     return new Promise((resolve, reject) => {
         $.post(SEND_MESSAGE_URL, messageData, (response) => {
             const serverResponse = parseInt(response);

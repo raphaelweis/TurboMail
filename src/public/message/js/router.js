@@ -2,11 +2,11 @@ import {setupMessages} from "./message.js";
 import {errorDetector, setupRelations} from "./relation.js";
 import {User} from "../../User.js";
 
-const SEND_MESSAGE_URL = "../../app/send_message.php";
-const SESSION_URL = "../../app/session.php";
-const LOGOUT_URL = "../../app/logout.php";
-const LOGIN_PAGE_URL = "../login/login.html";
-const SEND_RELATION_URL = "../../app/send_relation.php"
+export const SEND_MESSAGE_URL = '../../app/send_message.php';
+export const SESSION_URL = "../../app/session.php";
+export const LOGOUT_URL = "../../app/logout.php";
+export const LOGIN_PAGE_URL = "../login/login.html";
+export const SEND_RELATION_URL = "../../app/send_relation.php"
 
 export let loggedInUser;
 
@@ -29,6 +29,20 @@ window.onload = () => {
 // Public Functions        //
 //-------------------------//
 
+export function fetchUserData() {
+    return new Promise((resolve, reject) => {
+        $.post(SESSION_URL, (response) => {
+            const userData = JSON.parse(response);
+
+            if (userData != null) {
+                resolve(userData);
+            } else {
+                reject();
+            }
+        }, 'text');
+    });
+}
+
 export function sendMessageRequest(contactID, messageText) {
     const messageData = {
         idSender: loggedInUser.id,
@@ -48,23 +62,21 @@ export function sendMessageRequest(contactID, messageText) {
     })
 }
 
+export function setupMessagePage() {
+    const logoutButton = $('#logout-button');
+    const sendRelationButton = $('#send-relation');
+
+    logoutButton.on('click', () => {
+        logoutRequest();
+    });
+    sendRelationButton.on('click', () => {
+        addFriend();
+    });
+}
+
 //-------------------------//
 // Private Functions       //
 //-------------------------//
-
-function fetchUserData() {
-    return new Promise((resolve, reject) => {
-        $.post(SESSION_URL, (response) => {
-            const userData = JSON.parse(response);
-
-            if (userData != null) {
-                resolve(userData);
-            } else {
-                reject();
-            }
-        }, 'text');
-    });
-}
 
 function logoutRequest() {
     $.post(LOGOUT_URL, () => {
@@ -80,7 +92,7 @@ function addFriend() {
     addFriendErrorDiv.text("Error: ");
 
     $.post(SEND_RELATION_URL, formData, (response) => {
-        for(let i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.length; i++) {
             errorDetector(parseInt(response[i]), addFriendErrorDiv);
         }
 
@@ -89,16 +101,4 @@ function addFriend() {
 
         console.log(response);
     }, "json");
-}
-
-function setupMessagePage() {
-    const logoutButton = $('#logout-button');
-    const sendRelationButton = $('#send-relation');
-
-    logoutButton.on('click', () => {
-        logoutRequest();
-    });
-    sendRelationButton.on('click', () => {
-        addFriend();
-    });
 }

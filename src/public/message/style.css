@@ -138,10 +138,12 @@ main {
 }
 
 .contact {
-    height: 75px;
-    border-bottom: 1px solid var(--darkBlue);
-    background-color: var(--lightBlue);
-    transition: background-color 0.3s ease;
+    height: 5rem;
+    /*border-bottom: 1px solid var(--darkBlue);*/
+    border-bottom: none;
+    background-image: linear-gradient(to right, var(--backgroundColor), var(--darkBlue));
+    background-size: 200% 100%;
+    transition: background-position 0.1s linear;
     text-align: center;
 
     display: flex;
@@ -150,7 +152,8 @@ main {
 }
 
 .contact:hover {
-    background-color: var(--darkBlue);
+    background-position: -100% 0;
+    cursor: pointer;
 }
 
 .contact:active {
@@ -250,6 +253,11 @@ main {
 /* RESPONSIVE DESIGN */
 @media (max-width: 700px) {
     #messages {
+        display: none;
+        visibility: hidden;
+    }
+
+    .navbar-title {
         display: none;
         visibility: hidden;
     }

@@ -1,5 +1,7 @@
 import {loggedInUser} from "./router.js";
 
+const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php'
+
 //-------------------------//
 // Public Functions        //
 //-------------------------//
@@ -7,7 +9,7 @@ import {loggedInUser} from "./router.js";
 export function setupRelations() {
     const addFriendButton = $('#add-friend-button');
 
-    displayContacts(loggedInUser.relations);
+    updateContacts();
 
     addFriendButton.on('click', () => {
         showAddFriendDialog();
@@ -15,7 +17,6 @@ export function setupRelations() {
 }
 
 export function errorDetector(error, errorDiv) {
-
     const SUCCESS = 0;
     const EMPTY_INPUTS = 1;
     const INVALID_EMAIL = 2;
@@ -26,6 +27,7 @@ export function errorDetector(error, errorDiv) {
 
     switch (error) {
         case SUCCESS:
+            updateContacts();
             break;
         case EMPTY_INPUTS:
             errorDiv.append("empty inputs, ");
@@ -55,9 +57,23 @@ export function errorDetector(error, errorDiv) {
 // Private Functions       //
 //-------------------------//
 
+function updateContacts() {
+    $.post(FETCH_CONTACTS_URL, {email: loggedInUser.email}, (response) => {
+        let contacts = JSON.parse(response);
+        displayContacts(contacts);
+    }, 'text');
+}
+
 function displayContacts(relations) {
-    relations.forEach((relation)=> {
-        console.log(relation);
+    const contactsContainer = $('#contacts');
+
+    contactsContainer.empty();
+
+    relations.forEach((relation) => {
+        const contactDiv = $('<div></div>');
+        contactDiv.addClass('contact');
+        contactDiv.html(relation.first_name + ' ' + relation.last_name);
+        contactsContainer.append(contactDiv);
     })
 }
 

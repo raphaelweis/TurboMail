@@ -67,8 +67,8 @@ export function sendMessage() {
     const textarea = $('#message-textarea');
     const chat = $('#chat');
 
-    let messageText = textarea.val().replace(/\n/g, '<br/>'); // replace the '\n' characters with '<br>' so that we can preserve line breaks
-    let messageDiv = $('<div></div>');
+    const messageText = textarea.val().replace(/\n/g, '<br/>'); // replace the '\n' characters with '<br>' so that we can preserve line breaks
+    const messageDiv = $('<div></div>');
 
     if (messageText === "") {
         return;

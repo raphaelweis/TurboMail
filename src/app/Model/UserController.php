@@ -82,36 +82,50 @@ class UserController extends User {
      * @param int $idSender
      * @param string $emailReceiver
      * @param string $message
-     * @return int
+     * @return string
      */
-    public function AddFriend(int $idSender, string $emailReceiver, string $message): int {
+    public function AddFriend(int $idSender, string $emailReceiver, string $message): string {
+        $errors = [];
+
+        if(empty($emailReceiver) || empty($message)) {
+            $errors[] = 1;
+        }
         if($this->InvalidEmail($emailReceiver)) {
-            return 0;
+            $errors[] = 2;
+        }
+        if(count($errors) > 0) {
+            return json_encode($errors);
         }
 
         $idReceiver = $this->GetUserIdByEmail($emailReceiver);
         if($idReceiver == -1) {
-            return 0;
+            $errors[] = 3;
         }
-
         if($idSender == $idReceiver) {
-            return 0;
+            $errors[] = 4;
+        }
+        if(count($errors) > 0) {
+            return json_encode($errors);
         }
 
         $newRelation = new RelationController($idSender, $idReceiver);
 
         if($newRelation->RelationExist()) {
-            return 0;
+            $errors[] = 5;
         }
 
         $idRelation = $newRelation->GetRelationId($idSender, $idReceiver);
         if($idRelation == -1) {
-            return 0;
+            $errors[] = 6;
         }
 
-        //$newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
+        if(count($errors) == 0) {
+            //$newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
 
-        return 1;
+            $errors[] = 0;
+        }
+
+        return json_encode($errors);
     }
 
     /**

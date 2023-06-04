@@ -1,5 +1,5 @@
 import {setupMessages} from "./message.js";
-import {setupRelations} from "./relation.js";
+import {errorDetector, setupRelations} from "./relation.js";
 import {User} from "../../User.js";
 
 const SEND_MESSAGE_URL = "../../app/send_message.php";
@@ -75,10 +75,20 @@ function logoutRequest() {
 function addFriend() {
     const signUpForm = $('#relation-form');
     const formData = signUpForm.serialize();
+    const addFriendErrorDiv = $('#add-friend-error');
+
+    addFriendErrorDiv.text("Error: ");
 
     $.post(SEND_RELATION_URL, formData, (response) => {
+        for(let i = 0; i < response.length; i++) {
+            errorDetector(parseInt(response[i]), addFriendErrorDiv);
+        }
+
+        addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
+        addFriendErrorDiv.css("visibility", "visible");
+
         console.log(response);
-    })
+    }, "json");
 }
 
 function setupMessagePage() {

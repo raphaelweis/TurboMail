@@ -14,6 +14,43 @@ export function setupRelations() {
     });
 }
 
+export function errorDetector(error, errorDiv) {
+
+    const SUCCESS = 0;
+    const EMPTY_INPUTS = 1;
+    const INVALID_EMAIL = 2;
+    const USER_NOT_FOUND = 3;
+    const SAME_USER = 4;
+    const RELATION_ALREADY_EXISTS = 5;
+    const RELATION_NOT_FOUND = 6;
+
+    switch (error) {
+        case SUCCESS:
+            break;
+        case EMPTY_INPUTS:
+            errorDiv.append("empty inputs, ");
+            break;
+        case INVALID_EMAIL:
+            errorDiv.append("incorrect email format, ");
+            break;
+        case USER_NOT_FOUND:
+            errorDiv.append("user not found, ");
+            break;
+        case SAME_USER:
+            errorDiv.append("your are this user, ");
+            break;
+        case RELATION_ALREADY_EXISTS:
+            errorDiv.append("relation already exists, ");
+            break;
+        case RELATION_NOT_FOUND:
+            errorDiv.append("relation not found, ");
+            break;
+        default:
+            alert("Oops, something unexpected happened...");
+            break;
+    }
+}
+
 //-------------------------//
 // Private Functions       //
 //-------------------------//

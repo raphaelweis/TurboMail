@@ -40,7 +40,7 @@ class User extends DataBaseHandler {
         return 0;
     }
 
-    protected function GetUserIdByEmail($email): int {
+    public function GetUserIdByEmail($email): int {
 
         $statement = $this->connect()->prepare(SELECT_USER_ID_BY_MAIL_QUERY);
         if (!$statement->execute([$email])) {

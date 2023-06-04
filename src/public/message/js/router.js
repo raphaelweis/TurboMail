@@ -76,10 +76,11 @@ function logoutRequest() {
 function addFriend() {
     const signUpForm = $('#relation-form');
     const formData = signUpForm.serialize();
+    const addFriendErrorDiv = $('#add-friend-error');
+
+    addFriendErrorDiv.text("Error: ");
 
     $.post(SEND_RELATION_URL, formData, (response) => {
-        const addFriendErrorDiv = $('#add-friend-error');
-
         for(let i = 0; i < response.length; i++) {
             errorDetector(parseInt(response[i]), addFriendErrorDiv);
         }

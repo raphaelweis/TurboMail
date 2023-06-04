@@ -1,5 +1,7 @@
 export function setupRelations() {
-    $("#add-friend-button").on('click', () => {
+    const addFriendButton = $('#add-friend-button');
+
+    addFriendButton.on('click', () => {
         showAddFriendDialog();
     });
 }
@@ -24,6 +26,7 @@ function showAddFriendDialog() {
 
 function resizeDialog() {
     const textarea = $('#request-message')[0];
+
     textarea.style.height = 'auto';
 
     const currentScrollHeight = textarea.scrollHeight;

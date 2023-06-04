@@ -6,14 +6,14 @@ export function setupMessages(user) {
     insertUserInfo(user);
 
     messageTextArea.on('keydown', (event) => {
-        if (!event.shiftKey && event.keyCode === 13) { // enter key
+        if (!event.shiftKey && event.key === 'Enter') {
             event.preventDefault();
             sendMessage();
         }
-        if (event.shiftKey && event.keyCode === 13) {
+        if (event.shiftKey && event.key === 'Enter') {
             insertNewLine();
         }
-    }).focus();
+    })
     messageTextArea.on('focus', () => {
         resizeTextArea();
     });
@@ -23,11 +23,14 @@ export function setupMessages(user) {
     sendBox.on('input', () => {
         resizeTextArea();
     });
+
     resizeTextArea();
+    messageTextArea.focus();
 }
 
 function insertUserInfo(user) {
     const userInfo = $('#user-info');
+
     userInfo.text(user["s_FirstName"] + " " + user["s_LastName"]);
 }
 
@@ -49,6 +52,7 @@ function resetTextArea() {
 
 function insertNewLine() {
     const textarea = $('#message-textarea');
+
     textarea.val(textarea.val() + '\n');
 }
 

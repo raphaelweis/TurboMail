@@ -88,5 +88,3 @@ const SELECT_USER_RELATIONS_QUERY = 'SELECT ' . USER_TABLE . '.' . ID_USER_TABLE
 /***********************/
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
-
-echo SELECT_USER_RELATIONS_QUERY;

@@ -1,15 +1,11 @@
 <?php
 
-use TurboMail\Model\Message;
+use TurboMail\Model\MessageController;
 
-include_once 'Model/Message.php';
+include_once 'Model/MessageController.php';
 
 $relations = [];
-if (isset($_POST['email'])) {
-    $email = $_POST['email'];
-    $user = new UserController($email);
-    $idUser = $user->GetUserIdByEmail($email);
-    $relations = $user->FetchRelations($idUser);
+if (isset($_POST['relationId'])) {
+    $relationId = trim(htmlspecialchars($_POST['relationId']));
+    echo json_encode(MessageController::getConversationMessages($relationId));
 }
-
-echo json_encode($relations);

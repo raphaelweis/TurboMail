@@ -76,9 +76,10 @@ function sendMessageRequest(messageText) {
 
 function fetchMessagesRequest() {
     const relationId = loggedInUser.getSelectedContact().relationId;
-    $.post(FETCH_MESSAGES_URL, relationId, (response) => {
-        return response;
-    }, 'json');
+
+    $.post(FETCH_MESSAGES_URL, {relationId: relationId}, (response) => {
+        const messageArray = JSON.parse(response);
+    }, 'text');
 }
 
 function logoutRequest() {
@@ -266,22 +267,6 @@ function selectContact(relationId, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
     const messageTextArea = $('#message-textarea');
 
-    const SUCCESS = 0;
-
-    contactDiv.css({
-        'background-position': '-100% 0',
-        'font-size': '1.3rem',
-        'color': '#ffffff',
-    });
-    loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
-
-    const messageList = fetchMessagesRequest();
-    console.log(messageList);
-
-    if (messageList === null) {
-        alert('Oops... We had trouble fetching your messages. Try again in a few minutes maybe ?');
-        return;
-    }
 
     if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
@@ -295,6 +280,15 @@ function selectContact(relationId, contactDiv) {
         });
         messageTextArea.focus();
     }
+
+    loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
+    contactDiv.css({
+        'background-position': '-100% 0',
+        'font-size': '1.3rem',
+        'color': '#ffffff',
+    });
+
+    fetchMessagesRequest();
 }
 
 function addFriendErrorDetector(error, errorDiv) {

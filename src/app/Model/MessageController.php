@@ -42,9 +42,6 @@ class MessageController extends Message {
     }
 
     /**
-     * @param $sender
-     * @param $receiver
-     *
      * @return int
      */
     public function findRelationId(): int {
@@ -85,5 +82,17 @@ class MessageController extends Message {
      */
     public function getContent(): string {
         return $this->content;
+    }
+
+    /**
+     * @param $relationId
+     *
+     * @return array
+     */
+    public static function getConversationMessages($relationId): array {
+        //TODO: Separate messages in 2 arrays, one from sender and one from receiver
+        $messageObject = new Message();
+        $messages[] = $messageObject->fetchMessagesByRelationId($relationId);
+        return $messages;
     }
 }

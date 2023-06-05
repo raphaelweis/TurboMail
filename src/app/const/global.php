@@ -83,6 +83,7 @@ const SELECT_USER_RELATIONS_QUERY = 'SELECT ' . USER_TABLE . '.' . ID_USER_TABLE
                                             ' OR (' . USER_TABLE . '.' . ID_USER_TABLE . ' = ' . RELATION_TABLE . '.' . ID_RECEIVER_RELATION_TABLE .
                                             ' AND ' . RELATION_TABLE . '.' . ID_SENDER_RELATION_TABLE . '=?))' .
                                     ' WHERE ' . USER_TABLE . '.' . ID_USER_TABLE . '<>?;';
+const SELECT_MESSAGES_BY_RELATION_QUERY = 'SELECT * FROM ' . MESSAGE_TABLE . ' WHERE ' . ID_RELATION_MESSAGE_TABLE . '=?;';
 
 // update queries
 const UPDATE_RELATION_STATUS_QUERY = 'UPDATE ' . RELATION_TABLE . ' SET ' . STATUS_RELATION_TABLE .'=? WHERE ' . ID_RELATION_TABLE . '=?;';

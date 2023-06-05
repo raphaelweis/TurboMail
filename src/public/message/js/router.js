@@ -246,10 +246,10 @@ function selectContact(relationId, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
     const messageTextArea = $('#message-textarea');
 
-    console.log(relationId);
     if (loggedInUser.getSelectedContact() != undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
             'background-position': '0 0',
+            'font-size': '1rem',
             'color': '#000000',
             'font-weight': 'normal',
         });
@@ -262,6 +262,7 @@ function selectContact(relationId, contactDiv) {
     loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
     contactDiv.css({
         'background-position': '-100% 0',
+        'font-size': '1.2rem',
         'color': '#ffffff',
         'font-weight': 'bold',
     });

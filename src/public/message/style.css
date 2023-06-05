@@ -143,7 +143,7 @@ main {
     border-bottom: none;
     background-image: linear-gradient(to right, var(--backgroundColor), var(--darkBlue));
     background-size: 200% 100%;
-    transition: background-position 0.1s linear;
+    transition: all 0.1s linear;
     text-align: center;
 
     display: flex;

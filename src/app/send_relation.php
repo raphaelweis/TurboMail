@@ -14,5 +14,5 @@ if(isset($_POST['email-searched'], $_POST['request-message'])) {
 
     $user = new UserController($_SESSION['s_Email']);
 
-    echo $user->AddFriend($idSender, $emailReceiver, $message);
+    echo json_encode($user->AddFriend($idSender, $emailReceiver, $message));
 }

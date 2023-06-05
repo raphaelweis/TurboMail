@@ -6,7 +6,7 @@ use PDO;
 
 include_once 'User.php';
 include_once 'RelationController.php';
-include_once 'Message.php';
+include_once 'MessageController.php';
 include_once __DIR__ . '/../const/global.php';
 
 class UserController extends User {
@@ -83,12 +83,13 @@ class UserController extends User {
     }
 
     /**
-     * @param int $idSender
-     * @param string $emailReceiver
-     * @param string $message
-     * @return string
+     * @param  int  $idSender
+     * @param  string  $emailReceiver
+     * @param  string  $message
+     *
+     * @return array
      */
-    public function AddFriend(int $idSender, string $emailReceiver, string $message): string {
+    public function AddFriend(int $idSender, string $emailReceiver, string $message): array {
         $errors = [];
 
         if(empty($emailReceiver) || empty($message)) {
@@ -130,7 +131,7 @@ class UserController extends User {
             $errors[] = 0;
         }
 
-        return json_encode($errors);
+        return $errors;
     }
 
     /**

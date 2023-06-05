@@ -2,6 +2,8 @@
 
 namespace TurboMail\Model;
 
+use PDO;
+
 include_once 'Message.php';
 include_once __DIR__.'/../const/global.php';
 
@@ -47,33 +49,45 @@ class MessageController extends Message {
     public function findRelationId(): int {
         $statement = $this->connect()->prepare(SELECT_RELATION_QUERY);
 
-        if (!$statement->execute([$this->sender, $this->receiver, $this->receiver, $this->sender])) {
+        if (!$statement->execute([
+            $this->sender, $this->receiver, $this->receiver, $this->sender,
+        ])
+        ) {
             $statement = null;
+
             return 1;
         }
 
         if ($statement->rowCount() == 0) {
             $statement = null;
+
             return 1;
         }
 
         $relationId = $statement->fetch(PDO::FETCH_COLUMN);
         $statement = null;
+
         return $relationId;
     }
 
     /**
      * @return int
      */
-    public function insertIntoDB():int {
+    public function insertIntoDB(): int {
         $statement = $this->connect()->prepare(INSERT_MESSAGE_QUERY);
 
-        if (!$statement->execute([$this->relation, $this->sender, $this->receiver, $this->content, $this->date])) {
+        if (!$statement->execute([
+            $this->relation, $this->sender, $this->receiver, $this->content,
+            $this->date,
+        ])
+        ) {
             $statement = null;
+
             return 1;
         }
 
         $statement = null;
+
         return 0;
     }
 
@@ -90,9 +104,13 @@ class MessageController extends Message {
      * @return array
      */
     public static function getConversationMessages($relationId): array {
-        //TODO: Separate messages in 2 arrays, one from sender and one from receiver
         $messageObject = new Message();
-        $messages[] = $messageObject->fetchMessagesByRelationId($relationId);
-        return $messages;
+        $allMessages = $messageObject->fetchMessagesByRelationId($relationId);
+
+        if ($allMessages == null) {
+            return [];
+        };
+
+        return $allMessages;
     }
 }

@@ -41,7 +41,7 @@ function fetchUserData() {
             } else {
                 reject();
             }
-        }, 'text');
+        });
     });
 }
 
@@ -49,19 +49,18 @@ function updateContacts() {
     $.post(FETCH_CONTACTS_URL, {email: loggedInUser.getEmail()}, (response) => {
         let contacts = JSON.parse(response);
         displayContacts(contacts);
-    }, 'text');
+    });
 }
 
 function sendMessageRequest(messageText) {
     const messageData = {
         idSender: loggedInUser.getId(),
-        idReceiver: loggedInUser.getSelectedContact().relationId,
+        idReceiver: loggedInUser.getSelectedContact().contactId,
         messageContent: messageText,
     };
     return new Promise((resolve, reject) => {
         $.post(SEND_MESSAGE_URL, messageData, (response) => {
             const serverResponse = parseInt(response);
-            console.log(response);
 
             if (serverResponse === 0) {
                 resolve(serverResponse);
@@ -70,7 +69,7 @@ function sendMessageRequest(messageText) {
             } else {
                 reject(serverResponse);
             }
-        }, 'text');
+        });
     })
 }
 
@@ -79,30 +78,33 @@ function fetchMessagesRequest() {
 
     $.post(FETCH_MESSAGES_URL, {relationId: relationId}, (response) => {
         const messageArray = JSON.parse(response);
-    }, 'text');
+        displayMessages(messageArray);
+    });
 }
 
 function logoutRequest() {
     $.post(LOGOUT_URL, () => {
         window.location.href = LOGIN_PAGE_URL;
-    }, 'text');
+    });
 }
 
 function addFriend() {
     const signUpForm = $('#relation-form');
-    const formData = signUpForm.serialize();
     const addFriendErrorDiv = $('#add-friend-error');
+    const formData = signUpForm.serialize();
 
     addFriendErrorDiv.text('Error: ');
 
     $.post(SEND_RELATION_URL, formData, (response) => {
-        for (let i = 0; i < response.length; i++) {
-            addFriendErrorDetector(parseInt(response[i]), addFriendErrorDiv);
-        }
+        const serverResponse = JSON.parse(response);
+
+        serverResponse.forEach((response) => {
+            addFriendErrorDetector(parseInt(response), addFriendErrorDiv);
+        })
 
         addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
         addFriendErrorDiv.css('visibility', 'visible');
-    }, 'text');
+    });
 }
 
 //-----------------------------//
@@ -217,7 +219,23 @@ function sendMessage() {
     resetTextArea();
 }
 
-function displayMessages() {
+function displayMessages(messagesArray) {
+    const chat = $('#chat');
+
+    messagesArray.forEach((message) => {
+        const messageDiv = $('<div></div>');
+
+        messageDiv.html(message['message']);
+        messageDiv.addClass('msg-box');
+
+        if (loggedInUser.getId() === message['id_sender']) {
+            messageDiv.addClass('sent');
+        } else {
+            messageDiv.addClass('received');
+        }
+
+        chat.append(messageDiv);
+    })
 }
 
 function removeMessageFromChat(message) {
@@ -250,7 +268,7 @@ function displayContacts(relations) {
         contactDiv.html(relation.first_name + ' ' + relation.last_name);
 
         contactDiv.on('click', () => {
-            selectContact(relation.id, contactDiv);
+            selectContact(relation.id, relation.id_relation, contactDiv);
         });
 
         if (!relation.status) {
@@ -263,7 +281,7 @@ function displayContacts(relations) {
     })
 }
 
-function selectContact(relationId, contactDiv) {
+function selectContact(contactId, relationId, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
     const messageTextArea = $('#message-textarea');
 
@@ -281,7 +299,7 @@ function selectContact(relationId, contactDiv) {
         messageTextArea.focus();
     }
 
-    loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
+    loggedInUser.setSelectedContact({contactId: contactId, relationId: relationId, contactDiv: contactDiv});
     contactDiv.css({
         'background-position': '-100% 0',
         'font-size': '1.3rem',

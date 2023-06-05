@@ -16,8 +16,8 @@ class RelationController extends Relation {
         $this->status = 0;
     }
 
-    public function RelationExist(): int {
-        if($this->RelationAlreadyExist($this->idSender, $this->idReceiver)) {
+    public function RelationExists(): int {
+        if($this->RelationAlreadyExists($this->idSender, $this->idReceiver)) {
             return 1;
         }
 
@@ -27,5 +27,4 @@ class RelationController extends Relation {
 
         return 0;
     }
-
 }

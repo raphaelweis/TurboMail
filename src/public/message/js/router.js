@@ -230,6 +230,7 @@ function displayContacts(relations) {
     contactsContainer.empty();
 
     relations.forEach((relation) => {
+        console.log(relation);
         const contactDiv = $('<div></div>');
         contactDiv.addClass('contact');
         contactDiv.html(relation.first_name + ' ' + relation.last_name);

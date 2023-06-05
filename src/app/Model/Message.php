@@ -44,6 +44,9 @@ class Message extends DataBaseHandler {
         $this->relation = $this->findRelationId();
     }
 
+    /**
+     * @return int
+     */
     public function findRelationId(): int {
         $statement = $this->connect()->prepare(SELECT_RELATION_QUERY);
 
@@ -62,6 +65,9 @@ class Message extends DataBaseHandler {
         return $relationId;
     }
 
+    /**
+     * @return int
+     */
     public function insertIntoDB(): int {
         $statement = $this->connect()->prepare(INSERT_MESSAGE_QUERY);
 

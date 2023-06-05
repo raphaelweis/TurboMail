@@ -112,7 +112,7 @@ class UserController extends User {
 
         $newRelation = new RelationController($idSender, $idReceiver);
 
-        if($newRelation->RelationExist()) {
+        if($newRelation->RelationExists()) {
             $errors[] = 5;
         }
 

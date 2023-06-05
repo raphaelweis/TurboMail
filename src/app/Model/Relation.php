@@ -5,8 +5,7 @@ namespace TurboMail\Model;
 use PDO;
 
 class Relation {
-
-    protected function RelationAlreadyExist(int $idSender, int $idReceiver): int {
+    protected function RelationAlreadyExists(int $idSender, int $idReceiver): int {
         $dataBaseHandler = new DataBaseHandler();
 
         $statement = $dataBaseHandler->connect()->prepare(SELECT_RELATION_QUERY);
@@ -37,8 +36,21 @@ class Relation {
         }
 
         $statement = null;
-
         return 1;
+    }
+
+    public function AcceptRelation(int $newStatus, int $relationId) {
+        $databaseHandler = new DataBaseHandler();
+
+        $statement = $databaseHandler->connect()->prepare(UPDATE_RELATION_STATUS_QUERY);
+        if (!$statement->execute([$newStatus, $relationId])) {
+            $statement = null;
+
+            return 1;
+        }
+
+        $statement = null;
+        return 0;
     }
 
     public function GetRelationId(int $idSender, int $idReceiver): int {

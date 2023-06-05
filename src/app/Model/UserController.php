@@ -124,7 +124,7 @@ class UserController extends User {
         }
 
         if(count($errors) == 0) {
-            $newMessage = new Message($idSender, $idReceiver, $message);
+            $newMessage = new MessageController($idSender, $idReceiver, $message);
             $newMessage->insertIntoDB();
 
             $errors[] = 0;

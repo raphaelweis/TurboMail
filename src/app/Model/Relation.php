@@ -4,11 +4,10 @@ namespace TurboMail\Model;
 
 use PDO;
 
-class Relation {
+class Relation extends DataBaseHandler {
     protected function RelationAlreadyExists(int $idSender, int $idReceiver): int {
-        $dataBaseHandler = new DataBaseHandler();
+        $statement = $this->connect()->prepare(SELECT_RELATION_QUERY);
 
-        $statement = $dataBaseHandler->connect()->prepare(SELECT_RELATION_QUERY);
         if (!$statement->execute([$idSender, $idReceiver, $idReceiver, $idSender])) {
             $statement = null;
 
@@ -26,9 +25,8 @@ class Relation {
     }
 
     protected function SendRelation(int $idSender, int $idReceiver, int $status): int {
-        $dataBaseHandler = new DataBaseHandler();
+        $statement = $this->connect()->prepare(SEND_RELATION_QUERY);
 
-        $statement = $dataBaseHandler->connect()->prepare(SEND_RELATION_QUERY);
         if(!$statement->execute([$idSender, $idReceiver, $status])) {
             $statement = null;
 
@@ -39,10 +37,9 @@ class Relation {
         return 1;
     }
 
-    public function AcceptRelation(int $newStatus, int $relationId) {
-        $databaseHandler = new DataBaseHandler();
+    public function AcceptRelation(int $newStatus, int $relationId): int {
+        $statement = $this->connect()->prepare(UPDATE_RELATION_STATUS_QUERY);
 
-        $statement = $databaseHandler->connect()->prepare(UPDATE_RELATION_STATUS_QUERY);
         if (!$statement->execute([$newStatus, $relationId])) {
             $statement = null;
 
@@ -54,9 +51,8 @@ class Relation {
     }
 
     public function GetRelationId(int $idSender, int $idReceiver): int {
-        $dataBaseHandler = new DataBaseHandler();
+        $statement = $this->connect()->prepare(SELECT_RELATION_QUERY);
 
-        $statement = $dataBaseHandler->connect()->prepare(SELECT_RELATION_QUERY);
         if (!$statement->execute([$idSender, $idReceiver, $idReceiver, $idSender])) {
             $statement = null;
 

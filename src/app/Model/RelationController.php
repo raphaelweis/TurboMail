@@ -5,8 +5,17 @@ namespace TurboMail\Model;
 include_once 'Relation.php';
 
 class RelationController extends Relation {
+    /**
+     * @var int
+     */
     private int $idSender;
+    /**
+     * @var int
+     */
     private int $idReceiver;
+    /**
+     * @var int
+     */
     private int $status;
 
     // Constructor

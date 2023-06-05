@@ -1,11 +1,12 @@
-import {User} from "../../User.js";
+import {User} from '../../User.js';
 
 const SEND_MESSAGE_URL = '../../app/send_message.php';
-const SESSION_URL = "../../app/session.php";
-const LOGOUT_URL = "../../app/logout.php";
-const LOGIN_PAGE_URL = "../login/login.html";
-const SEND_RELATION_URL = "../../app/send_relation.php"
-const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php'
+const SESSION_URL = '../../app/session.php';
+const LOGOUT_URL = '../../app/logout.php';
+const LOGIN_PAGE_URL = '../login/login.html';
+const SEND_RELATION_URL = '../../app/send_relation.php';
+const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php';
+const FETCH_MESSAGES_URL = '../../app/fetch_messages.php';
 
 const loggedInUser = new User();
 
@@ -73,6 +74,13 @@ function sendMessageRequest(messageText) {
     })
 }
 
+function fetchMessagesRequest() {
+    const relationId = loggedInUser.getSelectedContact().relationId;
+    $.post(FETCH_MESSAGES_URL, relationId, (response) => {
+        return response;
+    }, 'json');
+}
+
 function logoutRequest() {
     $.post(LOGOUT_URL, () => {
         window.location.href = LOGIN_PAGE_URL;
@@ -84,7 +92,7 @@ function addFriend() {
     const formData = signUpForm.serialize();
     const addFriendErrorDiv = $('#add-friend-error');
 
-    addFriendErrorDiv.text("Error: ");
+    addFriendErrorDiv.text('Error: ');
 
     $.post(SEND_RELATION_URL, formData, (response) => {
         for (let i = 0; i < response.length; i++) {
@@ -92,10 +100,8 @@ function addFriend() {
         }
 
         addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
-        addFriendErrorDiv.css("visibility", "visible");
-
-        console.log(response);
-    }, "json");
+        addFriendErrorDiv.css('visibility', 'visible');
+    }, 'text');
 }
 
 //-----------------------------//
@@ -210,6 +216,9 @@ function sendMessage() {
     resetTextArea();
 }
 
+function displayMessages() {
+}
+
 function removeMessageFromChat(message) {
     message.remove();
 }
@@ -257,6 +266,23 @@ function selectContact(relationId, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
     const messageTextArea = $('#message-textarea');
 
+    const SUCCESS = 0;
+
+    contactDiv.css({
+        'background-position': '-100% 0',
+        'font-size': '1.3rem',
+        'color': '#ffffff',
+    });
+    loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
+
+    const messageList = fetchMessagesRequest();
+    console.log(messageList);
+
+    if (messageList === null) {
+        alert('Oops... We had trouble fetching your messages. Try again in a few minutes maybe ?');
+        return;
+    }
+
     if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
             'background-position': '0 0',
@@ -269,12 +295,6 @@ function selectContact(relationId, contactDiv) {
         });
         messageTextArea.focus();
     }
-    loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
-    contactDiv.css({
-        'background-position': '-100% 0',
-        'font-size': '1.3rem',
-        'color': '#ffffff',
-    });
 }
 
 function addFriendErrorDetector(error, errorDiv) {

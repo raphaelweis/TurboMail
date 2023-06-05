@@ -9,7 +9,7 @@ session_start();
 $array = [];
 if (!empty($_SESSION)) {
     foreach ($_SESSION as $key => $value) {
-        $array[$key] = $value;
+        $array[$key] = htmlspecialchars_decode($value);
     }
 } else {
     $array = null;

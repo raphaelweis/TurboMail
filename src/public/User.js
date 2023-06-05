@@ -10,6 +10,7 @@ export class User {
         this.#firstName = undefined
         this.#lastName = undefined
         this.#email = undefined
+        this.#selectedContact = undefined;
     }
 
     // setters

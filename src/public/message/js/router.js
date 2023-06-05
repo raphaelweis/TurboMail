@@ -137,7 +137,6 @@ function setupMessages() {
     });
 
     resizeTextArea();
-    messageTextArea.focus();
 }
 
 function insertUserInfo() {
@@ -236,13 +235,37 @@ function displayContacts(relations) {
         contactDiv.html(relation.first_name + ' ' + relation.last_name);
 
         contactDiv.on('click', () => {
-            selectContact(relation.id);
+            selectContact(relation.id, contactDiv);
         });
 
         contactsContainer.append(contactDiv);
     })
 }
 
+function selectContact(relationId, contactDiv) {
+    const messagesOverlay = $('#messages-overlay');
+    const messageTextArea = $('#message-textarea');
+
+    console.log(relationId);
+    if (loggedInUser.getSelectedContact() != undefined) {
+        loggedInUser.getSelectedContact().contactDiv.css({
+            'background-position': '0 0',
+            'color': '#000000',
+            'font-weight': 'normal',
+        });
+    } else {
+        messagesOverlay.fadeOut(100, () => {
+            messagesOverlay.remove();
+        });
+        messageTextArea.focus();
+    }
+    loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
+    contactDiv.css({
+        'background-position': '-100% 0',
+        'color': '#ffffff',
+        'font-weight': 'bold',
+    });
+}
 
 function addFriendErrorDetector(error, errorDiv) {
     const SUCCESS = 0;
@@ -279,11 +302,6 @@ function addFriendErrorDetector(error, errorDiv) {
             alert("Oops, something unexpected happened...");
             break;
     }
-}
-
-function selectContact(relationID) {
-    loggedInUser.setSelectedContact(relationID);
-    console.log(loggedInUser.getSelectedContact());
 }
 
 function showAddFriendDialog() {

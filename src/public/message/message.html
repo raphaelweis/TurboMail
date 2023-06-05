@@ -12,8 +12,6 @@
     src="../../../node_modules/jquery/dist/jquery.js"
   ></script>
   <script type="module" src="./js/router.js"></script>
-  <script type="module" src="./js/message.js"></script>
-  <script type="module" src="./js/relation.js"></script>
 
   <title>Messages</title>
 </head>
@@ -66,6 +64,12 @@
   </dialog>
   <section id="contacts" class="item"></section>
   <section id="messages" class="item">
+    <div id="messages-overlay">
+      <div id="helper-text">
+        <h2>No contact selected</h2>
+        <p>Please select one of your amazing friends, or add a new one!</p>
+      </div>
+    </div>
     <div id="chat"></div>
     <div id="send-box">
         <textarea

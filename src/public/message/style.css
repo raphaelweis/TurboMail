@@ -81,6 +81,7 @@ header {
     flex-direction: column;
     align-items: center;
 }
+
 .validation-error {
     visibility: hidden;
     color: var(--errorMessage);
@@ -139,7 +140,6 @@ main {
 
 .contact {
     height: 5rem;
-    /*border-bottom: 1px solid var(--darkBlue);*/
     border-bottom: none;
     background-image: linear-gradient(to right, var(--backgroundColor), var(--darkBlue));
     background-size: 200% 100%;
@@ -174,6 +174,31 @@ main {
         rgba(238, 238, 238, 1) 100%
     );
     border-top: 1px solid #000000;
+}
+
+#messages-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    z-index: 1000;
+}
+
+#helper-text {
+    text-align: center;
+    z-index: 1001;
+}
+
+#helper-text h2 {
+    font-size: 3rem;
+    padding: 1rem;
 }
 
 #chat {

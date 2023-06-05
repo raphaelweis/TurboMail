@@ -6,6 +6,7 @@ use PDO;
 
 include_once 'User.php';
 include_once 'RelationController.php';
+include_once 'Message.php';
 include_once __DIR__ . '/../const/global.php';
 
 class UserController extends User {
@@ -13,6 +14,7 @@ class UserController extends User {
      * @var string
      */
     private string $email;
+
     /**
      * @var string
      */
@@ -122,7 +124,8 @@ class UserController extends User {
         }
 
         if(count($errors) == 0) {
-            //$newMessage = new Message($idSender, $idReceiver, $idRelation, $message);
+            $newMessage = new Message($idSender, $idReceiver, $message);
+            $newMessage->insertIntoDB();
 
             $errors[] = 0;
         }

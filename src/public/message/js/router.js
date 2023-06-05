@@ -104,6 +104,10 @@ function addFriend() {
 
         addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
         addFriendErrorDiv.css('visibility', 'visible');
+
+        if(response[0] !== 0) {
+            showAddFriendDialog();
+        }
     });
 }
 

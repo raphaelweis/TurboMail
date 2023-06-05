@@ -54,15 +54,18 @@ function updateContacts() {
 function sendMessageRequest(messageText) {
     const messageData = {
         idSender: loggedInUser.getId(),
-        idReceiver: loggedInUser.getSelectedContact(),
+        idReceiver: loggedInUser.getSelectedContact().relationId,
         messageContent: messageText,
     };
     return new Promise((resolve, reject) => {
         $.post(SEND_MESSAGE_URL, messageData, (response) => {
             const serverResponse = parseInt(response);
+            console.log(response);
 
             if (serverResponse === 0) {
                 resolve(serverResponse);
+            } else if (serverResponse === 1) {
+                reject(serverResponse);
             } else {
                 reject(serverResponse);
             }
@@ -225,21 +228,28 @@ function setupRelations() {
 }
 
 function displayContacts(relations) {
-    const contactsContainer = $('#contacts');
+    const acceptedContactsContainer = $('#accepted-contacts');
+    const pendingContactsContainer = $('#pending-contacts');
 
-    contactsContainer.empty();
+    acceptedContactsContainer.empty();
+    pendingContactsContainer.empty();
 
     relations.forEach((relation) => {
         console.log(relation);
         const contactDiv = $('<div></div>');
-        contactDiv.addClass('contact');
         contactDiv.html(relation.first_name + ' ' + relation.last_name);
 
         contactDiv.on('click', () => {
             selectContact(relation.id, contactDiv);
         });
 
-        contactsContainer.append(contactDiv);
+        if (!relation.status) {
+            contactDiv.addClass('pending-contact');
+            pendingContactsContainer.append(contactDiv);
+        } else {
+            contactDiv.addClass('accepted-contact');
+            acceptedContactsContainer.append(contactDiv);
+        }
     })
 }
 
@@ -247,12 +257,11 @@ function selectContact(relationId, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
     const messageTextArea = $('#message-textarea');
 
-    if (loggedInUser.getSelectedContact() != undefined) {
+    if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
             'background-position': '0 0',
             'font-size': '1rem',
             'color': '#000000',
-            'font-weight': 'normal',
         });
     } else {
         messagesOverlay.fadeOut(100, () => {
@@ -263,9 +272,8 @@ function selectContact(relationId, contactDiv) {
     loggedInUser.setSelectedContact({relationId: relationId, contactDiv: contactDiv});
     contactDiv.css({
         'background-position': '-100% 0',
-        'font-size': '1.2rem',
+        'font-size': '1.3rem',
         'color': '#ffffff',
-        'font-weight': 'bold',
     });
 }
 

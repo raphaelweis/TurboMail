@@ -138,7 +138,7 @@ main {
     flex-grow: 1;
 }
 
-.contact {
+.accepted-contact {
     height: 5rem;
     border-bottom: none;
     background-image: linear-gradient(to right, var(--backgroundColor), var(--darkBlue));
@@ -151,12 +151,36 @@ main {
     align-items: center;
 }
 
-.contact:hover {
+.accepted-contact:hover {
     background-position: -100% 0;
+    color: #ffffff;
     cursor: pointer;
 }
 
-.contact:active {
+.accepted-contact:active {
+    background-color: var(--backgroundColor);
+}
+
+.pending-contact {
+    height: 5rem;
+    border-bottom: none;
+    background-image: linear-gradient(to right, #eeeeee, #000000);
+    background-size: 200% 100%;
+    transition: all 0.1s linear;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pending-contact:hover {
+    background-position: -100% 0;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.pending-contact:active {
     background-color: var(--backgroundColor);
 }
 
@@ -287,7 +311,7 @@ main {
         visibility: hidden;
     }
 
-    .contact {
+    .accepted-contact {
         background-color: var(--backgroundColor);
     }
 

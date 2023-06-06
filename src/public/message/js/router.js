@@ -96,7 +96,7 @@ function addFriend() {
     addFriendErrorDiv.text('Error: ');
 
     $.post(SEND_RELATION_URL, formData, (response) => {
-        const serverResponse = JSON.parse(response);
+        let serverResponse = JSON.parse(response);
 
         serverResponse.forEach((response) => {
             addFriendErrorDetector(parseInt(response), addFriendErrorDiv);
@@ -105,7 +105,6 @@ function addFriend() {
         if(serverResponse[0] !== 0) {
             addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
             addFriendErrorDiv.css('visibility', 'visible');
-            showAddFriendDialog();
         }
     });
 }
@@ -320,6 +319,7 @@ function addFriendErrorDetector(error, errorDiv) {
     switch (error) {
         case SUCCESS:
             updateContacts();
+            clearDialog();
             break;
         case EMPTY_INPUTS:
             errorDiv.append("empty inputs, ");
@@ -352,6 +352,13 @@ function showAddFriendDialog() {
 
     addFriendDialog[0].showModal();
 
+    requestMessage.on('keydown', (event) => {
+        if (!event.shiftKey && event.key === 'Enter') {
+            event.preventDefault();
+            addFriend();
+        }
+    });
+
     requestMessage.on("input", () => {
         resizeDialogTextArea();
     });
@@ -361,6 +368,16 @@ function showAddFriendDialog() {
     window.addEventListener("resize", () => {
         resizeDialogTextArea(requestMessage[0]);
     });
+}
+
+function clearDialog() {
+    const addFriendErrorDiv = $('#add-friend-error');
+    const addFriendEmail = $('#add-friend-email');
+    const addFriendTextArea = $('#request-message');
+
+    addFriendErrorDiv.val('');
+    addFriendEmail.val('');
+    addFriendTextArea.val('');
 }
 
 function resizeDialogTextArea() {

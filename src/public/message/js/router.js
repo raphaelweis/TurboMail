@@ -337,6 +337,8 @@ function selectContact(relation, contactDiv) {
 }
 
 function addFriendErrorDetector(error, errorDiv) {
+    const addFriendDialog = $('#add-friend');
+
     const SUCCESS = 0;
     const EMPTY_INPUTS = 1;
     const INVALID_EMAIL = 2;
@@ -348,6 +350,7 @@ function addFriendErrorDetector(error, errorDiv) {
     switch (error) {
         case SUCCESS:
             updateContacts();
+            addFriendDialog[0].close();
             clearDialog();
             break;
         case EMPTY_INPUTS:

@@ -93,8 +93,6 @@ function addFriend() {
     const addFriendErrorDiv = $('#add-friend-error');
     const formData = signUpForm.serialize();
 
-    addFriendErrorDiv.text('Error: ');
-
     $.post(SEND_RELATION_URL, formData, (response) => {
         const serverResponse = JSON.parse(response);
 
@@ -102,10 +100,10 @@ function addFriend() {
             addFriendErrorDetector(parseInt(response), addFriendErrorDiv);
         })
 
-        addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
-        addFriendErrorDiv.css('visibility', 'visible');
-
         if(response[0] !== 0) {
+            addFriendErrorDiv.text('Error: ');
+            addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
+            addFriendErrorDiv.css('visibility', 'visible');
             showAddFriendDialog();
         }
     });

@@ -240,6 +240,7 @@ function displayMessages(messagesArray) {
 
         chat.append(messageDiv);
     })
+    scrollElementToBottom(chat);
 }
 
 function removeMessageFromChat(message) {

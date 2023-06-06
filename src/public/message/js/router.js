@@ -96,7 +96,7 @@ function addFriend() {
     addFriendErrorDiv.text('Error: ');
 
     $.post(SEND_RELATION_URL, formData, (response) => {
-        let serverResponse = JSON.parse(response);
+        const serverResponse = JSON.parse(response);
 
         serverResponse.forEach((response) => {
             addFriendErrorDetector(parseInt(response), addFriendErrorDiv);
@@ -231,11 +231,33 @@ function displayMessages(messagesArray) {
 
         chat.append(messageDiv);
     })
+
+    if (!loggedInUser.getSelectedContact().status) {
+        displayAcceptRelationMenu();
+    }
+
     scrollElementToBottom(chat);
 }
 
 function removeMessageFromChat(message) {
     message.remove();
+}
+
+function displayAcceptRelationMenu() {
+    const chat = $('#chat');
+    const acceptRelationMenu = $('<div id="accept-relation-menu"></div>');
+    const acceptRelationMenuMessage = $('<div id="accept-relation-menu-message"></div>');
+    const acceptRelationMenuYes = $('<div id="accept-relation-menu-yes">Yes</div>')
+    const acceptRelationMenuNo = $('<div id="accept-relation-menu-no">No</div>')
+
+    const firstName = loggedInUser.getSelectedContact().firstName;
+    const lastName = loggedInUser.getSelectedContact().lastName;
+    const acceptRelationMenuText = `Do you accept the friend request sent by ${firstName} ${lastName} ?`
+
+    acceptRelationMenu.append(acceptRelationMenuMessage, acceptRelationMenuYes, acceptRelationMenuNo);
+    acceptRelationMenuMessage.html(acceptRelationMenuText);
+
+    chat.append(acceptRelationMenu);
 }
 
 //-----------------------------//
@@ -264,7 +286,7 @@ function displayContacts(relations) {
         contactDiv.html(relation.first_name + ' ' + relation.last_name);
 
         contactDiv.on('click', () => {
-            selectContact(relation.id, relation.id_relation, contactDiv);
+            selectContact(relation, contactDiv);
         });
 
         if (!relation.status) {
@@ -277,7 +299,7 @@ function displayContacts(relations) {
     })
 }
 
-function selectContact(contactId, relationId, contactDiv) {
+function selectContact(relation, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
     const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
@@ -297,7 +319,14 @@ function selectContact(contactId, relationId, contactDiv) {
         messageTextArea.focus();
     }
 
-    loggedInUser.setSelectedContact({contactId: contactId, relationId: relationId, contactDiv: contactDiv});
+    loggedInUser.setSelectedContact({
+        contactId: relation.id,
+        firstName: relation.first_name,
+        lastName: relation.last_name,
+        relationId: relation.id_relation,
+        status: relation.status,
+        contactDiv: contactDiv
+    });
     contactDiv.css({
         'background-position': '-100% 0',
         'font-size': '1.3rem',
@@ -319,7 +348,6 @@ function addFriendErrorDetector(error, errorDiv) {
     switch (error) {
         case SUCCESS:
             updateContacts();
-            clearDialog();
             break;
         case EMPTY_INPUTS:
             errorDiv.append("empty inputs, ");

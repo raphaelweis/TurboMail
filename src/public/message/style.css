@@ -124,6 +124,10 @@ body {
     overflow: hidden;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 /* MAIN */
 main {
     display: flex;
@@ -284,7 +288,6 @@ main {
     flex-grow: 1;
     border: none;
     padding: 1.5rem 4.5rem 1.5rem 1rem;
-    line-height: 1rem;
     overflow: scroll;
     resize: none;
 }
@@ -293,6 +296,7 @@ main {
     position: absolute;
     bottom: 0.5rem;
     right: 0.5rem;
+    /*top: 0.5rem;*/
     border: none;
     border-radius: 0.2rem;
     padding: 0.5rem 0.5rem 0.3rem 0.3rem;

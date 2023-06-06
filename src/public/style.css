@@ -4,6 +4,8 @@
 /* ALL */
 * {
     font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    line-height: 16px;
     color: var(--darkFontColor);
     margin: 0;
     padding: 0;

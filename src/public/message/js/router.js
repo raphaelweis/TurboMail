@@ -165,14 +165,14 @@ function resizeTextArea() {
     const container = $('#send-box')[0];
     const textarea = $('#message-textarea')[0];
 
-    container.style.height = 'auto';
-    container.style.overflow = 'hidden';
+    container.style.height = 4 + 'rem';
     container.style.height = textarea.scrollHeight + 'px';
     scrollElementToBottom(textarea);
 }
 
 function resetTextArea() {
     const container = $('#send-box')[0];
+    const textarea = $('#message-textarea')[0];
 
     container.style.height = 4 + 'rem';
 }
@@ -287,8 +287,10 @@ function displayContacts(relations) {
 
 function selectContact(contactId, relationId, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
+    const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
 
+    chat.empty();
 
     if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({

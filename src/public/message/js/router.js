@@ -137,21 +137,18 @@ function setupMessages() {
             event.preventDefault();
             sendMessage();
         }
-        if (event.shiftKey && event.key === 'Enter') {
-            insertNewLine();
-        }
     })
     messageTextArea.on('focus', () => {
-        resizeTextArea();
+        resizeMessageTextArea();
     });
     sendButton.on('click', () => {
         sendMessage();
     })
     sendBox.on('input', () => {
-        resizeTextArea();
+        resizeMessageTextArea();
     });
 
-    resizeTextArea();
+    resizeMessageTextArea();
 }
 
 function insertUserInfo() {
@@ -160,26 +157,22 @@ function insertUserInfo() {
     userInfo.text(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
 }
 
-function resizeTextArea() {
+function resizeMessageTextArea() {
     const container = $('#send-box')[0];
     const textarea = $('#message-textarea')[0];
 
     container.style.height = 'auto';
-    container.style.overflow = 'hidden';
     container.style.height = textarea.scrollHeight + 'px';
     scrollElementToBottom(textarea);
 }
 
-function resetTextArea() {
+function resetMessageTextArea() {
     const container = $('#send-box')[0];
+    const textarea = $('#message-textarea')[0];
 
     container.style.height = 4 + 'rem';
-}
-
-function insertNewLine() {
-    const textarea = $('#message-textarea');
-
-    textarea.val(textarea.val() + '\n');
+    container.style.height = textarea.style.scrollHeight + 'px';
+    scrollElementToBottom(textarea);
 }
 
 function scrollElementToBottom(element) {
@@ -219,7 +212,7 @@ function sendMessage() {
     textarea.focus()
 
     scrollElementToBottom(chat[0]);
-    resetTextArea();
+    resetMessageTextArea();
 }
 
 function displayMessages(messagesArray) {
@@ -239,6 +232,7 @@ function displayMessages(messagesArray) {
 
         chat.append(messageDiv);
     })
+    scrollElementToBottom(chat);
 }
 
 function removeMessageFromChat(message) {
@@ -286,8 +280,10 @@ function displayContacts(relations) {
 
 function selectContact(contactId, relationId, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
+    const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
 
+    chat.empty();
 
     if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
@@ -357,27 +353,29 @@ function showAddFriendDialog() {
     addFriendDialog[0].showModal();
 
     requestMessage.on("input", () => {
-        resizeDialog();
+        resizeDialogTextArea();
     });
     closeButton.on('click', () => {
         addFriendDialog[0].close();
     })
     window.addEventListener("resize", () => {
-        resizeDialog(requestMessage[0]);
+        resizeDialogTextArea(requestMessage[0]);
     });
 }
 
-function resizeDialog() {
-    const textarea = $('#request-message')[0];
+function resizeDialogTextArea() {
+    const Textarea = $('#request-message');
+    const textarea = Textarea[0];
 
+    let verticalPadding, finalHeight;
+    verticalPadding = parseInt(Textarea.css('padding-bottom')) + parseInt(Textarea.css('padding-top'));
+
+    textarea.style.overflow = 'hidden';
     textarea.style.height = 'auto';
 
-    const currentScrollHeight = textarea.scrollHeight;
-    const topPadding = parseInt(window.getComputedStyle(textarea).paddingTop);
-    const bottomPadding = parseInt(window.getComputedStyle(textarea).paddingBottom);
-    const verticalPadding = topPadding + bottomPadding;
-    const finalHeight = currentScrollHeight - verticalPadding;
-
+    finalHeight = textarea.scrollHeight - verticalPadding;
     textarea.style.height = finalHeight + 'px';
-}
+    textarea.style.overflow = 'scroll';
 
+    scrollElementToBottom(textarea);
+}

@@ -1,12 +1,54 @@
 /* FONTS */
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
-/* ALL */
+/* RESET ALL DEFAULTS */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
 * {
-    font-family: "Raleway", sans-serif;
-    color: var(--darkFontColor);
     margin: 0;
     padding: 0;
+    border: 0;
+    font-family: "Raleway", sans-serif;
+    color: var(--darkFontColor);
+    font-size: 16px;
+    line-height: 1rem;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 /* COLORS */
@@ -38,9 +80,11 @@ button[class*="common-button"] {
     background-color: var(--buttonColor);
     transition: background-color 0.3s ease;
 }
+
 input[type="submit"] {
     float: right;
 }
+
 input[class*="common-button"]:hover,
 button[class*="common-button"]:hover {
     background-color: var(--lightBlue);

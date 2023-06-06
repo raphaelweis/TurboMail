@@ -1,5 +1,7 @@
 CREATE DATABASE IF NOT EXISTS TurboMailDB;
 
+USE TurboMailDB;
+
 CREATE TABLE IF NOT EXISTS User (
     id BIGINT NOT NULL,
     first_name VARCHAR(128) NOT NULL,
@@ -8,7 +10,7 @@ CREATE TABLE IF NOT EXISTS User (
     password VARCHAR(256) NOT NULL,
     CONSTRAINT PK_User PRIMARY KEY (id),
     CONSTRAINT UC_User UNIQUE (email)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS Relation (
     id BIGINT NOT NULL,
@@ -18,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Relation (
     CONSTRAINT PK_Relation PRIMARY KEY (id),
     CONSTRAINT FK_Relation_Sender FOREIGN KEY (id_sender) REFERENCES User(id),
     CONSTRAINT FK_Relation_Receiver FOREIGN KEY (id_receiver) REFERENCES User(id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS Message (
     id BIGINT NOT NULL,
@@ -29,4 +31,4 @@ CREATE TABLE IF NOT EXISTS Message (
     date DATETIME NOT NULL,
     CONSTRAINT PK_Message PRIMARY KEY (id),
     CONSTRAINT FK_Message FOREIGN KEY (id_relation) REFERENCES Relation(id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

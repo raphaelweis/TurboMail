@@ -348,6 +348,7 @@ function addFriendErrorDetector(error, errorDiv) {
     switch (error) {
         case SUCCESS:
             updateContacts();
+            clearDialog();
             break;
         case EMPTY_INPUTS:
             errorDiv.append("empty inputs, ");

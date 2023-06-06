@@ -99,7 +99,7 @@ class UserController extends User {
             $errors[] = 2;
         }
         if(count($errors) > 0) {
-            return json_encode($errors);
+            return $errors;
         }
 
         $idReceiver = $this->GetUserIdByEmail($emailReceiver);
@@ -110,7 +110,7 @@ class UserController extends User {
             $errors[] = 4;
         }
         if(count($errors) > 0) {
-            return json_encode($errors);
+            return $errors;
         }
 
         $newRelation = new RelationController($idSender, $idReceiver);

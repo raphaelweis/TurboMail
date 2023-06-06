@@ -91,7 +91,7 @@ function logoutRequest() {
 function addFriend() {
     const signUpForm = $('#relation-form');
     const addFriendErrorDiv = $('#add-friend-error');
-    const formData = signUpForm.serialize();
+    const formData = signUpForm.serialize().replace(/%0D%0A/g, '<br/>');
 
     addFriendErrorDiv.text('Error: ');
 

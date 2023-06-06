@@ -58,27 +58,15 @@ header {
 
 #add-friend h2 {
     text-align: center;
-    margin: 1em 0 1em 0;
-    font-size: 3em;
+    font-size: 3rem;
+    margin: 5rem;
     color: var(--darkBlue);
-}
-
-#close-button {
-    float: right;
-    margin: 0.5rem 1rem 0 0;
-    font-size: 2rem;
-    font-family: Arial, serif;
-    color: #aaaaaa;
-}
-
-#close-button:hover {
-    color: #000000;
-    cursor: pointer;
 }
 
 #relation-form {
     display: flex;
     flex-direction: column;
+    margin: 3rem;
     align-items: center;
 }
 
@@ -92,40 +80,50 @@ header {
     border: none;
     outline: none;
     border-bottom: 1px solid var(--lightBlue);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding: 0.2rem;
-    width: 90%;
+    width: 100%;
     resize: none;
 }
 
 #relation-form textarea {
     font-size: 1.5rem;
+    line-height: 1.5rem;
     border: none;
     outline: none;
     background-color: #eeeeee;
     border-left: 1px solid var(--lightBlue);
-    margin: 0 2rem 2rem 2rem;
-    padding: 0.5rem 0.2rem 0.5rem 0.2rem;
-    width: 90%;
+    margin: 2rem 0;
+    padding: 0.5rem 0.2rem;
+    width: 100%;
     max-height: 50vh;
-    overflow: scroll;
+    overflow: hidden;
     resize: none;
 }
 
 #relation-form input[type='submit'] {
+    font-size: 1.5rem;
     align-self: end;
-    margin: 0 5% 5% 0;
     padding: 0.5em 1em 0.5em 1em;
 }
+
+#close-button {
+    float: right;
+    margin: 1rem 1rem 0 0;
+    font-size: 3rem;
+    color: #aaaaaa;
+}
+
+#close-button:hover {
+    color: #000000;
+    cursor: pointer;
+}
+
 
 /* BODY */
 body {
     background-color: var(--backgroundColor);
     overflow: hidden;
-}
-
-::-webkit-scrollbar {
-    display: none;
 }
 
 /* MAIN */
@@ -295,7 +293,7 @@ main {
     padding: 1.5rem 4rem 1.5rem 0.5rem;
     border: none;
     outline: none;
-    overflow: scroll;
+    overflow-y: scroll;
     resize: none;
 }
 

@@ -47,6 +47,10 @@ table {
     border-spacing: 0;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 /* COLORS */
 :root {
     --darkBlue: #2e3192;

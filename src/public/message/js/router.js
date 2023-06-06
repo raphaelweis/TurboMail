@@ -151,7 +151,7 @@ function setupMessages() {
 }
 
 function insertUserInfo() {
-    const userInfo = $('#user-info');
+    const userInfo = $('#navbar-user-info');
 
     userInfo.text(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
 }
@@ -247,14 +247,16 @@ function displayAcceptRelationMenu() {
     const chat = $('#chat');
     const acceptRelationMenu = $('<div id="accept-relation-menu"></div>');
     const acceptRelationMenuMessage = $('<div id="accept-relation-menu-message"></div>');
-    const acceptRelationMenuYes = $('<div id="accept-relation-menu-yes">Yes</div>')
-    const acceptRelationMenuNo = $('<div id="accept-relation-menu-no">No</div>')
+    const acceptRelationMenuButtons = $('<div id="accept-relation-menu-buttons"></div>');
+    const acceptRelationMenuYes = $('<button id="accept-relation-menu-yes" class="common-button">Yes</button>')
+    const acceptRelationMenuNo = $('<button id="accept-relation-menu-no" class="common-button">No</button>')
 
     const firstName = loggedInUser.getSelectedContact().firstName;
     const lastName = loggedInUser.getSelectedContact().lastName;
     const acceptRelationMenuText = `Do you accept the friend request sent by ${firstName} ${lastName} ?`
 
-    acceptRelationMenu.append(acceptRelationMenuMessage, acceptRelationMenuYes, acceptRelationMenuNo);
+    acceptRelationMenu.append(acceptRelationMenuMessage, acceptRelationMenuButtons);
+    acceptRelationMenuButtons.append(acceptRelationMenuNo, acceptRelationMenuYes);
     acceptRelationMenuMessage.html(acceptRelationMenuText);
 
     chat.append(acceptRelationMenu);

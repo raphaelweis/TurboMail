@@ -89,6 +89,7 @@ function logoutRequest() {
 }
 
 function addFriend() {
+    const addFriendDialog = $('#add-friend');
     const signUpForm = $('#relation-form');
     const addFriendErrorDiv = $('#add-friend-error');
     const formData = signUpForm.serialize().replace(/%0D%0A/g, '<br/>');
@@ -105,6 +106,8 @@ function addFriend() {
         if(serverResponse[0] !== 0) {
             addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
             addFriendErrorDiv.css('visibility', 'visible');
+            addFriendDialog[0].close(); // This avoids the exception InvalidStateError
+            addFriendDialog[0].showModal();
         }
     });
 }

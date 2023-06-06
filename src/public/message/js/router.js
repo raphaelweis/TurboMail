@@ -143,16 +143,16 @@ function setupMessages() {
         }
     })
     messageTextArea.on('focus', () => {
-        resizeTextArea();
+        resizeMessageTextArea();
     });
     sendButton.on('click', () => {
         sendMessage();
     })
     sendBox.on('input', () => {
-        resizeTextArea();
+        resizeMessageTextArea();
     });
 
-    resizeTextArea();
+    resizeMessageTextArea();
 }
 
 function insertUserInfo() {
@@ -161,20 +161,22 @@ function insertUserInfo() {
     userInfo.text(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
 }
 
-function resizeTextArea() {
+function resizeMessageTextArea() {
     const container = $('#send-box')[0];
     const textarea = $('#message-textarea')[0];
 
-    container.style.height = 4 + 'rem';
+    container.style.height = 'auto';
     container.style.height = textarea.scrollHeight + 'px';
     scrollElementToBottom(textarea);
 }
 
-function resetTextArea() {
+function resetMessageTextArea() {
     const container = $('#send-box')[0];
     const textarea = $('#message-textarea')[0];
 
     container.style.height = 4 + 'rem';
+    container.style.height = textarea.style.scrollHeight + 'px';
+    scrollElementToBottom(textarea);
 }
 
 function insertNewLine() {
@@ -220,7 +222,7 @@ function sendMessage() {
     textarea.focus()
 
     scrollElementToBottom(chat[0]);
-    resetTextArea();
+    resetMessageTextArea();
 }
 
 function displayMessages(messagesArray) {

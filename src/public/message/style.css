@@ -272,25 +272,29 @@ main {
 /* SEND BOX */
 #send-box {
     position: absolute;
-    display: flex;
     bottom: 1rem;
     left: 1rem;
     right: 1rem;
-    flex-direction: row;
     height: 4rem;
     max-height: 20rem;
     border: none;
     outline: none;
     border-radius: 0.2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
 #send-box textarea {
-    flex-grow: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
     border-radius: 0.2rem;
+    padding: 1.5rem 4rem 1.5rem 0.5rem;
     border: none;
     outline: none;
-    padding: 1.4rem 4.5rem 1.4rem 1rem;
     overflow: scroll;
     resize: none;
 }

@@ -384,15 +384,18 @@ function showAddFriendDialog() {
     const addFriendDialog = $('#add-friend');
     const requestMessage = $('#request-message');
     const closeButton = $('#close-button');
+    let keydownFlag = 0;
 
     addFriendDialog[0].showModal();
 
     requestMessage.on('keydown', (event) => {
-        if (!event.shiftKey && event.key === 'Enter') {
+        if (!event.shiftKey && event.key === 'Enter' && !flag) {
+            keydownFlag = 1;
             event.preventDefault();
             addFriend();
         }
     });
+    keydownFlag = 0;
 
     requestMessage.on("input", () => {
         resizeDialogTextArea();

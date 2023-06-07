@@ -40,7 +40,7 @@ const MIN_PASSWORD_LENGTH = 8;
 /* Message Table */
 /*****************/
 // Message table's name
-const MESSAGE_TABLE= 'Message';
+const MESSAGE_TABLE = 'Message';
 
 // Message table's attributes
 const ID_MESSAGE_TABLE = 'id';
@@ -84,8 +84,9 @@ const SELECT_USER_RELATIONS_QUERY = 'SELECT ' . USER_TABLE . '.' . ID_USER_TABLE
                                             ' AND ' . RELATION_TABLE . '.' . ID_SENDER_RELATION_TABLE . '=?))' .
                                     ' WHERE ' . USER_TABLE . '.' . ID_USER_TABLE . '<>?;';
 const SELECT_MESSAGES_BY_RELATION_QUERY = 'SELECT * FROM ' . MESSAGE_TABLE . ' WHERE ' . ID_RELATION_MESSAGE_TABLE . '=? ORDER BY ' . DATE_MESSAGE_TABLE . ' ASC;';
+const SELECT_NEW_MESSAGES_BY_RELATION_QUERY = 'SELECT * FROM ' . MESSAGE_TABLE . ' WHERE ' . ID_RELATION_MESSAGE_TABLE . '=? AND TIMESTAMPDIFF(SECOND, ' . DATE_MESSAGE_TABLE . ', NOW()) < 10 ORDER BY '. DATE_MESSAGE_TABLE .' ASC;';
 
-// update queries
+// Update queries
 const UPDATE_RELATION_STATUS_QUERY = 'UPDATE ' . RELATION_TABLE . ' SET ' . STATUS_RELATION_TABLE .'=? WHERE ' . ID_RELATION_TABLE . '=?;';
 
 /***********************/

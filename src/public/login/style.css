@@ -12,6 +12,7 @@ body {
 
 main {
     flex: 1;
+    margin-bottom: 3rem;
 }
 
 footer {
@@ -154,7 +155,7 @@ input:not([type="submit"]) {
     }
 
     .application-title {
-        margin-top: 1.5rem;
+        margin-top: 5rem;
     }
 
     .application-title h1 {
@@ -180,8 +181,17 @@ input:not([type="submit"]) {
     .sign-up {
         border: none;
     }
+    .sign-up h2 {
+        margin-top: 6rem;
+    }
 
     footer {
         font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .application-title h1 {
+        font-size: 4rem;
     }
 }

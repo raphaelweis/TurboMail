@@ -389,7 +389,7 @@ function showAddFriendDialog() {
     addFriendDialog[0].showModal();
 
     requestMessage.on('keydown', (event) => {
-        if (!event.shiftKey && event.key === 'Enter' && !flag) {
+        if (!event.shiftKey && event.key === 'Enter' && !keydownFlag) {
             keydownFlag = 1;
             event.preventDefault();
             addFriend();

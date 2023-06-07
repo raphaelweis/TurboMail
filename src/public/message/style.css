@@ -263,37 +263,51 @@ main {
 }
 
 /* ACCEPT RELATION DIALOG */
-#accept-relation-menu {
+.relation-pending {
     display: flex;
     flex-direction: column;
     width: 100%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-    margin: 0.5rem 0;
-    background: linear-gradient(to left, var(--lightBlue), var(--darkBlue));
+    margin: 0.2rem 0;
     text-align: center;
     color: var(--lightFontColor);
 }
 
-#accept-relation-menu-message {
+.relation-pending-message {
     color: var(--lightFontColor);
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: bold;
+}
+
+#accept-relation-banner {
+    background: linear-gradient(to left, var(--lightBlue), var(--darkBlue));
+}
+
+#relation-sent-banner {
+    background-image: linear-gradient(to left, #aaaaaa, #555555);
+}
+
+#accept-relation-banner-message {
     margin: 2rem 0 1rem 0;
 }
 
-#accept-relation-menu-buttons button {
+#relation-sent-banner-message {
+    margin: 2rem 0;
+}
+
+#accept-relation-banner-buttons button {
     margin: 2rem;
     transition: all 0.1s linear;
 }
 
-#accept-relation-menu-yes:hover {
+#accept-relation-banner-yes:hover {
     padding: 1rem 1.5rem;
     margin: 1.5rem;
     background-color: var(--green);
 }
 
-#accept-relation-menu-no:hover {
+#accept-relation-banner-no:hover {
     padding: 1rem 1.5rem;
     margin: 1.5rem;
     background-color: var(--red);

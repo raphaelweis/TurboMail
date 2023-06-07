@@ -14,7 +14,7 @@ const loggedInUser = new User();
 // Initial execution           //
 //-----------------------------//
 window.onload = () => {
-    fetchUserData()
+    fetchUserDataRequest()
         .then((userData) => {
             loggedInUser.setUserData(userData);
 
@@ -31,7 +31,7 @@ window.onload = () => {
 //-----------------------------//
 // Server Requests             //
 //-----------------------------//
-function fetchUserData() {
+function fetchUserDataRequest() {
     return new Promise((resolve, reject) => {
         $.post(SESSION_URL, (response) => {
             const userData = JSON.parse(response);
@@ -45,9 +45,10 @@ function fetchUserData() {
     });
 }
 
-function updateContacts() {
+function fetchContactsRequest() {
     $.post(FETCH_CONTACTS_URL, {email: loggedInUser.getEmail()}, (response) => {
         let contacts = JSON.parse(response);
+        console.log(contacts);
         displayContacts(contacts);
     });
 }
@@ -88,7 +89,7 @@ function logoutRequest() {
     });
 }
 
-function addFriend() {
+function addFriendRequest() {
     const signUpForm = $('#relation-form');
     const addFriendErrorDiv = $('#add-friend-error');
     const formData = signUpForm.serialize();
@@ -102,11 +103,19 @@ function addFriend() {
             addFriendErrorDetector(parseInt(response), addFriendErrorDiv);
         })
 
-        if(serverResponse[0] !== 0) {
+        if (serverResponse[0] !== 0) {
             addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
             addFriendErrorDiv.css('visibility', 'visible');
         }
     });
+}
+
+function updateRelationStatusRequest() {
+    //TODO
+}
+
+function deleteRelationRequest() {
+    //TODO
 }
 
 //-----------------------------//
@@ -120,7 +129,7 @@ function setupMessagePage() {
         logoutRequest();
     });
     sendRelationButton.on('click', () => {
-        addFriend();
+        addFriendRequest();
     });
 }
 
@@ -216,6 +225,9 @@ function sendMessage() {
 
 function displayMessages(messagesArray) {
     const chat = $('#chat');
+    const selectedContact = loggedInUser.getSelectedContact();
+    const isRelationAccepted = selectedContact.status;
+    const isRelationSender = selectedContact.senderId === loggedInUser.getId();
 
     messagesArray.forEach((message) => {
         const messageDiv = $('<div></div>');
@@ -232,8 +244,10 @@ function displayMessages(messagesArray) {
         chat.append(messageDiv);
     })
 
-    if (!loggedInUser.getSelectedContact().status) {
-        displayAcceptRelationMenu();
+    if (!isRelationAccepted && isRelationSender) {
+        showRelationSentBanner()
+    } else if (!isRelationAccepted && !isRelationSender) {
+        showAcceptRelationBanner();
     }
 
     scrollElementToBottom(chat);
@@ -243,23 +257,47 @@ function removeMessageFromChat(message) {
     message.remove();
 }
 
-function displayAcceptRelationMenu() {
+function showAcceptRelationBanner() {
     const chat = $('#chat');
-    const acceptRelationMenu = $('<div id="accept-relation-menu"></div>');
-    const acceptRelationMenuMessage = $('<div id="accept-relation-menu-message"></div>');
-    const acceptRelationMenuButtons = $('<div id="accept-relation-menu-buttons"></div>');
-    const acceptRelationMenuYes = $('<button id="accept-relation-menu-yes" class="common-button">Yes</button>')
-    const acceptRelationMenuNo = $('<button id="accept-relation-menu-no" class="common-button">No</button>')
-
-    const firstName = loggedInUser.getSelectedContact().firstName;
-    const lastName = loggedInUser.getSelectedContact().lastName;
-    const acceptRelationMenuText = `Do you accept the friend request sent by ${firstName} ${lastName} ?`
+    const messageTextarea = $('#message-textarea');
+    const acceptRelationMenu = $('<div id="accept-relation-banner" class="relation-pending"></div>');
+    const acceptRelationMenuMessage = $('<div id="accept-relation-banner-message" class="relation-pending-message"></div>');
+    const acceptRelationMenuButtons = $('<div id="accept-relation-banner-buttons"></div>');
+    const acceptRelationMenuYes = $('<button id="accept-relation-banner-yes" class="common-button">Yes</button>')
+    const acceptRelationMenuNo = $('<button id="accept-relation-banner-no" class="common-button">No</button>')
+    const selectedContact = loggedInUser.getSelectedContact();
+    const acceptRelationMenuText = `${selectedContact.firstName} ${selectedContact.lastName} sent you a friend request! Do you accept it?`;
 
     acceptRelationMenu.append(acceptRelationMenuMessage, acceptRelationMenuButtons);
     acceptRelationMenuButtons.append(acceptRelationMenuNo, acceptRelationMenuYes);
     acceptRelationMenuMessage.html(acceptRelationMenuText);
 
     chat.append(acceptRelationMenu);
+
+    messageTextarea.prop('disabled', true);
+
+    acceptRelationMenuYes.on('click', () => {
+        acceptRelationRequest();
+    });
+    acceptRelationMenuNo.on('click', () => {
+        denyRelationRequest();
+    });
+}
+
+function showRelationSentBanner() {
+    const chat = $('#chat');
+    const messageTextarea = $('#message-textarea');
+    const acceptRelationMenu = $('<div id="relation-sent-banner" class="relation-pending"></div>');
+    const acceptRelationMenuMessage = $('<div id="relation-sent-banner-message" class="relation-pending-message"></div>');
+    const selectedContact = loggedInUser.getSelectedContact();
+    const acceptRelationMenuText = `Your request has been sent to ${selectedContact.firstName} ${selectedContact.lastName}. Now you just have to wait!`;
+
+    acceptRelationMenu.append(acceptRelationMenuMessage);
+    acceptRelationMenuMessage.html(acceptRelationMenuText);
+
+    chat.append(acceptRelationMenu);
+
+    messageTextarea.prop('disabled', true);
 }
 
 //-----------------------------//
@@ -268,7 +306,7 @@ function displayAcceptRelationMenu() {
 function setupRelations() {
     const addFriendButton = $('#add-friend-button');
 
-    updateContacts();
+    fetchContactsRequest();
 
     addFriendButton.on('click', () => {
         showAddFriendDialog();
@@ -315,9 +353,7 @@ function selectContact(relation, contactDiv) {
             'color': '#000000',
         });
     } else {
-        messagesOverlay.fadeOut(100, () => {
-            messagesOverlay.remove();
-        });
+        messagesOverlay.fadeOut(100);
         messageTextArea.focus();
     }
 
@@ -326,6 +362,7 @@ function selectContact(relation, contactDiv) {
         firstName: relation.first_name,
         lastName: relation.last_name,
         relationId: relation.id_relation,
+        senderId: relation.id_sender,
         status: relation.status,
         contactDiv: contactDiv
     });
@@ -349,7 +386,7 @@ function addFriendErrorDetector(error, errorDiv) {
 
     switch (error) {
         case SUCCESS:
-            updateContacts();
+            fetchContactsRequest();
             clearDialog();
             break;
         case EMPTY_INPUTS:
@@ -386,7 +423,7 @@ function showAddFriendDialog() {
     requestMessage.on('keydown', (event) => {
         if (!event.shiftKey && event.key === 'Enter') {
             event.preventDefault();
-            addFriend();
+            addFriendRequest();
         }
     });
 
@@ -426,4 +463,37 @@ function resizeDialogTextArea() {
     textarea.style.overflow = 'scroll';
 
     scrollElementToBottom(textarea);
+}
+
+function acceptRelationRequest() {
+    const acceptRelationBanner = $('#accept-relation-banner');
+    const acceptedContactsContainer = $('#accepted-contacts');
+    const contactDiv = loggedInUser.getSelectedContact().contactDiv;
+    const messageTextarea = $('#message-textarea');
+
+    acceptRelationBanner.remove();
+    contactDiv.remove();
+
+    contactDiv.removeClass('pending-contact');
+    contactDiv.addClass('accepted-contact');
+
+    acceptedContactsContainer.prepend(contactDiv);
+    messageTextarea.prop('disabled', false);
+}
+
+function denyRelationRequest() {
+    const messagesOverlay = $('#messages-overlay');
+    const chat = $('#chat');
+    const acceptRelationBanner = $('#accept-relation-banner');
+    const messageTextarea = $('#message-textarea');
+    const contactDiv = loggedInUser.getSelectedContact().contactDiv;
+
+    acceptRelationBanner.remove();
+    contactDiv.remove();
+
+    messageTextarea.prop('disabled', false);
+    chat.empty();
+
+    loggedInUser.setSelectedContact(undefined);
+    messagesOverlay.fadeIn(100);
 }

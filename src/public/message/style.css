@@ -262,7 +262,7 @@ main {
     background-color: var(--lightBlue);
 }
 
-/* ACCEPT RELATION DIALOG */
+/* ACCEPT RELATION BANNER */
 .relation-pending {
     display: flex;
     flex-direction: column;

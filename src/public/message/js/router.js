@@ -277,7 +277,7 @@ function displayMessages(messagesArray) {
         showAcceptRelationBanner();
     }
 
-    scrollElementToBottom(chat);
+    scrollElementToBottom(chat[0]);
 }
 
 function removeMessageFromChat(message) {

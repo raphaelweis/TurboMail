@@ -480,6 +480,8 @@ function acceptRelationRequest() {
     const contactDiv = loggedInUser.getSelectedContact().contactDiv;
     const messageTextarea = $('#message-textarea');
 
+    updateRelationStatusRequest();
+
     acceptRelationBanner.remove();
     contactDiv.remove();
 
@@ -496,6 +498,8 @@ function denyRelationRequest() {
     const acceptRelationBanner = $('#accept-relation-banner');
     const messageTextarea = $('#message-textarea');
     const contactDiv = loggedInUser.getSelectedContact().contactDiv;
+
+    deleteRelationRequest();
 
     acceptRelationBanner.remove();
     contactDiv.remove();

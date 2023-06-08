@@ -115,10 +115,6 @@ input:not([type="submit"]) {
     border-bottom-left-radius: 0.4rem;
 }
 
-.row input:focus {
-    outline: none;
-}
-
 .row input[type="submit"] {
     margin-right: 15%;
 }

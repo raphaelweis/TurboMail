@@ -1,50 +1,20 @@
 /* FONTS */
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
-/* RESET ALL DEFAULTS */
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
+/* DEFAULTS */
 * {
     margin: 0;
     padding: 0;
-    border: 0;
+    border: none;
+    outline: none;
     font-family: "Raleway", sans-serif;
     color: var(--darkFontColor);
-    font-size: 16px;
     line-height: 1rem;
     vertical-align: baseline;
 }
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-
-body {
-    line-height: 1;
-}
-
-ol, ul {
-    list-style: none;
-}
-
-blockquote, q {
-    quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+html {
+    font-size: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -60,6 +30,8 @@ table {
     --lightFontColor: #ffffff;
     --darkFontColor: #000000;
     --errorMessage: #af0202;
+    --red: #cc3223;
+    --green: #008000;
 }
 
 /* BUTTONS */
@@ -67,7 +39,7 @@ input[class*="common-button"] {
     border: none;
     border-radius: 0.2rem;
     font-size: 1rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 1rem;
     color: var(--lightFontColor);
     background-color: var(--buttonColor);
     transition: background-color 0.3s ease;
@@ -76,6 +48,8 @@ input[class*="common-button"] {
 button[class*="common-button"] {
     border: none;
     border-radius: 0.2rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
     color: var(--lightFontColor);
     background-color: var(--buttonColor);
     transition: background-color 0.3s ease;

@@ -113,4 +113,9 @@ class MessageController extends Message {
 
         return $allMessages;
     }
+
+    public static function DeleteMessagesFromRelation($relationId): int {
+        $message = new Message();
+        return $message->DeleteMessagesByRelationId($relationId);
+    }
 }

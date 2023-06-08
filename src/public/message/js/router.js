@@ -7,6 +7,8 @@ const LOGIN_PAGE_URL = '../login/login.html';
 const SEND_RELATION_URL = '../../app/send_relation.php';
 const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php';
 const FETCH_MESSAGES_URL = '../../app/fetch_messages.php';
+const UPDATE_RELATION_STATUS_URL = '../../app/update_relation_status.php';
+const DELETE_RELATION_URL = '../../app/delete_relation.php';
 
 const loggedInUser = new User();
 
@@ -112,12 +114,35 @@ function addFriendRequest() {
     });
 }
 
-function updateRelationStatusRequest() {
-    //TODO
+function updateRelationStatusRequest(newRelationStatus) {
+    const data = {
+        new_status: newRelationStatus,
+        id_relation: loggedInUser.getSelectedContact().relationId
+    }
+    $.post(UPDATE_RELATION_STATUS_URL, data, (response) => {
+        const serverResponse = parseInt(response);
+        console.log(response);
+
+        if (serverResponse === 1) {
+            alert('Oops... There\'s an issue with the database. Come back later maybe?');
+        } else if (serverResponse !== 0) {
+            alert('Oops... something unexpected just happened. Is your internet connection at fault?');
+        }
+    });
 }
 
 function deleteRelationRequest() {
-    //TODO
+    const data = {id_relation: loggedInUser.getSelectedContact().relationId};
+    $.post(DELETE_RELATION_URL, data, (response) => {
+        const serverResponse = parseInt(response);
+        console.log(response);
+
+        if (serverResponse === 1) {
+            alert('Oops... We couldn\'t delete this relation. Maybe you two are meant to be friends after all...');
+        } else if (serverResponse !== 0) {
+            alert('Oops... To be honest, we don\'t know what happened. Come back later, please?');
+        }
+    });
 }
 
 //-----------------------------//
@@ -391,7 +416,7 @@ function addFriendErrorDetector(error, errorDiv) {
     switch (error) {
         case SUCCESS:
             fetchContactsRequest();
-            updateContacts();
+            fetchContactsRequest();
             addFriendDialog[0].close();
             clearDialog();
             break;
@@ -479,8 +504,9 @@ function acceptRelationRequest() {
     const acceptedContactsContainer = $('#accepted-contacts');
     const contactDiv = loggedInUser.getSelectedContact().contactDiv;
     const messageTextarea = $('#message-textarea');
+    const ACCEPTED_STATUS = 1;
 
-    updateRelationStatusRequest();
+    updateRelationStatusRequest(ACCEPTED_STATUS);
 
     acceptRelationBanner.remove();
     contactDiv.remove();

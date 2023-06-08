@@ -433,8 +433,8 @@ function showAddFriendDialog() {
             event.preventDefault();
             addFriendRequest();
         }
+        keydownFlag = 0;
     });
-    keydownFlag = 0;
 
     requestMessage.on("input", () => {
         resizeDialogTextArea();

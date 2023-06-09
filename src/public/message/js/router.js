@@ -29,6 +29,10 @@ window.onload = () => {
         .catch(() => {
             window.location.href = LOGIN_PAGE_URL;
         });
+
+    setInterval(() => {
+        if (loggedInUser.getSelectedContact() !== undefined) fetchMessagesRequest(true);
+    }, 5000);
 };
 
 //-----------------------------//
@@ -76,16 +80,10 @@ function sendMessageRequest(messageText) {
     })
 }
 
-function fetchMessagesRequest() {
-    const data = {relationId: loggedInUser.getSelectedContact().relationId};
+function fetchMessagesRequest(recentOnly) {
+    const data = {relationId: loggedInUser.getSelectedContact().relationId, recentOnly: recentOnly};
 
     $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
-}
-
-function fetchRecentMessagesRequest() {
-    const data = {relationId: loggedInUser.getSelectedContact().relationId};
-
-    $.post(FETCH_RECENT_MESSAGES_URL, data, (response) => displayNewMessages(JSON.parse(response)));
 }
 
 function logoutRequest() {
@@ -214,13 +212,11 @@ function scrollElementToBottom(element) {
 }
 
 function sendMessage() {
-    const COULD_NOT_SEND_MESSAGE = 1;
-
     const textarea = $('#message-textarea');
     const chat = $('#chat');
-
     const messageText = textarea.val().replace(/\n/g, '<br/>'); // replace the '\n' characters with '<br>' so that we can preserve line breaks
     const messageDiv = $('<div></div>');
+    const COULD_NOT_SEND_MESSAGE = 1;
 
     if (messageText === "") {
         return;
@@ -395,7 +391,7 @@ function selectContact(relation, contactDiv) {
         'background-position': '-100% 0', 'font-size': '1.3rem', 'color': '#ffffff',
     });
 
-    fetchMessagesRequest();
+    fetchMessagesRequest(false);
 }
 
 function addFriendErrorDetector(error, errorDiv) {

@@ -11,12 +11,12 @@ include_once 'DataBaseHandler.php';
 class Message extends DataBaseHandler {
     /**
      * @param $relationId
+     * @param $request
      *
      * @return array|null
      */
-    public function fetchMessagesByRelationId($relationId): ?array {
-        //TODO: Change to protected Method, add public static method in MessageController.
-        $statement = $this->connect()->prepare(SELECT_MESSAGES_BY_RELATION_QUERY);
+    protected function fetchMessagesByRelationId($relationId, $request): ?array {
+        $statement = $this->connect()->prepare($request);
 
         if (!$statement->execute([$relationId])) {
             $statement = null;

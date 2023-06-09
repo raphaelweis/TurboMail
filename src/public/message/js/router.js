@@ -338,9 +338,7 @@ function setupRelations() {
 
     fetchContactsRequest();
 
-    addFriendButton.on('click', () => {
-        showAddFriendDialog();
-    });
+    addFriendButton.on('click', () => showAddFriendDialog());
 }
 
 function displayContacts(relations) {

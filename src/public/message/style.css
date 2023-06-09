@@ -17,6 +17,7 @@ header {
 main {
     height: 100%;
     display: flex;
+    overflow: hidden;
 }
 
 /* NAVBAR */

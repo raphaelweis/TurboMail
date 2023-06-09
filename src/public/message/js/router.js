@@ -7,7 +7,7 @@ const LOGIN_PAGE_URL = '../login/login.html';
 const SEND_RELATION_URL = '../../app/send_relation.php';
 const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php';
 const FETCH_MESSAGES_URL = '../../app/fetch_messages.php';
-const FETCH_RECENT_MESSAGES_URL = '../../app/fetch_recent_messages.php';
+const FETCH_NEW_MESSAGES_URL = '../../app/fetch_new_messages.php';
 const UPDATE_RELATION_STATUS_URL = '../../app/update_relation_status.php';
 const DELETE_RELATION_URL = '../../app/delete_relation.php';
 
@@ -29,11 +29,6 @@ window.onload = () => {
         .catch(() => {
             window.location.href = LOGIN_PAGE_URL;
         });
-
-    setInterval(() => {
-        if (loggedInUser.getSelectedContact() !== undefined && !loggedInUser.getMessageRequestLock())
-            fetchMessagesRequest(true);
-    }, 5000);
 };
 
 //-----------------------------//
@@ -81,10 +76,16 @@ function sendMessageRequest(messageText) {
     })
 }
 
-function fetchMessagesRequest(recentOnly) {
-    const data = {relationId: loggedInUser.getSelectedContact().relationId, recentOnly: recentOnly};
+function fetchMessagesRequest() {
+    const data = {relationId: loggedInUser.getSelectedContact().relationId}
 
     $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
+}
+
+function fetchNewMessagesRequest() {
+    const data = {relationId: loggedInUser.getSelectedContact().relationId, senderId: loggedInUser.getId()}
+
+    $.post(FETCH_NEW_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
 }
 
 function logoutRequest() {
@@ -222,8 +223,6 @@ function sendMessage() {
     if (messageText === "") {
         return;
     }
-
-    setMessageRequestLock();
 
     sendMessageRequest(messageText)
         .catch((error) => {
@@ -394,7 +393,7 @@ function selectContact(relation, contactDiv) {
         'background-position': '-100% 0', 'font-size': '1.3rem', 'color': '#ffffff',
     });
 
-    fetchMessagesRequest(false);
+    fetchMessagesRequest();
 }
 
 function addFriendErrorDetector(error, errorDiv) {
@@ -530,13 +529,4 @@ function denyRelationRequest() {
 
     loggedInUser.setSelectedContact(undefined);
     messagesOverlay.fadeIn(100);
-}
-
-//-----------------------------//
-// Else                        //
-//-----------------------------//
-
-function setMessageRequestLock() {
-    loggedInUser.setMessageRequestLock(true);
-    setTimeout(() => loggedInUser.setMessageRequestLock(false), 5000);
 }

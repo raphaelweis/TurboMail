@@ -11,26 +11,25 @@ include_once 'DataBaseHandler.php';
 class Message extends DataBaseHandler {
     /**
      * @param $relationId
-     * @param $request
      *
      * @return array|null
      */
-    protected function fetchMessagesByRelationId($relationId, $request): ?array {
-        $statement = $this->connect()->prepare($request);
+    protected function fetchMessagesByRelationId($relationId): ?array {
+        $statement = $this->connect()->prepare(SELECT_MESSAGES_BY_RELATION_QUERY);
 
         if (!$statement->execute([$relationId])) {
             $statement = null;
             return null;
         }
 
-        if ($statement->rowCount() == 0) {
+        if ($statement->rowCount() === 0) {
             $statement = null;
             return null;
         }
 
-        $messageTable = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $messagesArray = $statement->fetchAll(PDO::FETCH_ASSOC);
         $statement = null;
-        return $messageTable;
+        return $messagesArray;
     }
 
     /**

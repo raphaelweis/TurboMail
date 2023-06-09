@@ -4,6 +4,7 @@ export class User {
     #lastName;
     #email;
     #selectedContact;
+    #messageRequestLock;
 
     constructor() {
         this.#id = undefined
@@ -11,6 +12,7 @@ export class User {
         this.#lastName = undefined
         this.#email = undefined
         this.#selectedContact = undefined;
+        this.#messageRequestLock = false;
     }
 
     // setters
@@ -23,6 +25,10 @@ export class User {
 
     setSelectedContact(contact) {
         this.#selectedContact = contact;
+    }
+
+    setMessageRequestLock(messageRequestLock) {
+         this.#messageRequestLock = messageRequestLock;
     }
 
     // getters
@@ -44,5 +50,9 @@ export class User {
 
     getSelectedContact() {
         return this.#selectedContact;
+    }
+
+    getMessageRequestLock() {
+        return this.#messageRequestLock;
     }
 }

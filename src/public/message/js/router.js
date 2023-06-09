@@ -31,7 +31,8 @@ window.onload = () => {
         });
 
     setInterval(() => {
-        if (loggedInUser.getSelectedContact() !== undefined) fetchMessagesRequest(true);
+        if (loggedInUser.getSelectedContact() !== undefined && !loggedInUser.getMessageRequestLock())
+            fetchMessagesRequest(true);
     }, 5000);
 };
 
@@ -221,6 +222,8 @@ function sendMessage() {
     if (messageText === "") {
         return;
     }
+
+    setMessageRequestLock();
 
     sendMessageRequest(messageText)
         .catch((error) => {
@@ -527,4 +530,13 @@ function denyRelationRequest() {
 
     loggedInUser.setSelectedContact(undefined);
     messagesOverlay.fadeIn(100);
+}
+
+//-----------------------------//
+// Else                        //
+//-----------------------------//
+
+function setMessageRequestLock() {
+    loggedInUser.setMessageRequestLock(true);
+    setTimeout(() => loggedInUser.setMessageRequestLock(false), 5000);
 }

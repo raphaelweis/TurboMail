@@ -7,6 +7,7 @@ const LOGIN_PAGE_URL = '../login/login.html';
 const SEND_RELATION_URL = '../../app/send_relation.php';
 const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php';
 const FETCH_MESSAGES_URL = '../../app/fetch_messages.php';
+const FETCH_RECENT_MESSAGES_URL = '../../app/fetch_recent_messages.php';
 const UPDATE_RELATION_STATUS_URL = '../../app/update_relation_status.php';
 const DELETE_RELATION_URL = '../../app/delete_relation.php';
 
@@ -76,18 +77,19 @@ function sendMessageRequest(messageText) {
 }
 
 function fetchMessagesRequest() {
-    const relationId = loggedInUser.getSelectedContact().relationId;
+    const data = {relationId: loggedInUser.getSelectedContact().relationId};
 
-    $.post(FETCH_MESSAGES_URL, {relationId: relationId}, (response) => {
-        const messageArray = JSON.parse(response);
-        displayMessages(messageArray);
-    });
+    $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
+}
+
+function fetchRecentMessagesRequest() {
+    const data = {relationId: loggedInUser.getSelectedContact().relationId};
+
+    $.post(FETCH_RECENT_MESSAGES_URL, data, (response) => displayNewMessages(JSON.parse(response)));
 }
 
 function logoutRequest() {
-    $.post(LOGOUT_URL, () => {
-        window.location.href = LOGIN_PAGE_URL;
-    });
+    $.post(LOGOUT_URL, () => window.location.href = LOGIN_PAGE_URL);
 }
 
 function addFriendRequest() {
@@ -106,9 +108,9 @@ function addFriendRequest() {
         })
 
         if (serverResponse[0] !== 0) {
-            addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // removes trailing comma + space
+            addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // to remove the trailing comma + space
             addFriendErrorDiv.css('visibility', 'visible');
-            addFriendDialog[0].close(); // This avoids the exception InvalidStateError
+            addFriendDialog[0].close(); //TODO
             addFriendDialog[0].showModal();
         }
     });
@@ -116,12 +118,10 @@ function addFriendRequest() {
 
 function updateRelationStatusRequest(newRelationStatus) {
     const data = {
-        new_status: newRelationStatus,
-        id_relation: loggedInUser.getSelectedContact().relationId
+        new_status: newRelationStatus, id_relation: loggedInUser.getSelectedContact().relationId
     }
     $.post(UPDATE_RELATION_STATUS_URL, data, (response) => {
         const serverResponse = parseInt(response);
-        console.log(response);
 
         if (serverResponse === 1) {
             alert('Oops... There\'s an issue with the database. Come back later maybe?');
@@ -135,7 +135,6 @@ function deleteRelationRequest() {
     const data = {id_relation: loggedInUser.getSelectedContact().relationId};
     $.post(DELETE_RELATION_URL, data, (response) => {
         const serverResponse = parseInt(response);
-        console.log(response);
 
         if (serverResponse === 1) {
             alert('Oops... We couldn\'t delete this relation. Maybe you two are meant to be friends after all...');
@@ -280,6 +279,10 @@ function displayMessages(messagesArray) {
     scrollElementToBottom(chat[0]);
 }
 
+function displayNewMessages(messagesArray) {
+    //TODO
+}
+
 function removeMessageFromChat(message) {
     message.remove();
 }
@@ -348,7 +351,6 @@ function displayContacts(relations) {
     pendingContactsContainer.empty();
 
     relations.forEach((relation) => {
-        console.log(relation);
         const contactDiv = $('<div></div>');
         contactDiv.html(relation.first_name + ' ' + relation.last_name);
 
@@ -375,9 +377,7 @@ function selectContact(relation, contactDiv) {
 
     if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
-            'background-position': '0 0',
-            'font-size': '1rem',
-            'color': '#000000',
+            'background-position': '0 0', 'font-size': '1rem', 'color': '#000000',
         });
     } else {
         messagesOverlay.fadeOut(100);
@@ -394,9 +394,7 @@ function selectContact(relation, contactDiv) {
         contactDiv: contactDiv
     });
     contactDiv.css({
-        'background-position': '-100% 0',
-        'font-size': '1.3rem',
-        'color': '#ffffff',
+        'background-position': '-100% 0', 'font-size': '1.3rem', 'color': '#ffffff',
     });
 
     fetchMessagesRequest();

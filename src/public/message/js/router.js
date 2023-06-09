@@ -98,6 +98,8 @@ function addFriendRequest() {
     const addFriendErrorDiv = $('#add-friend-error');
     const formData = signUpForm.serialize().replace(/%0D%0A/g, '<br/>');
 
+    addFriendErrorDiv.text('Error: ');
+
     $.post(SEND_RELATION_URL, formData, (response) => {
         const serverResponse = JSON.parse(response);
 
@@ -106,7 +108,6 @@ function addFriendRequest() {
         })
 
         if (serverResponse[0] !== 0) {
-            addFriendErrorDiv.text('Error: ');
             addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // to remove the trailing comma + space
             addFriendErrorDiv.css('visibility', 'visible');
             addFriendDialog[0].close(); //TODO

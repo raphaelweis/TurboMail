@@ -93,23 +93,25 @@ class MessageController extends Message {
 
     /**
      * @param $relationId
-     * @param $recentOnly
      *
      * @return array
      */
-    public static function getConversationMessages($relationId, $recentOnly): array {
-        $request = $recentOnly ? SELECT_NEW_MESSAGES_BY_RELATION_QUERY : SELECT_MESSAGES_BY_RELATION_QUERY;
-
+    public static function getConversationMessages($relationId): array {
         $messageObject = new Message();
-        $allMessages = $messageObject->fetchMessagesByRelationId($relationId, $request);
+        $allMessages = $messageObject->fetchMessagesByRelationId($relationId);
 
-        if ($allMessages == null) {
+        if ($allMessages === null) {
             return [];
         };
 
         return $allMessages;
     }
 
+    /**
+     * @param $relationId
+     *
+     * @return int
+     */
     public static function DeleteMessagesFromRelation($relationId): int {
         $message = new Message();
         return $message->DeleteMessagesByRelationId($relationId);

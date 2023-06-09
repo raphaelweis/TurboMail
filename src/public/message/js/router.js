@@ -7,7 +7,7 @@ const LOGIN_PAGE_URL = '../login/login.html';
 const SEND_RELATION_URL = '../../app/send_relation.php';
 const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php';
 const FETCH_MESSAGES_URL = '../../app/fetch_messages.php';
-const FETCH_RECENT_MESSAGES_URL = '../../app/fetch_recent_messages.php';
+const FETCH_NEW_MESSAGES_URL = '../../app/fetch_new_messages.php';
 const UPDATE_RELATION_STATUS_URL = '../../app/update_relation_status.php';
 const DELETE_RELATION_URL = '../../app/delete_relation.php';
 
@@ -77,15 +77,15 @@ function sendMessageRequest(messageText) {
 }
 
 function fetchMessagesRequest() {
-    const data = {relationId: loggedInUser.getSelectedContact().relationId};
+    const data = {relationId: loggedInUser.getSelectedContact().relationId}
 
     $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
 }
 
-function fetchRecentMessagesRequest() {
-    const data = {relationId: loggedInUser.getSelectedContact().relationId};
+function fetchNewMessagesRequest() {
+    const data = {relationId: loggedInUser.getSelectedContact().relationId, senderId: loggedInUser.getId()}
 
-    $.post(FETCH_RECENT_MESSAGES_URL, data, (response) => displayNewMessages(JSON.parse(response)));
+    $.post(FETCH_NEW_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
 }
 
 function logoutRequest() {
@@ -214,13 +214,11 @@ function scrollElementToBottom(element) {
 }
 
 function sendMessage() {
-    const COULD_NOT_SEND_MESSAGE = 1;
-
     const textarea = $('#message-textarea');
     const chat = $('#chat');
-
     const messageText = textarea.val().replace(/\n/g, '<br/>'); // replace the '\n' characters with '<br>' so that we can preserve line breaks
     const messageDiv = $('<div></div>');
+    const COULD_NOT_SEND_MESSAGE = 1;
 
     if (messageText === "") {
         return;

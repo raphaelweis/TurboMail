@@ -1,5 +1,11 @@
 <?php /** @noinspection PhpUnused */
 
+/*************/
+/* Constants */
+/*************/
+
+const RECENT_MESSAGES_THRESHOLD_SECONDS = 5;
+
 /************/
 /* Database */
 /************/
@@ -117,7 +123,7 @@ const SELECT_MESSAGES_BY_RELATION_QUERY
 const SELECT_NEW_MESSAGES_BY_RELATION_QUERY
 = 'SELECT * FROM '.MESSAGE_TABLE.' WHERE '.ID_RELATION_MESSAGE_TABLE
     .'=? AND TIMESTAMPDIFF(SECOND, '.DATE_MESSAGE_TABLE
-    .', NOW()) < 10 ORDER BY '.DATE_MESSAGE_TABLE.';';
+    .', NOW()) < '. RECENT_MESSAGES_THRESHOLD_SECONDS . ' ORDER BY '.DATE_MESSAGE_TABLE.';';
 
 // Update queries
 const UPDATE_RELATION_STATUS_QUERY

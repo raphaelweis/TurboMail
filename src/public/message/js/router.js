@@ -17,6 +17,7 @@ const loggedInUser = new User();
 // Initial execution           //
 //-----------------------------//
 window.onload = () => {
+    responsivePage();
     fetchUserDataRequest()
         .then((userData) => {
             loggedInUser.setUserData(userData);
@@ -29,7 +30,6 @@ window.onload = () => {
         .catch(() => {
             window.location.href = LOGIN_PAGE_URL;
         });
-    responsivePage();
 };
 
 //-----------------------------//

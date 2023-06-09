@@ -29,6 +29,7 @@ window.onload = () => {
         .catch(() => {
             window.location.href = LOGIN_PAGE_URL;
         });
+    responsivePage();
 };
 
 //-----------------------------//
@@ -367,9 +368,15 @@ function displayContacts(relations) {
 }
 
 function selectContact(relation, contactDiv) {
+    const currentWindow = $(window);
     const messagesOverlay = $('#messages-overlay');
     const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
+
+    //Responsive
+    if (currentWindow.width() < 500) {
+        selectContactInResponsive();
+    }
 
     chat.empty();
 
@@ -531,4 +538,63 @@ function denyRelationRequest() {
 
     loggedInUser.setSelectedContact(undefined);
     messagesOverlay.fadeIn(100);
+}
+
+//------------------------------//
+// Responsive related functions //
+//------------------------------//
+function responsivePage() {
+    const currentWindow = $(window);
+    const backArrow = $('#back-arrow');
+    const contacts = $('#contacts');
+    const messages = $('#messages');
+
+    if(currentWindow.width() <= 500) {
+        displayContactsInResponsive();
+    }
+
+    currentWindow.on('resize', () => {
+        messages.css('display', 'inline');
+
+        if(currentWindow.width() <= 500) {
+            displayContactsInResponsive();
+        }
+
+        if(currentWindow.width() > 500) {
+            contacts.css('width', '20%');
+            contacts.css('max-width', '30rem');
+        }
+    })
+
+    backArrow.on('click', () => {
+        displayContactsInResponsive();
+    })
+}
+
+function displayContactsInResponsive() {
+    const logo = $('#navbar-logo');
+    const backArrow = $('#back-arrow');
+    const contacts = $('#contacts');
+    const messages = $('#messages');
+
+    logo.css('display', 'inline');
+    backArrow.css('display', 'none');
+
+    messages.css('display', 'none');
+
+    contacts.css('display', 'inline');
+    contacts.css('width', '100%');
+    contacts.css('max-width', '100%');
+}
+
+function selectContactInResponsive() {
+    const logo = $('#navbar-logo');
+    const backArrow = $('#back-arrow');
+    const contacts = $('#contacts');
+    const messages = $('#messages');
+
+    logo.css('display', 'none');
+    backArrow.css('display', 'inline');
+    contacts.css('display', 'none');
+    messages.css('display', 'inline');
 }

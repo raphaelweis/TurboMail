@@ -16,6 +16,7 @@ const loggedInUser = new User();
 // Initial execution           //
 //-----------------------------//
 window.onload = () => {
+    responsivePage();
     fetchUserDataRequest()
         .then((userData) => {
             loggedInUser.setUserData(userData);
@@ -130,7 +131,6 @@ function updateRelationStatusRequest(newRelationStatus) {
 
 function deleteRelationRequest() {
     const data = {id_relation: loggedInUser.getSelectedContact().relationId};
-
     $.post(DELETE_RELATION_URL, data, (response) => {
         const serverResponse = parseInt(response);
 
@@ -333,7 +333,7 @@ function displayContacts(relations) {
     pendingContactsContainer.empty();
 
     relations.forEach((relation) => {
-        let contactDiv = $('<div></div>');
+        const contactDiv = $('<div></div>');
         contactDiv.html(relation.first_name + ' ' + relation.last_name);
 
         contactDiv.on('click', () => selectContact(relation, contactDiv));
@@ -349,8 +349,15 @@ function displayContacts(relations) {
 }
 
 function selectContact(relation, contactDiv) {
+    const currentWindow = $(window);
     const messagesOverlay = $('#messages-overlay');
     const messageTextArea = $('#message-textarea');
+
+    if (currentWindow.width() < 500) {
+        selectContactInResponsive();
+    }
+
+    chat.empty();
 
     if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
@@ -502,4 +509,63 @@ function denyRelationRequest() {
 
     loggedInUser.setSelectedContact(undefined);
     messagesOverlay.fadeIn(100);
+}
+
+//------------------------------//
+// Responsive related functions //
+//------------------------------//
+function responsivePage() {
+    const currentWindow = $(window);
+    const backArrow = $('#back-arrow');
+    const contacts = $('#contacts');
+    const messages = $('#messages');
+
+    if(currentWindow.width() <= 500) {
+        displayContactsInResponsive();
+    }
+
+    currentWindow.on('resize', () => {
+        messages.css('display', 'inline');
+
+        if(currentWindow.width() <= 500) {
+            displayContactsInResponsive();
+        }
+
+        if(currentWindow.width() > 500) {
+            contacts.css('width', '20%');
+            contacts.css('max-width', '30rem');
+        }
+    })
+
+    backArrow.on('click', () => {
+        displayContactsInResponsive();
+    })
+}
+
+function displayContactsInResponsive() {
+    const logo = $('#navbar-logo');
+    const backArrow = $('#back-arrow');
+    const contacts = $('#contacts');
+    const messages = $('#messages');
+
+    logo.css('display', 'inline');
+    backArrow.css('display', 'none');
+
+    messages.css('display', 'none');
+
+    contacts.css('display', 'inline');
+    contacts.css('width', '100%');
+    contacts.css('max-width', '100%');
+}
+
+function selectContactInResponsive() {
+    const logo = $('#navbar-logo');
+    const backArrow = $('#back-arrow');
+    const contacts = $('#contacts');
+    const messages = $('#messages');
+
+    logo.css('display', 'none');
+    backArrow.css('display', 'inline');
+    contacts.css('display', 'none');
+    messages.css('display', 'inline');
 }

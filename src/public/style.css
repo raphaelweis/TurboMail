@@ -46,9 +46,7 @@ input[class*="common-button"] {
 }
 
 button[class*="common-button"] {
-    border: none;
     border-radius: 0.2rem;
-    font-size: 1rem;
     padding: 0.5rem 1rem;
     color: var(--lightFontColor);
     background-color: var(--buttonColor);
@@ -61,5 +59,16 @@ input[type="submit"] {
 
 input[class*="common-button"]:hover,
 button[class*="common-button"]:hover {
+    background-color: var(--lightBlue);
+}
+
+button[class*="round-button"] {
+    background-color: black;
+    border-radius: 100%;
+    color: var(--lightFontColor);
+    transition: background-color 0.3s ease;
+}
+
+button[class*="round-button"]:hover {
     background-color: var(--lightBlue);
 }

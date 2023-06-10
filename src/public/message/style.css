@@ -436,6 +436,8 @@ main {
 }
 
 #accept-relation-banner-buttons button {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
     margin: 2rem;
     transition: all 0.1s linear;
 }

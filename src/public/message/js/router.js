@@ -84,11 +84,19 @@ function fetchMessagesRequest() {
 
     chat.empty();
 
-    $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)))
+    return new Promise((resolve) => {
+        $.post(FETCH_MESSAGES_URL, data, (response) => {
+            displayMessages(JSON.parse(response))
+            resolve(response);
+        });
+    })
 }
 
 function logoutRequest() {
-    $.post(LOGOUT_URL, () => window.location.href = LOGIN_PAGE_URL);
+    return new Promise((resolve) => {
+        $.post(LOGOUT_URL, () => window.location.href = LOGIN_PAGE_URL);
+        resolve();
+    });
 }
 
 function addFriendRequest() {
@@ -99,33 +107,41 @@ function addFriendRequest() {
 
     addFriendErrorDiv.text('Error: ');
 
-    $.post(SEND_RELATION_URL, data, (response) => {
-        const serverResponse = JSON.parse(response);
+    return new Promise((resolve) => {
+        $.post(SEND_RELATION_URL, data, (response) => {
+            const serverResponse = JSON.parse(response);
 
-        serverResponse.forEach((response) => {
-            addFriendErrorDetector(parseInt(response), addFriendErrorDiv);
-        })
+            serverResponse.forEach((response) => {
+                addFriendErrorDetector(parseInt(response), addFriendErrorDiv);
+            })
 
-        if (serverResponse[0] !== 0) {
-            addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // to remove the trailing comma + space
-            addFriendErrorDiv.css('visibility', 'visible');
-            addFriendDialog[0].close(); //TODO
-            addFriendDialog[0].showModal();
-        }
+            if (serverResponse[0] !== 0) {
+                addFriendErrorDiv.text(addFriendErrorDiv.text().slice(0, -2)); // to remove the trailing comma + space
+                addFriendErrorDiv.css('visibility', 'visible');
+                addFriendDialog[0].close(); //TODO
+                addFriendDialog[0].showModal();
+            }
+            resolve();
+        });
     });
 }
 
 function updateRelationStatusRequest(newRelationStatus) {
     const data = {new_status: newRelationStatus, id_relation: loggedInUser.getSelectedContact().relationId}
 
-    $.post(UPDATE_RELATION_STATUS_URL, data, (response) => {
-        const serverResponse = parseInt(response);
+    return new Promise((resolve, reject) => {
+        $.post(UPDATE_RELATION_STATUS_URL, data, (response) => {
+            const serverResponse = parseInt(response);
 
-        if (serverResponse === 1) {
-            alert('Oops... There\'s an issue with the database. Come back later maybe?');
-        } else if (serverResponse !== 0) {
-            alert('Oops... something unexpected just happened. Is your internet connection at fault?');
-        }
+            if (serverResponse === 1) {
+                alert('Oops... There\'s an issue with the database. Come back later maybe?');
+                reject();
+            } else if (serverResponse !== 0) {
+                alert('Oops... something unexpected just happened. Is your internet connection at fault?');
+                reject();
+            }
+            resolve();
+        });
     });
 }
 
@@ -216,21 +232,25 @@ function insertUserInfo() {
 }
 
 function resizeMessageTextArea() {
+    const chat = $('#chat')[0];
     const container = $('#send-box')[0];
     const textarea = $('#message-textarea')[0];
 
     container.style.height = 'auto';
     container.style.height = textarea.scrollHeight + 'px';
     scrollElementToBottom(textarea);
+    scrollElementToBottom(chat);
 }
 
 function resetMessageTextArea() {
+    const chat = $('#chat')[0];
     const container = $('#send-box')[0];
     const textarea = $('#message-textarea')[0];
 
     container.style.height = 4 + 'rem';
     container.style.height = textarea.style.scrollHeight + 'px';
     scrollElementToBottom(textarea);
+    scrollElementToBottom(chat);
 }
 
 function scrollElementToBottom(element) {
@@ -350,11 +370,13 @@ function setupRelations() {
 function refreshContacts() {
     const messagesOverlay = $('#messages-overlay');
     const chat = $('#chat');
+    const messageTextarea = $('#message-textarea');
 
     loggedInUser.setSelectedContact(undefined);
     chat.empty();
+    messageTextarea.prop('disabled', false);
     messagesOverlay.fadeIn(100);
-    fetchContactsRequest().then();
+    fetchContactsRequest();
 }
 
 function displayContacts(relations) {

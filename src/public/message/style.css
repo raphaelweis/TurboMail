@@ -327,7 +327,7 @@ main {
 #confirm-relation-delete p {
     font-size: 1.5rem;
     line-height: 1.5rem;
-    margin: 3rem 2rem 0rem 2rem;
+    margin: 3rem 2rem 0 2rem;
 }
 
 #confirm-relation-delete button {

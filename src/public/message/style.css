@@ -47,11 +47,7 @@ main {
     font-weight: bold;
 }
 
-#navbar-user-info {
-    margin: 0 0.5rem;
-}
-
-#navbar button {
+.navbar-item {
     margin: 0 0.5rem;
 }
 
@@ -425,21 +421,4 @@ main {
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 700px) {
-    #messages {
-        display: none;
-        visibility: hidden;
-    }
-
-    .navbar-title {
-        display: none;
-        visibility: hidden;
-    }
-
-    .accepted-contact {
-        background-color: var(--backgroundColor);
-    }
-
-    textarea {
-        height: 40px;
-    }
 }

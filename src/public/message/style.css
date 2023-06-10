@@ -136,8 +136,28 @@ main {
 #contacts {
     max-width: 30rem;
     width: 20%;
+    min-width: 12rem;
     overflow: scroll;
     border-right: 1px solid black;
+}
+
+#contacts-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-image: linear-gradient(to right, var(--lightBlue), var(--darkBlue));
+}
+
+#contacts-header-title {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+#contacts-refresh-button {
+    margin-right: 1rem;
+    height: 2rem;
+    width: 2rem;
 }
 
 .accepted-contact {
@@ -240,7 +260,7 @@ main {
     z-index: 1002;
 }
 
-#action-buttons {
+#messages-header {
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
@@ -254,21 +274,16 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-#action-buttons img {
-    height: 1rem;
-    width: 1rem;
-}
-
-#action-buttons button {
+#messages-header button {
     height: 2rem;
     width: 2rem;
 }
 
-#clickable-button1 {
+#messages-trash-button {
     margin-right: 0.25rem;
 }
 
-#clickable-button2 {
+#messages-refresh-button {
     margin-left: 0.25rem;
 }
 
@@ -285,7 +300,7 @@ main {
     max-width: 50%;
     margin: 0.5rem 1rem;
     padding: 1rem;
-    #border: none;
+    border: none;
     color: var(--lightFontColor);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
     word-wrap: break-word;
@@ -354,6 +369,7 @@ main {
 
 #send-button:hover {
     background-color: var(--lightBlue);
+    cursor: pointer;
 }
 
 /* ACCEPT RELATION BANNER */

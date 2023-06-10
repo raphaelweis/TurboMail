@@ -7,7 +7,6 @@ const LOGIN_PAGE_URL = '../login/login.html';
 const SEND_RELATION_URL = '../../app/send_relation.php';
 const FETCH_CONTACTS_URL = '../../app/fetch_contacts.php';
 const FETCH_MESSAGES_URL = '../../app/fetch_messages.php';
-const FETCH_NEW_MESSAGES_URL = '../../app/fetch_new_messages.php';
 const UPDATE_RELATION_STATUS_URL = '../../app/update_relation_status.php';
 const DELETE_RELATION_URL = '../../app/delete_relation.php';
 
@@ -50,7 +49,7 @@ function fetchUserDataRequest() {
 
 function fetchContactsRequest() {
     $.post(FETCH_CONTACTS_URL, {email: loggedInUser.getEmail()}, (response) => {
-        let contacts = JSON.parse(response);
+        const contacts = JSON.parse(response);
         displayContacts(contacts);
     });
 }
@@ -77,15 +76,12 @@ function sendMessageRequest(messageText) {
 }
 
 function fetchMessagesRequest() {
+    const chat = $('#chat');
     const data = {relationId: loggedInUser.getSelectedContact().relationId}
 
+    chat.empty();
+
     $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
-}
-
-function fetchNewMessagesRequest() {
-    const data = {relationId: loggedInUser.getSelectedContact().relationId, senderId: loggedInUser.getId()}
-
-    $.post(FETCH_NEW_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
 }
 
 function logoutRequest() {
@@ -160,12 +156,15 @@ function setupMessagePage() {
 }
 
 function setupMessages() {
+    const trashButton = $('#messages-trash-button');
+    const refreshButton = $('#messages-refresh-button');
     const messageTextArea = $('#message-textarea');
     const sendBox = $('#send-box');
     const sendButton = $('#send-button');
 
     insertUserInfo();
 
+    refreshButton.on('click', () => fetchMessagesRequest());
     messageTextArea.on('keydown', (event) => {
         if (!event.shiftKey && event.key === 'Enter') {
             event.preventDefault();
@@ -277,10 +276,6 @@ function displayMessages(messagesArray) {
     scrollElementToBottom(chat[0]);
 }
 
-function displayNewMessages(messagesArray) {
-    //TODO
-}
-
 function removeMessageFromChat(message) {
     message.remove();
 }
@@ -333,10 +328,16 @@ function showRelationSentBanner() {
 //-----------------------------//
 function setupRelations() {
     const addFriendButton = $('#add-friend-button');
+    const refreshButton = $('#contacts-refresh-button');
 
     fetchContactsRequest();
 
+    refreshButton.on('click', () => refreshContacts());
     addFriendButton.on('click', () => showAddFriendDialog());
+
+}
+
+function refreshContacts() {
 }
 
 function displayContacts(relations) {
@@ -347,12 +348,10 @@ function displayContacts(relations) {
     pendingContactsContainer.empty();
 
     relations.forEach((relation) => {
-        const contactDiv = $('<div></div>');
+        let contactDiv = $('<div></div>');
         contactDiv.html(relation.first_name + ' ' + relation.last_name);
 
-        contactDiv.on('click', () => {
-            selectContact(relation, contactDiv);
-        });
+        contactDiv.on('click', () => selectContact(relation, contactDiv));
 
         if (!relation.status) {
             contactDiv.addClass('pending-contact');
@@ -366,10 +365,7 @@ function displayContacts(relations) {
 
 function selectContact(relation, contactDiv) {
     const messagesOverlay = $('#messages-overlay');
-    const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
-
-    chat.empty();
 
     if (loggedInUser.getSelectedContact() !== undefined) {
         loggedInUser.getSelectedContact().contactDiv.css({
@@ -410,7 +406,6 @@ function addFriendErrorDetector(error, errorDiv) {
     switch (error) {
         case SUCCESS:
             fetchContactsRequest();
-            fetchContactsRequest();
             addFriendDialog[0].close();
             clearDialog();
             break;
@@ -439,6 +434,7 @@ function addFriendErrorDetector(error, errorDiv) {
 }
 
 function showAddFriendDialog() {
+    const window = $('#window');
     const addFriendDialog = $('#add-friend');
     const requestMessage = $('#request-message');
     const closeButton = $('#close-button');
@@ -461,7 +457,7 @@ function showAddFriendDialog() {
     closeButton.on('click', () => {
         addFriendDialog[0].close();
     })
-    window.addEventListener("resize", () => {
+    window.on('resize', () => {
         resizeDialogTextArea(requestMessage[0]);
     });
 }

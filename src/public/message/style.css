@@ -145,7 +145,6 @@ main {
 /* CONTACTS */
 #contacts {
     max-width: 30rem;
-    min-width: 10rem;
     width: 20%;
     min-width: 12rem;
     overflow: scroll;

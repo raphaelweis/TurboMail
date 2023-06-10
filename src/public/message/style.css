@@ -25,16 +25,18 @@ main {
     color: var(--darkFontColor);
     padding: 1rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
 }
 
 #back-arrow {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: none;
     cursor: pointer;
+    margin: 0 0.42rem 0 0.42rem;
 }
 #navbar-logo {
     vertical-align: middle;
@@ -369,6 +371,12 @@ main {
 }
 
 /* RESPONSIVE DESIGN */
+@media (max-width: 930px) and (min-width: 800px) {
+    #relation-form #request-message {
+        min-height: 3rem;
+    }
+}
+
 @media (max-width: 800px) {
     #navbar-title {
         display: none;
@@ -378,6 +386,37 @@ main {
         width: 3rem;
         height: 1.5rem;
         margin: 0;
+    }
+
+    #navbar {
+        justify-content: center;
+        gap: 1rem;
+    }
+    .navbar-item {
+        justify-content: flex-end;
+        margin: 0 0.5rem;
+    }
+
+    #add-friend h2 {
+        font-size: 2.5rem;
+    }
+    #relation-form #add-friend-email {
+        font-size: 1rem;
+    }
+    #relation-form #request-message {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+    #relation-form #send-relation {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 660px) {
+    #relation-form #request-message {
+        font-size: 1rem;
+        line-height: 1rem;
+        min-height: 2rem;
     }
 }
 

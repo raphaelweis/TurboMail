@@ -54,7 +54,7 @@ function fetchContactsRequest() {
     return new Promise((resolve) => {
         $.post(FETCH_CONTACTS_URL, data, (response) => displayContacts(JSON.parse(response)));
         resolve();
-    })
+    });
 }
 
 function sendMessageRequest(messageText) {
@@ -131,15 +131,21 @@ function updateRelationStatusRequest(newRelationStatus) {
 
 function deleteRelationRequest() {
     const data = {id_relation: loggedInUser.getSelectedContact().relationId};
-    $.post(DELETE_RELATION_URL, data, (response) => {
-        const serverResponse = parseInt(response);
 
-        if (serverResponse === 1) {
-            alert('Oops... We couldn\'t delete this relation. Maybe you two are meant to be friends after all...');
-        } else if (serverResponse !== 0) {
-            alert('Oops... To be honest, we don\'t know what happened. Come back later, please?');
-        }
-    });
+    return new Promise((resolve, reject) => {
+        $.post(DELETE_RELATION_URL, data, (response) => {
+            const serverResponse = parseInt(response);
+
+            if (serverResponse === 1) {
+                alert('Oops... We couldn\'t delete this relation. Maybe you two are meant to be friends after all...');
+                reject(serverResponse);
+            } else if (serverResponse !== 0) {
+                alert('Oops... To be honest, we don\'t know what happened. Come back later, please?');
+                reject(serverResponse);
+            }
+            resolve(serverResponse);
+        });
+    })
 }
 
 //-----------------------------//
@@ -162,6 +168,7 @@ function setupMessages() {
 
     insertUserInfo();
 
+    trashButton.on('click', () => showDeleteRelationDialog());
     refreshButton.on('click', () => fetchMessagesRequest());
     messageTextArea.on('keydown', (event) => {
         if (!event.shiftKey && event.key === 'Enter') {
@@ -174,6 +181,32 @@ function setupMessages() {
     sendBox.on('input', () => resizeMessageTextArea());
 
     resizeMessageTextArea();
+}
+
+function showDeleteRelationDialog() {
+    const deleteRelationDialog = $('#confirm-relation-delete');
+    const closeButton = $('#confirm-relation-delete-close-button');
+    const noButton = $('#confirm-relation-delete-no');
+    const yesButton = $('#confirm-relation-delete-yes');
+
+    deleteRelationDialog[0].showModal();
+
+    closeButton.on('click', () => deleteRelationDialog[0].close());
+    noButton.on('click', () => deleteRelationDialog[0].close());
+    yesButton.on('click', () => deleteCurrentConversation());
+}
+
+function deleteCurrentConversation() {
+    const deleteRelationDialog = $('#confirm-relation-delete');
+    const chat = $('#chat');
+
+    deleteRelationDialog[0].close();
+    deleteRelationRequest()
+        .then(() => {
+            chat.empty();
+            refreshContacts();
+        })
+        .catch();
 }
 
 function insertUserInfo() {
@@ -318,11 +351,10 @@ function refreshContacts() {
     const messagesOverlay = $('#messages-overlay');
     const chat = $('#chat');
 
-
     loggedInUser.setSelectedContact(undefined);
     chat.empty();
     messagesOverlay.fadeIn(100);
-    setupRelations();
+    fetchContactsRequest().then();
 }
 
 function displayContacts(relations) {
@@ -351,6 +383,7 @@ function displayContacts(relations) {
 function selectContact(relation, contactDiv) {
     const currentWindow = $(window);
     const messagesOverlay = $('#messages-overlay');
+    const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
 
     if (currentWindow.width() < 500) {
@@ -427,7 +460,7 @@ function addFriendErrorDetector(error, errorDiv) {
 function showAddFriendDialog() {
     const addFriendDialog = $('#add-friend');
     const requestMessage = $('#request-message');
-    const closeButton = $('#close-button');
+    const closeButton = $('#add-friend-close-button');
     let keydownFlag = 0;
 
     addFriendDialog[0].showModal();
@@ -520,18 +553,18 @@ function responsivePage() {
     const contacts = $('#contacts');
     const messages = $('#messages');
 
-    if(currentWindow.width() <= 500) {
+    if (currentWindow.width() <= 500) {
         displayContactsInResponsive();
     }
 
     currentWindow.on('resize', () => {
         messages.css('display', 'inline');
 
-        if(currentWindow.width() <= 500) {
+        if (currentWindow.width() <= 500) {
             displayContactsInResponsive();
         }
 
-        if(currentWindow.width() > 500) {
+        if (currentWindow.width() > 500) {
             contacts.css('width', '20%');
             contacts.css('max-width', '30rem');
         }

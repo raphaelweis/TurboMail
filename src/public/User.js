@@ -4,6 +4,7 @@ export class User {
     #lastName;
     #email;
     #selectedContact;
+    #contactsList;
 
     constructor() {
         this.#id = undefined
@@ -25,6 +26,10 @@ export class User {
         this.#selectedContact = contact;
     }
 
+    setContactsList(contactList) {
+        this.#contactsList = contactList;
+    }
+
     // getters
     getId() {
         return this.#id;
@@ -44,5 +49,9 @@ export class User {
 
     getSelectedContact() {
         return this.#selectedContact;
+    }
+
+    getContactsList(contactList) {
+        this.#contactsList = contactList;
     }
 }

@@ -48,20 +48,22 @@ function fetchUserDataRequest() {
 }
 
 function fetchContactsRequest() {
-    $.post(FETCH_CONTACTS_URL, {email: loggedInUser.getEmail()}, (response) => {
-        const contacts = JSON.parse(response);
-        displayContacts(contacts);
-    });
+    const data = {email: loggedInUser.getEmail()};
+
+    return new Promise((resolve) => {
+        $.post(FETCH_CONTACTS_URL, data, (response) => displayContacts(JSON.parse(response)));
+        resolve();
+    })
 }
 
 function sendMessageRequest(messageText) {
-    const messageData = {
+    const data = {
         idSender: loggedInUser.getId(),
         idReceiver: loggedInUser.getSelectedContact().contactId,
         messageContent: messageText,
     };
     return new Promise((resolve, reject) => {
-        $.post(SEND_MESSAGE_URL, messageData, (response) => {
+        $.post(SEND_MESSAGE_URL, data, (response) => {
             const serverResponse = parseInt(response);
 
             if (serverResponse === 0) {
@@ -81,7 +83,7 @@ function fetchMessagesRequest() {
 
     chat.empty();
 
-    $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)));
+    $.post(FETCH_MESSAGES_URL, data, (response) => displayMessages(JSON.parse(response)))
 }
 
 function logoutRequest() {
@@ -92,11 +94,11 @@ function addFriendRequest() {
     const addFriendDialog = $('#add-friend');
     const signUpForm = $('#relation-form');
     const addFriendErrorDiv = $('#add-friend-error');
-    const formData = signUpForm.serialize().replace(/%0D%0A/g, '<br/>');
+    const data = signUpForm.serialize().replace(/%0D%0A/g, '<br/>');
 
     addFriendErrorDiv.text('Error: ');
 
-    $.post(SEND_RELATION_URL, formData, (response) => {
+    $.post(SEND_RELATION_URL, data, (response) => {
         const serverResponse = JSON.parse(response);
 
         serverResponse.forEach((response) => {
@@ -113,9 +115,8 @@ function addFriendRequest() {
 }
 
 function updateRelationStatusRequest(newRelationStatus) {
-    const data = {
-        new_status: newRelationStatus, id_relation: loggedInUser.getSelectedContact().relationId
-    }
+    const data = {new_status: newRelationStatus, id_relation: loggedInUser.getSelectedContact().relationId}
+
     $.post(UPDATE_RELATION_STATUS_URL, data, (response) => {
         const serverResponse = parseInt(response);
 
@@ -129,6 +130,7 @@ function updateRelationStatusRequest(newRelationStatus) {
 
 function deleteRelationRequest() {
     const data = {id_relation: loggedInUser.getSelectedContact().relationId};
+
     $.post(DELETE_RELATION_URL, data, (response) => {
         const serverResponse = parseInt(response);
 
@@ -147,12 +149,8 @@ function setupMessagePage() {
     const logoutButton = $('#logout-button');
     const sendRelationButton = $('#send-relation');
 
-    logoutButton.on('click', () => {
-        logoutRequest();
-    });
-    sendRelationButton.on('click', () => {
-        addFriendRequest();
-    });
+    logoutButton.on('click', () => logoutRequest());
+    sendRelationButton.on('click', () => addFriendRequest());
 }
 
 function setupMessages() {
@@ -171,15 +169,9 @@ function setupMessages() {
             sendMessage();
         }
     })
-    messageTextArea.on('focus', () => {
-        resizeMessageTextArea();
-    });
-    sendButton.on('click', () => {
-        sendMessage();
-    })
-    sendBox.on('input', () => {
-        resizeMessageTextArea();
-    });
+    messageTextArea.on('focus', () => resizeMessageTextArea());
+    sendButton.on('click', () => sendMessage());
+    sendBox.on('input', () => resizeMessageTextArea());
 
     resizeMessageTextArea();
 }
@@ -219,9 +211,7 @@ function sendMessage() {
     const messageDiv = $('<div></div>');
     const COULD_NOT_SEND_MESSAGE = 1;
 
-    if (messageText === "") {
-        return;
-    }
+    if (messageText === "") return;
 
     sendMessageRequest(messageText)
         .catch((error) => {
@@ -258,20 +248,12 @@ function displayMessages(messagesArray) {
         messageDiv.html(message['message']);
         messageDiv.addClass('msg-box');
 
-        if (loggedInUser.getId() === message['id_sender']) {
-            messageDiv.addClass('sent');
-        } else {
-            messageDiv.addClass('received');
-        }
+        if (loggedInUser.getId() === message['id_sender']) messageDiv.addClass('sent'); else messageDiv.addClass('received');
 
         chat.append(messageDiv);
     })
 
-    if (!isRelationAccepted && isRelationSender) {
-        showRelationSentBanner()
-    } else if (!isRelationAccepted && !isRelationSender) {
-        showAcceptRelationBanner();
-    }
+    if (!isRelationAccepted && isRelationSender) showRelationSentBanner(); else if (!isRelationAccepted && !isRelationSender) showAcceptRelationBanner();
 
     scrollElementToBottom(chat[0]);
 }
@@ -299,12 +281,8 @@ function showAcceptRelationBanner() {
 
     messageTextarea.prop('disabled', true);
 
-    acceptRelationMenuYes.on('click', () => {
-        acceptRelationRequest();
-    });
-    acceptRelationMenuNo.on('click', () => {
-        denyRelationRequest();
-    });
+    acceptRelationMenuYes.on('click', () => acceptRelationRequest());
+    acceptRelationMenuNo.on('click', () => denyRelationRequest());
 }
 
 function showRelationSentBanner() {
@@ -330,14 +308,19 @@ function setupRelations() {
     const addFriendButton = $('#add-friend-button');
     const refreshButton = $('#contacts-refresh-button');
 
-    fetchContactsRequest();
-
-    refreshButton.on('click', () => refreshContacts());
-    addFriendButton.on('click', () => showAddFriendDialog());
-
+    fetchContactsRequest().then(() => {
+        refreshButton.on('click', () => refreshContacts());
+        addFriendButton.on('click', () => showAddFriendDialog());
+    });
 }
 
 function refreshContacts() {
+    const relationId = loggedInUser.getSelectedContact().relationId;
+    fetchContactsRequest().then(() => {
+        const acceptedContact = $('.accepted-contact');
+        const pendingContacts = $('.pending-contact');
+    })
+
 }
 
 function displayContacts(relations) {
@@ -385,9 +368,7 @@ function selectContact(relation, contactDiv) {
         status: relation.status,
         contactDiv: contactDiv
     });
-    contactDiv.css({
-        'background-position': '-100% 0', 'font-size': '1.3rem', 'color': '#ffffff',
-    });
+    contactDiv.css({'background-position': '-100% 0', 'font-size': '1.3rem', 'color': '#ffffff',});
 
     fetchMessagesRequest();
 }
@@ -405,9 +386,10 @@ function addFriendErrorDetector(error, errorDiv) {
 
     switch (error) {
         case SUCCESS:
-            fetchContactsRequest();
-            addFriendDialog[0].close();
-            clearDialog();
+            fetchContactsRequest().then(() => {
+                addFriendDialog[0].close();
+                clearDialog();
+            });
             break;
         case EMPTY_INPUTS:
             errorDiv.append("empty inputs, ");
@@ -434,7 +416,6 @@ function addFriendErrorDetector(error, errorDiv) {
 }
 
 function showAddFriendDialog() {
-    const window = $('#window');
     const addFriendDialog = $('#add-friend');
     const requestMessage = $('#request-message');
     const closeButton = $('#close-button');
@@ -451,15 +432,9 @@ function showAddFriendDialog() {
         keydownFlag = 0;
     });
 
-    requestMessage.on("input", () => {
-        resizeDialogTextArea();
-    });
-    closeButton.on('click', () => {
-        addFriendDialog[0].close();
-    })
-    window.on('resize', () => {
-        resizeDialogTextArea(requestMessage[0]);
-    });
+    requestMessage.on("input", () => resizeDialogTextArea());
+    closeButton.on('click', () => addFriendDialog[0].close());
+    window.addEventListener('resize', () => resizeDialogTextArea(requestMessage[0]));
 }
 
 function clearDialog() {

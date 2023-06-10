@@ -20,9 +20,11 @@ footer {
     padding: 2rem;
     text-align: justify;
 }
-
 footer * {
     color: var(--lightFontColor);
+}
+footer h2 {
+    margin-bottom: 1rem;
 }
 
 /* NAVBAR */

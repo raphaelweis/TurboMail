@@ -351,6 +351,7 @@ function displayContacts(relations) {
 function selectContact(relation, contactDiv) {
     const currentWindow = $(window);
     const messagesOverlay = $('#messages-overlay');
+    const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
 
     if (currentWindow.width() < 500) {
@@ -520,20 +521,19 @@ function responsivePage() {
     const contacts = $('#contacts');
     const messages = $('#messages');
 
-    if(currentWindow.width() <= 500) {
+    if (currentWindow.width() <= 500) {
         displayContactsInResponsive();
     }
 
     currentWindow.on('resize', () => {
-        messages.css('display', 'inline');
+        messages.css('display', 'flex');
 
-        if(currentWindow.width() <= 500) {
+        if (currentWindow.width() <= 500) {
             displayContactsInResponsive();
         }
 
-        if(currentWindow.width() > 500) {
-            contacts.css('width', '20%');
-            contacts.css('max-width', '30rem');
+        if (currentWindow.width() > 500) {
+            contacts.css({'width': '20%', 'max-width': '30rem'});
         }
     })
 
@@ -553,9 +553,13 @@ function displayContactsInResponsive() {
 
     messages.css('display', 'none');
 
-    contacts.css('display', 'inline');
-    contacts.css('width', '100%');
-    contacts.css('max-width', '100%');
+    contacts.css({'display': 'inline', 'width': '100%', 'max-width': '100%'});
+
+    if (loggedInUser.getSelectedContact() !== undefined) {
+        loggedInUser.getSelectedContact().contactDiv.css({
+            'background-position': '0 0', 'font-size': '1rem', 'color': '#000000',
+        });
+    }
 }
 
 function selectContactInResponsive() {
@@ -567,5 +571,5 @@ function selectContactInResponsive() {
     logo.css('display', 'none');
     backArrow.css('display', 'inline');
     contacts.css('display', 'none');
-    messages.css('display', 'inline');
+    messages.css('display', 'flex');
 }

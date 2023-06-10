@@ -55,6 +55,12 @@ main {
     font-weight: bold;
 }
 
+#button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
 .navbar-item {
     margin: 0 0.5rem;
 }

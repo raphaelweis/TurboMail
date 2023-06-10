@@ -315,12 +315,14 @@ function setupRelations() {
 }
 
 function refreshContacts() {
-    const relationId = loggedInUser.getSelectedContact().relationId;
-    fetchContactsRequest().then(() => {
-        const acceptedContact = $('.accepted-contact');
-        const pendingContacts = $('.pending-contact');
-    })
+    const messagesOverlay = $('#messages-overlay');
+    const chat = $('#chat');
 
+
+    loggedInUser.setSelectedContact(undefined);
+    chat.empty();
+    messagesOverlay.fadeIn(100);
+    setupRelations();
 }
 
 function displayContacts(relations) {

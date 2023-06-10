@@ -42,7 +42,7 @@ input[class*="common-button"] {
     padding: 0.5rem 1rem;
     color: var(--lightFontColor);
     background-color: var(--buttonColor);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 button[class*="common-button"] {
@@ -50,7 +50,7 @@ button[class*="common-button"] {
     padding: 0.5rem 1rem;
     color: var(--lightFontColor);
     background-color: var(--buttonColor);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 input[type="submit"] {
@@ -67,7 +67,7 @@ button[class*="round-button"] {
     background-color: black;
     border-radius: 100%;
     color: var(--lightFontColor);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 button[class*="round-button"]:hover {
@@ -78,4 +78,29 @@ button[class*="round-button"]:hover {
 img[class*="round-button-icon"] {
     height: 1rem;
     width: 1rem;
+}
+
+.dialog {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border: none;
+    border-radius: 0.5em;
+}
+
+.dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+.dialog-close-button {
+    float: right;
+    margin: 1rem 1rem 0 0;
+    font-size: 3rem;
+    color: #aaaaaa;
+}
+
+.dialog-close-button:hover {
+    color: #000000;
+    cursor: pointer;
 }

@@ -423,6 +423,7 @@ main {
 @media (max-width: 500px) {
     #add-friend h2 {
         font-size: 2rem;
+        line-height: 2rem;
     }
     #relation-form #add-friend-email {
         font-size: 1rem;

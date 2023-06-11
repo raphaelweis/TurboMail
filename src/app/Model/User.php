@@ -13,19 +13,16 @@ class User extends DataBaseHandler {
         $statement = $this->connect()->prepare(LOGIN_QUERY);
         if (!$statement->execute([$email])) {
             $statement = null;
-
             return -1;
         }
         if ($statement->rowCount() == 0) {
             $statement = null;
-
             return 1;
         }
 
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
         if (!password_verify($password, $user[0][PASSWORD_USER_TABLE])) {
             $statement = null;
-
             return 1;
         }
 

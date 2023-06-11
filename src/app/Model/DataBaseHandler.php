@@ -12,7 +12,10 @@ use PDOException;
  */
 class DataBaseHandler {
     /**
-     * this method connects its caller to the configured database
+     * This method connects its caller to the configured database.
+     * The database can be any type of database thanks to
+     * the PDO class
+     *
      * @return PDO|void
      */
     public function connect() {

@@ -13,6 +13,9 @@ include_once 'DataBaseHandler.php';
  * It should not be instantiated by something other than the message controller, hence the empty protected constructor.
  */
 class Message extends DataBaseHandler {
+    /**
+     * Protected constructor - creates a new Message object.
+     */
     protected function __construct() {
         // empty constructor.
     }

@@ -21,5 +21,5 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass
     );
 
     // Running error handlers and user register operation
-    echo $signup->SignupUser();
+    echo json_encode($signup->SignupUser());
 }

@@ -23,8 +23,7 @@ class DataBaseHandler {
                 HOST_PASSWORD
             );
         } catch (PDOException $e) {
-            echo 'Error!: '.$e->getMessage().'<br/>';
-            die();
+            exit();
         }
     }
 }

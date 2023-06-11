@@ -27,6 +27,7 @@ window.onload = () => {
             setupMessagePage();
         })
         .catch(() => {
+            alert('Mmh... Looks you aren\'t logged in. We are taking you back to the login page.');
             window.location.href = LOGIN_PAGE_URL;
         });
 };
@@ -39,7 +40,7 @@ function fetchUserDataRequest() {
         $.post(SESSION_URL, (response) => {
             const userData = JSON.parse(response);
 
-            if (userData != null) {
+            if (userData.length !== 0) {
                 resolve(userData);
             } else {
                 reject();

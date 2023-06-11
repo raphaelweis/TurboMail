@@ -7,6 +7,11 @@ use PDO;
 include_once 'Message.php';
 include_once __DIR__.'/../const/global.php';
 
+/**
+ * This class represents a message row in the database. It can insert or delete rows in the message table of the
+ * database. It can either be instantiated to insert a new message, or be used as an abstract class with static methods,
+ * notably if there is not enough data to create a full object.
+ */
 class MessageController extends Message {
     /**
      * the relation ID associated to this message
@@ -114,9 +119,9 @@ class MessageController extends Message {
     }
 
     /**
-     * Queries the database for all messages associated to a specified relation ID.
+     * Fetches all messages in the database given a relation ID.
      *
-     * Returns an array with all the found messages if the operation was successful, or an empty array in case of an
+     * Returns an array containing the fetched messages if the operation was successful, or an empty array in case of an
      * error.
      *
      * @param $relationId

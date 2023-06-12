@@ -4,7 +4,6 @@ use TurboMail\Model\NewUserController;
 
 include_once 'Model/NewUserController.php';
 
-// Grabbing the data
 if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'], $_POST['password-check'])) {
     $firstName = trim(htmlspecialchars($_POST['firstname']));
     $lastName = trim(htmlspecialchars($_POST['lastname']));
@@ -20,6 +19,5 @@ if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['pass
         $passwordCheck
     );
 
-    // Running error handlers and user register operation
     echo json_encode($signup->SignupUser());
 }

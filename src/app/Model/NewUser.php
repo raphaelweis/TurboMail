@@ -8,7 +8,7 @@ include_once __DIR__.'/../const/global.php';
 
 /**
  * This class provides methods to interact with the user table of the database, specifically when creating a new user
- * after a sign-up request. It should not be instantiated by something other than the message controller, hence the
+ * after a sign-up request. It should not be instantiated by something other than the NewUser controller, hence the
  * empty protected constructor.
  */
 class NewUser extends DataBaseHandler {

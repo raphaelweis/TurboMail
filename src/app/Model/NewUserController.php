@@ -13,26 +13,31 @@ include_once __DIR__.'/../const/global.php';
 class NewUserController extends NewUser {
     /**
      * The new user's first name.
+     *
      * @var string
      */
     private string $firstName;
     /**
      * The new user's last name.
+     *
      * @var string
      */
     private string $lastName;
     /**
      * The new user's email address
+     *
      * @var string
      */
     private string $email;
     /**
      * The new user's password
+     *
      * @var string
      */
     private string $password;
     /**
      * The new user's second verification password.
+     *
      * @var string
      */
     private string $passwordCheck;
@@ -66,9 +71,9 @@ class NewUserController extends NewUser {
      * Returns an array of errors if at least one verification failed, a 500 error code the database insertion failed,
      * or an empty array if all went well.
      *
-     * @return string
+     * @return array
      */
-    public function SignupUser(): string {
+    public function SignupUser(): array {
         $errors = [];
 
         if ($this->EmptyInput()) {

@@ -2,7 +2,7 @@
 
 namespace TurboMail\Model;
 
-include_once __DIR__ . '/../const/global.php';
+include_once __DIR__.'/../const/global.php';
 
 use PDO;
 use PDOException;

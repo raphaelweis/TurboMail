@@ -1,9 +1,5 @@
 <?php
 
-use TurboMail\Model\UserController;
-
-include_once 'Model/UserController.php';
-
 session_start();
 
 $array = [];

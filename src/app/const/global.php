@@ -137,3 +137,4 @@ const DELETE_RELATION_BY_ID_QUERY
 /***********************/
 const NAMES_REGEX = "/^(?!\s)[a-zA-Z\'\-\sÀ-ÖØ-öø-ÿ]+$/u";
 const PASSWORD_REGEX = "/^[a-zA-Z0-9\/!@#$%&*]+$/";
+const EMAIL_REGEX = "/^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,})+$/";

@@ -21,13 +21,11 @@ window.onload = () => {
 function signInRequest() {
     const signInForm = $('#sign-in');
     const signInErrorDiv = $("#sign-in-error");
-
     const SUCCESS = 0;
     const INVALID_LOGIN = 1;
+    const data = signInForm.serialize();
 
-    const formData = signInForm.serialize();
-
-    $.post(LOGIN_URL, formData, (response) => {
+    $.post(LOGIN_URL, data, (response) => {
         const responseInt = parseInt(response);
 
         if (responseInt === SUCCESS) {
@@ -37,13 +35,12 @@ function signInRequest() {
         } else {
             alert("Oops, something unexpected happened...");
         }
-    }, "text");
+    });
 }
 
 function signUpRequest() {
     const signUpForm = $('#sign-up');
     const signUpErrorDiv = $("#sign-up-error");
-
     const SUCCESS = 0;
     const EMPTY_INPUTS = 1;
     const INVALID_FIRSTNAME = 2;
@@ -52,12 +49,11 @@ function signUpRequest() {
     const INVALID_PASSWORD = 5;
     const DIFFERENT_PASSWORDS = 6;
     const EMAIL_TAKEN = 7;
-
-    const formData = signUpForm.serialize();
+    const data = signUpForm.serialize();
 
     signUpErrorDiv.text("Error: ");
 
-    $.post(REGISTER_URL, formData, (response) => {
+    $.post(REGISTER_URL, data, (response) => {
         let responseInt;
         for (let i = 0; i < response.length; i++) {
             responseInt = parseInt(response[i]);
@@ -93,5 +89,5 @@ function signUpRequest() {
         }
         signUpErrorDiv.text(signUpErrorDiv.text().slice(0, -2)); // removes trailing comma + space
         signUpErrorDiv.css("visibility", "visible");
-    }, "json");
+    });
 }

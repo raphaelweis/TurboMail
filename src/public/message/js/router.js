@@ -494,8 +494,8 @@ function showAddFriendDialog() {
             event.preventDefault();
             addFriendRequest();
         }
-        keydownFlag = 0;
     });
+    keydownFlag = 0;
 
     requestMessage.on("input", () => resizeDialogTextArea());
     closeButton.on('click', () => addFriendDialog[0].close());
@@ -507,6 +507,7 @@ function clearDialog() {
     const addFriendEmail = $('#add-friend-email');
     const addFriendTextArea = $('#request-message');
 
+    addFriendErrorDiv.css('visibility', 'hidden');
     addFriendErrorDiv.val('');
     addFriendEmail.val('');
     addFriendTextArea.val('');

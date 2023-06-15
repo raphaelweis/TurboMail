@@ -54,13 +54,14 @@ function signUpRequest() {
     signUpErrorDiv.text("Error: ");
 
     $.post(REGISTER_URL, data, (response) => {
+        response = JSON.parse(response);
         let responseInt;
         for (let i = 0; i < response.length; i++) {
             responseInt = parseInt(response[i]);
             switch (responseInt) {
                 case SUCCESS:
                     window.location.href = HOME_PAGE;
-                    return;
+                    break;
                 case EMPTY_INPUTS:
                     signUpErrorDiv.append("empty inputs, ");
                     break;

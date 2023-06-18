@@ -1,4 +1,4 @@
-import {User} from '../../User.js';
+import {User} from '../User.js';
 
 const SEND_MESSAGE_URL = '../../app/send_message.php';
 const SESSION_URL = '../../app/session.php';
@@ -466,7 +466,7 @@ function addFriendErrorDetector(error, errorDiv) {
             errorDiv.append("user not found, ");
             break;
         case SAME_USER:
-            errorDiv.append("your are this user, ");
+            errorDiv.append("you are this user, ");
             break;
         case RELATION_ALREADY_EXISTS:
             errorDiv.append("relation already exists, ");

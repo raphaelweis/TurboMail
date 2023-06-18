@@ -1,13 +1,9 @@
-CREATE DATABASE IF NOT EXISTS TurboMailDB;
-
-USE TurboMailDB;
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 16 juin 2023 à 21:28
+-- Généré le : sam. 17 juin 2023 à 20:53
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -52,7 +48,6 @@ INSERT INTO `message` (`id`, `id_sender`, `id_receiver`, `id_relation`, `message
 (5, 1, 6, 5, 'Salut Michael !<br/><br/>Est-ce que tu as encore des chaussures à vendre ?', '2023-06-16 21:09:28'),
 (6, 1, 7, 6, 'Salut Marc !', '2023-06-16 21:10:10'),
 (7, 1, 8, 7, 'Ce nouveau site à l\'air cool pour communiquer !', '2023-06-16 21:10:48'),
-(8, 9, 1, 8, 'Ciao Fabio !', '2023-06-16 21:11:06'),
 (9, 1, 10, 9, 'Salut Giannis !<br/><br/>Ton prochain match se joue où ?', '2023-06-16 21:11:54'),
 (10, 1, 11, 10, 'Salut Aleix !<br/>Super course tout à l\'heure !', '2023-06-16 21:12:23'),
 (11, 1, 12, 11, 'Salut Nikola !<br/><br/>Bien joué pour ton titre de finals MVP !<br/>Repose toi bien !', '2023-06-16 21:13:20'),
@@ -94,7 +89,6 @@ INSERT INTO `relation` (`id`, `id_sender`, `id_receiver`, `status`) VALUES
 (5, 1, 6, 0),
 (6, 1, 7, 0),
 (7, 1, 8, 0),
-(8, 9, 1, 0),
 (9, 1, 10, 0),
 (10, 1, 11, 0),
 (11, 1, 12, 0),
@@ -139,7 +133,8 @@ INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`) VALUES
 (12, 'Nikola', 'Jokic', 'nikola.jokic@nba.com', '$2y$10$Etu0TE1pAoyHfpMfQgA8FezqV2tF4UHhwwgQxeqzYsCejlY5UiPRG'),
 (13, 'Jorge', 'Martin', 'jorge.martin@motogp.com', '$2y$10$XHom4nAqEZdVeIC2ZFRrOuo54Xr1S0npT1gPz8jMtv8KiWm2Vuw0S'),
 (14, 'Rudy', 'Gobert', 'rudy.gobert@nba.com', '$2y$10$MiZLe4cns0C1z8GZxRLz2O5qKO.WBX57uVxeWGG2t7g8Yf7R8/KD6'),
-(15, 'Brad', 'Binder', 'brad.binder@motogp.com', '$2y$10$AiuPKVraJ1S7PyRtD6ZJiucnEllpBo17wXnw4U5OuTqorxWNMuimu');
+(15, 'Brad', 'Binder', 'brad.binder@motogp.com', '$2y$10$AiuPKVraJ1S7PyRtD6ZJiucnEllpBo17wXnw4U5OuTqorxWNMuimu'),
+(16, 'Shaquille', 'O&#039;Neal', 'shaquille.oneal@nba.com', '$2y$10$fCnM4T/IP2P3CwDmw.17A.rjrC2/wx4EcjSfDv7hVhfkfUe4UvsXa');
 
 --
 -- Index pour les tables déchargées
@@ -175,19 +170,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pour la table `relation`
 --
 ALTER TABLE `relation`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Contraintes pour les tables déchargées

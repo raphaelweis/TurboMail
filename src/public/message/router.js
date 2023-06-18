@@ -409,9 +409,9 @@ function selectContact(relation, contactDiv) {
     const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
 
-    if (currentWindow.width() < 500) {
-        selectContactInResponsive();
-    }
+    if (relation.status === 1) messageTextArea.prop('disabled', false);
+
+    if (currentWindow.width() < 500) selectContactInResponsive();
 
     chat.empty();
 

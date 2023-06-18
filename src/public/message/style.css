@@ -473,6 +473,21 @@ main {
         margin: 0 0.5rem;
     }
 
+    #confirm-relation-delete {
+        height: 22rem;
+    }
+    #confirm-relation-delete h2 {
+        font-size: 2rem;
+        margin: 3rem 1.5rem;
+    }
+    #confirm-relation-delete p {
+        font-size: 1rem;
+    }
+    #confirm-relation-delete button {
+        font-size: 1rem;
+        margin: 3rem 1.5rem;
+    }
+
     #add-friend h2 {
         font-size: 2.5rem;
         margin: 3rem

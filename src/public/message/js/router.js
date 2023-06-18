@@ -577,20 +577,20 @@ function responsivePage() {
     const contacts = $('#contacts');
     const messages = $('#messages');
 
-    if (currentWindow.width() <= 500) {
-        displayContactsInResponsive();
-    }
+    if (currentWindow.width() <= 1000) adaptAddFriendDialog();
+
+    if (currentWindow.width() <= 500) displayContactsInResponsive();
 
     currentWindow.on('resize', () => {
         messages.css('display', 'flex');
 
-        if (currentWindow.width() <= 500) {
-            displayContactsInResponsive();
-        }
+        if (currentWindow.width() <= 1000) adaptAddFriendDialog();
 
-        if (currentWindow.width() > 500) {
-            contacts.css({'width': '20%', 'max-width': '30rem'});
-        }
+        if (currentWindow.width() <= 500) displayContactsInResponsive();
+
+        if (currentWindow.width() > 500) contacts.css({'width': '20%', 'max-width': '30rem'});
+
+        if (currentWindow.width() > 1000) resetAddFriendDialog();
     })
 
     backArrow.on('click', () => {
@@ -628,4 +628,20 @@ function selectContactInResponsive() {
     backArrow.css('display', 'inline');
     contacts.css('display', 'none');
     messages.css('display', 'flex');
+}
+
+function adaptAddFriendDialog() {
+    const addFriendEmail = $('#add-friend-email');
+    const addFriendMessage = $('#request-message');
+
+    addFriendEmail.prop('placeholder', 'Email');
+    addFriendMessage.prop('placeholder', 'Message');
+}
+
+function resetAddFriendDialog() {
+    const addFriendEmail = $('#add-friend-email');
+    const addFriendMessage = $('#request-message');
+
+    addFriendEmail.prop('placeholder', 'Enter your new relation\'s email');
+    addFriendMessage.prop('placeholder', 'Write an impactful message to go along with your request');
 }

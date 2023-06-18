@@ -453,12 +453,6 @@ main {
 }
 
 /* RESPONSIVE DESIGN */
-@media (max-width: 930px) and (min-width: 800px) {
-    #relation-form #request-message {
-        min-height: 3rem;
-    }
-}
-
 @media (max-width: 800px) {
     #navbar-title {
         display: none;
@@ -481,24 +475,16 @@ main {
 
     #add-friend h2 {
         font-size: 2.5rem;
+        margin: 3rem
     }
     #relation-form #add-friend-email {
         font-size: 1rem;
     }
     #relation-form #request-message {
         font-size: 1rem;
-        line-height: 1rem;
     }
     #relation-form #send-relation {
         font-size: 1rem;
-    }
-}
-
-@media (max-width: 660px) {
-    #relation-form #request-message {
-        font-size: 1rem;
-        line-height: 1rem;
-        min-height: 2rem;
     }
 }
 
@@ -509,11 +495,6 @@ main {
     }
     #relation-form #add-friend-email {
         font-size: 1rem;
-    }
-    #relation-form #request-message {
-        font-size: 1rem;
-        line-height: 1rem;
-        min-height: 2rem;
     }
     #relation-form #send-relation {
         font-size: 1rem;

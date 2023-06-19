@@ -393,7 +393,7 @@ function displayContacts(relations) {
 
         contactDiv.on('click', () => selectContact(relation, contactDiv));
 
-        if (!relation.status) {
+        if (!parseInt(relation.status)) {
             contactDiv.addClass('pending-contact');
             pendingContactsContainer.append(contactDiv);
         } else {
@@ -409,7 +409,7 @@ function selectContact(relation, contactDiv) {
     const chat = $('#chat');
     const messageTextArea = $('#message-textarea');
 
-    if (relation.status === 1) messageTextArea.prop('disabled', false);
+    if (parseInt(relation.status) === 1) messageTextArea.prop('disabled', false);
 
     if (currentWindow.width() < 500) selectContactInResponsive();
 
